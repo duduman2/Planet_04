@@ -45,6 +45,7 @@ public class LoginServiceImpl implements LoginService {
 
 	
 	
+	
 	@Override
 	public UserInfo getJoinUserInfo(HttpServletRequest req) {
 		

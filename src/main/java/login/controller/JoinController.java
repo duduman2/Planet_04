@@ -23,6 +23,7 @@ public class JoinController extends HttpServlet {
 		
 		req.getRequestDispatcher("/WEB-INF/views/login/join.jsp").forward(req, resp);
 		
+		
 	}
 
 	@Override
