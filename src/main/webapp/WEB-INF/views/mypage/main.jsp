@@ -119,12 +119,7 @@ div.right_section {
 				<td></td>
 				<td></td>
 			</tr>
-			<tr>
-				<th class="info" colspan="2"></th>
-			</tr>
-			<tr>
-				<th class="info" colspan="2"></th>
-			</tr>
+
 		</table>  <!-- first table end -->
 		
 		<table class="table">
@@ -158,12 +153,6 @@ div.right_section {
 			<tr>
 				<td></td>
 				<td></td>
-			</tr>
-			<tr>
-				<th class="info" colspan="2"></th>
-			</tr>
-			<tr>
-				<th class="info" colspan="2"></th>
 			</tr>
 		</table>  <!-- third table end -->		
 		

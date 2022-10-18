@@ -15,7 +15,7 @@
 	<td></td>
 </tr>
 <tr>
-	<th>닉네임</th>
+	<th>주소</th>
 	<td></td>
 </tr>
 <tr>
