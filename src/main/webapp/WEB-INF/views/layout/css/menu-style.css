@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+#logo {
+	box-sizing: content-box;
+}
+
+ul.navigation, ul.t-navigation {
+	list-style-type: none ;
+	padding: 0;
+	margin: 0;
+}
+
+ul.navigation, ul.t-navigation > li {
+	float: left;
+	line-height: 40px;
+	padding: 0 100px;
+	border: 1px solid red;
+	position: relative;
+}
+
+ul.navigation > li > ul {
+	position: absolute;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul.navigation > li > ul > li {
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+}
+
+ul.navigation > li:hover > ul > li {
+	height: 40px;
+	font-size: 15px;
+	line-height: 40px;
+
+	text-decoration: none;
+}
+
+footer {
+	clear: both;
+}
