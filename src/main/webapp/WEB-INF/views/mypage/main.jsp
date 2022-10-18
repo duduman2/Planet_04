@@ -109,22 +109,24 @@ div.right_section {
 	<div class="right_section" id="right_section"  style="width: 60%; float: left;">
 		<table class="table">
 			<tr>
-				<th class="info" colspan="2">나의 쇼핑</th>
+				<th class="info" colspan="3">나의 쇼핑<button style="float: right;">+전체보기</button></th>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
+				<td>+장바구니</td>
+				<td>+배송 확인</td>
+				<td>+환불/반품</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
+				<td>+포인트</td>
+				<td>+문의 사항</td>
+				<td>+고객센터</td>
 			</tr>
 
 		</table>  <!-- first table end -->
 		
 		<table class="table">
 			<tr>
-				<th class="info" colspan="2">내가 작성한 글 확인하기</th>
+				<th class="info" colspan="2">내가 작성한 글 확인하기<button style="float: right;">+전체보기</button></th>
 			</tr>
 			<tr>
 				<td>게시판</td>
@@ -134,17 +136,12 @@ div.right_section {
 				<td>댓글</td>
 				<td><button>댓글 더보기</button></td>
 			</tr>
-			<tr>
-				<th class="info" colspan="2">내가 구매한 리스트</th>
-			</tr>
-			<tr>
-				<th class="info" colspan="2">장바구니</th>
-			</tr>
+
 		</table>  <!-- second table end -->
 		
 		<table class="table">
 			<tr>
-				<th class="info" colspan="2">Q n A</th>
+				<th class="info" colspan="2">내가 구매한 리스트<button style="float: right;">+전체보기</button></th>
 			</tr>
 			<tr>
 				<td></td>
@@ -154,7 +151,21 @@ div.right_section {
 				<td></td>
 				<td></td>
 			</tr>
-		</table>  <!-- third table end -->		
+		</table>  <!-- third table end -->
+				
+		<table class="table">
+			<tr>
+				<th class="info" colspan="2">Q n A<button style="float: right;">+전체보기</button></th>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>  <!--forth table end -->		
 		
 	</div> <!-- right_section  end -->
 	
