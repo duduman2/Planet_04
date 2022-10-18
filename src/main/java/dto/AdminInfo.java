@@ -2,21 +2,23 @@ package dto;
 
 public class AdminInfo {
 	
+	private int adminno;
 	private String adminid;
 	private String adminPw;
 	
 	public AdminInfo() {
 	}
-
-	public AdminInfo(String adminid, String adminPw) {
+	
+	public AdminInfo(int adminno, String adminid, String adminPw) {
 		super();
+		this.adminno = adminno;
 		this.adminid = adminid;
 		this.adminPw = adminPw;
 	}
 
 	@Override
 	public String toString() {
-		return "AdminInfo [adminid=" + adminid + ", adminPw=" + adminPw + "]";
+		return "AdminInfo [adminno=" + adminno + ", adminid=" + adminid + ", adminPw=" + adminPw + "]";
 	}
 
 	public String getAdminid() {
@@ -33,6 +35,14 @@ public class AdminInfo {
 
 	public void setAdminPw(String adminPw) {
 		this.adminPw = adminPw;
+	}
+
+	public int getAdminno() {
+		return adminno;
+	}
+
+	public void setAdminno(int adminno) {
+		this.adminno = adminno;
 	}
 	
 }

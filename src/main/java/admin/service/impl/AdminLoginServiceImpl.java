@@ -80,8 +80,7 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 
 	@Override
 	public List<AdminInfo> getList(Paging paging) {
-		// TODO Auto-generated method stub
-		return null;
+		return adminDao.selectAll(JDBCTemplate.getConnection(), paging);
 	}
 
 }

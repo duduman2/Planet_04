@@ -1,7 +1,9 @@
 package admin.dao.face;
 
 import java.sql.Connection;
+import java.util.List;
 
+import common.Paging;
 import dto.AdminInfo;
 
 public interface AdminLoginDao {
@@ -22,5 +24,14 @@ public interface AdminLoginDao {
 	 * @return int - 테이블의 전체 행 수
 	 */
 	public int selectCntAll(Connection conn);
+
+	/**
+	 * 리스트 테이블 페이징 목록 조회
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param paging - 페이징 정보 객체
+	 * @return List<AdminInfo> - 테이블 페이징 목록 조회 결과
+	 */
+	public List<AdminInfo> selectAll(Connection conn, Paging paging);
 
 }
