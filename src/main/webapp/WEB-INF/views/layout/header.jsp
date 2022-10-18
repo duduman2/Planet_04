@@ -18,13 +18,14 @@
 $(document).ready(function() {
 	
 	//마우스오버시 메뉴 색 변경
-	$("li").mouseover(function() {
-		$(this).attr("style", "color : green;")
+	$("ul.nav2 > li").mouseover(function() {
+		$(this).addClass('green')
+		$("ul.nav2 > li").nextAll.addClass('black')
 	})
 	
 	//마우스오버 해제 시 메뉴 색 원래대로
-	$("li").mouseleave(function() {
-		$(this).attr("style", "color : black;")
+	$("ul.nav2 > li").mouseleave(function() {
+		$(this).removeClass('green')
 	})
 })
 </script>
@@ -33,9 +34,19 @@ $(document).ready(function() {
 <!-- <link rel="stylesheet" type="text/css" href="/css/menu-style.css"> -->
 
 <style type="text/css">
+
+.green {
+	color : green;
+}
+
+.black {
+	color : black;
+}
+
 #logo {
 	float:left;
 	width: 200px;
+	height: 50px;
 	border: 1px solid green;
 }
 
@@ -90,6 +101,10 @@ ul.nav2 > li:hover > ul > li {
 	line-height: 40px;
 
 	text-decoration: none;
+}
+
+footer {
+	clear: both;
 }
 
 </style>
