@@ -14,6 +14,7 @@ public interface LoginService {
 
 	public boolean login(UserInfo userInfo);
 
+	
 	public UserInfo info(UserInfo userInfo);
 
 	

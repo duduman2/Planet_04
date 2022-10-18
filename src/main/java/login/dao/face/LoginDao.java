@@ -12,7 +12,6 @@ public interface LoginDao {
 
 	int insert(Connection conn, UserInfo userinfo);
 
-
 	
 
 

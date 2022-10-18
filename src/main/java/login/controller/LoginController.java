@@ -27,6 +27,7 @@ public class LoginController extends HttpServlet {
 		System.out.println("/login/con [GET]");
 		
 		req.getRequestDispatcher("/WEB-INF/views/login/login.jsp").forward(req, resp);
+	
 		
 	}
 
