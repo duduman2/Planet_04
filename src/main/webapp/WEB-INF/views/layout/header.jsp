@@ -18,40 +18,121 @@
 $(document).ready(function() {
 	
 	//마우스오버시 메뉴 색 변경
-	$("ul.nav2 > li").mouseover(function() {
+	$("li > a").mouseover(function() {
 		$(this).addClass('green')
-		$("ul.nav2 > li").nextAll.addClass('black')
 	})
 	
 	//마우스오버 해제 시 메뉴 색 원래대로
-	$("ul.nav2 > li").mouseleave(function() {
+	$("li > a").mouseleave(function() {
 		$(this).removeClass('green')
 	})
+	
+	//전체메뉴 보기
+// 	$(".category").on("click", )
+	
+// 	click(function() {
+// 		$("ul.nav2 > li > ul > li").addClass({
+// 			"height":"40px"
+// 			, "width" : "280px"
+// 			, "font-size" : "15px"
+// 			, "line-height" : "40px"
+// 			, "text-decoration" : "none"})})
+	
+// 		, function() {
+// 			$("ul.nav2 > li > ul > li").css({
+// 				"height":"0px"
+// 				, "font-size" : "0px"
+// 				, "line-height" : "0px"})})
+	
 })
 </script>
 
-<!-- 추후 css따로 뺄 예정 -->
-<!-- <link rel="stylesheet" type="text/css" href="/css/menu-style.css"> -->
-
 <style type="text/css">
 
+
+/* --- jQuery Class --- */
 .green {
-	color : green;
+	color : green !important;
+	font-weight: bold !important;
 }
 
-.black {
-	color : black;
+.viewmenu {
+	height: 40px;
+	width: 280px;
+	font-size: 15px;
+	line-height: 40px;
+	text-decoration: none;
+}
+
+.hidemenu {
+	height: 0px;
+	font-size: 0px;
+	line-height: 0px;
+}
+/* --------------------- */
+
+
+/* --- BootStrap 무시 --- */
+li > a {
+	color: black;
+}
+
+li > a:hover {
+	text-decoration : none;
+}
+/* --------------------- */
+
+
+#nav0 {
+	width: 1140px;
+	height: 100px;
+	margin: 0 auto;
 }
 
 #logo {
 	float:left;
-	width: 200px;
-	height: 50px;
-	border: 1px solid green;
+	font-size: 40px;
+	font-style:italic;
+	font-weight: bold;
+	text-align: left;
+}
+
+#logo > a {
+	color: green;
+	text-decoration: none;
 }
 
 #top-menu {
-	box-sizing:border-box;
+	float: left;
+	width: 1140px;
+	height: 60px;
+}
+
+.category {
+	width: 150px !important;
+	text-align: left !important;
+}
+
+.store {
+	float: left;
+	margin: 15px 0 0 30px;
+	font-size: 18px;
+	font-weight: bold;
+	color: green;
+}
+
+.store > button {
+	border: none;
+	background: none;
+}
+
+.search {
+	float: left;
+	width: 600px;
+	margin: 16px 0 0 40px;
+}
+
+#searchType {
 	float: left;
 }
 
@@ -62,12 +143,57 @@ $(document).ready(function() {
 ul.nav1 {
 	list-style-type: none;
 	padding: 0;
-	margin: 0;
+	margin: 16px 0;
+	float: left;
 }
 
 ul.nav1 > li {
 	float: left;
-	border: 1px solid green;
+}
+ul.nav1-2 {
+	list-style-type: none;
+	padding: 0;
+	margin: 16px 0;
+	float: right;
+}
+
+ul.nav1-2 > li {
+	float: left;
+	font-size: 20px;
+	padding: 0 5px;
+	position: relative;
+}
+
+ul.nav1-2 > li > ul {
+	position: absolute;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul.nav1-2 > li > ul > li {
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+	z-index: 9999;
+}
+
+ul.nav1-2 > li:hover > ul > li {
+	width: 100px;
+	height: 40px;
+	font-size: 15px;
+	line-height: 40px;
+	
+	background: gray;
+	
+	text-align: left;
+	
+	text-decoration: none;
+}
+
+.write {
+	float: right;
+	margin: 16px 5px;
 }
 
 ul.nav2 {
@@ -78,7 +204,11 @@ ul.nav2 {
 
 ul.nav2 > li {
 	float: left;
-	border: 1px solid green;
+	border-right: 1px solid #d9d9d9;
+	width: 200px;
+	font-size: 18px;
+	letter-spacing: -1px;
+	text-align: center;
 	position: relative;
 }
 
@@ -97,10 +227,20 @@ ul.nav2 > li > ul > li {
 
 ul.nav2 > li:hover > ul > li {
 	height: 40px;
+	width: 200px;
+	padding-left: 10px;
 	font-size: 15px;
+	letter-spacing: -1px;
+	text-align: left;
 	line-height: 40px;
+	background: lightgray;
 
 	text-decoration: none;
+}
+
+.headerhr {
+	margin-top: 0;
+	margin-bottom: 0px;
 }
 
 footer {
@@ -114,55 +254,103 @@ footer {
 
 <header id="header" class="text-center">
 
-<div id="logo">PLanet</div>
+<div id="nav0">
 
 <div id="top-menu">
-	<ul class="nav1">
-		<li>스토어</li>
-		<li>검색</li>
-		<li>장바구니</li>
-		<li>마이페이지</li>
+	<div id="logo"><a href="/main">PLanet</a></div>
+	<div class="store"> | <button onclick="location.href='/tradeboard'">플래닛 스토어</button></div>
+	<div class="search">
+		<form action="/search" method="post">
+			<select name="searchType" id="searchType" style="height:26px;">
+				<option value="a">통합검색</option>
+				<option value="t">제목</option>
+				<option value="c">내용</option>
+				<option value="n">작성자</option>
+			</select>
+			<input type="text" style="width:450px; float:left;" placeholder="검색어를 입력하세요"
+				id="keywordInput" name="keywordInput">
+			<button typel="button" style="float:left;">
+				<span class="glyphicon glyphicon-search"></span>
+			</button>
+		</form>
+	</div>
+	
+	<!-- 로그인 상태 -->
+	<% if( null != session.getAttribute("login") && (Boolean) session.getAttribute("login") ) { %>
+	<button type="button" class="write btn btn-success">게시글 작성</button>
+	<% } %>
+
+	<ul class="nav1-2">
+		<li>
+			<span class="glyphicon glyphicon-shopping-cart"></span>
+		</li>
+		<li>
+			<span class="glyphicon glyphicon-bell"></span>
+		</li>
+		
+		<!-- 비로그인 상태 -->
+		<% if( null == session.getAttribute("login") || !(Boolean) session.getAttribute("login") ) { %>
+		<button type="button" onclick="location.href='/'" class="btn btn-success">로그인</button>
+		<% } %>
+		
+		<!-- 로그인 상태 -->
+		<% if( null != session.getAttribute("login") && (Boolean) session.getAttribute("login") ) { %>
+		<li>
+			<span class="glyphicon glyphicon-user"></span>
+			<ul>
+				<li><a>마이페이지</a></li>
+				<li><a>나의 쇼핑</a></li>
+				<li><a>내가 쓴 글</a></li>
+				<li><a>회원 탈퇴</a></li>
+			</ul>
+		</li>
+		<button onclick="location.href='/login/logout'">로그아웃</button>
+		<% } %>
 	</ul>
+	
+	
 </div>
 
 <div id="sec-menu">
 	<ul class="nav2">
-		<li>전체메뉴</li>
+		<li class="category">
+		<span class="glyphicon glyphicon-menu-hamburger">전체메뉴</span></li>
 		
 		<li>
-			<a>커뮤니티</a>
+			<a href="/board/main.jsp">커뮤니티</a>
 			<ul>
-				<li><a>일반 게시판</a></li>
-				<li><a>자랑하기</a></li>
-				<li><a>소품 추천</a></li>
-				<li><a>인테리어 후기</a></li>
-				<li><a>모임 게시판</a></li>
+				<li><a href="/board/main.jsp">일반 게시판</a></li>
+				<li><a href="/board/main.jsp">자랑하기</a></li>
+				<li><a href="/board/main.jsp">소품 추천</a></li>
+				<li><a href="/board/main.jsp">인테리어 후기</a></li>
+				<li><a href="/board/main.jsp">모임 게시판</a></li>
 			</ul>
 		</li>
 		
 		<li>
-			<a>노하우</a>
+			<a href="/board/main.jsp">노하우</a>
 			<ul>
-				<li><a>일반 게시판</a></li>
-				<li><a>자랑하기</a></li>
-				<li><a>소품 추천</a></li>
-				<li><a>인테리어 후기</a></li>
-				<li><a>모임 게시판</a></li>
+				<li><a href="/board/main.jsp">일반 게시판</a></li>
+				<li><a href="/board/main.jsp">자랑하기</a></li>
+				<li><a href="/board/main.jsp">소품 추천</a></li>
+				<li><a href="/board/main.jsp">인테리어 후기</a></li>
+				<li><a href="/board/main.jsp">모임 게시판</a></li>
 			</ul>
 		</li>
 		
-		<li>
-			<a>분양/중고거래</a>
+		<li style="border:none;">
+			<a href="/board/main.jsp">분양/중고거래</a>
 			<ul>
-				<li><a>일반 게시판</a></li>
-				<li><a>자랑하기</a></li>
-				<li><a>소품 추천</a></li>
-				<li><a>인테리어 후기</a></li>
-				<li><a>모임 게시판</a></li>
+				<li><a href="/board/main.jsp">일반 게시판</a></li>
+				<li><a href="/board/main.jsp">자랑하기</a></li>
+				<li><a href="/board/main.jsp">소품 추천</a></li>
+				<li><a href="/board/main.jsp">인테리어 후기</a></li>
+				<li><a href="/board/main.jsp">모임 게시판</a></li>
 			</ul>
 		</li>
 	</ul>
 </div>
-
+</div>
 </header>
+<hr class="headerhr">
 <div class="container">
