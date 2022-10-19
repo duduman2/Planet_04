@@ -8,11 +8,9 @@
 
 <script type="text/javascript">
 
-var url = "<%=request.getContextPath() %>/admin/login";
+alert("삭제가 완료되었습니다.")
 
-alert("아이디 또는 비밀번호가 틀립니다.")
-
-location.href = url; // 해당 url로 리다이렉트
+window.close();
 
 </script>
 
