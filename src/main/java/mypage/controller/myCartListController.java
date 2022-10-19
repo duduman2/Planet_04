@@ -12,8 +12,8 @@ import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
 
-@WebServlet("/mypage/controller")
-public class MypageController extends HttpServlet {
+@WebServlet("/my/carList/controller")
+public class myCartListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// Service 객체 선언
@@ -21,14 +21,13 @@ public class MypageController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/mypage/controller [GET]");
+		System.out.println("/my/carList/controller [GET]");
 	
-		req.getRequestDispatcher("/WEB-INF/views/mypage/main.jsp").forward(req, resp);
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/mypage/controller [Post]");
+		System.out.println("/my/carList/controller [GET]");
 
 	
 	}
