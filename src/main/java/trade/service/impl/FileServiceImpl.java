@@ -12,18 +12,18 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
 import common.JDBCTemplate;
-import dto.Paramdata;
+import dto.Product;
 import dto.Uploadfile;
-import trade.dao.face.ParamdataDao;
+import trade.dao.face.ProductDao;
 import trade.dao.face.UploadfileDao;
-import trade.dao.impl.ParamdataDaoImpl;
+import trade.dao.impl.ProductDaoImpl;
 import trade.dao.impl.UploadfileDaoImpl;
 import trade.service.face.FileService;
 
 public class FileServiceImpl implements FileService {
 
 	//DAO객체
-	private ParamdataDao paramdataDao = new ParamdataDaoImpl();
+	private ProductDao productDao = new ProductDaoImpl();
 	private UploadfileDao uploadfileDao = new UploadfileDaoImpl();
 	
 	@Override
@@ -36,11 +36,12 @@ public class FileServiceImpl implements FileService {
 				
 				//2. 업로드된 파일이 저장될 경로
 				String saveDirectory = req.getServletContext().getRealPath("upload");
-				
 				System.out.println("파일경로 : " + saveDirectory);
+				
 				//폴더가 없을 경우 폴더 생성
 				File directory = new File(saveDirectory);
 				directory.mkdir();
+				
 				System.out.println("폴더 " +directory);
 				//3. 업로드 용량 제한 크기
 				int maxPostSize = 10 * 1024 * 1024;
@@ -91,16 +92,26 @@ public class FileServiceImpl implements FileService {
 					JDBCTemplate.rollback(conn);
 				}
 				
-
 				//--------------------------------------------------
 				
 				//폼필더 전달 파라미터 정보
+//				Paramdata paramdata = new Paramdata();
 				
-				Paramdata paramdata = new Paramdata();
-				paramdata.setTitle(mul.getParameter("title"));
-				paramdata.setData1(mul.getParameter("data1"));
+//				paramdata.setTitle(mul.getParameter("title"));
+//				paramdata.setData1(mul.getParameter("data1"));
+
 				
-				int res2 = paramdataDao.insert(conn, paramdata);
+//				BoardInfo boardinfo= new BoardInfo();
+				
+				Product product = new Product();
+				
+				
+				
+				product.setProductname(mul.getParameter("title"));
+				product.setProductcontent(mul.getParameter("content"));
+				product.setProductprice(Integer.parseInt(mul.getParameter("price")));
+				
+				int res2 = productDao.insert(conn,product);
 				if(res2 >0 ) {
 					JDBCTemplate.commit(conn);
 				} else {
@@ -108,9 +119,11 @@ public class FileServiceImpl implements FileService {
 				}
 	}
 
+
 	@Override
-	public List<Uploadfile> list() {
-		return uploadfileDao.selectAll(JDBCTemplate.getConnection());
+	public List<Product> boardList(Product product) {
+		return productDao.selectBoardList(JDBCTemplate.getConnection(),product);
 	}
+
 
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import dto.BoardInfo;
+import dto.Product;
 import dto.Uploadfile;
 
 public interface FileService {
@@ -15,11 +17,7 @@ public interface FileService {
 	 */
 	public void cosFileupload(HttpServletRequest req);
 	
-	/**
-	 * 업로드된 파일의 전체 정보를 조회한다
-	 * 
-	 * @return 조회된 전체 파일 목록
-	 */
-	public List<Uploadfile> list();
+
+	public List<Product> boardList(Product product);
 
 }
