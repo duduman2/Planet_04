@@ -12,22 +12,24 @@ import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
 
-@WebServlet("/my/carList/controller")
-public class myCartListController extends HttpServlet {
+@WebServlet(name = "myUserStoryController", urlPatterns = { "/my/userStory/controller" })
+public class UserStoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// Service 객체 선언
 	private MypageService mypageService = new MypageServiceImpl();
 	
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/my/carList/controller [GET]");
+		System.out.println("/my/userStory/controller [GET]");
+
 	
 	}
-
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/my/carList/controller [Post]");
+		System.out.println("/my/userStory/controller [POST]");
 
 	
 	}
