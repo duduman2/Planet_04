@@ -68,7 +68,7 @@ div.right_section {
 </head>
 <body>
 
-<%-- <%@include file="..//header.jsp" %> --%>
+<%-- <%@include file="../layout/header.jsp" %> --%>
 
 <h1>/mypage/main.jsp</h1>
 <h3>마이페이지 메인</h3>
@@ -86,7 +86,7 @@ div.right_section {
 	<tr style="height: 300px;">
 		<td colspan="2" style="text-align: center;"><img src="../sources/mypage/DefaultImage.png" alt="기본이미지" 
 		style="width: 200px; height:200px; border-radius: 50%; display: block; 
-		margin: auto; margin-top: 20px; padding: 10px;" ></img><br>아이디? 닉네임?값 가져오기</td>
+		margin: auto; margin-top: 20px; padding: 10px;" ></img><h3>아이디?닉네임? 값 가져오기</h3></td>
 	</tr>
 	<tr>
 		<th style="text-align: center; height: 50px;">회원 등급</th>
@@ -112,7 +112,7 @@ div.right_section {
 				<th class="info" colspan="3">나의 쇼핑<button style="float: right;">+전체보기</button></th>
 			</tr>
 			<tr>
-				<td>+장바구니</td>
+				<td><a>+장바구니</a></td>
 				<td>+배송 확인</td>
 				<td>+환불/반품</td>
 			</tr>
@@ -172,7 +172,7 @@ div.right_section {
 </div><!-- verticalline  end -->
 </table>
 
-<%-- <%@include file="..//footer.jsp" %> --%>
+<%-- <%@include file="../layout/footer.jsp" %> --%>
 
 </body>
 </html>
