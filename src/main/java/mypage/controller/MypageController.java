@@ -21,7 +21,7 @@ public class MypageController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/mypage/controller [GET]");
+		System.out.println("/mypage/controller [GET] 시작");
 	
 		req.getRequestDispatcher("/WEB-INF/views/mypage/main.jsp").forward(req, resp);
 	}
