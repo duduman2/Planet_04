@@ -2,12 +2,18 @@ package mypage.service.face;
 
 import java.util.List;
 
-public class MypageService {
-	
-	private UserCartDao userCartDao;
-	private UserBoardDao userBoardDao;
-	private UserInfoDao userInfoDao;
-	
+import dto.AskBoard;
+import dto.CarList;
+import dto.StoryBoard;
+import dto.UserInfo;
+import mypage.dao.face.UserBoardDao;
+import mypage.dao.face.UserCartDao;
+import mypage.dao.face.UserInfoDao;
+import mypage.dao.impl.UserBoardDaoImpl;
+import mypage.dao.impl.UserCartDaoImple;
+import mypage.dao.impl.UserInfoDaoImpl;
+
+public interface MypageService {
 	
 	
 	//장바구니 리스트 int
@@ -32,7 +38,7 @@ public class MypageService {
 	public UserInfo showUserInfo();
 
 	//회원 정보 수정 int, UserInfo
-	public int showUserInfo();
+	public int modifyUserInfo();
 	
 	//회원 탈퇴 int
 	public int deleteUser();
