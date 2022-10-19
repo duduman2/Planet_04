@@ -1,6 +1,8 @@
 package login.controller;
 
 import java.io.IOException;
+
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +38,7 @@ public class JoinController extends HttpServlet {
 		loginService.join(userinfo);
 				
 		//메인으로 리다이렉트
-		resp.sendRedirect("/");
+		resp.sendRedirect("/main");
 				
 	}
    
