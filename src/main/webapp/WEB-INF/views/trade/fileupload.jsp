@@ -1,27 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ include file="../layout/header.jsp"%>
 
 <h1>파일 업로드</h1>
 <hr>
 
 <form action="/trade/productupload" method="post" enctype="multipart/form-data">
 
-	<label>제목<input type="text" name="title"></label><br>
-	<label>데이터1<input type="text" name="data1"></label><br>
-	<label>데이터2<input type="text" name="data2"></label><br>
 	
-	<label>파일<input type="file" name="upfile"></label><br>
+	<label>상품명<input type="text" name="title"></label><br>
+	<label>상품설명<textarea rows="4" cols="30" name="content"></textarea></label><br>
+	<label>금액<input type="text" name="price"></label><br>
+	
+	<label>이미지<input type="file" name="upfile"></label><br>
 
 	<button>전송</button>
 	
 </form>
 
-</body>
-</html>
+<%@ include file="../layout/footer.jsp"%>

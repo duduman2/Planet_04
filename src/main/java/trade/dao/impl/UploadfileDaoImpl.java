@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.JDBCTemplate;
+import dto.BoardInfo;
+import dto.Product;
 import dto.Uploadfile;
 import trade.dao.face.UploadfileDao;
 
@@ -19,16 +21,17 @@ public class UploadfileDaoImpl implements UploadfileDao {
 	@Override
 	public int insert(Connection conn, Uploadfile uploadfile) {
 		String sql = "";
-		sql += "INSERT INTO uploadfile (fileno,origin_name, stored_name)";
-		sql += " VALUES (uploadfile_seq.nextval, ?, ?)";
+		sql += "INSERT INTO uploadfile (fileno,origin_name, stored_name, filepath)";
+		sql += " VALUES (uploadfile_seq.nextval, ?, ?, ?)";
 		
 		int res = 0;
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			
+
 			ps.setString(1, uploadfile.getOriginName());
 			ps.setString(2, uploadfile.getStoredName());
+			ps.setString(3, uploadfile.getFilePath());
 			
 			res = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -40,40 +43,12 @@ public class UploadfileDaoImpl implements UploadfileDao {
 		return res;
 	}
 
+	
+
 	@Override
-	public List<Uploadfile> selectAll(Connection conn) {
-		
-		String sql = "";
-		sql += "SELECT fileno, origin_name, stored_name";
-		sql += " FROM uploadfile";
-		sql += " ORDER BY fileno DESC";
-		
-		List<Uploadfile> list = new ArrayList<>();
-		
-		try {
-			ps = conn.prepareStatement(sql);
-			
-			rs = ps.executeQuery();
-			
-			while (rs.next() ) {
-				Uploadfile uploadfile = new Uploadfile();
-				
-				uploadfile.setFileno(rs.getInt("fileno"));
-				uploadfile.setOriginName(rs.getString("origin_name"));
-				uploadfile.setStoredName(rs.getString("stored_name"));
-				
-				list.add(uploadfile);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rs);
-			JDBCTemplate.close(ps);
-		}
-		
-				
-		
-		return list;
+	public List<BoardInfo> selectBoardList(Connection connection) {
+
+		return null;
 	}
 
 }
