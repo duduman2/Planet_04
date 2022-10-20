@@ -68,7 +68,7 @@ div.right_section {
 </head>
 <body>
 
-<%-- <%@include file="..//header.jsp" %> --%>
+<%-- <%@include file="../layout/header.jsp" %> --%>
 
 <h1>/mypage/main.jsp</h1>
 <h3>마이페이지 메인</h3>
@@ -86,7 +86,7 @@ div.right_section {
 	<tr style="height: 300px;">
 		<td colspan="2" style="text-align: center;"><img src="../sources/mypage/DefaultImage.png" alt="기본이미지" 
 		style="width: 200px; height:200px; border-radius: 50%; display: block; 
-		margin: auto; margin-top: 20px; padding: 10px;" ></img><br>아이디? 닉네임?값 가져오기</td>
+		margin: auto; margin-top: 20px; padding: 10px;" ></img><h3>아이디?닉네임? 값 가져오기</h3></td>
 	</tr>
 	<tr>
 		<th style="text-align: center; height: 50px;">회원 등급</th>
@@ -109,27 +109,24 @@ div.right_section {
 	<div class="right_section" id="right_section"  style="width: 60%; float: left;">
 		<table class="table">
 			<tr>
-				<th class="info" colspan="2">나의 쇼핑</th>
+				<th class="info" colspan="3">나의 쇼핑<button style="float: right;">+전체보기</button></th>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
+				<td><a>+장바구니</a></td>
+				<td>+배송 확인</td>
+				<td>+환불/반품</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
+				<td>+포인트</td>
+				<td>+문의 사항</td>
+				<td>+고객센터</td>
 			</tr>
-			<tr>
-				<th class="info" colspan="2"></th>
-			</tr>
-			<tr>
-				<th class="info" colspan="2"></th>
-			</tr>
+
 		</table>  <!-- first table end -->
 		
 		<table class="table">
 			<tr>
-				<th class="info" colspan="2">내가 작성한 글 확인하기</th>
+				<th class="info" colspan="2">내가 작성한 글 확인하기<button style="float: right;">+전체보기</button></th>
 			</tr>
 			<tr>
 				<td>게시판</td>
@@ -139,17 +136,12 @@ div.right_section {
 				<td>댓글</td>
 				<td><button>댓글 더보기</button></td>
 			</tr>
-			<tr>
-				<th class="info" colspan="2">내가 구매한 리스트</th>
-			</tr>
-			<tr>
-				<th class="info" colspan="2">장바구니</th>
-			</tr>
+
 		</table>  <!-- second table end -->
 		
 		<table class="table">
 			<tr>
-				<th class="info" colspan="2">Q n A</th>
+				<th class="info" colspan="2">내가 구매한 리스트<button style="float: right;">+전체보기</button></th>
 			</tr>
 			<tr>
 				<td></td>
@@ -159,20 +151,28 @@ div.right_section {
 				<td></td>
 				<td></td>
 			</tr>
+		</table>  <!-- third table end -->
+				
+		<table class="table">
 			<tr>
-				<th class="info" colspan="2"></th>
+				<th class="info" colspan="2">Q n A<button style="float: right;">+전체보기</button></th>
 			</tr>
 			<tr>
-				<th class="info" colspan="2"></th>
+				<td></td>
+				<td></td>
 			</tr>
-		</table>  <!-- third table end -->		
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>  <!--forth table end -->		
 		
 	</div> <!-- right_section  end -->
 	
 </div><!-- verticalline  end -->
 </table>
 
-<%-- <%@include file="..//footer.jsp" %> --%>
+<%-- <%@include file="../layout/footer.jsp" %> --%>
 
 </body>
 </html>
