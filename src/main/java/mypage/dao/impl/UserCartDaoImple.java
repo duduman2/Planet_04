@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.List;
 
 import dto.CarList;
+import dto.Cart;
 import mypage.dao.face.UserCartDao;
 
 public class UserCartDaoImple implements UserCartDao {
@@ -16,7 +17,7 @@ public class UserCartDaoImple implements UserCartDao {
 	
 	
 	@Override
-	public List<CarList> selectCartByUserNo() {
+	public List<Cart> selectCartByUserNo() {
 
 		return null;
 	}

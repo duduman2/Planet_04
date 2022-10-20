@@ -37,7 +37,7 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<dto.CarList> checkCart() {
+	public List<dto.Cart> checkCart() {
 
 		return null;
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import dto.AskBoard;
 import dto.CarList;
+import dto.Cart;
 import dto.StoryBoard;
 import dto.UserInfo;
 import mypage.dao.face.UserBoardDao;
@@ -16,8 +17,8 @@ import mypage.dao.impl.UserInfoDaoImpl;
 public interface MypageService {
 	
 	
-	//장바구니 리스트 int
-	public List<CarList> checkCart();
+	//장바구니 내역 조회 int
+	public List<Cart> checkCart();
 
 	//장바구니 내역 삭제 int
 	public int deleteCart();
