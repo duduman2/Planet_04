@@ -10,19 +10,19 @@ clear: both;
 	background-color: yellowgreen;
 }
 
-#best {
+#hitRank {
 	height: 500px;
 	background-color: yellow;
 }
 
-#know-how {
+#knowhowRank {
 	float: left;
 	width: 50%;
 	height: 300px;
 	background-color: tomato;
 }
 
-#qna {
+#qnaRank {
 	float: left;
 	width: 50%;
 	height: 300px;
@@ -35,18 +35,15 @@ clear: both;
 <p>테마별 노하우</p>
 </div>
 
-<div id="best">
-<p>오늘의 인기글</p>
-
-</div>
+<%@ include file="../main/hitRank.jsp"%>
 
 <p>인기 추천글</p>
-<div id="know-how">
+<div id="knowhowRank">
 <p>노하우 추천순</p>
 
 </div>
 
-<div id="qna">
+<div id="qnaRank">
 <p>질문답변 추천순</p>
 
 </div>
