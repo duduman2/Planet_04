@@ -4,36 +4,44 @@
 * { font-size: 1.03em;}
 table { border: 1px solid #ccc; border-collapse: collapse }
 
-div {  width: 100%; }
+.main {  width: 100%; }
+
 div.left_section { 
 	 
 	/* 나중에 header 연결 후 수정하기!! */
-/* 	width: 40%; */
+	width: 30%;
 	
-	display: block;
+	display: inline;
 	margin-top: 30px;
- 	margin-left: 100px; /* 나중에 header 연결 후 수정하기!! */
-	margin-right: 50px;
+/*  	margin-left: 100px; 나중에 header 연결 후 수정하기!! */
+	margin-right: 15px;
 	float: left;
 /* 	background-color: #DBF227; */
 }
 div.verticalline {
- 	width: 0.5%; 
+ 	width: 0.3%; 
 	height: 700px;
- 	margin: 30px, 30px; 
+ 	margin-right: 15px; 
 	
 	border-left-width: medium; 
 	border-left-style: solid; 
-	border-left-color: block;
+	border-left-color: #ccc;
 
 	float: left;
+	position: relative;
+	
+	
 /* 	background-color: #005C53; */
  }
 div.right_section { 
-/* 	width: 55%  */
-	margin-left: 50px;
+	width: 50%; 
+	margin-left: 0;
 	margin-top: 30px;
 	float: left;
+	display: block;
+/* 	position: absolute; */
+/* 	left: 760px; */
+/* 	width: 300px; */
 /* 	background-color: #D6D58E; */
 }
 

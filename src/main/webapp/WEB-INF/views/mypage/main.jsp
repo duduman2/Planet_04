@@ -1,21 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+<!-- <!DOCTYPE html> -->
+<!-- <html> -->
+<!-- <head> -->
+<!-- <meta charset="UTF-8"> -->
+
+<%@include file="../layout/header.jsp" %>
 
 <title>마이페이지</title>
 
 <style type="text/css">
-@import url("./layout/css/mypage.css");
+@import url("../sources/mypage/mypage.css");
 
 </style>
 
-</head>
-<body>
 
-<%@include file="../layout/header.jsp" %>
+<!-- </head> -->
+<!-- <body> -->
+
+
 
 <h1>/mypage/main.jsp</h1>
 <h3>마이페이지 메인</h3>
@@ -25,7 +28,8 @@
 
 <div class="main" style="width: 100%;"> 
 
-<div class="left_section" id="left_section" style="width: 20%; float: left;">
+<!-- left profile section -->
+<div class="left_section" id="left_section" style="width: 30%; float: left;">
 <table class="table">
 	<tr>
 		<th class="info" colspan="2">프로필 설정<button style="float: right;">설정(수정)</button></th>
@@ -52,69 +56,76 @@
 </div>
 
 
-<div class="verticalline" id="verticalline"  style="float: left;"></div>
-	<div class="right_section" id="right_section"  style="width: 60%; float: left;">
-		<table class="table">
-			<tr>
-				<th class="info" colspan="3">나의 쇼핑<button style="float: right;">+전체보기</button></th>
-			</tr>
-			<tr>
-				<td><a>+장바구니</a></td>
-				<td>+배송 확인</td>
-				<td>+환불/반품</td>
-			</tr>
-			<tr>
-				<td>+포인트</td>
-				<td>+문의 사항</td>
-				<td>+고객센터</td>
-			</tr>
+<!-- verticalline section -->
+<div class="verticalline" id="verticalline"  style="float: left;">
+<!-- 	<div style="color: white;">v</div> -->
+<!-- 	<div>v</div> -->
+</div>
 
-		</table>  <!-- first table end -->
-		
-		<table class="table">
-			<tr>
-				<th class="info" colspan="2">내가 작성한 글 확인하기<button style="float: right;">+전체보기</button></th>
-			</tr>
-			<tr>
-				<td>게시판</td>
-				<td><button>게시판 더보기</button></td>
-			</tr>
-			<tr>
-				<td>댓글</td>
-				<td><button>댓글 더보기</button></td>
-			</tr>
 
-		</table>  <!-- second table end -->
-		
-		<table class="table">
-			<tr>
-				<th class="info" colspan="2">내가 구매한 리스트<button style="float: right;">+전체보기</button></th>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-		</table>  <!-- third table end -->
-				
-		<table class="table">
-			<tr>
-				<th class="info" colspan="2">Q n A<button style="float: right;">+전체보기</button></th>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-		</table>  <!--forth table end -->		
-		
-	</div> <!-- right_section  end -->
+<!-- right table's section -->
+<div class="right_section" id="right_section"  style="width: 67%; float: left;">
+	<table class="table">
+		<tr>
+			<th class="info" colspan="3">나의 쇼핑<button style="float: right;">+전체보기</button></th>
+		</tr>
+		<tr>
+			<td><a>+장바구니</a></td>
+			<td>+배송 확인</td>
+			<td>+환불/반품</td>
+		</tr>
+		<tr>
+			<td>+포인트</td>
+			<td>+문의 사항</td>
+			<td>+고객센터</td>
+		</tr>
+
+	</table>  <!-- first table end -->
+	
+	<table class="table">
+		<tr>
+			<th class="info" colspan="2">내가 작성한 글 확인하기<button style="float: right;">+전체보기</button></th>
+		</tr>
+		<tr>
+			<td>게시판</td>
+			<td><button>게시판 더보기</button></td>
+		</tr>
+		<tr>
+			<td>댓글</td>
+			<td><button>댓글 더보기</button></td>
+		</tr>
+
+	</table>  <!-- second table end -->
+	
+	<table class="table">
+		<tr>
+			<th class="info" colspan="2">내가 구매한 리스트<button style="float: right;">+전체보기</button></th>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>  <!-- third table end -->
+			
+	<table class="table">
+		<tr>
+			<th class="info" colspan="2">Q n A<button style="float: right;">+전체보기</button></th>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>  <!--forth table end -->		
+	
+</div> <!-- right_section  end -->
 	
 </div><!-- verticalline  end -->
 </table>
