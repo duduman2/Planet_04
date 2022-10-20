@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+
+* { font-size: 1.03em;}
+table { border: 1px solid #ccc; border-collapse: collapse }
+
+div {  width: 100%; }
+div.left_section { 
+	 
+	/* 나중에 header 연결 후 수정하기!! */
+/* 	width: 40%; */
+	
+	display: block;
+	margin-top: 30px;
+ 	margin-left: 100px; /* 나중에 header 연결 후 수정하기!! */
+	margin-right: 50px;
+	float: left;
+/* 	background-color: #DBF227; */
+}
+div.verticalline {
+ 	width: 0.5%; 
+	height: 700px;
+ 	margin: 30px, 30px; 
+	
+	border-left-width: medium; 
+	border-left-style: solid; 
+	border-left-color: block;
+
+	float: left;
+/* 	background-color: #005C53; */
+ }
+div.right_section { 
+/* 	width: 55%  */
+	margin-left: 50px;
+	margin-top: 30px;
+	float: left;
+/* 	background-color: #D6D58E; */
+}
+
+

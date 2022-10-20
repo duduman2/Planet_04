@@ -4,71 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>마이페이지</title>
 
-<!-- 부트스트랩3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-<!-- bootstrap -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<!-- summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
-<!-- 스마트 에디터2 라이브러리 -->
-<script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
-
-<!-- jQuery 2.2.4 라이브러리 -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
 <style type="text/css">
-* { font-size: 1.03em;}
-table { border: 1px solid #ccc; border-collapse: collapse }
+@import url("./layout/css/mypage.css");
 
-div {  width: 100%; }
-div.left_section { 
-	 
-	/* 나중에 header 연결 후 수정하기!! */
-/* 	width: 40%; */
-	
-	display: block;
-	margin-top: 30px;
- 	margin-left: 100px; /* 나중에 header 연결 후 수정하기!! */
-	margin-right: 50px;
-	float: left;
-/* 	background-color: #DBF227; */
-}
-div.verticalline {
- 	width: 0.5%; 
-	height: 700px;
- 	margin: 30px, 30px; 
-	
-	border-left-width: medium; 
-	border-left-style: solid; 
-	border-left-color: block;
-
-	float: left;
-/* 	background-color: #005C53; */
- }
-div.right_section { 
-/* 	width: 55%  */
-	margin-left: 50px;
-	margin-top: 30px;
-	float: left;
-/* 	background-color: #D6D58E; */
-}
 </style>
+
 </head>
 <body>
 
-<%-- <%@include file="../layout/header.jsp" %> --%>
+<%@include file="../layout/header.jsp" %>
 
 <h1>/mypage/main.jsp</h1>
 <h3>마이페이지 메인</h3>
@@ -172,7 +119,7 @@ div.right_section {
 </div><!-- verticalline  end -->
 </table>
 
-<%-- <%@include file="../layout/footer.jsp" %> --%>
+<%@include file="../layout/footer.jsp" %>
 
-</body>
-</html>
+<!-- </body> -->
+<!-- </html> -->

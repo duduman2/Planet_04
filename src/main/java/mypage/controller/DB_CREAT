@@ -3,8 +3,9 @@ DROP TABLE tbl_admininfo;
 DROP SEQUENCE tbl_admininfo_seq;
 CREATE TABLE tbl_admininfo (
     admin_no NUMBER PRIMARY KEY -- 관리자 번호
-    , admin_id VARCHAR2(20) -- 관리자 아이디
-    , admin_pw VARCHAR2(20) -- 관리자 비밀번호 
+    , admin_id VARCHAR2(20) UNIQUE NOT NULL -- 관리자 아이디
+    , admin_pw VARCHAR2(20) NOT NULL -- 관리자 비밀번호 
+    , admin_date DATE  NOT NULL -- 관리자 생성일자
 );  
 CREATE SEQUENCE tbl_admininfo_seq;
 SELECT * FROM tbl_admininfo;
@@ -14,7 +15,7 @@ DROP TABLE tbl_grade;
 DROP SEQUENCE tbl_grade_seq;
 CREATE TABLE tbl_grade (
     grade NUMBER PRIMARY KEY -- 등급코드
-    , gradename VARCHAR2(20) -- 등급명
+    , gradename VARCHAR2(20) default '씨앗??' -- 등급명
 );
 CREATE SEQUENCE tbl_grade_seq;
 SELECT * FROM tbl_grade;
@@ -39,16 +40,176 @@ CREATE TABLE tbl_user (
     , userpw VARCHAR2(20) -- 회원 비밀번호
     , name VARCHAR2(20) -- 회원 이름
     , usernick VARCHAR2(20) NOT NULL -- 회원 닉네임
-    , gender VARCHAR2(20) -- 성별
-    , email VARCHAR2(20) NOT NULL -- 이메일
+    , gender VARCHAR2(10) -- 성별
+    , email VARCHAR2(50) NOT NULL -- 이메일
     , phone VARCHAR2(20) NOT NULL -- 전화번호
-    , add1 VARCHAR2(20) -- 주소1
-    , add2 VARCHAR2(20) -- 주소2 
+    , add1 VARCHAR2(50) -- 주소1
+    , add2 VARCHAR2(50) -- 주소2 
     , userbsno VARCHAR2(20) NOT NULL -- 사업자번호
-    , grade VARCHAR2(20) REFERENCES -- 등급코드 
-    , report VARCHAR2(20) REFERENCES -- 신고코드
-    , wish_no VARCHAR2(20) REFERENCES -- 장바구니번호 
+    , grade VARCHAR2(20) REFERENCES tbl_grade -- 등급코드 
+    , report VARCHAR2(20) REFERENCES tbl_report -- 신고코드
+    , wish_no VARCHAR2(20) REFERENCES tbl_wish -- 장바구니번호 
 );
 CREATE SEQUENCE tbl_user_seq;
 SELECT * FROM tbl_user;
+
+
+-- 테이블 5
+DROP TABLE tbl_board;
+DROP SEQUENCE tbl_board_seq;
+CREATE TABLE tbl_board (
+    boardno NUMBER PRIMARY KEY -- 게시글 코드
+    , title VARCHAR2(40) -- 글제목
+    , boad_content VARCHAR2(100) -- 글내용
+    , insert_dat DATE -- 작성일 
+    , update_dat DATE -- 수정일
+    , hit NUMBER --  조회수
+    , cateno VARCHAR2(20) REFERENCES tbl_board_cate -- 게시판종류코드
+    , userno VARCHAR2(20) REFERENCES tbl_user -- 회원번호
+ 
+);
+CREATE SEQUENCE tbl_board_seq;
+SELECT * FROM tbl_board;
+
+
+-- 테이블 6
+DROP TABLE tbl_board_cate;
+DROP SEQUENCE tbl_board_cate_seq;
+CREATE TABLE tbl_board_cate (
+    cateno NUMBER PRIMARY KEY -- 게시판 종류 코드
+    , cate_name VARCHAR2(20) -- 게시판 종류 이름
+    , cate_dat DATE -- 게시판 종류 등록일
+);
+CREATE SEQUENCE tbl_board_cate_seq;
+SELECT * FROM tbl_board_cate;
+
+
+-- 테이블 7
+DROP TABLE tbl_attachedfile;
+DROP SEQUENCE tbl_attachedfile_seq;
+CREATE TABLE tbl_attachedfile (
+    fileno NUMBER PRIMARY KEY -- 파일 번호
+    , filename VARCHAR2(20) -- 파일 이름
+    , filepath VARCHAR2(40) -- 파일 저장 경로 
+    , filesize NUMBER -- 파일 크기
+    , filetype VARCHAR2(20) -- 파일 타입
+    , boardno NUMBER REFERENCES tbl_board --  게시글코드
+    , commentno NUMBER REFERENCES tbl_comment -- 댓글번호
+);
+CREATE SEQUENCE tbl_attachedfile_seq;
+SELECT * FROM tbl_attachedfile;
+
+
+-- 테이블 8
+DROP TABLE tbl_notice;
+DROP SEQUENCE tbl_notice_seq;
+CREATE TABLE tbl_notice (
+    notice_no NUMBER PRIMARY KEY -- 공지사항 번호
+    , insert_dat DATE -- 작성일
+    , title VARCHAR2(40) --  글제목
+    , notice_content VARCHAR2(100) -- 글내용
+    , boardno NUMBER REFERENCES tbl_board --  게시글코드
+);
+CREATE SEQUENCE tbl_notice_seq;
+SELECT * FROM tbl_notice;
+
+
+-- 테이블 9
+DROP TABLE tbl_recommend;
+DROP SEQUENCE tbl_recommend_seq;
+CREATE TABLE tbl_recommend (
+    recommendno NUMBER PRIMARY KEY -- 추천번호
+    , userid NUMBER REFERENCES tbl_user -- 회원 아이디
+    , boardno NUMBER REFERENCES tbl_board --  게시글코드
+);
+CREATE SEQUENCE tbl_recommend_seq;
+SELECT * FROM tbl_recommend;
+
+
+-- 테이블 10
+DROP TABLE tbl_share;
+DROP SEQUENCE tbl_share_seq;
+CREATE TABLE tbl_share (
+    share_no NUMBER PRIMARY KEY -- 공유 종류 코드
+    , boardno NUMBER REFERENCES tbl_board --  게시글코드
+);
+CREATE SEQUENCE tbl_share_seq;
+SELECT * FROM tbl_share;
+
+
+-- 테이블 11
+DROP TABLE tbl_comment;
+DROP SEQUENCE tbl_comment_seq;
+CREATE TABLE tbl_comment (
+    commentno NUMBER PRIMARY KEY -- 댓글 번호
+    , comm_content VARCHAR2(100) -- 댓글 내용
+    , insert_dat DATE -- 작성일
+    , userid NUMBER REFERENCES tbl_user -- 회원 아이디
+    , boardno NUMBER REFERENCES tbl_board --  게시글코드
+);
+CREATE SEQUENCE tbl_comment_seq;
+SELECT * FROM tbl_comment;
+
+
+-- 테이블 12
+DROP TABLE tbl_wish;
+DROP SEQUENCE tbl_wish_seq;
+CREATE TABLE tbl_wish (
+    wish_no NUMBER PRIMARY KEY -- 장바구니 번호
+    , wish_total_price NUMBER -- 장바구니 총 금액
+    , product_no NUMBER -- 상품번호 
+    , wish_amount NUMBER -- 수량
+);
+CREATE SEQUENCE tbl_wish_seq;
+SELECT * FROM tbl_wish;
+
+
+
+-- 테이블 13
+DROP TABLE tbl_order;
+CREATE TABLE tbl_order (
+    order_no NUMBER PRIMARY KEY -- 주문번호
+    , order_total_price NUMBER -- 주문 총 금액
+    , product_no NUMBER NOT NULL -- 상품번호
+    , order_amount NUMBER -- 수량 
+    , wish_no NUMBER REFERENCES tbl_wish -- 장바구니번호
+    , pay_no NUMBER REFERENCES tbl_payment -- 결제번호  
+);
+DROP SEQUENCE tbl_order_seq;
+CREATE SEQUENCE tbl_order_seq;
+SELECT * FROM tbl_order;
+
+
+
+-- 테이블 14
+DROP TABLE tbl_payment;
+CREATE TABLE tbl_payment (
+    pay_no NUMBER PRIMARY KEY -- 결제 번호
+    , pay_dat DATE -- 결제 날짜 
+    , pay_method VARCHAR2(10) -- 결제 방법
+    , pay_price NUMBER -- 결제 금액
+    , pay_cancel_no NUMBER NOT NULL -- 결제 취소 번호
+    , pay_cancel_reason VARCHAR2(20) -- 결제 취소 사유 
+);
+DROP SEQUENCE tbl_payment_seq;
+CREATE SEQUENCE tbl_payment_seq;
+SELECT * FROM tbl_payment;
+
+-- 테이블 15
+DROP TABLE tbl_product;
+CREATE TABLE tbl_product (
+    product_no NUMBER PRIMARY KEY -- 상품 번호 
+    , product_name VARCHAR2(20) -- 상품명
+    , product_content VARCHAR2(100) -- 상품 설명
+    , price NUMBER --  금액
+    , img VARCHAR2(20) -- 이미지첨부
+    , insert_dat DATE --  작성일
+    , wish_no NUMBER REFERENCES tbl_wish -- 장바구니번호
+    , order_no NUMBER REFERENCES tbl_order -- 주문번호
+    , pay_no NUMBER REFERENCES tbl_payment -- 결제번호
+    , userno NUMBER REFERENCES tbl_user -- 회원번호
+);
+DROP SEQUENCE tbl_product_seq;
+CREATE SEQUENCE tbl_product_seq;
+SELECT * FROM tbl_product;
 
