@@ -10,7 +10,9 @@
 
 alert("삭제가 완료되었습니다.")
 
-window.close();
+opener.location.reload(); // 부모창 새로고침
+
+history.back();
 
 </script>
 

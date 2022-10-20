@@ -193,4 +193,90 @@ public class AdminLoginDaoImpl implements AdminLoginDao {
 		
 	}
 
+	@Override
+	public int selectCntAll(Connection conn, AdminInfo adminInfo) {
+		
+		System.out.println("AdminLoginDaoImpl.selectCntAll2 Start");
+		
+		String sql = "SELECT count(*) cnt FROM tbl_admininfo where admin_id like ? ";
+		
+		//총 게시글 수 변수
+		int count = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			ps.setString(1, "%" + adminInfo.getAdminId() + "%");
+
+			rs = ps.executeQuery(); //SQL수행 및 결과 집합 저장
+			
+
+			while( rs.next() ) {
+				count = rs.getInt("cnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectCntAll2 End");
+		
+		//최종 결과 반환
+		return count;
+		
+	}
+
+	@Override
+	public List<AdminInfo> selectAll(Connection conn, Paging paging, AdminInfo adminInfo) {
+		System.out.println("AdminLoginDaoImpl.selectAll2 Start");
+		
+		//SQL작성
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += "	SELECT rownum rnum, B.* FROM (";
+		sql += "		SELECT admin_no, admin_id, admin_date FROM tbl_admininfo";
+		sql += "		where admin_id like ? ORDER BY admin_no asc";
+		sql += "	) B";
+		sql += " ) tbl_admininfo";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+		
+		//결과 저장할 List
+		List<AdminInfo> adminList = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			
+			ps.setString(1, "%" + adminInfo.getAdminId() + "%");
+			ps.setInt(2, paging.getStartNo());
+			ps.setInt(3, paging.getEndNo());
+			
+			rs = ps.executeQuery(); //SQL수행 및 결과 집합 저장
+			
+			//조회 결과 처리
+			while(rs.next()) {
+				
+				AdminInfo adminInfo2 = new AdminInfo(); //조회 결과 행 저장 DTO객체
+				
+				adminInfo2.setAdminNo( rs.getInt("admin_no") );
+				adminInfo2.setAdminId( rs.getString("admin_id") );
+				adminInfo2.setAdminDate( rs.getDate("admin_date") );
+				
+				//리스트에 결과값 저장하기
+				adminList.add(adminInfo2);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectAll2 End");
+		
+		return adminList; //최종 결과 반환
+	}
+
 }

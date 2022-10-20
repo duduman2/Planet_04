@@ -11,6 +11,7 @@
 <%@ include file="./header.jsp" %>
 
 <% List<AdminInfo> adminList = (List) request.getAttribute("adminList"); %>
+<% String userid = (String) request.getAttribute("userid"); %>
 
 <style type="text/css">
 
@@ -104,6 +105,12 @@ function deleteadmin() {
 		
 		<button class="configbutton" onclick="createadmin();">관리자 추가</button>
 		<button class="configbutton" onclick="deleteadmin();">관리자 삭제</button>
+		<form action="<%=request.getContextPath() %>/admin/mainconfig" method="get" style="display: inline;">
+			<!-- 이거 테두리 어떻게 음영 지우지?? -->
+			<input type="search" style="margin-left: 10px; border-color: #029EE4" name="userid" placeholder="아이디" value="<%=userid%>">
+			<button>검색</button>
+			<button type="button" onclick="location.href='/admin/mainconfig'">초기화</button>
+		</form>
 		<br>
 		<table class="admintable">
 			<tr>
