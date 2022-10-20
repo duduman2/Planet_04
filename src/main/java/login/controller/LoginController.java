@@ -27,13 +27,13 @@ public class LoginController extends HttpServlet {
 		System.out.println("/login/con [GET]");
 		
 		req.getRequestDispatcher("/WEB-INF/views/login/login.jsp").forward(req, resp);
+	
 		
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("login/con [POST]");
 		
 		//전달 파라미터에 대한 한글 인코딩 설정
 		req.setCharacterEncoding("UTF-8");
@@ -58,6 +58,43 @@ public class LoginController extends HttpServlet {
 					session.setAttribute("u_nick", userinfo.getU_nick());
 					
 				}
+			
+				
+				//전달 파라미터에 대한 한글 인코딩 설정
+				req.setCharacterEncoding("UTF-8");
+				
+				//전달 파라미터 얻기
+				String u_id = req.getParameter("u_id");
+				String u_pw = req.getParameter("u_pw");
+				
+				System.out.println("LoginController doPost() - userid : " + u_id);
+				System.out.println("LoginController doPost() - userpw : " + u_pw);
+				
+				//-------------------------------------------------
+				
+				
+//				//로그인 인증 - 제대로된 ID&PASS 인지 검사
+//				if( "abc".equals(u_id) && "123".equals(u_pw) ) {
+//					System.out.println("LoginController doPost() - 로그인 성공");
+//					
+//					//세션 객체
+//					HttpSession session = req.getSession();
+//					
+//					//세션 정보 저장하기
+//					session.setAttribute("login", true);		//로그인 상태
+//					session.setAttribute("loginid", u_id);	//로그인한 아이디
+//					
+//					req.getRequestDispatcher("/WEB-INF/views/main/main.jsp").forward(req, resp);
+//					
+//					
+//				} else {
+//					System.out.println("LoginController doPost() - 로그인 실패");
+//					
+//					req.getRequestDispatcher("/WEB-INF/views/login/login.jsp").forward(req, resp);
+//					
+//				}
+				
+				
 				
 				//메인페이지로 리다이렉트
 				resp.sendRedirect("/");

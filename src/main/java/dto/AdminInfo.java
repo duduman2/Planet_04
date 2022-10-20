@@ -1,30 +1,45 @@
 package dto;
 
+import java.util.Date;
+
 public class AdminInfo {
 	
-	private String adminid;
+	private int adminNo;
+	private String adminId;
 	private String adminPw;
+	private Date adminDate;
 	
 	public AdminInfo() {
 	}
 
-	public AdminInfo(String adminid, String adminPw) {
+	public AdminInfo(int adminNo, String adminId, String adminPw, Date adminDate) {
 		super();
-		this.adminid = adminid;
+		this.adminNo = adminNo;
+		this.adminId = adminId;
 		this.adminPw = adminPw;
+		this.adminDate = adminDate;
 	}
 
 	@Override
 	public String toString() {
-		return "AdminInfo [adminid=" + adminid + ", adminPw=" + adminPw + "]";
+		return "AdminInfo [adminNo=" + adminNo + ", adminId=" + adminId + ", adminPw=" + adminPw + ", adminDate="
+				+ adminDate + "]";
 	}
 
-	public String getAdminid() {
-		return adminid;
+	public int getAdminNo() {
+		return adminNo;
 	}
 
-	public void setAdminid(String adminid) {
-		this.adminid = adminid;
+	public void setAdminNo(int adminNo) {
+		this.adminNo = adminNo;
+	}
+
+	public String getAdminId() {
+		return adminId;
+	}
+
+	public void setAdminId(String adminId) {
+		this.adminId = adminId;
 	}
 
 	public String getAdminPw() {
@@ -33,6 +48,14 @@ public class AdminInfo {
 
 	public void setAdminPw(String adminPw) {
 		this.adminPw = adminPw;
+	}
+
+	public Date getAdminDate() {
+		return adminDate;
+	}
+
+	public void setAdminDate(Date adminDate) {
+		this.adminDate = adminDate;
 	}
 	
 }
