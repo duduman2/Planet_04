@@ -34,4 +34,20 @@ public interface AdminLoginDao {
 	 */
 	public List<AdminInfo> selectAll(Connection conn, Paging paging);
 
+	/**
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param adminInfo - 생성할 관리자 정보
+	 * @return 결과값 반환
+	 */
+	public int create_tbl_admininfo(Connection conn, AdminInfo adminInfo);
+
+	/**
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param adminInfo - 삭제할 관리자 정보
+	 * @return 결과값 반환
+	 */
+	public int delete_tbl_admininfo(Connection conn, AdminInfo adminInfo);
+
 }

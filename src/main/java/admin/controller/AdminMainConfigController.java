@@ -23,33 +23,21 @@ public class AdminMainConfigController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/admin/main [GET] Start");
+		System.out.println("/admin/mainconfig [GET] Start");
 		
-		HttpSession session = req.getSession();
+		// 전달파라미터에서 현재 페이징 객체 계산하기
+		Paging paging = adminService.getPaging(req);
+					
+		// 관리자리스트 페이징 목록 조회
+		List<AdminInfo> adminList = adminService.getList( paging );
+					
+		req.setAttribute("paging", paging);
+					
+		req.setAttribute("adminList", adminList);
+					
+		req.getRequestDispatcher("/WEB-INF/views/admin/adminMainConfig.jsp").forward(req, resp);
 		
-		// Object형태인 session을 String을 거쳐 Boolean으로 변환
-		Boolean sessionStatus = Boolean.valueOf( String.valueOf( session.getAttribute("login") ) );
-		
-		if( sessionStatus ) {
-			
-			// 전달파라미터에서 현재 페이징 객체 계산하기
-			Paging paging = adminService.getPaging(req);
-			
-			req.setAttribute("paging", paging);
-			
-			List<AdminInfo> adminList = adminService.getList( paging );
-			
-			req.setAttribute("adminList", adminList);
-			
-			req.getRequestDispatcher("/WEB-INF/views/admin/adminMainConfig.jsp").forward(req, resp);
-			
-		} else {
-			
-			req.getRequestDispatcher("/WEB-INF/views/admin/adminMainFail.jsp").forward(req, resp);
-			
-		}
-		
-		System.out.println("/admin/main [GET] End");
+		System.out.println("/admin/mainconfig [GET] End");
 		
 	}
 	

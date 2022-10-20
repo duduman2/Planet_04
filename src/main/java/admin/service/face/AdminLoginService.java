@@ -20,7 +20,7 @@ public interface AdminLoginService {
 	/**
 	 * dto객체 정보로 tbl_admininfo 테이블과 정보 비교
 	 * 
-	 * @param adminInfo
+	 * @param adminInfo - 관리자 정보
 	 * @return 로그인 성공/실패 반환
 	 */
 	public Boolean AdminLogin(AdminInfo adminInfo);
@@ -40,5 +40,19 @@ public interface AdminLoginService {
 	 * @return 관리자리스트 전체 목록 조회
 	 */
 	public List<AdminInfo> getList(Paging paging);
+
+	/**
+	 * 
+	 * @param adminInfo - 관리자 정보
+	 * @return 생성여부 반환
+	 */
+	public Boolean AdminCreate(AdminInfo adminInfo);
+
+	/**
+	 * 
+	 * @param adminInfo - 관리자 정보
+	 * @return 삭제여부 반환
+	 */
+	public Boolean AdminDelete(AdminInfo adminInfo);
 	
 }

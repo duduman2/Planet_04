@@ -23,7 +23,7 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 		
 		AdminInfo adminInfo = new AdminInfo();
 		
-		adminInfo.setAdminid( req.getParameter("userid") );
+		adminInfo.setAdminId( req.getParameter("userid") );
 		adminInfo.setAdminPw( req.getParameter("userpw") );
 		
 		System.out.println("AdminServiceImpl.getAdminInfo End");
@@ -80,7 +80,49 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 
 	@Override
 	public List<AdminInfo> getList(Paging paging) {
+		
+		System.out.println("AdminServiceImpl.getPaging Start");
+		
+		System.out.println("AdminServiceImpl.getPaging End");
+		
 		return adminDao.selectAll(JDBCTemplate.getConnection(), paging);
+		
+	}
+
+	@Override
+	public Boolean AdminCreate(AdminInfo adminInfo) {
+System.out.println("AdminServiceImpl.AdminCreate Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		if( adminDao.create_tbl_admininfo(conn, adminInfo) > 0 ) {
+			JDBCTemplate.commit(conn);
+			return true;
+		}
+		
+		JDBCTemplate.rollback(conn);
+		
+		System.out.println("AdminServiceImpl.AdminCreate End");
+		
+		return false;
+	}
+
+	@Override
+	public Boolean AdminDelete(AdminInfo adminInfo) {
+System.out.println("AdminServiceImpl.AdminDelete Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		if( adminDao.delete_tbl_admininfo(conn, adminInfo) > 0 ) {
+			JDBCTemplate.commit(conn);
+			return true;
+		}
+		
+		JDBCTemplate.rollback(conn);
+		
+		System.out.println("AdminServiceImpl.AdminDelete End");
+		
+		return false;
 	}
 
 }

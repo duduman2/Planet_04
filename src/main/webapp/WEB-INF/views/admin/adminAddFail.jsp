@@ -8,11 +8,9 @@
 
 <script type="text/javascript">
 
-var url = "<%=request.getContextPath() %>/admin/login";
+alert("중복된 아이디 입니다.")
 
-alert("아이디 또는 비밀번호가 틀립니다.")
-
-location.href = url; // 해당 url로 리다이렉트
+history.back();
 
 </script>
 
