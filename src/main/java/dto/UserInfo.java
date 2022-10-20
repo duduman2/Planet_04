@@ -10,20 +10,23 @@ public class UserInfo {
 	private String u_name;
 	private Date u_birth;
 	private String u_gender;
-	private int u_phone;
+	private String u_phone;
 	private String u_email;
 	private String u_address;
 	private String u_nick;
 	private Date u_join_date;
 	private String u_trade_user;
-	private int b_business_number;
+	private String b_business_number; 
+	private String grade;
+	private String reportcode;
+	private String wishno;
 	
 	public UserInfo() {
 	}
 
-	public UserInfo(int u_no, String u_id, String u_pw, String u_name, Date u_birth, String u_gender, int u_phone,
+	public UserInfo(int u_no, String u_id, String u_pw, String u_name, Date u_birth, String u_gender, String u_phone,
 			String u_email, String u_address, String u_nick, Date u_join_date, String u_trade_user,
-			int b_business_number) {
+			String b_business_number, String grade, String reportcode, String wishno) {
 		super();
 		this.u_no = u_no;
 		this.u_id = u_id;
@@ -38,6 +41,9 @@ public class UserInfo {
 		this.u_join_date = u_join_date;
 		this.u_trade_user = u_trade_user;
 		this.b_business_number = b_business_number;
+		this.grade = grade;
+		this.reportcode = reportcode;
+		this.wishno = wishno;
 	}
 
 	@Override
@@ -45,7 +51,8 @@ public class UserInfo {
 		return "UserInfo [u_no=" + u_no + ", u_id=" + u_id + ", u_pw=" + u_pw + ", u_name=" + u_name + ", u_birth="
 				+ u_birth + ", u_gender=" + u_gender + ", u_phone=" + u_phone + ", u_email=" + u_email + ", u_address="
 				+ u_address + ", u_nick=" + u_nick + ", u_join_date=" + u_join_date + ", u_trade_user=" + u_trade_user
-				+ ", b_business_number=" + b_business_number + "]";
+				+ ", b_business_number=" + b_business_number + ", grade=" + grade + ", reportcode=" + reportcode
+				+ ", wishno=" + wishno + "]";
 	}
 
 	public int getU_no() {
@@ -96,11 +103,11 @@ public class UserInfo {
 		this.u_gender = u_gender;
 	}
 
-	public int getU_phone() {
+	public String getU_phone() {
 		return u_phone;
 	}
 
-	public void setU_phone(int u_phone) {
+	public void setU_phone(String u_phone) {
 		this.u_phone = u_phone;
 	}
 
@@ -144,12 +151,36 @@ public class UserInfo {
 		this.u_trade_user = u_trade_user;
 	}
 
-	public int getB_business_number() {
+	public String getB_business_number() {
 		return b_business_number;
 	}
 
-	public void setB_business_number(int b_business_number) {
+	public void setB_business_number(String b_business_number) {
 		this.b_business_number = b_business_number;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	public String getReportcode() {
+		return reportcode;
+	}
+
+	public void setReportcode(String reportcode) {
+		this.reportcode = reportcode;
+	}
+
+	public String getWishno() {
+		return wishno;
+	}
+
+	public void setWishno(String wishno) {
+		this.wishno = wishno;
 	}
 	
 }
