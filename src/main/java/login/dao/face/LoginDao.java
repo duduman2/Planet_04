@@ -15,6 +15,10 @@ public interface LoginDao {
 	// 회원 정보 삽입
 	public int insert(Connection conn, UserInfo userinfo);
 
+	//모든 유저 아이디조회
+//	public UserInfo selectAllU_id (Connection conn, UserInfo userinfo);
+//
+//	public int selectAllU_id(String u_id); 
 	
 
 

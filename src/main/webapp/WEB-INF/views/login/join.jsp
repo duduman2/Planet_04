@@ -1,15 +1,136 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    
+    
+    
+<%@ include file="../layout/loginApi.jsp" %>
 
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<%-- <%@ include file="../login/naver.html" %> --%>
 
+<%-- <%@ include file="../login/callback.html" %> --%>
+
+<!-- <!DOCTYPE html> -->
+<!-- <html> -->
+<!-- <head> -->
+<!-- <meta charset="UTF-8"> -->
+<!-- <title>Insert title here</title> -->
+
+<!-- jQuery 2.2.4 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+
+<script type="text/javascript">
+$(function(){
+	$('#idCheck').click(register.idCheck);
+  $('#btn-join').on('click', register.send);
+});
+
+var register = {
+	isIDCheck: false,
+  idCheck: function(){
+  	//console.log(this);				//이벤트가 발생한 객체를 가르킴
+   // console.log(register);		
+    
+    var $userid = $('#userid');
+    
+    //빈값 체크
+    if(!$u_id.val()){
+    	//$userid.parent().after('<p>아이디를 입력하세요</p>').next().css('color', 'red');
+      $u_id.nextAll('span').html('아이디를 입력하세요').css('color', 'red');
+      return;
+    }else{
+    	$userid.isIDCheck = true;
+      $userid.nextAll('span').html('');
+      alert('중복체크를 했습니다.');
+    }
+    
+    //중복체크 버튼 이벤트 제거
+    //$('#btn-idcheck').off('click');
+   
+  },
+  send: function(){
+  	if(!register.isIDCheck){
+    	alert('아이디 중복체크를 하세요.');
+      return;
+    }
+    
+    alert('확인되었습니다.');
+  }
+}
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	//아이디 입력창에 포커스주기
+	$("input").eq(0).focus()
+
+	
+	//닉네임 입력창에 엔터키 입력 시 submit
+	$("input").eq(2).keydown(function(e) {
+		if( e.keyCode == 13 ) { //엔터키
+			$("#btnJoin").click();
+		}
+	})
+	
+	//비밀번호 확인	
+	$('#pwCheck').blur(function(){
+		if($('#u_pw').val() != $('#pwCheck').val()){
+			if($('#pwCheck').val()!=''){
+				alert("비밀번호가 일치하지 않습니다.");
+				$('#pwCheck').val('');
+				$('#pwCheck').focus();
+			}
+		}
+	})  	 
+	
+	//회원가입 버튼
+	$("#btnJoin").click(function() {
+		$(this).parents("form").submit();
+		
+	})
+	
+	//취소 버튼
+	$("#btnCancel").click(function() {
+		$(location).attr('href', '/main') //메인으로 가기
+	})
+	
+	//생년월일
+	$("#birth").click(function() {
+		 var now = new Date();
+		 var year = now.getFullYear();
+		 var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
+		 var day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate());           
+		 
+		 //년도 selectbox만들기               
+		 for(var i = 1900 ; i <= year ; i++) {
+		     $('#year').append('<option value="' + i + '">' + i + '년</option>');    
+		 }
+
+		 // 월별 selectbox 만들기            
+		 for(var i=1; i <= 12; i++) {
+		     var mm = i > 9 ? i : "0"+i ;            
+		     $('#month').append('<option value="' + mm + '">' + mm + '월</option>');    
+		 }
+		    
+		 // 일별 selectbox 만들기
+		 for(var i=1; i <= 31; i++) {
+		     var dd = i > 9 ? i : "0"+i ;            
+		     $('#day').append('<option value="' + dd + '">' + dd+ '일</option>');    
+		 }
+		 $("#year  > option[value="+year+"]").attr("selected", "true");        
+		 $("#month  > option[value="+mon+"]").attr("selected", "true");    
+		 $("#day  > option[value="+day+"]").attr("selected", "true");       
+	})
+	
+})
+</script>
+
+
+
+<!-- 주소API -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-	//주소 API
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -59,227 +180,6 @@
     }
 </script>
 
-<script>
-	$('.input_id').focusout(function(){
-		let userId = $('.input_id').val(); // input_id에 입력되는 값
-		
-		$.ajax({
-			url : "IdCheckService",
-			type : "post",
-			data : {userId: userId},
-			dataType : 'json',
-			success : function(result){
-				if(result == 0){
-					$("#checkId").html('사용할 수 없는 아이디입니다.');
-					$("#checkId").attr('color','red');
-				} else{
-					$("#checkId").html('사용할 수 있는 아이디입니다.');
-					$("#checkId").attr('color','green');
-				} 
-			},
-			error : function(){
-				alert("서버요청실패");
-			}
-		})
-		 
-	})
- </script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-	
-	//아이디 입력창에 포커스주기
-	$("input").eq(0).focus()
-	
-	//닉네임 입력창에 엔터키 입력 시 submit
-	$("input").eq(2).keydown(function(e) {
-		if( e.keyCode == 13 ) { //엔터키
-			$("#btnJoin").click();
-		}
-	})
-	
-	//회원가입 버튼
-	$("#btnJoin").click(function() {
-		$(this).parents("form").submit();
-	})
-	
-	//취소 버튼
-	$("#btnCancel").click(function() {
-// 		history.go(-1) //뒤로가기
-		$(location).attr('href', '/main') //메인으로 가기
-	})
-	
-	//생년월일
-	$("#birth").click(function() {
-		 var now = new Date();
-		 var year = now.getFullYear();
-		 var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
-		 var day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate());           
-		 
-		 //년도 selectbox만들기               
-		 for(var i = 1900 ; i <= year ; i++) {
-		     $('#year').append('<option value="' + i + '">' + i + '년</option>');    
-		 }
-
-		 // 월별 selectbox 만들기            
-		 for(var i=1; i <= 12; i++) {
-		     var mm = i > 9 ? i : "0"+i ;            
-		     $('#month').append('<option value="' + mm + '">' + mm + '월</option>');    
-		 }
-		    
-		 // 일별 selectbox 만들기
-		 for(var i=1; i <= 31; i++) {
-		     var dd = i > 9 ? i : "0"+i ;            
-		     $('#day').append('<option value="' + dd + '">' + dd+ '일</option>');    
-		 }
-		 $("#year  > option[value="+year+"]").attr("selected", "true");        
-		 $("#month  > option[value="+mon+"]").attr("selected", "true");    
-		 $("#day  > option[value="+day+"]").attr("selected", "true");       
-	})
-	
-})
-</script>
-
-
-<!-- 카카오 로그인 API -->
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script>
-Kakao.init('bcb8c1969cddb1acbd2699a7b40925ab'); //발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
-//카카오로그인
-function kakaoLogin() {
-    Kakao.Auth.login({
-      success: function (response) {
-        Kakao.API.request({
-          url: '/v2/user/me',
-          success: function (response) {
-        	  console.log(response)
-          },
-          fail: function (error) {
-            console.log(error)
-          },
-        })
-      },
-      fail: function (error) {
-        console.log(error)
-      },
-    })
-  }
-//카카오로그아웃  
-function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-        	console.log(response)
-        },
-        fail: function (error) {
-          console.log(error)
-        },
-      })
-      Kakao.Auth.setAccessToken(undefined)
-    }
-  }  
-</script>
-
-<!-- 네이버 로그인 API -->
-
-
-<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
-<script>
-
-var naverLogin = new naver.LoginWithNaverId(
-		{
-			clientId: "IahXu6d4TYMETpsiP8w7", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-			callbackUrl: "http://localhost:8888/login/con", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
-			isPopup: false,
-			callbackHandle: true
-		}
-	);	
-
-
-naverLogin.init();
-
-window.addEventListener('load', function () {
-	naverLogin.getLoginStatus(function (status) {
-		if (status) {
-			var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
-    		
-			console.log(naverLogin.user); 
-    		
-            if( email == undefined || email == null) {
-				alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
-				naverLogin.reprompt();
-				return;
-			}
-		} else {
-			console.log("callback 처리에 실패하였습니다.");
-		}
-	});
-});
-
-
-var testPopUp;
-function openPopUp() {
-    testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
-}
-function closePopUp(){
-    testPopUp.close();
-}
-
-function naverLogout() {
-	openPopUp();
-	setTimeout(function() {
-		closePopUp();
-		}, 1000);
-	
-	
-}
-</script> 
-
-<!-- 구글 API -->
-<meta name ="google-signin-client_id" content="247077116806-mg0h0onqn21pqb97qq6g35la5n4sseun.apps.googleusercontent.com">
-
-<script>
-//처음 실행하는 함수
-function init() {
-	gapi.load('auth2', function() {
-		gapi.auth2.init();
-		options = new gapi.auth2.SigninOptionsBuilder();
-		options.setPrompt('select_account');
-        // 추가는 Oauth 승인 권한 추가 후 띄어쓰기 기준으로 추가
-		options.setScope('email profile openid https://www.googleapis.com/auth/user.birthday.read');
-        // 인스턴스의 함수 호출 - element에 로그인 기능 추가
-        // GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
-		gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
-	})
-}
-
-function onSignIn(googleUser) {
-	var access_token = googleUser.getAuthResponse().access_token
-	$.ajax({
-    	// people api를 이용하여 프로필 및 생년월일에 대한 선택동의후 가져온다.
-		url: 'https://people.googleapis.com/v1/people/me'
-        // key에 자신의 API 키를 넣습니다.
-		, data: {personFields:'birthdays', key:'AIzaSyBOdmeC4SOSzXmPGLEM2vZueqiBSWKg3wk', 'access_token': access_token}
-		, method:'GET'
-	})
-	.done(function(e){
-        //프로필을 가져온다.
-		var profile = googleUser.getBasicProfile();
-		console.log(profile)
-	})
-	.fail(function(e){
-		console.log(e);
-	})
-}
-function onSignInFailure(t){		
-	console.log(t);
-}
-</script>
-
-<!-- 구글 api 사용을 위한 스크립트 -->
-<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 
 
 <style type="text/css">
@@ -321,7 +221,7 @@ label {
 	color: white;
 }
 
-#dbCheckId {
+#idCheck {
 	border: thin solid #128525;
 	border-radius: 3px;
 	background-color: white;
@@ -359,16 +259,21 @@ label {
 	text-align: center;
 }
 
+#naver_id_login { 
+	display: none;
+	
+	
+ } 
+
 </style>
 
 
-</head>
 <body>
 
 <h1 style="text-align: center; font-weight: bold;">회원가입</h1><br><br>
 
 
-
+<!-- SNS 간편 회원가입 -->
 <form  class="form-horizontal" id="snsForm">
 <div class="signin-sns cont">
 <h3 style="color: #585252; text-align: center;">SNS 간편 회원가입</h3><br><br>
@@ -378,8 +283,12 @@ label {
 
 
 <!-- 네이버 -->
-<a datatype="naver" class="css-l0qndx e1ufx3to0" id="naverIdLogin_loginButton" href="javascript:void(0)"  style="margin-right: 40px;"><svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet"><g fill="none" fill-rule="evenodd"><path fill="#00C63B" d="M0 24C0 10.745 10.745 0 24 0s24 10.745 24 24-10.745 24-24 24S0 37.255 0 24z"></path><path fill="#FFF" d="M21 25.231V34h-7V15h7l6 8.769V15h7v19h-7l-6-8.769z"></path></g></svg></a>
 
+
+
+<!-- <a datatype="naver" class="css-l0qndx e1ufx3to0" id="naverIdLogin_loginButton" href="javascript:void(0)"  style="margin-right: 40px;"><svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet"><g fill="none" fill-rule="evenodd"><path fill="#00C63B" d="M0 24C0 10.745 10.745 0 24 0s24 10.745 24 24-10.745 24-24 24S0 37.255 0 24z"></path><path fill="#FFF" d="M21 25.231V34h-7V15h7l6 8.769V15h7v19h-7l-6-8.769z"></path></g></svg></a> -->
+
+<a datatype="naver" class="css-l0qndx e1ufx3to0" id="naverIdLogin_loginButton" href="javascript:void(0)"  style="margin-right: 40px;"><svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet"><g fill="none" fill-rule="evenodd"><path fill="#00C63B" d="M0 24C0 10.745 10.745 0 24 0s24 10.745 24 24-10.745 24-24 24S0 37.255 0 24z"></path><path fill="#FFF" d="M21 25.231V34h-7V15h7l6 8.769V15h7v19h-7l-6-8.769z"></path></g></svg></a>
 
 <!-- 구글 -->
 <a datatype="google" id="GgCustomLogin" class="css-l0qndx e1ufx3to0" href="javascript:void(0)">
@@ -405,40 +314,41 @@ label {
 
 
 <form method="post" action="./con" class="form-horizontal" id="emailForm">
-<div class="signin-email cont">
+<div class="signin-email cont"></div>
 <h3 style="color: #585252; text-align: center;">이메일 간편 회원 가입</h3><br><br>
 	
 		<div class="form-group">
 			<label for="id">아이디</label>
-			<input type="text" id="id" name="id" class="input_id" required="required" style="width: 232px; height: 25px; border: 1px solid gray;">
-			<font id = "checkId" size = "2"></font>
+			<input type="text" id="u_id" name="u_id" class="input_id" required="required" style="width: 232px; height: 25px; border: 1px solid gray;">
+			
 			<!-- 로그인 중복확인 -->
-			<button type="submit" onclick="fn_dbCheckId()" name="dbCheckId" class="checkId" id="dbCheckId">중복확인</button>
-			<input type="hidden" name="idDuplication" value="idUnCheck">
+			<button type="submit" name="idCheck" class="checkId" id="idCheck">중복확인</button>
+
+			<input type="hidden" name="idDuplication" value="idCheck">
 		</div>
 			<br>
 			
 		<div class="form-group">
 			<label for="password">비밀번호</label> 
-			<input type="password" name="pw" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
+			<input type="password" name="u_pw" id="u_pw" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
 		</div>
 			<br>
 			
 		<div class="form-group">
 			<label for="password">비밀번호확인</label> 
-			<input type="password" name="pwCheck" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
+			<input type="password" name="pwCheck" id="pwCheck" required="required" style="width: 232px; height: 25px; border: 1px solid gray;">
 		</div>
 			<br>
 			
 		<div class="form-group">
 			<label for="name">이름</label> 
-			<input type="text" name="name" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
+			<input type="text" name="u_name" id="u_name" onchange="isSame" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
 		</div>
 			<br>
 		
 		<div class="form-group">
 			<label for="nickname">닉네임</label> 
-			<input type="text" name="nickname" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
+			<input type="text" name="u_nick" id="u_nick" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
 			
 			<!-- 닉네임 중복확인 -->
 			<button type="submit" onclick="fn_dbCheckNickname()" name="dbCheckNickname" id="dbCheckNickname" class="checkNickname">중복확인</button>
@@ -449,21 +359,21 @@ label {
 			
 		<div class="form-group">
 			<label for="bitrh">생년월일</label> 
-			<input type="date" id="birth" name="birth" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
+			<input type="date" id="u_birth" name="u_birth" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
 		</div>
 			<br>
 			
 			<div class="form-group" style="color: #585252;">
 			<label for="gender">성별</label> 
-			<input type="radio" name="gender" value="남자"  required="required"> 남성
-			<input type="radio" name="gender" value="여자" required="required"> 여성
+			<input type="radio" name="u_gender" id="u_gender" value="남자"  required="required"> 남성
+			<input type="radio" name="u_gender" id="u_gender" value="여자" required="required"> 여성
 			
 		</div>
 			<br>
 		
-		<div class="form-group">
+		<div>
 			<label for="email">이메일</label> 
-			<input type="email" name="email" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
+			<input type="email" name="u_email" id="u_email" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
 			
 			<!-- 이메일 중복확인 -->
 			<button type="submit" onclick="fn_dbCheckEmail()" name="dbCheckEmail" id="dbCheckEmail" class="checkEmail">중복확인</button>
@@ -473,35 +383,36 @@ label {
 							
 		<div class="form-group">
 			<label for="tel">휴대폰</label>
-			<input type="text" name="phone" required="required" style="width: 232px; height: 25px; border: 1px solid gray;">
+			<input type="text" name="u_phone" id="phone" required="required" placeholder=" '-' 를 제외한 숫자만 입력하세요" style="width: 232px; height: 25px; border: 1px solid gray;">
 		</div>
 			<br>
 			
-		<div class="form-group">
-			<label for="address">주소</label>
-			<input type="text" id="sample6_postcode" placeholder="우편번호" required="required" style="width: 232px; height: 25px; border: 1px solid gray;">
-			<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" id="address"><br>
-		</div>
+ 		<div> 
+ 			<label for="address">주소</label> 
+ 			<input type="text" id="sample6_postcode" name="u_address" placeholder="우편번호" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
+ 			<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" id="address"><br> 
+ 		</div> 
 
-		<div class="form-group">		
-			<label for="address2"></label>
-			<input type="text" id="sample6_address" placeholder="주소" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"><br>
-		</div>
+ 		<div >		 
+ 			<label for="address2"></label> 
+			<input type="text" id="sample6_address" placeholder="주소" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"><br> 
+ 		</div> 
 		
-		<div>
-			<label for="address3"></label>	
-			<input type="text" id="sample6_detailAddress" placeholder="상세주소" required="required" style="width: 232px; height: 25px; border: 1px solid gray;">
-		</div>
+		<div> 
+ 			<label for="address3"></label>	
+ 			<input type="text" id="sample6_detailAddress" placeholder="상세주소" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
+			<input type="text" id="sample6_extraAddress" placeholder="참고항목" style="width: 232px; height: 25px; margin-left:124px; border: 1px solid gray;"> 		
+		</div> 
 			<br><br><br><br>
-	</form>
 		
 		<div class="form-group" style="text-align: center;">
-			<button type="submit" class="btn btn-primary" id="btnJoin" style="margin-right: 15px;">회원가입</button>
+			<button type="button" class="btn btn-primary" id="btnJoin" style="margin-right: 15px;">회원가입</button>
 			
-			<button type="submit" class="btn btn-danger" id="btnCancel">취소</button>
+			<button type="button" class="btn btn-danger" id="btnCancel">취소</button>
 		</div>
-		
+</form>
 </div>
+
 
 <br><br><br><br><br><br><br><br><br><br><br><br>
 
