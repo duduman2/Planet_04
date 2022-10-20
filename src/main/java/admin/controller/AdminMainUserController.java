@@ -18,6 +18,8 @@ public class AdminMainUserController extends HttpServlet {
 		
 		System.out.println("/admin/mainuser [GET] Start");
 		
+		
+		
 		req.getRequestDispatcher("/WEB-INF/views/admin/adminMainUser.jsp").forward(req, resp);
 		
 		System.out.println("/admin/mainuser [GET] End");

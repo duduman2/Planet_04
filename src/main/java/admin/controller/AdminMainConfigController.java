@@ -25,12 +25,18 @@ public class AdminMainConfigController extends HttpServlet {
 		
 		System.out.println("/admin/mainconfig [GET] Start");
 		
+		AdminInfo adminInfo = new AdminInfo();
+		
+		adminInfo = adminService.getAdminInfo(req); // jsp로부터 가져온 요청정보 dto에 저장
+		
 		// 전달파라미터에서 현재 페이징 객체 계산하기
-		Paging paging = adminService.getPaging(req);
+		Paging paging = adminService.getPaging(req, adminInfo);
 					
 		// 관리자리스트 페이징 목록 조회
-		List<AdminInfo> adminList = adminService.getList( paging );
-					
+		List<AdminInfo> adminList = adminService.getList(paging, adminInfo);
+		
+		req.setAttribute("userid", adminInfo.getAdminId());
+		
 		req.setAttribute("paging", paging);
 					
 		req.setAttribute("adminList", adminList);

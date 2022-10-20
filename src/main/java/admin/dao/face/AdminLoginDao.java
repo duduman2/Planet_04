@@ -5,6 +5,7 @@ import java.util.List;
 
 import common.Paging;
 import dto.AdminInfo;
+import dto.UserInfo;
 
 public interface AdminLoginDao {
 
@@ -49,5 +50,29 @@ public interface AdminLoginDao {
 	 * @return 결과값 반환
 	 */
 	public int delete_tbl_admininfo(Connection conn, AdminInfo adminInfo);
+
+	// selectCntAll에 userid 오버로딩
+	public int selectCntAll(Connection conn, AdminInfo adminInfo);
+
+	// selectAll에 userid 오버로딩
+	public List<AdminInfo> selectAll(Connection connection, Paging paging, AdminInfo adminInfo);
+
+	/**
+	 * 사용자 계정 추가
+	 * 
+	 * @param conn DB객체
+	 * @param userInfo 사용자정보
+	 * @return 결과값
+	 */
+	public int create_tbl_user(Connection conn, UserInfo userInfo);
+
+	/**
+	 * 사용자 계정 삭제
+	 * 
+	 * @param conn DB객체
+	 * @param userInfo 사용자정보
+	 * @return 결과값
+	 */
+	public int delete_tbl_user(Connection conn, UserInfo userInfo);
 
 }

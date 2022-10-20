@@ -9,7 +9,7 @@
 <body>
 
 <form action="<%=request.getContextPath() %>/admin/addadmin" method="post">
-	<div style="color: #029EE4; font-size: 1.2em">관리자 생성<br><br></div>
+	<div style="color: #029EE4; font-size: 1.2em">관리자 생성</div><br>
 	<input type="text" name="userid" placeholder="아이디"><br><br>
 	<input type="password" name="userpw" placeholder="비밀번호"><br><br>
 	<button>생성</button>
