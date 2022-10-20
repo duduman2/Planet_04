@@ -4,7 +4,9 @@
 * { font-size: 1.03em;}
 table { border: 1px solid #ccc; border-collapse: collapse }
 
-.main {  width: 100%; }
+.main {  width: 100%; 
+/* 	margin-top: 50px; */
+}
 
 div.left_section { 
 	 

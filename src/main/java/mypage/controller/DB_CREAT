@@ -1,3 +1,5 @@
+-- 테이블명세서 기준!!
+
 -- 테이블 1
 DROP TABLE tbl_admininfo;
 DROP SEQUENCE tbl_admininfo_seq;
