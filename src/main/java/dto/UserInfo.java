@@ -4,22 +4,22 @@ import java.util.Date;
 
 public class UserInfo {
 
-	private int u_no;
-	private String u_id;
-	private String u_pw;
-	private String u_name;
-	private Date u_birth;
-	private String u_gender;
-	private String u_phone;
-	private String u_email;
-	private String u_address;
-	private String u_nick;
-	private Date u_join_date;
-	private String u_trade_user;
-	private String b_business_number; 
-	private String grade;
-	private String reportcode;
-	private String wishno;
+	private int u_no;		// 회원 번호
+	private String u_id;	// 회원 아이디
+	private String u_pw;	// 회원 아이디
+	private String u_name;	// 회원 이름
+	private Date u_birth;	// 생년월일
+	private String u_gender;// 성별
+	private String u_phone;	// 전화번호
+	private String u_email;	// 이메일
+	private String u_address;	// 주소
+	private String u_nick;		// 회원 닉네임
+	private Date u_join_date;	// 생성날짜
+	private String u_trade_user;// 사업자유저
+	private String b_business_number; 	// 사업자번호
+	private String grade;		// 등급코드
+	private String reportcode;	// 신고코드
+	private String wishno;		// 장바구니번호 
 	
 	public UserInfo() {
 	}

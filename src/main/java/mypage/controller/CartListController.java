@@ -22,7 +22,8 @@ public class CartListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/carList/controller [GET]");
-	
+		
+		req.getRequestDispatcher("/WEB-INF/views/mypage/cartList.jsp").forward(req, resp);
 	}
 
 	@Override

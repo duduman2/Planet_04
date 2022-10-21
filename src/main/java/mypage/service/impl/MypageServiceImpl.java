@@ -2,6 +2,7 @@ package mypage.service.impl;
 
 import java.util.List;
 
+import dto.Cart;
 import mypage.dao.face.UserBoardDao;
 import mypage.dao.face.UserCartDao;
 import mypage.dao.face.UserInfoDao;
@@ -37,8 +38,11 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<dto.Cart> checkCart() {
+	public List<Cart> checkCart() {
 
+		
+		
+		
 		return null;
 	}
 

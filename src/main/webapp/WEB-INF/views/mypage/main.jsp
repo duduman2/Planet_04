@@ -13,17 +13,26 @@
 @import url("../sources/mypage/mypage.css");
 
 </style>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#btnUpdate").click(function() {
+		$(location).attr("href", "/userInfo/controller")
+	})
+	$("#btnList").click(function() {
+		$(location).attr("href", "/carList/controller")
+	})
+})
 
+</script>
 
 <!-- </head> -->
 <!-- <body> -->
 
 
 
-<h1>/mypage/main.jsp</h1>
-<h3>마이페이지 메인</h3>
-회원정보 조회,수정,탈퇴 / 내가 작성한 글 확인 / 내가 구매한 리스트 <br>
-/ 등급 확인 / 나의 장바구니 등 꾸미기
+<h1>/mypage/main.jsp&nbsp;&nbsp;&nbsp;마이페이지 메인</h1>
+회원정보 조회,수정,탈퇴 / 내가 작성한 글 확인 / 내가 구매한 리스트 / 등급 확인 / 나의 장바구니 등 꾸미기
 <hr>
 
 <div class="main" style="width: 100%;"> 
@@ -32,7 +41,9 @@
 <div class="left_section" id="left_section" style="width: 30%; float: left;">
 <table class="table">
 	<tr>
-		<th class="info" colspan="2">프로필 설정<button style="float: right;">설정(수정)</button></th>
+		<th class="info" colspan="2">프로필 설정
+		<button type="button" style="float: right;" id="btnUpdate" class="btn btn-info"
+		 >설정(수정)</button></th>
 	</tr>
 	<tr style="height: 300px;">
 		<td colspan="2" style="text-align: center;"><img src="../sources/mypage/DefaultImage.png" alt="기본이미지" 
@@ -70,7 +81,7 @@
 			<th class="info" colspan="3">나의 쇼핑<button style="float: right;">+전체보기</button></th>
 		</tr>
 		<tr>
-			<td><a>+장바구니</a></td>
+			<td><button id="btnList" class="btn btn-primary">+장바구니</button></td>
 			<td>+배송 확인</td>
 			<td>+환불/반품</td>
 		</tr>
