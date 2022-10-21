@@ -1,6 +1,7 @@
 package login.dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ public class LoginDaoImpl implements LoginDao {
 	public int selectCntUserInfoByU_idU_pw(Connection conn, UserInfo userinfo) {
 
 		String sql = "";
-		sql += "SELECT count(*) FROM member";
+		sql += "SELECT count(*) FROM userinfo";
 		sql += " WHERE 1=1";
 		sql += "	AND u_id = ?";
 		sql += "	AND u_pw = ?";
@@ -53,7 +54,7 @@ public class LoginDaoImpl implements LoginDao {
 	public UserInfo selectUserInfoByU_id(Connection conn, UserInfo userinfo) {
 
 		String sql = "";
-		sql += "SELECT u_id, u_pw, u_nick FROM member";
+		sql += "SELECT u_id, u_pw, u_nick FROM userinfo";
 		sql += " WHERE u_id = ?";
 		
 		UserInfo result = null;
@@ -89,8 +90,14 @@ public class LoginDaoImpl implements LoginDao {
 	public int insert(Connection conn, UserInfo userinfo) {
 		
 		String sql = "";
-		sql += "INSERT INTO member ( u_id, u_pw, u_nick )";
-		sql += " VALUES ( ?, ?, ? )";
+		sql += "INSERT INTO userinfo (";
+		sql += "	u_no, u_id, u_pw, u_name, u_nick,";
+		sql += "	u_birth, u_gender, u_email, u_phone, u_address,";
+		sql += "	u_grade )";
+		sql += " VALUES (";
+		sql += "	userinfo_seq.nextval, ?, ?, ?, ?,";
+		sql += "	sysdate, ?, ?, ?, ?,";
+		sql += "	0 )";
 		
 		int res = 0;
 		
@@ -99,7 +106,12 @@ public class LoginDaoImpl implements LoginDao {
 			
 			ps.setString(1, userinfo.getU_id());
 			ps.setString(2, userinfo.getU_pw());
-			ps.setString(3, userinfo.getU_nick());
+			ps.setString(3, userinfo.getU_name());
+			ps.setString(4, userinfo.getU_nick());
+			ps.setString(5, userinfo.getU_gender());
+			ps.setString(6, userinfo.getU_email());
+			ps.setString(7, userinfo.getU_phone());
+			ps.setString(8, userinfo.getU_address());
 			
 			res = ps.executeUpdate();
 			
@@ -111,6 +123,46 @@ public class LoginDaoImpl implements LoginDao {
 		
 		return res;
 	}
+
+	
+	
+
+
+//	@Override
+//	public UserInfo selectAllU_id(Connection conn, UserInfo userinfo) {
+//		try {
+//			ps = conn.prepareStatement(sql);
+//			
+//			ps.setString(1, userinfo.getU_id());
+//			ps.setString(2, userinfo.getU_pw());
+//			
+//			rs = ps.executeQuery();
+//			
+//			while(rs.next()) {
+//				cnt = rs.getInt(1);
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			JDBCTemplate.close(rs);
+//			JDBCTemplate.close(ps);
+//		}
+//				
+//		return cnt;
+//	}
+//	
+//
+//
+//
+//	@Override
+//	public int selectAllU_id(String u_id) {
+//		int result = -1; //오류 발생
+//		
+//		ps = conn.prepareStatement(sql);
+//		
+//		return 0;
+//	}
 
 	
 	

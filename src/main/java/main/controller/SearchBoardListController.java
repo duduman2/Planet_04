@@ -11,9 +11,30 @@ import javax.servlet.http.HttpServletResponse;
 public class SearchBoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("/search [GET]");
+		
+		req.getRequestDispatcher("/WEB-INF/views/search/insert.jsp").forward(req, resp);
+		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		System.out.println("/search [POST]");
+		
+		req.setCharacterEncoding("UTF-8");
+		
+		String type = req.getParameter("searchType");
+		String keyword = req.getParameter("keywordInput");
+		
+		System.out.println(type); //a(통합검색), t(제목), c(내용), n(작성자)
+		System.out.println(keyword);
+		
+		req.getRequestDispatcher("/WEB-INF/views/search/list.jsp").forward(req, resp);
 		
 		
 	}
-
+	
 }

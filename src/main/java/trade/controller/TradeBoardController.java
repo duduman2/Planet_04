@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.BoardInfo;
+import dto.Product;
 import dto.Uploadfile;
 import trade.service.face.FileService;
 import trade.service.impl.FileServiceImpl;
@@ -23,14 +25,16 @@ public class TradeBoardController extends HttpServlet {
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-			//파일 전체 목록 조회하기
-			List<Uploadfile> list = fileService.list();
-
-			//[TEST] 조회 결과 확인
-//			for(Uploadfile file : list) System.out.println(file);
+			Product product = new Product();
+//			product = 
+			List<Product> boardList = fileService.boardList(product);
+			
+//			for(Product i : boardList) {
+//				System.out.println(i);
+//			}
 
 			//조회결과를 모델값으로 전달하기
-			req.setAttribute("list",list);
+			req.setAttribute("boardList",boardList);
 
 			//View지정 및 포워드
 			req.getRequestDispatcher("/WEB-INF/views/trade/tradeboard.jsp").forward(req, resp);

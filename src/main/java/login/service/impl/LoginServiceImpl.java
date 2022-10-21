@@ -1,6 +1,8 @@
 package login.service.impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +15,8 @@ import login.service.face.LoginService;
 public class LoginServiceImpl implements LoginService {
 
 	private LoginDao loginDao = new LoginDaoImpl();
+	private PreparedStatement ps;
+	private ResultSet rs;
 	
 	@Override
 	public UserInfo getLoginUserInfo(HttpServletRequest req) {
@@ -37,6 +41,36 @@ public class LoginServiceImpl implements LoginService {
 		return false;
 		
 	}
+	
+	
+	@Override
+	public int login(String u_id, String u_pw) {
+		 String SQL = "SELECT userPassword FROM USER WHERE userID = ?";
+		 
+		 Connection conn = JDBCTemplate.getConnection();
+		 
+	        try {
+	            ps = conn.prepareStatement(SQL);
+	            ps.setString(1, u_id);
+	            rs = ps.executeQuery();
+	            if(rs.next()){
+	                if(rs.getString(1).equals(u_pw))
+	                    return 1;    // 로그인 성공
+	                else
+	                    return 0; // 비밀번호 불일치
+	            }
+	            return -1; // ID가 없음
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return -2; // DB 오류
+		
+		
+		
+	}
+	
+	
 
 	@Override
 	public UserInfo info(UserInfo userinfo) {
@@ -53,10 +87,16 @@ public class LoginServiceImpl implements LoginService {
 		
 		userinfo.setU_id( req.getParameter("u_id") );
 		userinfo.setU_pw( req.getParameter("u_pw") );
+		userinfo.setU_name( req.getParameter("u_name") );
 		userinfo.setU_nick( req.getParameter("u_nick") );
+		userinfo.setU_gender( req.getParameter("u_gender") );
+		userinfo.setU_email( req.getParameter("u_email") );
+		userinfo.setU_phone( req.getParameter("u_phone") );
+		userinfo.setU_address( req.getParameter("u_address") );
+		
 		
 		return userinfo;
-	}
+	} 
 
 	@Override
 	public void join(UserInfo userinfo) {
@@ -72,8 +112,18 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 
-	
-	}
+
+//	@Override
+//	public int idCheck(String u_id) {
+//		
+//		int result = loginDao.selectAllU_id(u_id);
+//		
+//		return result;
+//	}
+
+
+}
+
 
 	
 	

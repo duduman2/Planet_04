@@ -73,7 +73,7 @@ button:hover {
 }
 
 .bottom {
-	height: 160px; /* 어떻게 '나머지 영역을 가득 채운다'를 설정하지? */
+	height: 160px; /* 어떻게 '나머지 영역을 가득 채운다'를 설정하지?? */
 	background-color: #D3D3D3;
 	text-align: center;
 	font-size: 0.8em;
@@ -92,7 +92,7 @@ button:hover {
 <div class="background">
 	<div class="mainbox">
 		<div class="top">
-			<img src="/sources/admin/logo.png">
+			<img src="<%=request.getContextPath() %>/sources/admin/logo.png">
 			<!-- WEB-INF 내의 파일은 브라우저에서 직접 접근이 불가하므로 컨트롤러를 거쳐야 한다. -->
 		</div>
 		<div class="middle1">
