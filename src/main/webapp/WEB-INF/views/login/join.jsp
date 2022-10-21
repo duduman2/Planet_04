@@ -20,58 +20,66 @@
 
 
 <script type="text/javascript">
-$(function(){
-	$('#idCheck').click(register.idCheck);
-  $('#btn-join').on('click', register.send);
-});
+$('.input_id').focusout(function(){
+	let u_id = $('.input_id').val(); // input_id에 입력되는 값
+	
+	$.ajax({
+		url : "/join/con",
+		type : "post",
+		data : {u_id: u_id},
+		dataType : 'json',
+		success : function(result){
+			if(result == 0){
+				$("#idCheck").html('사용할 수 없는 아이디입니다.');
+				$("#idCheck").attr('color','red');
+			} else{
+				$("#idCheck").html('사용할 수 있는 아이디입니다.');
+				$("#idCheck").attr('color','green');
+			} 
+		},
+		error : function(){
+			alert("서버요청실패");
+		}
+	})
+	 
+})
 
-var register = {
-	isIDCheck: false,
-  idCheck: function(){
-  	//console.log(this);				//이벤트가 발생한 객체를 가르킴
-   // console.log(register);		
-    
-    var $userid = $('#userid');
-    
-    //빈값 체크
-    if(!$u_id.val()){
-    	//$userid.parent().after('<p>아이디를 입력하세요</p>').next().css('color', 'red');
-      $u_id.nextAll('span').html('아이디를 입력하세요').css('color', 'red');
-      return;
-    }else{
-    	$userid.isIDCheck = true;
-      $userid.nextAll('span').html('');
-      alert('중복체크를 했습니다.');
-    }
-    
-    //중복체크 버튼 이벤트 제거
-    //$('#btn-idcheck').off('click');
-   
-  },
-  send: function(){
-  	if(!register.isIDCheck){
-    	alert('아이디 중복체크를 하세요.');
-      return;
-    }
-    
-    alert('확인되었습니다.');
-  }
-}
+
 </script>
 
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	//아이디 입력창에 포커스주기
+	//입력창에 포커스주기
 	$("input").eq(0).focus()
 
+
+// 	$("#btn").click(function() {
+// 		console.log("btn 아이디 중복 클릭")
+		
+// 		$.ajax({
+// 			type: "post"		//요청 메소드
+// 			, url: "./con"		//요청 URL
+// 			, data: {		//요청 파라미터
+// 				u_id: $("#u_id").val()
+// 				, idCheck: $("#idCheck").val()
+// 			}
+// 			, dataType: "html"	//응답 데이터 형식
+// 				, success: function( res ) {
+// 					console.log("사용가능한 아이디입니다")
+					
+// 					//응답 데이터 반영
+// 					$("#result").html( res )
+					
+// 				}
+// 				, error: function() {
+// 					console.log("이미 사용중인 아이디입니다")
+					
+// 				}
+				
+// 		})
+// 	})
 	
-	//닉네임 입력창에 엔터키 입력 시 submit
-	$("input").eq(2).keydown(function(e) {
-		if( e.keyCode == 13 ) { //엔터키
-			$("#btnJoin").click();
-		}
-	})
 	
 	//비밀번호 확인	
 	$('#pwCheck').blur(function(){
@@ -319,12 +327,14 @@ label {
 	
 		<div class="form-group">
 			<label for="id">아이디</label>
-			<input type="text" id="u_id" name="u_id" class="input_id" required="required" style="width: 232px; height: 25px; border: 1px solid gray;">
-			
-			<!-- 로그인 중복확인 -->
-			<button type="submit" name="idCheck" class="checkId" id="idCheck">중복확인</button>
+			<input type="text" id="u_id" name="u_id" class = "input_id" required="required" style="width: 232px; height: 25px; border: 1px solid gray; margin-right: 20px;">
 
-			<input type="hidden" name="idDuplication" value="idCheck">
+			<!-- 로그인 중복확인 -->
+<!-- 			<button type="submit" name="idCheck" class="checkId" id="idCheck">중복확인</button> -->
+
+
+				<font id="idCheck" name="idCheck" size="3"></font>
+
 		</div>
 			<br>
 			
@@ -351,7 +361,7 @@ label {
 			<input type="text" name="u_nick" id="u_nick" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
 			
 			<!-- 닉네임 중복확인 -->
-			<button type="submit" onclick="fn_dbCheckNickname()" name="dbCheckNickname" id="dbCheckNickname" class="checkNickname">중복확인</button>
+			<button type="submit" onclick="fn_dbCheckNickname()" name="dbCheckNickname" id="nickCheck" class="checkNickname">중복확인</button>
 			<input type="hidden" name="nicknameDuplication" value="nicknameUncheck">
 		</div>
 			<br>
@@ -365,8 +375,8 @@ label {
 			
 			<div class="form-group" style="color: #585252;">
 			<label for="gender">성별</label> 
-			<input type="radio" name="u_gender" id="u_gender" value="남자"  required="required"> 남성
-			<input type="radio" name="u_gender" id="u_gender" value="여자" required="required"> 여성
+			<input type="radio" name="u_gender" id="u_gender" value="male"  required="required"> 남성
+			<input type="radio" name="u_gender" id="u_gender" value="female" required="required"> 여성
 			
 		</div>
 			<br>
@@ -415,6 +425,7 @@ label {
 
 
 <br><br><br><br><br><br><br><br><br><br><br><br>
+
 
 
 

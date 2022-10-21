@@ -22,9 +22,6 @@ public interface LoginService {
 //	회원가입 처리
 	public void join(UserInfo userinfo);
 
-//	아이디 중복확인
-//	public int idCheck(String u_id);
-	
 
 
 
