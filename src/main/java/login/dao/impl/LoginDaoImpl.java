@@ -97,7 +97,7 @@ public class LoginDaoImpl implements LoginDao {
 		sql += " VALUES (";
 		sql += "	userinfo_seq.nextval, ?, ?, ?, ?,";
 		sql += "	sysdate, ?, ?, ?, ?,";
-		sql += "	0 )";
+		sql += "	'새싹' )";
 		
 		int res = 0;
 		
@@ -124,46 +124,67 @@ public class LoginDaoImpl implements LoginDao {
 		return res;
 	}
 
+
+
+	@Override
+	public int selectLoginInfo(String u_id, String u_pw) {
+		 String SQL = "SELECT u_pw FROM userinfo WHERE u_id = ?";
+		 
+		 Connection conn = JDBCTemplate.getConnection();
+		 
+	        try {
+	            ps = conn.prepareStatement(SQL);
+	            ps.setString(1, u_id);
+	            rs = ps.executeQuery();
+	            if(rs.next()){
+	                if(rs.getString(1).equals(u_pw))
+	                    return 1;    // 로그인 성공
+	                else
+	                    return 0; // 비밀번호 불일치
+	            }
+	            return -1; // ID가 없음
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return -2; // DB 오류
+		
+	}
+
+
+
+
+	@Override
+	public int idCheck(String u_id) {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String SQL = "SELECT * FROM userinfo WHERE u_id = ?";
+		int idCHeck = 0; 
+		
+		try {
+	            ps = conn.prepareStatement(SQL);
+	            ps.setString(1, u_id);
+	            rs = ps.executeQuery();
+	            if(rs.next() || u_id.equals("")){
+	            	idCHeck = 0;
+	            } else {
+	            	idCHeck = 1;
+	            }
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	        	JDBCTemplate.close(ps);
+	        }
+		
+		return idCHeck;
+	}
+
 	
 	
 
-
-//	@Override
-//	public UserInfo selectAllU_id(Connection conn, UserInfo userinfo) {
-//		try {
-//			ps = conn.prepareStatement(sql);
-//			
-//			ps.setString(1, userinfo.getU_id());
-//			ps.setString(2, userinfo.getU_pw());
-//			
-//			rs = ps.executeQuery();
-//			
-//			while(rs.next()) {
-//				cnt = rs.getInt(1);
-//			}
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			JDBCTemplate.close(rs);
-//			JDBCTemplate.close(ps);
-//		}
-//				
-//		return cnt;
-//	}
-//	
-//
-//
-//
-//	@Override
-//	public int selectAllU_id(String u_id) {
-//		int result = -1; //오류 발생
-//		
-//		ps = conn.prepareStatement(sql);
-//		
-//		return 0;
-//	}
-
+	
 	
 	
 }
