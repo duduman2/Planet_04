@@ -12,44 +12,46 @@ import admin.service.face.AdminLoginService;
 import admin.service.impl.AdminLoginServiceImpl;
 import dto.UserInfo;
 
-@WebServlet("/admin/adduser")
-public class AdminMainAdduserController extends HttpServlet {
+@WebServlet("/admin/uptuser")
+public class AdminMainUptuserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	AdminLoginService adminService = new AdminLoginServiceImpl();
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/admin/adduser [GET] Start");
+		System.out.println("/admin/uptuser [GET] Start");
 		
-		req.getRequestDispatcher("/WEB-INF/views/admin/createuser.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/admin/searchuser.jsp").forward(req, resp);
 		
-		System.out.println("/admin/adduser [GET] End");
+		System.out.println("/admin/uptuser [GET] End");
 		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/admin/adduser [POST] Start");
+		System.out.println("/admin/uptuser [POST] Start");
 		
+		/*
 		UserInfo userInfo = new UserInfo();
 		userInfo = adminService.getUserInfo(req); // jsp로부터 가져온 요청정보 dto에 저장
 		
-		Boolean result = adminService.UserCreate(userInfo); // dto 정보로 관리자 생성
+		Boolean result = adminService.UserDelete(userInfo); // dto 정보로 관리자 제거
 		
 		if( result ) {
 			
-			resp.sendRedirect("/admin/cresuc");
+			resp.sendRedirect("/admin/delsuc");
 			
 		} else {
 			
-			resp.sendRedirect("/admin/crefail");
+			resp.sendRedirect("/admin/delfail");
 			
 		}
+		*/
 		
-		System.out.println("/admin/adduser [POST] End");
+		System.out.println("/admin/uptuser [POST] End");
 		
 	}
-
+	
 }

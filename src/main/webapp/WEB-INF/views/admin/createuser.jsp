@@ -18,16 +18,17 @@
 	<input type="text" name="add1" placeholder="주소"><br><br>
 	<input type="text" name="usernick" placeholder="닉네임(필수)">
 	<input type="text" name="userbsno" placeholder="사업자번호"><br><br>
-	생일 : <input type="date" name="birth"><br><br>
-	
-	<input type="radio" id="contactChoice1" name="gender">
+	<input type="text" name="grade" placeholder="등급"><br><br>
+	생일(필수) : <input type="date" name="birth"><br><br>
+	성별(필수) :
+	<input type="radio" id="contactChoice1" name="gender" value="남자">
     <label for="contactChoice1">남자</label>
-    <input type="radio" id="contactChoice2" name="gender">
+    <input type="radio" id="contactChoice1" name="gender" value="여자">
     <label for="contactChoice2">여자</label><br><br>
-    
-    <input type="radio" id="contactChoice3" name="tradeuser">
+    사업자유무 : 
+    <input type="radio" id="contactChoice2" name="tradeuser" value="사업자">
     <label for="contactChoice1">사업자</label>
-    <input type="radio" id="contactChoice4" name="tradeuser">
+    <input type="radio" id="contactChoice2" name="tradeuser" value="개인">
     <label for="contactChoice2">개인</label><br><br>
 	<button>생성</button>
 </form>
