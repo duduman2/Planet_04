@@ -26,8 +26,9 @@ public class AdminLoginController extends HttpServlet {
 		
 		req.getRequestDispatcher("/WEB-INF/views/admin/adminLogin.jsp").forward(req, resp);
 		
-//		resp.sendRedirect("/WEB-INF/views/admin/adminLogin.jsp"); // 이걸로는 왜 접속이 안되냐??
+//		resp.sendRedirect("/WEB-INF/views/admin/adminLogin.jsp"); // 이걸로는 왜 접속이 안되냐
 		// WEB-INF 내의 파일은 브라우저에서 직접 접근이 안된다. Controller로만 접근 가능.
+		//resp.sendRedirect("/admin/login"); 이건 됨
 		
 		System.out.println("/admin/login [GET] End");
 		

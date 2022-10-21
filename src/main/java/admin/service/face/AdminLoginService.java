@@ -85,5 +85,31 @@ public interface AdminLoginService {
 	 * @return 성공/실패값 반환
 	 */
 	public Boolean UserDelete(UserInfo userInfo);
+
+	/**
+	 * 사용자 검색
+	 * 
+	 * @param userInfo 사용자 아이디
+	 * @return 사용자 정보 반환
+	 */
+	public UserInfo UserSearch(UserInfo userInfo);
+
+	/**
+	 * 페이징 계산
+	 * 
+	 * @param req 요청정보
+	 * @param userInfo 사용자id
+	 * @return 페이징 계산 완료된 객체
+	 */
+	public Paging getPaging(HttpServletRequest req, UserInfo userInfo);
+
+	/**
+	 * 사용자 리스트 조회
+	 * 
+	 * @param paging 페이징 계산된 객체
+	 * @param userInfo 사용자 정보
+	 * @return 사용자 리스트
+	 */
+	public List<UserInfo> getList(Paging paging, UserInfo userInfo);
 	
 }
