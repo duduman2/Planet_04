@@ -19,7 +19,7 @@ $(document).ready(function() {
 	$("#btnUpdate").click(function() {
 		$(location).attr("href", "/userInfo/controller")
 	})
-	$("#btnList").click(function() {
+	$("#btncartList").click(function() {
 		$(location).attr("href", "/carList/controller")
 	})
 })
@@ -42,8 +42,7 @@ $(document).ready(function() {
 <table class="table">
 	<tr>
 		<th class="info" colspan="2">프로필 설정
-		<button type="button" style="float: right;" id="btnUpdate" class="btn btn-info"
-		 >설정(수정)</button></th>
+		<button type="button" style="float: right;" id="btnUpdate">설정(수정)</button></th>
 	</tr>
 	<tr style="height: 300px;">
 		<td colspan="2" style="text-align: center;"><img src="../sources/mypage/DefaultImage.png" alt="기본이미지" 
@@ -81,7 +80,8 @@ $(document).ready(function() {
 			<th class="info" colspan="3">나의 쇼핑<button style="float: right;">+전체보기</button></th>
 		</tr>
 		<tr>
-			<td><button id="btnList" class="btn btn-primary">+장바구니</button></td>
+<!-- 			<td><button id="btncartList">+장바구니</button></td> -->
+			<td><a id="btncartList">+장바구니</a></td>
 			<td>+배송 확인</td>
 			<td>+환불/반품</td>
 		</tr>

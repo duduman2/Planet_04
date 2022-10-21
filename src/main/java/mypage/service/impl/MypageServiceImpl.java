@@ -1,7 +1,9 @@
 package mypage.service.impl;
 
+import java.sql.Connection;
 import java.util.List;
 
+import common.JDBCTemplate;
 import dto.Cart;
 import mypage.dao.face.UserBoardDao;
 import mypage.dao.face.UserCartDao;
@@ -40,10 +42,16 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public List<Cart> checkCart() {
 
+		Connection conn = JDBCTemplate.getConnection();
+		System.out.println("MypageService - List<Cart> checkCart() - DB 연결 객체 생성완료 ");
 		
+		//tbl_wish  전체 조회 - userCartDao 이용
+		List<Cart> list = userCartDao.checkCart(conn);
 		
-		
-		return null;
+		System.out.println("MypageService - List<Cart> checkCart() - DAO 호출 후");
+
+		//조회 결과 리턴
+		return list;
 	}
 
 	@Override

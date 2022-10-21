@@ -14,7 +14,7 @@
 <h1>장바구니 리스트</h1>
 <hr>
 
-<div>
+<div id="cartResult">
 	장바구니 내역 보여주기
 
 </div>

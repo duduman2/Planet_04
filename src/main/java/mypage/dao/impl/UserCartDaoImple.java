@@ -1,9 +1,13 @@
 package mypage.dao.impl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import common.JDBCTemplate;
 import dto.Cart;
 import mypage.dao.face.UserCartDao;
 
@@ -17,11 +21,41 @@ public class UserCartDaoImple implements UserCartDao {
 	// 
 	
 	@Override
-	public List<Cart> checkCart() {
+	public List<Cart> checkCart(Connection conn) {
 
+		// wish_no, wish_total_price, product_no, wish_amount
 		
+		String sql = "";
+		sql += "SELECT";
+		sql += " wish_no, wish_total_price, product_no, wish_amount";
+		sql += " FROM tbl_wish";
+		sql += " ORDER BY wish_no";
 		
-		return null;
+		List<Cart> list = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Cart cart = new Cart();
+				
+				cart.setCarNo( rs.getInt("wish_no"));
+				cart.setTotalPrice( rs.getInt("wish_total_price"));
+				cart.setProduct_no( rs.getInt("product_no"));
+				cart.setWish_amount( rs.getInt("wish_amount"));
+				
+				list.add(cart);
+			}
+					
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		return list;
 	}
 	@Override
 	public int deleteCart() {
