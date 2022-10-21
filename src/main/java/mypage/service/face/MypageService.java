@@ -18,7 +18,7 @@ public interface MypageService {
 	/**
 	 * 장바구니 내역 조회
 	 * 
-	 * @return 조회된 장바구니의 리스트 
+	 * @return List<Cart> - 조회된 장바구니의 리스트 
 	 */
 	
 	public List<Cart> checkCart(); //장바구니 내역 조회 int

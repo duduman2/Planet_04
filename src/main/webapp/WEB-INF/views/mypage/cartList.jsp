@@ -11,6 +11,9 @@
 <style type="text/css">
 @import url("../sources/mypage/mypage.css");
 
+table, tr, th, td { border: 1px solid #ccc; width: 100%; }
+#cartAllList { text-align: center; } 
+
 </style>
 </head>
 <body>
@@ -19,22 +22,29 @@
 <hr>
 
 <div id="cartResult">
-	장바구니 내역 보여주기
+	장바구니 내역 보여주기 <%-- wish_no, wish_total_price, product_no, wish_amount --%>
 
-	<table>
+<table id="cartAllList">
 	<thead>
-		<tr> <%-- wish_no, wish_total_price, product_no, wish_amount --%>
-			<th style="width: 20%">장바구니 번호</th>
-			<th style="width: 30%">총 금액</th>
-			<th style="width: 30%">제품 번호</th>
-			<th style="width: 20%">제품 총 수량</th>
+		<tr>
+			<th style="width: 20%;">장바구니 번호</th>
+			<th style="width: 30%;">총 금액</th>
+			<th style="width: 30%;">제품 번호</th>
+			<th style="width: 20%;">제품 총 수량</th>
 		</tr>
 	</thead>
-	<tbody>
-		
+	<tbody> 
+		<% for(int i=0; i<cList.size(); i++) { %>
+		<tr>
+			<td><%= cList.get(i).getCarNo()	%></td>
+			<td><%= cList.get(i).getTotalPrice()	%></td>
+			<td><%= cList.get(i).getProduct_no()	%></td>
+			<td><%= cList.get(i).getWish_amount() %></td>		
+		</tr>
+		<% } %>
 	
 	</tbody>
-	</table>
+</table>
 
 </div>
 

@@ -16,12 +16,10 @@ public class UserCartDaoImple implements UserCartDao {
 	// DB 관련 객체
 	private PreparedStatement ps = null; // SQL 수행 객체
 	private ResultSet rs = null;		 // 결과 집합 객체
-	// (conn은 메소드의 변수에 선언)을 많이 하는 것 같음
-	
-	// 
 	
 	@Override
 	public List<Cart> checkCart(Connection conn) {
+		System.out.println("UserCartDaoImple - List<Cart> checkCart() 시작! ");
 
 		// wish_no, wish_total_price, product_no, wish_amount
 		
@@ -34,8 +32,7 @@ public class UserCartDaoImple implements UserCartDao {
 		List<Cart> list = new ArrayList<>();
 		
 		try {
-			ps = conn.prepareStatement(sql);
-			
+			ps = conn.prepareStatement(sql);	
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -55,6 +52,7 @@ public class UserCartDaoImple implements UserCartDao {
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(ps);
 		}
+		System.out.println("UserCartDaoImple - List<Cart> checkCart() 끝! ");
 		return list;
 	}
 	@Override
