@@ -28,7 +28,6 @@ public class UserCartDaoImple implements UserCartDao {
 //		sql += "SELECT";
 //		sql += " wish_no, wish_total_price, product_no, wish_amount";
 //		sql += " FROM tbl_wish";
-//		sql += " ORDER BY wish_no";
 		
 		List<Cart> cartlist = new ArrayList<>();
 		
