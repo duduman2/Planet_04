@@ -7,13 +7,14 @@ public class Cart {
 	// wish_no, wish_total_price, product_no, wish_amount
 	
 	private int carNo;
-	private int u_no;
 	private int totalPrice;
-	private Date paymentDate;
-	
 	private int product_no;
 	private int wish_amount;
 	
+	//필요없는거 같은디??
+	private Date paymentDate;
+	private int u_no;
+
 	public Cart() {	}
 
 	public Cart(int carNo, int u_no, int totalPrice, Date paymentDate, int product_no, int wish_amount) {

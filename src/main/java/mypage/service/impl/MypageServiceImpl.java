@@ -41,7 +41,10 @@ public class MypageServiceImpl implements MypageService {
 
 	@Override
 	public List<Cart> checkCart() {
+		System.out.println("MypageService - List<Cart> checkCart() - DB 연결 객체 생성완료 ");
 		
+		System.out.println("MypageService - List<Cart> checkCart() - DAO 호출 후");
+
 		// DB 조회 결과 반환
 		return userCartDao.checkCart(JDBCTemplate.getConnection());
 		

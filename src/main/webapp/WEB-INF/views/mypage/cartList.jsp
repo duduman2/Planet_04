@@ -5,14 +5,15 @@
 
 <%@include file="../layout/header.jsp" %>
 
-<%	List<Cart> cList = (List) request.getAttribute("cartList"); %>
+<%-- 모델값 전달받기 --%>
+<%	List<Cart> cList = (List) request.getAttribute("cartlist"); %>
 
 <title>cartList</title>
 <style type="text/css">
 @import url("../sources/mypage/mypage.css");
 
 table, tr, th, td { border: 1px solid #ccc; width: 100%; }
-#cartAllList { text-align: center; } 
+th { text-align: center; }
 
 </style>
 </head>
@@ -24,7 +25,7 @@ table, tr, th, td { border: 1px solid #ccc; width: 100%; }
 <div id="cartResult">
 	장바구니 내역 보여주기 <%-- wish_no, wish_total_price, product_no, wish_amount --%>
 
-<table id="cartAllList">
+<table class="table table-hover">
 	<thead>
 		<tr>
 			<th style="width: 20%;">장바구니 번호</th>
@@ -45,6 +46,8 @@ table, tr, th, td { border: 1px solid #ccc; width: 100%; }
 	
 	</tbody>
 </table>
+
+<div id="blank" style="height: 100px;"></div>
 
 </div>
 

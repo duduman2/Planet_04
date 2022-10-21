@@ -141,6 +141,10 @@ $(document).ready(function() {
 </div><!-- verticalline  end -->
 </table>
 
+
+<div id="blank" style="height: 100px; margin-bottom: 700px;">blank </div>
+
+
 <%@include file="../layout/footer.jsp" %>
 
 <!-- </body> -->
