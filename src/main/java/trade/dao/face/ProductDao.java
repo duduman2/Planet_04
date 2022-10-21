@@ -12,6 +12,8 @@ public interface ProductDao {
 
 	public List<Product> selectBoardList(Connection conn, Product product);
 
+	public Product selectBoardByProductno(Connection conn, Product product);
+
 
 
 

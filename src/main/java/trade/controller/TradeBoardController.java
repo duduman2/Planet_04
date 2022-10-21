@@ -26,7 +26,6 @@ public class TradeBoardController extends HttpServlet {
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 			Product product = new Product();
-//			product = 
 			List<Product> boardList = fileService.boardList(product);
 			
 //			for(Product i : boardList) {

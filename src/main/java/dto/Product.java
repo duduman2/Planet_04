@@ -2,100 +2,118 @@ package dto;
 
 import java.util.Date;
 
+/**
+ * @author JJUFE
+ *
+ */
+/**
+ * @author JJUFE
+ *
+ */
 public class Product {
-	private String productNo;
-	private String productname;
-	private String productcontent;
-	private int productprice;
-	private Date productdate;
-	private int fileno;
-	private String filename;
-	private String filepath;
+	private int productNo;
+	private String productName;
+	private String productContent;
+	private int productPrice;
+	private Date productDate;
+	private int fileNo;
+	private String fileName;
+	private String filePath;
+	private String productClass;
 	
 	public Product() {}
 
-	public Product(String productNo, String productname, String productcontent, int productprice, Date productdate,
-			int fileno, String filename, String filepath) {
+	public Product(int productNo, String productName, String productContent, int productPrice, Date productDate,
+			int fileNo, String fileName, String filePath, String productClass) {
 		super();
 		this.productNo = productNo;
-		this.productname = productname;
-		this.productcontent = productcontent;
-		this.productprice = productprice;
-		this.productdate = productdate;
-		this.fileno = fileno;
-		this.filename = filename;
-		this.filepath = filepath;
+		this.productName = productName;
+		this.productContent = productContent;
+		this.productPrice = productPrice;
+		this.productDate = productDate;
+		this.fileNo = fileNo;
+		this.fileName = fileName;
+		this.filePath = filePath;
+		this.productClass = productClass;
 	}
 
 	@Override
 	public String toString() {
-		return "Product [productNo=" + productNo + ", productname=" + productname + ", productcontent=" + productcontent
-				+ ", productprice=" + productprice + ", productdate=" + productdate + ", fileno=" + fileno
-				+ ", filename=" + filename + ", filepath=" + filepath + "]";
+		return "Product [productNo=" + productNo + ", productName=" + productName + ", productContent=" + productContent
+				+ ", productPrice=" + productPrice + ", productDate=" + productDate + ", fileNo=" + fileNo
+				+ ", fileName=" + fileName + ", filePath=" + filePath + ", productClass=" + productClass + "]";
 	}
 
-	public String getProductNo() {
+	public int getProductNo() {
 		return productNo;
 	}
 
-	public void setProductNo(String productNo) {
+	public void setProductNo(int productNo) {
 		this.productNo = productNo;
 	}
 
-	public String getProductname() {
-		return productname;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setProductname(String productname) {
-		this.productname = productname;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
-	public String getProductcontent() {
-		return productcontent;
+	public String getProductContent() {
+		return productContent;
 	}
 
-	public void setProductcontent(String productcontent) {
-		this.productcontent = productcontent;
+	public void setProductContent(String productContent) {
+		this.productContent = productContent;
 	}
 
-	public int getProductprice() {
-		return productprice;
+	public int getProductPrice() {
+		return productPrice;
 	}
 
-	public void setProductprice(int productprice) {
-		this.productprice = productprice;
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
 	}
 
-	public Date getProductdate() {
-		return productdate;
+	public Date getProductDate() {
+		return productDate;
 	}
 
-	public void setProductdate(Date productdate) {
-		this.productdate = productdate;
+	public void setProductDate(Date productDate) {
+		this.productDate = productDate;
 	}
 
-	public int getFileno() {
-		return fileno;
+	public int getFileNo() {
+		return fileNo;
 	}
 
-	public void setFileno(int fileno) {
-		this.fileno = fileno;
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
 	}
 
-	public String getFilename() {
-		return filename;
+	public String getFileName() {
+		return fileName;
 	}
 
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
-	public String getFilepath() {
-		return filepath;
+	public String getFilePath() {
+		return filePath;
 	}
 
-	public void setFilepath(String filepath) {
-		this.filepath = filepath;
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getProductClass() {
+		return productClass;
+	}
+
+	public void setProductClass(String productClass) {
+		this.productClass = productClass;
 	}
 
 
