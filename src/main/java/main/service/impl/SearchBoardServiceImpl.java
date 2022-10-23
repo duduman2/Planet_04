@@ -1,8 +1,7 @@
 package main.service.impl;
 
+import java.sql.Connection;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import common.JDBCTemplate;
 import dto.BoardInfo;
@@ -23,8 +22,12 @@ public class SearchBoardServiceImpl implements SearchBoardService {
 	}
 	
 	@Override
-	public BoardInfo getBoardTitle(HttpServletRequest req) {
-		return null;
+	public List<BoardInfo> writer(String keyword) {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		return searchBoardDao.selectByWriter(conn, keyword);
 	}
 
+	
 }

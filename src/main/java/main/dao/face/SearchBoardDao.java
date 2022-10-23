@@ -14,5 +14,13 @@ public interface SearchBoardDao {
 	 * @return List<BoardInfo> - 테이블 전체 조회 목록
 	 */
 	public List<BoardInfo> selectAll(Connection conn);
-	
+
+	/**
+	 * 
+	 * @param conn
+	 * @param keyword
+	 * @return
+	 */
+	public List<BoardInfo> selectByWriter(Connection conn, String keyword);
+
 }

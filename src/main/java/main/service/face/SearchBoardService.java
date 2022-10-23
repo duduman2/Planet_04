@@ -15,13 +15,11 @@ public interface SearchBoardService {
 	 */
 	public List<BoardInfo> getList();
 
-	
 	/**
-	 * 전달파라미터 boardtitle을 BoardInfo DTO로 저장하여 반환한다
 	 * 
-	 * @param req - 요청 정보 객체
-	 * @return BoardInfo - 
+	 * @param keyword
+	 * @return
 	 */
-	public BoardInfo getBoardTitle(HttpServletRequest req);
-
+	public List<BoardInfo> writer(String keyword);
+	
 }
