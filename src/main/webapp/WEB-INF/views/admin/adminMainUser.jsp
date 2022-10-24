@@ -41,20 +41,7 @@ td {
 </style>
 
 <script type="text/javascript">
-function createuser() {
- 
-    var _width = '600';
-    var _height = '300';
- 
-    // 팝업을 가운데 위치시키기 위해 아래와 같이 값 구하기
-    var _left = Math.ceil(( window.screen.width - _width )/2);
-    var _top = Math.ceil(( window.screen.height - _height )/2); 
- 
-    window.open('<%=request.getContextPath() %>/admin/adduser', 'adduser', 'width='+ _width +',height='+ _height +',left='+ _left +',top='+ _top );
- 
-}
-
-function deleteuser() {
+	function createuser() {
 	 
 	    var _width = '600';
 	    var _height = '300';
@@ -63,22 +50,35 @@ function deleteuser() {
 	    var _left = Math.ceil(( window.screen.width - _width )/2);
 	    var _top = Math.ceil(( window.screen.height - _height )/2); 
 	 
-	    window.open('<%=request.getContextPath() %>/admin/deluser', 'deluser', 'width='+ _width +',height='+ _height +',left='+ _left +',top='+ _top );
+	    window.open('<%=request.getContextPath() %>/admin/adduser', 'adduser', 'width='+ _width +',height='+ _height +',left='+ _left +',top='+ _top );
 	 
-}
-
-function searchuser() {
-	 
-	    var _width = '600';
-	    var _height = '300';
-	 
-	    // 팝업을 가운데 위치시키기 위해 아래와 같이 값 구하기
-	    var _left = Math.ceil(( window.screen.width - _width )/2);
-	    var _top = Math.ceil(( window.screen.height - _height )/2); 
-	 
-	    window.open('<%=request.getContextPath() %>/admin/srhuser', 'srhuser', 'width='+ _width +',height='+ _height +',left='+ _left +',top='+ _top );
-	 
-}
+	}
+	
+	function deleteuser() {
+		 
+		    var _width = '600';
+		    var _height = '300';
+		 
+		    // 팝업을 가운데 위치시키기 위해 아래와 같이 값 구하기
+		    var _left = Math.ceil(( window.screen.width - _width )/2);
+		    var _top = Math.ceil(( window.screen.height - _height )/2); 
+		 
+		    window.open('<%=request.getContextPath() %>/admin/deluser', 'deluser', 'width='+ _width +',height='+ _height +',left='+ _left +',top='+ _top );
+		 
+	}
+	
+	function updateuser( url ) {
+		 
+		    var _width = '600';
+		    var _height = '300';
+		 
+		    // 팝업을 가운데 위치시키기 위해 아래와 같이 값 구하기
+		    var _left = Math.ceil(( window.screen.width - _width )/2);
+		    var _top = Math.ceil(( window.screen.height - _height )/2); 
+		 
+		    window.open('<%=request.getContextPath() %>/admin/uptuser?userid=' + url , 'uptuser', 'width='+ _width +',height='+ _height +',left='+ _left +',top='+ _top );
+		 
+	}
 </script>
 
 </head>
@@ -89,7 +89,7 @@ function searchuser() {
 	메뉴
 	</div>
 	<div class="righttopbox">
-	관리자 관리
+	사용자 관리
 	</div>
 </div>
 
@@ -109,7 +109,6 @@ function searchuser() {
 		<!-- 여기부터 달라진다 -->
 		<button class="configbutton" onclick="createuser();">사용자 추가</button>
 		<button class="configbutton" onclick="deleteuser();">사용자 삭제</button>
-		<button class="configbutton" onclick="searchuser();">사용자 수정</button>
 		<form action="<%=request.getContextPath() %>/admin/mainuser" method="get" style="display: inline;">
 			<input type="search" style="margin-left: 10px; border-color: #029EE4" name="userid" placeholder="아이디" value="<%=userid%>">
 			<button>검색</button>
@@ -136,21 +135,24 @@ function searchuser() {
 			</tr>
 			<% for(int i=0; i<userList.size(); i++) { %>			
 			<tr>
-				<td style="width: 5%"><%=userList.get(i).getU_no() %></td>
-				<td style="width: 5%"><%=userList.get(i).getU_id() %></td>
+				<td style="width: 3%"><%=userList.get(i).getU_no() %></td>
+				<td style="width: 7%"><%=userList.get(i).getU_id() %></td>
 				<td style="width: 5%"><%=userList.get(i).getU_name() %></td>
 				<td style="width: 5%"><%=userList.get(i).getU_birth() %></td>
-				<td style="width: 5%"><%=userList.get(i).getU_gender() %></td>
+				<td style="width: 3%"><%=userList.get(i).getU_gender() %></td>
 				<td style="width: 5%"><%=userList.get(i).getU_phone() %></td>
-				<td style="width: 10%"><%=userList.get(i).getU_email() %></td>
-				<td style="width: 20%"><%=userList.get(i).getU_address() %></td>
-				<td style="width: 5%"><%=userList.get(i).getU_nick() %></td>
+				<td style="width: 12%"><%=userList.get(i).getU_email() %></td>
+				<td style="width: 27%"><%=userList.get(i).getU_address() %></td>
+				<td style="width: 7%"><%=userList.get(i).getU_nick() %></td>
 				<td style="width: 5%"><%=userList.get(i).getU_join_date() %></td>
 				<td style="width: 5%"><%=userList.get(i).getU_trade_user() %></td>
-				<td style="width: 10%"><%=userList.get(i).getB_business_number() %></td>
-				<td style="width: 5%"><%=userList.get(i).getGrade() %></td>
-				<td style="width: 5%"><%=userList.get(i).getReportcode() %></td>
-				<td style="width: 5%"></td>
+				<td style="width: 7%"><%=userList.get(i).getB_business_number() %></td>
+				<td style="width: 3%"><%=userList.get(i).getGrade() %></td>
+				<td style="width: 3%"><%=userList.get(i).getReportcode() %></td>
+				<td style="width: 3%">
+				<input type="button" value="수정" onclick="updateuser('<%=userList.get(i).getU_id() %>')"/>
+				<!-- 자바스크립트 함수에 String 매개변수 넣을거면 꼭 ''으로 감싸줘야 한다. ""도 안됨. -->
+				</td>
 			</tr>
 			<% } %>
 		</table>

@@ -22,7 +22,14 @@ public class AdminMainUptuserController extends HttpServlet {
 		
 		System.out.println("/admin/uptuser [GET] Start");
 		
-		req.getRequestDispatcher("/WEB-INF/views/admin/searchuser.jsp").forward(req, resp);
+		UserInfo userInfo = new UserInfo();
+		userInfo.setU_id( req.getParameter("userid") );
+		
+		userInfo = adminService.UserSearch(userInfo);
+		
+		req.setAttribute("userInfo", userInfo);
+		
+		req.getRequestDispatcher("/WEB-INF/views/admin/updateuser.jsp").forward(req, resp);
 		
 		System.out.println("/admin/uptuser [GET] End");
 		
@@ -33,25 +40,25 @@ public class AdminMainUptuserController extends HttpServlet {
 		
 		System.out.println("/admin/uptuser [POST] Start");
 		
-		/*
 		UserInfo userInfo = new UserInfo();
-		userInfo = adminService.getUserInfo(req); // jsp로부터 가져온 요청정보 dto에 저장
 		
-		Boolean result = adminService.UserDelete(userInfo); // dto 정보로 관리자 제거
+		userInfo = adminService.UserSearch2(req);
+		
+		System.out.println(userInfo);
+		
+		Boolean result = adminService.UserUpdate(userInfo); // dto 정보로 관리자 생성
 		
 		if( result ) {
 			
-			resp.sendRedirect("/admin/delsuc");
+			resp.sendRedirect("/admin/cresuc");
 			
 		} else {
 			
-			resp.sendRedirect("/admin/delfail");
+			resp.sendRedirect("/admin/crefail");
 			
 		}
-		*/
 		
 		System.out.println("/admin/uptuser [POST] End");
-		
 	}
 	
 }

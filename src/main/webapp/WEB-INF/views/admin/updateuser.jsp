@@ -9,11 +9,14 @@
 <head>
 <meta charset="UTF-8">
 <title>사용자 관리</title>
+<script type="text/javascript">
+</script>
 </head>
 <body>
 
 <form action="<%=request.getContextPath() %>/admin/uptuser" method="post">
 	<div style="color: #029EE4; font-size: 1.2em">사용자 수정</div><br>
+	번호(변경불가) <input type="text" name="userno" value="<%=userInfo.getU_no() %>" readonly="readonly"><br><br>
 	아이디 <input type="text" name="userid" placeholder="아이디(필수)" value="<%=userInfo.getU_id() %>">
 	비밀번호 <input type="text" name="userpw" placeholder="비밀번호(필수)" value="<%=userInfo.getU_pw() %>"><br><br>
 	이름 <input type="text" name="name" placeholder="이름(필수)" value="<%=userInfo.getU_name() %>">
