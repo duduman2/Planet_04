@@ -25,10 +25,6 @@
 	border-radius: 20px / 30px;
 }
 
-.configbutton:hover {
-	cursor: pointer;
-}
-
 .admintable {
 	width: 98%;
 	height: 100px;
@@ -90,6 +86,9 @@ function deleteadmin() {
 
 <div class="down">
 	<div class="leftbottombox">
+		<div class="menubutton">
+			<a href="<%=request.getContextPath() %>/admin/mainnotice">공지사항</a>
+		</div>
 		<div class="menubutton" style="background-color: #e9ecef">
 			<a href="<%=request.getContextPath() %>/admin/mainconfig">관리자 관리</a>
 		</div>

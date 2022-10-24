@@ -6,7 +6,7 @@ public class BoardInfo {
 	
 	private String userId;
 	private String userNick;
-	private int userRank;
+	private String userRank;
 	private int boardNo;
 	private String boardTitle;
 	private String boardContent;
@@ -16,7 +16,7 @@ public class BoardInfo {
 	public BoardInfo() {
 	}
 
-	public BoardInfo(String userId, String userNick, int userRank, int boardNo, String boardTitle, String boardContent,
+	public BoardInfo(String userId, String userNick, String userRank, int boardNo, String boardTitle, String boardContent,
 			Date boardDate, int boardHit) {
 		super();
 		this.userId = userId;
@@ -52,11 +52,11 @@ public class BoardInfo {
 		this.userNick = userNick;
 	}
 
-	public int getUserRank() {
+	public String getUserRank() {
 		return userRank;
 	}
 
-	public void setUserRank(int userRank) {
+	public void setUserRank(String userRank) {
 		this.userRank = userRank;
 	}
 

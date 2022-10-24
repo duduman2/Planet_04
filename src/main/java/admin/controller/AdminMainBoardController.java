@@ -18,12 +18,6 @@ public class AdminMainBoardController extends HttpServlet {
 		
 		System.out.println("/admin/mainboard [GET] Start");
 		
-		
-		
-		
-		
-		
-		
 		req.getRequestDispatcher("/WEB-INF/views/admin/adminMainBoard.jsp").forward(req, resp);
 		
 		System.out.println("/admin/mainboard [GET] End");

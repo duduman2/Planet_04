@@ -8,6 +8,18 @@
 
 <%@ include file="./header.jsp" %>
 
+<style type="text/css">
+.configbutton {
+	width: 100px;
+	height: 30px;
+	background-color: white;
+	border: solid 1px #029EE4;
+	color: #029EE4;
+	margin: 10px;
+	border-radius: 20px / 30px;
+}
+</style>
+
 </head>
 <body>
 
@@ -16,12 +28,15 @@
 	메뉴
 	</div>
 	<div class="righttopbox">
-	관리자 관리
+	게시글 관리
 	</div>
 </div>
 
 <div class="down">
 	<div class="leftbottombox">
+		<div class="menubutton">
+			<a href="<%=request.getContextPath() %>/admin/mainnotice">공지사항</a>
+		</div>
 		<div class="menubutton">
 			<a href="<%=request.getContextPath() %>/admin/mainconfig">관리자 관리</a>
 		</div>
@@ -34,8 +49,6 @@
 	</div>
 	<div class="rightbottombox">
 		<!-- 여기부터 달라진다 -->
-		
-		
 		<!-- 여기부터 달라진다 -->
 	</div>
 </div>

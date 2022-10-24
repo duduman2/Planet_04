@@ -42,17 +42,17 @@
 			%>
 			
 			
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">접속하기<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="login.jsp">로그인</a><li>
-						<li><a href="join.jsp">회원가입</a><li>
-					</ul>
-				</li>	
-			</ul>
+<!-- 			<ul class="nav navbar-nav navbar-right"> -->
+<!-- 				<li class="dropdown"> -->
+<!-- 					<a href="#" class="dropdown-toggle" -->
+<!-- 						data-toggle="dropdown" role="button" aria-haspopup="true" -->
+<!-- 						aria-expanded="false">접속하기<span class="caret"></span></a> -->
+<!-- 					<ul class="dropdown-menu"> -->
+<!-- 						<li><a href="login.jsp">로그인</a><li> -->
+<!-- 						<li><a href="join.jsp">회원가입</a><li> -->
+<!-- 					</ul> -->
+<!-- 				</li>	 -->
+<!-- 			</ul> -->
 
 			<%
 			
@@ -86,10 +86,10 @@
 			<table class="table table-striped" style="text-align : center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">번호</th>
-						<th style="background-color: #eeeeee; text-align: center;">제목</th>
-						<th style="background-color: #eeeeee; text-align: center;">작성자</th>
-						<th style="background-color: #eeeeee; text-align: center;">작성일</th>
+						<th style="background-color: #e4f7ba; text-align: center;">번호</th>
+						<th style="background-color: #e4f7ba; text-align: center;">제목</th>
+						<th style="background-color: #e4f7ba; text-align: center;">작성자</th>
+						<th style="background-color: #e4f7ba; text-align: center;">작성일</th>
 					</tr>				
 				</thead>
 				<tbody>
@@ -101,7 +101,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<a href="writer.jsp" class="btn btn-primary pull-right">글쓰기</a>
+			<a href="write.jsp" class="btn btn-primary pull-right">글쓰기</a>
 		</div>
 	</div>
 

@@ -107,9 +107,10 @@ public class FileServiceImpl implements FileService {
 				
 				
 				
-				product.setProductname(mul.getParameter("title"));
-				product.setProductcontent(mul.getParameter("content"));
-				product.setProductprice(Integer.parseInt(mul.getParameter("price")));
+				product.setProductName(mul.getParameter("title"));
+				product.setProductContent(mul.getParameter("content"));
+				product.setProductPrice(Integer.parseInt(mul.getParameter("price")));
+				product.setProductClass(mul.getParameter("class"));
 				
 				int res2 = productDao.insert(conn,product);
 				if(res2 >0 ) {
@@ -121,8 +122,8 @@ public class FileServiceImpl implements FileService {
 
 
 	@Override
-	public List<Product> boardList(Product product) {
-		return productDao.selectBoardList(JDBCTemplate.getConnection(),product);
+	public List<Product> boardList(Product product, String cl) {
+		return productDao.selectBoardList(JDBCTemplate.getConnection(),product, cl);
 	}
 
 
