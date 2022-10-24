@@ -24,6 +24,8 @@ public class UserInfoController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/userInfo/controller [GET]");
 	
+		req.getRequestDispatcher("/WEB-INF/views/mypage/uInfoModify.jsp").forward(req, resp);
+
 	}
 	
 	@Override
