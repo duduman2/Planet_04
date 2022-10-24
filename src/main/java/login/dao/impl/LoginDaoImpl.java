@@ -181,10 +181,136 @@ public class LoginDaoImpl implements LoginDao {
 		return idCHeck;
 	}
 
-	
-	
 
-	
+
+	@Override
+	public int nickCheck(String u_nick) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String SQL = "SELECT * FROM userinfo WHERE u_nick = ?";
+		int nickCHeck = 0; 
+		
+		try {
+	            ps = conn.prepareStatement(SQL);
+	            ps.setString(1, u_nick);
+	            rs = ps.executeQuery();
+	            if(rs.next() || u_nick.equals("")){
+	            	nickCHeck = 0;
+	            } else {
+	            	nickCHeck = 1;
+	            }
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	        	JDBCTemplate.close(ps);
+	        }
+		
+		return nickCHeck;
+	}
+
+
+
+	@Override
+	public int emailCheck(String u_email) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String SQL = "SELECT * FROM userinfo WHERE u_email = ?";
+		int emailCHeck = 0; 
+		
+		try {
+	            ps = conn.prepareStatement(SQL);
+	            ps.setString(1, u_email);
+	            rs = ps.executeQuery();
+	            if(rs.next() || u_email.equals("")){
+	            	emailCHeck = 0;
+	            } else {
+	            	emailCHeck = 1;
+	            }
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	        	JDBCTemplate.close(ps);
+	        }
+		
+		return emailCHeck;
+	}
+
+
+
+	@Override
+	public int nameCheck(String u_name) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String SQL = "SELECT * FROM userinfo WHERE u_name = ?";
+		int nameCHeck = 0; 
+		
+		try {
+	            ps = conn.prepareStatement(SQL);
+	            ps.setString(1, u_name);
+	            rs = ps.executeQuery();
+	            if(rs.next() || u_name.equals("")){
+	            	nameCHeck = 0;
+	            } else {
+	            	nameCHeck = 1;
+	            }
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	        	JDBCTemplate.close(ps);
+	        }
+		
+		return nameCHeck;
+	}
+
+
+
+	@Override
+	public UserInfo selectUserInfoByU_name(Connection conn, UserInfo userinfo) {
+		String sql = "";
+		sql += "SELECT u_name, u_email, u_id FROM userinfo";
+		sql += " WHERE u_name = ?";
+		
+		UserInfo result = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, userinfo.getU_name());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				result = new UserInfo();
+				
+				result.setU_name(rs.getString("u_name"));
+				result.setU_email( rs.getString("u_email") );
+				result.setU_id( rs.getString("u_id") );
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+				
+		return result;
+		
+	}
+
+
+
+	@Override
+	public UserInfo findId(String u_name, String u_email) {
+		
+		
+		return null;
+	}
+
+
+
 	
 	
 }
