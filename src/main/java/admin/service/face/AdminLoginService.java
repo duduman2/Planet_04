@@ -111,5 +111,29 @@ public interface AdminLoginService {
 	 * @return 사용자 리스트
 	 */
 	public List<UserInfo> getList(Paging paging, UserInfo userInfo);
+
+	/**
+	 * 사용자 정보 변경
+	 * 
+	 * @param userInfo 사용자 정보
+	 * @return 결과
+	 */
+	public Boolean UserUpdate(UserInfo userInfo);
+
+	/**
+	 * 변경할 사용자값 dto에 저장
+	 * 
+	 * @param req 사용자 고유번호
+	 * @return 사용자 정보 반환
+	 */
+	public UserInfo UserSearch2(HttpServletRequest req);
+	
+	/**
+	 * 관리자 아이디 중복검사
+	 * 
+	 * @param adminInfo 관리자 아이디
+	 * @return 결과값
+	 */
+	public Boolean AdminCheck(AdminInfo adminInfo);
 	
 }

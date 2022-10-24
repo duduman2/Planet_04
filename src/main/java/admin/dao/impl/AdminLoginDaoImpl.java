@@ -511,4 +511,137 @@ public class AdminLoginDaoImpl implements AdminLoginDao {
 		
 	}
 
+	@Override
+	public int update_tbl_user(Connection conn, UserInfo userInfo) {
+		
+		System.out.println("AdminLoginDaoImpl.update_tbl_user Start");
+		
+		String sql = "";
+		sql += "update tbl_user set userid = ?, userpw = ?, name = ?, ";
+		sql += "phone = ?, email = ?, add1 = ?, usernick = ?, userbsno = ?, ";
+		sql += "grade = ?, reportcode = ?, birth = ?, gender = ?, tradeuser = ? ";
+		sql += "where userno = ?";
+				
+		int cnt = 0;
+		
+		try {
+			
+			// java.util.date로 저장된 dto객체를 string을 거쳐 java.sql.date로 변환하는 구문
+	        Date date = userInfo.getU_birth();
+	        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	        String formattedDate = simpleDateFormat.format(date);
+	        java.sql.Date date1 = java.sql.Date.valueOf(formattedDate);
+			
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, userInfo.getU_id());
+			ps.setString(2, userInfo.getU_pw());
+			ps.setString(3, userInfo.getU_name());
+			ps.setString(4, userInfo.getU_phone());
+			ps.setString(5, userInfo.getU_email());
+			ps.setString(6, userInfo.getU_address());
+			ps.setString(7, userInfo.getU_nick());
+			ps.setString(8, userInfo.getB_business_number());
+			ps.setString(9, userInfo.getGrade());
+			ps.setString(10, userInfo.getReportcode());
+			ps.setDate(11, date1);
+			ps.setString(12, userInfo.getU_gender());
+			ps.setString(13, userInfo.getU_trade_user());
+			ps.setInt(14, userInfo.getU_no());
+			
+			System.out.println(
+					userInfo.getU_id() + userInfo.getU_pw() + userInfo.getU_name()
+					+ userInfo.getU_phone() + userInfo.getU_email() + userInfo.getU_address()
+					+ userInfo.getU_nick() + userInfo.getB_business_number() + userInfo.getGrade() + userInfo.getReportcode()
+					+ date1 + userInfo.getU_gender() + userInfo.getU_trade_user() + userInfo.getU_no()
+					);
+			
+			cnt = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.update_tbl_user End");
+		
+		return cnt;
+		
+	}
+
+	@Override
+	public UserInfo selectUser2(Connection conn, UserInfo userInfo) {
+		
+		System.out.println("AdminLoginDaoImpl.selectUser2 End");
+		
+		String sql = "select * from tbl_user where userno = ?";
+		
+		try {
+			
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, userInfo.getU_no());
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				
+				userInfo.setU_id( rs.getString("userid") );
+				userInfo.setU_pw( rs.getString("userpw") );
+				userInfo.setU_name( rs.getString("name") );
+				userInfo.setU_phone( rs.getString("phone") );
+				userInfo.setU_email( rs.getString("email") );
+				userInfo.setU_address( rs.getString("add1") );
+				userInfo.setU_nick( rs.getString("usernick") );
+				userInfo.setB_business_number( rs.getString("userbsno") );
+				userInfo.setGrade( rs.getString("grade") );
+				userInfo.setReportcode( rs.getString("reportcode") );
+				userInfo.setU_birth( rs.getDate("birth") );
+				userInfo.setU_gender( rs.getString("gender") );
+				userInfo.setU_trade_user( rs.getString("tradeuser") );
+
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectUser2 End");
+		
+		return userInfo;
+		
+	}
+
+	@Override
+	public int select_tbl_admininfo2(Connection conn, AdminInfo adminInfo) {
+System.out.println("AdminLoginDaoImpl.select_tbl_admininfo2 Start");
+		
+		String sql = "select count(*) cnt from tbl_admininfo where admin_id = ?";
+		
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, adminInfo.getAdminId());
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				cnt = rs.getInt("cnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.select_tbl_admininfo2 End");
+		
+		return cnt;
+	}
+
 }

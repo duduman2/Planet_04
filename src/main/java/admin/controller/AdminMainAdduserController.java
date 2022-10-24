@@ -36,7 +36,7 @@ public class AdminMainAdduserController extends HttpServlet {
 		UserInfo userInfo = new UserInfo();
 		userInfo = adminService.getUserInfo(req); // jsp로부터 가져온 요청정보 dto에 저장
 		
-		Boolean result = adminService.UserCreate(userInfo); // dto 정보로 관리자 생성
+		Boolean result = adminService.UserCreate(userInfo); // dto 정보로 사용자 생성
 		
 		if( result ) {
 			

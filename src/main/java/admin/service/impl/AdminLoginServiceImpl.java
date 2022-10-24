@@ -287,8 +287,6 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 		//Paging객체 생성
 		Paging paging = new Paging(totalCount, curPage);
 		
-		System.out.println(paging);
-		
 		System.out.println("AdminServiceImpl.getPaging3 End");
 				
 		return paging;
@@ -304,6 +302,83 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 		
 		return adminDao.selectAll(JDBCTemplate.getConnection(), paging, userInfo);
 		
+	}
+
+	@Override
+	public Boolean UserUpdate(UserInfo userInfo) {
+		
+		System.out.println("AdminServiceImpl.UserUpdate Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		if( adminDao.update_tbl_user(conn, userInfo) > 0 ) {
+			JDBCTemplate.commit(conn);
+			return true;
+		}
+		
+		JDBCTemplate.rollback(conn);
+		
+		System.out.println("AdminServiceImpl.UserUpdate End");
+		
+		return false;
+		
+	}
+
+	@Override
+	public UserInfo UserSearch2(HttpServletRequest req) {
+		
+		System.out.println("AdminServiceImpl.UserSearch2 Start");
+		
+		UserInfo userInfo = new UserInfo();
+		
+		userInfo.setU_no(Integer.parseInt(req.getParameter("userno")));
+		userInfo.setU_id(req.getParameter("userid"));
+		userInfo.setU_pw(req.getParameter("userpw"));
+		userInfo.setU_name(req.getParameter("name"));
+		userInfo.setU_phone(req.getParameter("phone"));
+		userInfo.setU_email(req.getParameter("email"));
+		userInfo.setU_address(req.getParameter("add1"));
+		userInfo.setU_nick(req.getParameter("usernick"));
+		userInfo.setB_business_number(req.getParameter("userbsno"));
+		userInfo.setGrade(req.getParameter("grade"));
+		userInfo.setReportcode(req.getParameter("reportcode"));
+		
+		// string으로 가져온 birth를 date로 바꿔서 dto에 저장하는 구문
+		String from = req.getParameter("birth");
+		if( from != null) {
+			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				userInfo.setU_birth(fm.parse(from));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		userInfo.setU_gender(req.getParameter("gender"));
+		userInfo.setU_trade_user(req.getParameter("tradeuser"));
+		
+		System.out.println("AdminServiceImpl.UserSearch2 End");
+		
+		return userInfo;
+		
+	}
+
+	@Override
+	public Boolean AdminCheck(AdminInfo adminInfo) {
+		System.out.println("AdminServiceImpl.AdminCheck Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		if( adminDao.select_tbl_admininfo2(conn, adminInfo) > 0 ) {
+			JDBCTemplate.commit(conn);
+			return true;
+		}
+		
+		JDBCTemplate.rollback(conn);
+		
+		System.out.println("AdminServiceImpl.AdminCheck End");
+		
+		return false;
 	}
 
 }
