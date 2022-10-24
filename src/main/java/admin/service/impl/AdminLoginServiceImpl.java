@@ -13,6 +13,7 @@ import admin.service.face.AdminLoginService;
 import common.JDBCTemplate;
 import common.Paging;
 import dto.AdminInfo;
+import dto.Notice;
 import dto.UserInfo;
 
 public class AdminLoginServiceImpl implements AdminLoginService {

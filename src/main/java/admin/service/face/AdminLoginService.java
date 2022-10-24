@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import common.Paging;
 import dto.AdminInfo;
+import dto.Notice;
 import dto.UserInfo;
 
 public interface AdminLoginService {
@@ -129,7 +130,7 @@ public interface AdminLoginService {
 	public UserInfo UserSearch2(HttpServletRequest req);
 	
 	/**
-	 * 관리자 아이디 중복검사
+	 * 관리자 아이디 중복검사ddd
 	 * 
 	 * @param adminInfo 관리자 아이디
 	 * @return 결과값
