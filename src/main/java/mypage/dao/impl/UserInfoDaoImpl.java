@@ -54,21 +54,26 @@ public class UserInfoDaoImpl implements UserInfoDao {
 			
 			while( rs.next() ) {
 				
-				re.setU_no("userno");
-				re.setU_id("userid");
-				re.setU_pw("userpw");
-				re.setU_name("name");
-				re.setU_birth("birth");
-				re.setU_gender("gender");
-				re.setU_phone("phone");
-				re.setU_email("email");
-				re.setU_address("add1");
-				re.setU_nick("usernick");
-				re.setU_trade_user("tradeuser");
-				re.setB_business_number("userbsno");
-				re.setGrade("grade");
-				re.setReportcode("reportcode");
-				re.setWishno("wish_no");
+//				rs.getInt(); 조회결과시
+				
+				rs.getInt(0);
+				
+//				re.setU_no("userno");
+//				re.setU_id("userid");
+//				re.setU_pw("userpw");
+//				re.setU_name("name"); //4
+//				re.setU_birth("birth");
+//				re.setU_gender("gender");
+//				re.setU_phone("phone");
+//				re.setU_email("email");//8
+//				re.setU_address("add1");
+//				re.setU_nick("usernick");
+//				re.setU_join_date("joindate");
+//				re.setU_trade_user("tradeuser"); //12
+//				re.setB_business_number("userbsno");
+//				re.setGrade("grade");
+//				re.setReportcode("reportcode");
+//				re.setWishno("wish_no");  //16
 				
 			}
 		} catch (SQLException e) {

@@ -142,7 +142,13 @@ $(document).ready(function() {
 </table>
 
 
-<div id="blank" style="height: 100px; margin-bottom: 700px;">blank </div>
+<div id="blank" style="height: 100px; margin-bottom: 700px;"> </div>
+
+<script type="text/javascript">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</script>
 
 
 <%@include file="../layout/footer.jsp" %>

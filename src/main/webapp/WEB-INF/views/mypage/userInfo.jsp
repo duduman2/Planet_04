@@ -10,12 +10,27 @@
 @import url("../sources/mypage/mypage.css");
 
 </style>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+// 	$(".btnBack").click(function() { //실행안됨!!
+// 		$(location).attr("href", "/mypage/controller")
+// 	})
+
+	})
+})
+
+</script>
 </head>
 <body>
 <h1>개인정보 확인하기</h1>
 <hr>
 <div class="main" style="width: 100%;">
-<table class="table" id="userinfo">
+
+
+
+
+<table class="table table-striped table-hover" id="userinfo">
 	private int u_no;		// 회원 번호
 	private String u_id;	// 회원 아이디
 	private String u_pw;	// 회원 패스워드
@@ -112,5 +127,26 @@
 
 
 </table>
+
+<div class="text-center" >
+<button id="btnUserInfoUpdate" class="btnUserInfoUpdate" 
+style="width: 100px; height: 50px;">수정하기</button> 
+&nbsp;&nbsp;&nbsp;
+<button id="btnBack" class="btnBack" style="width: 100px; 
+height: 50px;" onclick="history.go(-1)">되돌아가기</button>
+</div>
+
+<div></div>
+
+<div id="blank" style="height: 100px;"> </div>
+
+
 </div><!--<div class=main> end -->
+
+<script type="text/javascript">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</script>
+
 <%@ include file="../layout/footer.jsp"%>

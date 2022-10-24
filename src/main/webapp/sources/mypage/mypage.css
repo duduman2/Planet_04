@@ -51,15 +51,14 @@ div.right_section {
 /* ------------/mypage/main.jsp   end----------------------------- */
 /* ------------/mypage/userInfo.jsp   start----------------------- */
 #userinfo { width: 100%; }
-#userinfo th {
+#userinfo th { 	/* 안되는데?? */
 	width: 40%;
 	
 }
-#userinfo td {
+#userinfo td { 	/* 이것두 안되는데?? */
 	width: 60%;
 }
 /* ------------/mypage/userInfo.jsp   end------------------------- */
-
 
 
 
