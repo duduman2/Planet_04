@@ -16,7 +16,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	$("#btnUpdate").click(function() {
+	$("#btnUserInfo").click(function() {
 		$(location).attr("href", "/userInfo/controller")
 	})
 	$("#btncartList").click(function() {
@@ -42,7 +42,7 @@ $(document).ready(function() {
 <table class="table">
 	<tr>
 		<th class="info" colspan="2">프로필 설정
-		<button type="button" style="float: right;" id="btnUpdate">설정(수정)</button></th>
+		<button type="button" style="float: right;" id="btnUserInfo">설정</button></th>
 	</tr>
 	<tr style="height: 300px;">
 		<td colspan="2" style="text-align: center;"><img src="../sources/mypage/DefaultImage.png" alt="기본이미지" 
