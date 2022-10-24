@@ -12,7 +12,8 @@
 <style type="text/css">
 @import url("../sources/mypage/mypage.css");
 
-table, tr, th, td { border: 1px solid #ccc; width: 100%; }
+table {  width: 100%; }
+table, tr, th, td { border: 1px solid #ccc; }
 th { text-align: center; }
 
 </style>
@@ -28,23 +29,36 @@ th { text-align: center; }
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th style="width: 20%;">장바구니 번호</th>
-			<th style="width: 30%;">총 금액</th>
-			<th style="width: 30%;">제품 번호</th>
-			<th style="width: 20%;">제품 총 수량</th>
-		</tr>
+			<th>장바구니 번호</th>
+			<th>제품 번호</th>
+		</tr>	
 	</thead>
 	<tbody> 
 		<% for(int i=0; i<cList.size(); i++) { %>
 		<tr>
-			<td><%= cList.get(i).getCarNo()	%></td>
-			<td><%= cList.get(i).getTotalPrice()	%></td>
+			<td><%= cList.get(i).getCarNo()	%> 번</td>
+<!-- 			<td>상품명+링크 추가하기</td> -->
+<!-- 			<td>제품세부사항(컬러, 사이즈)+수정하기</td> -->
 			<td><%= cList.get(i).getProduct_no()	%></td>
-			<td><%= cList.get(i).getWish_amount() %></td>		
+<!-- 			<td>제품 가격</td> -->
+<!-- 			<td>배송비유무</td> -->
+
 		</tr>
-		<% } %>
+<%-- 		<% } %> --%>
 	
 	</tbody>
+	<tfoot>
+		<tr>	
+<%-- 		<% for(int i=0; i<cList.size(); i++) { %> --%>
+			<th>제품 총 수량</th>
+			<th>총 금액</th>
+		</tr>
+		<tr>
+			<td style="text-align: right;"><%= cList.get(i).getWish_amount() %> 개</td>		
+			<td style="text-align: right;"><%= cList.get(i).getTotalPrice() %> 원</td>
+		</tr>
+		<% } %>
+	</tfoot>
 </table>
 
 <div id="blank" style="height: 100px;"></div>
