@@ -43,7 +43,7 @@ $(document).ready(function() {
 				n1 : $("#userid").val()		// 이게 효자네
 			}
 			, dataType: "html"				// 응답 데이터를 처리할 형식(**요청 파라미터의 형식이 아님!!)
-			// 서블릿으로 바로 주고 받으려면 json으로 사용하기
+			// 이거 왜 출력안되냐 => 서블릿으로 바로 주고 받으려면 json으로 사용하기
 			, success: function( res ) {
 //				console.log( res.result )
  				$(".checkuserid").html( res )
