@@ -5,6 +5,7 @@ import java.util.List;
 
 import common.JDBCTemplate;
 import dto.Cart;
+import dto.UserInfo;
 import mypage.dao.face.UserBoardDao;
 import mypage.dao.face.UserCartDao;
 import mypage.dao.face.UserInfoDao;
@@ -80,9 +81,13 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public dto.UserInfo showUserInfo() {
-
-		return null;
+	public dto.UserInfo showUserInfo(UserInfo param) {
+		System.out.println("MypageService - UserInfo showUserInfo(UserInfo param) - DB 연결 객체 생성완료 ");
+		
+		System.out.println("MypageService - UserInfo showUserInfo(UserInfo param) - DAO 호출 후");
+		
+		// DB 조회 결과 반환
+		return userInfoDao.showUserInfo(JDBCTemplate.getConnection(), param);
 	}
 
 	@Override

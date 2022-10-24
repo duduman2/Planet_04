@@ -8,6 +8,8 @@ table { border: 1px solid #ccc; border-collapse: collapse }
 /* 	margin-top: 50px; */
 }
 
+/* ------------ mypage// 전체 설정하기   end ---------------------- */
+/* ------------ /mypage/main.jsp    start ------------------------- */
 div.left_section { 
 	 
 	/* 나중에 header 연결 후 수정하기!! */
@@ -46,5 +48,19 @@ div.right_section {
 /* 	width: 300px; */
 /* 	background-color: #D6D58E; */
 }
+/* ------------/mypage/main.jsp   end----------------------------- */
+/* ------------/mypage/userInfo.jsp   start----------------------- */
+#userinfo { width: 100%; }
+#userinfo th {
+	width: 40%;
+	
+}
+#userinfo td {
+	width: 60%;
+}
+/* ------------/mypage/userInfo.jsp   end------------------------- */
+
+
+
 
 
