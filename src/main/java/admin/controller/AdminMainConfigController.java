@@ -40,7 +40,7 @@ public class AdminMainConfigController extends HttpServlet {
 		req.setAttribute("paging", paging);
 					
 		req.setAttribute("adminList", adminList);
-					
+		
 		req.getRequestDispatcher("/WEB-INF/views/admin/adminMainConfig.jsp").forward(req, resp);
 		
 		System.out.println("/admin/mainconfig [GET] End");

@@ -8,7 +8,7 @@
 
 <script type="text/javascript">
 
-alert("중복된 아이디 입니다.")
+alert("작업이 완료되지 않았습니다.")
 
 history.back();
 

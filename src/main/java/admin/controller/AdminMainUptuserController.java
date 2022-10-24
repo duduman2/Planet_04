@@ -12,31 +12,41 @@ import admin.service.face.AdminLoginService;
 import admin.service.impl.AdminLoginServiceImpl;
 import dto.UserInfo;
 
-@WebServlet("/admin/adduser")
-public class AdminMainAdduserController extends HttpServlet {
+@WebServlet("/admin/uptuser")
+public class AdminMainUptuserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	AdminLoginService adminService = new AdminLoginServiceImpl();
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/admin/adduser [GET] Start");
+		System.out.println("/admin/uptuser [GET] Start");
 		
-		req.getRequestDispatcher("/WEB-INF/views/admin/createuser.jsp").forward(req, resp);
+		UserInfo userInfo = new UserInfo();
+		userInfo.setU_id( req.getParameter("userid") );
 		
-		System.out.println("/admin/adduser [GET] End");
+		userInfo = adminService.UserSearch(userInfo);
+		
+		req.setAttribute("userInfo", userInfo);
+		
+		req.getRequestDispatcher("/WEB-INF/views/admin/updateuser.jsp").forward(req, resp);
+		
+		System.out.println("/admin/uptuser [GET] End");
 		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/admin/adduser [POST] Start");
+		System.out.println("/admin/uptuser [POST] Start");
 		
 		UserInfo userInfo = new UserInfo();
-		userInfo = adminService.getUserInfo(req); // jsp로부터 가져온 요청정보 dto에 저장
 		
-		Boolean result = adminService.UserCreate(userInfo); // dto 정보로 사용자 생성
+		userInfo = adminService.UserSearch2(req);
+		
+		System.out.println(userInfo);
+		
+		Boolean result = adminService.UserUpdate(userInfo); // dto 정보로 관리자 생성
 		
 		if( result ) {
 			
@@ -48,8 +58,7 @@ public class AdminMainAdduserController extends HttpServlet {
 			
 		}
 		
-		System.out.println("/admin/adduser [POST] End");
-		
+		System.out.println("/admin/uptuser [POST] End");
 	}
-
+	
 }
