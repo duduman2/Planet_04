@@ -25,10 +25,6 @@
 	border-radius: 20px / 30px;
 }
 
-.configbutton:hover {
-	cursor: pointer;
-}
-
 .admintable {
 	width: 98%;
 	height: 100px;

@@ -35,7 +35,7 @@ public class ProductDaoImpl implements ProductDao {
 			ps.setString(1, product.getProductName());
 			ps.setString(2, product.getProductContent());
 			ps.setInt(3, product.getProductPrice());
-			ps.setString(4, product.getProductClass());
+			ps.setString(4, product.getProductClass()+"전체");
 			
 			res= ps.executeUpdate();
 			
@@ -49,23 +49,29 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public List<Product> selectBoardList(Connection conn, Product product) {
+	public List<Product> selectBoardList(Connection conn, Product product, String cl) {
 
 		String sql = "";
 		
 //		sql += "SELECT productname, productprice, fileno";
 //		sql += " FROM product";
 		
-		sql += "select p.productno, p.fileno, p.productname, p.productprice, u.stored_name, u.filepath";
+		sql += "select p.productno, p.fileno, p.productname, p.productprice, p.productclass, u.stored_name, u.filepath";
 		sql += " from product p";
 		sql += " inner join uploadfile u";
 		sql += " on p.fileno = u.fileno";
+//		sql += " where p.productclass like (?)";
+		sql += " where instr(p.productclass,?) > 0";
 		sql += " order by p.productno desc";
-//		sql += " where p.fileno = ?";
 		
 		List<Product> list = new ArrayList<>();
 		try {
 			ps = conn.prepareStatement(sql);
+			
+			if(cl==null) {
+				cl = "전체"; 
+			}
+			ps.setString(1, cl);
 			
 			rs = ps.executeQuery();
 			

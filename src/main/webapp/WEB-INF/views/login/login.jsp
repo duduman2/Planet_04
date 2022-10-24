@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 
 <!-- jQuery 2.2.4 -->
@@ -34,37 +36,18 @@ $(document).ready(function() {
 	$("#btnJoin").click(function() {
 		$(location).attr('href', '/join/con') 
 	})
+	
+	//취소 버튼
+	$("#btnCancel").click(function() {
+		$(location).attr('href', '/main') //메인으로 가기
+	})
 })
-</script>
-
-<script type="text/javascript">
-
-$("#name").focusout(function(){
-		
-    if($('#u_id').val() == ""){
-  		$('#check').text('이름을 입력해주세요.');
-  	  	$('#check').css('color', 'red');
-  
-    }else{
-   	 $('#check').hide();
-    }
-    });
-    
-		$("#u_email").focusout(function(){
-    if($('#u_email').val() == ""){
-  		$('#check').text('이메일을 입력해주세요');
-  	  	$('#check').css('color', 'red');
-    }else{
-   	 $('#check').hide();
-    }
-    });
-
 </script>
 
 
 <style type="text/css">
 
-body{margin: 0 auto; width: 400px;}
+body{margin: 0 auto; width: 400px; height:1000px;}
 
 input { 
 	border-radius: 3px; 
@@ -102,6 +85,17 @@ label {
 	color: white;
 }
 
+#btnCancel {
+	width: 370px;
+	height: 41px;
+	background-color: #5B9E28;
+	border-radius: 7px;
+	border: thin solid #5B9E28;
+	font-weight: bold;
+	font-size: 13px;
+	color: white;
+}
+
 #snsForm {
 	display: block;
 	text-align: center;
@@ -118,6 +112,44 @@ section {
 
 </style>
 
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v10.0&appId=83895073079499" nonce="SiOBIhLG"></script>
+
+<script>
+//기존 로그인 상태를 가져오기 위해 Facebook에 대한 호출
+function statusChangeCallback(res){
+	statusChangeCallback(response);
+}
+
+function fnFbCustomLogin(){
+	FB.login(function(response) {
+		if (response.status === 'connected') {
+			FB.api('/me', 'get', {fields: 'name,email'}, function(r) {
+				console.log(r);
+			})
+		} else if (response.status === 'not_authorized') {
+			// 사람은 Facebook에 로그인했지만 앱에는 로그인하지 않았습니다.
+			alert('앱에 로그인해야 이용가능한 기능입니다.');
+		} else {
+			// 그 사람은 Facebook에 로그인하지 않았으므로이 앱에 로그인했는지 여부는 확실하지 않습니다.
+			alert('페이스북에 로그인해야 이용가능한 기능입니다.');
+		}
+	}, {scope: 'public_profile,email'});
+}
+
+window.fbAsyncInit = function() {
+	FB.init({
+		appId      : '83895073079499', // 내 앱 ID를 입력한다.
+		cookie     : true,
+		xfbml      : true,
+		version    : 'v10.0'
+	});
+	FB.AppEvents.logPageView();   
+};
+  
+  
+</script>
+
+
 </head>
 
 <!-- 로그인 화면 -->
@@ -126,11 +158,12 @@ section {
 	<div class="col-lg-4"></div>
 	<div class="col-lg-4">
 	
-	<h1 style="color: #13471C; text-align:center; font-size: 100; font-style: italic; font-weight: bold;">PLanet</h1>
+	<br><br><br><br>
+	<h1 style="color: #13471C; text-align:center; font-size: 130; font-style: italic; font-weight: bold;">PLanet</h1><br>
 		
 		<div class="jumbotron" style="padding-top:10px">
 		
-			<form method="post" action="/loginAction/con" class="form-horizontal">
+			<form method="post" action="/login/con" class="form-horizontal">
 			
 				<h3 style="text-align:center; color: #585252;" >이메일 로그인</h3>
 
@@ -150,6 +183,11 @@ section {
 				
 				<div class="form-group">
 					<button type="button" class="btn btn-primary" id="btnLogin" >로그인</button>
+				</div>
+					<br>
+				
+				<div class="form-group">
+					<button type="button" class="btn btn-primary" id="btnCancel" >취소</button>
 				</div>
 					<br><br><br>
 					
@@ -202,7 +240,7 @@ section {
 
 
 
-<a datatype="naver" class="css-l0qndx e1ufx3to0" style="margin-right: 40px;"><svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet"><g fill="none" fill-rule="evenodd"><path fill="#00C63B" d="M0 24C0 10.745 10.745 0 24 0s24 10.745 24 24-10.745 24-24 24S0 37.255 0 24z"></path><path fill="#FFF" d="M21 25.231V34h-7V15h7l6 8.769V15h7v19h-7l-6-8.769z"></path></g></svg></a>
+<!-- <a datatype="naver" class="css-l0qndx e1ufx3to0" style="margin-right: 40px;"><svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet"><g fill="none" fill-rule="evenodd"><path fill="#00C63B" d="M0 24C0 10.745 10.745 0 24 0s24 10.745 24 24-10.745 24-24 24S0 37.255 0 24z"></path><path fill="#FFF" d="M21 25.231V34h-7V15h7l6 8.769V15h7v19h-7l-6-8.769z"></path></g></svg></a> -->
 
 <!-- <ul> -->
 <!-- 	<li> -->
@@ -219,13 +257,24 @@ section {
 <!-- </ul> -->
 
 
+<!-- 페이스북 -->
+<a datatype="facebook" class="css-l0qndx e1ufx3to0" style="margin-right: 40px;"id="fnFbCustomLogin" onclick="fnFbCustomLogin();" href="javascript:void(0)"><svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet"><g fill="none" fill-rule="evenodd"><path fill="#3B5998" d="M0 24C0 10.745 10.745 0 24 0s24 10.745 24 24-10.745 24-24 24S0 37.255 0 24z"></path><path fill="#FFF" d="M25.77 35V24h3.384v-3.385h-3.385v-2.538c-.012-.756.08-1.285 1.693-1.692h1.692V13h-3.385c-3.25 0-4.52 1.84-4.23 5.077v2.538H19V24h2.538v11h4.231z"></path></g></svg></a>
+
+<!-- <ul> -->
+<!--  <li onclick="fnFbCustomLogin();"> -->
+<!--   <a href="javascript:void(0)"> -->
+<!--    <span>Login with Facebook</span> -->
+<!--   </a> -->
+<!--  </li> -->
+<!-- </ul> -->
+
 
 
 
 <!-- 구글 -->
 <a datatype="google" id="GgCustomLogin" class="css-l0qndx e1ufx3to0" href="javascript:void(0)">
 
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet">
+<svg xmlns="http://www.w3.org/2000/svg" width="49" height="49" viewBox="0 0 49 49" preserveAspectRatio="xMidYMid meet">
 <g fill="none" fill-rule="evenodd">
 
 <g transform="translate(-90.000000, -398.000000) translate(90.000000, 398.000000)">

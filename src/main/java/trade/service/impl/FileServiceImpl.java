@@ -122,8 +122,8 @@ public class FileServiceImpl implements FileService {
 
 
 	@Override
-	public List<Product> boardList(Product product) {
-		return productDao.selectBoardList(JDBCTemplate.getConnection(),product);
+	public List<Product> boardList(Product product, String cl) {
+		return productDao.selectBoardList(JDBCTemplate.getConnection(),product, cl);
 	}
 
 

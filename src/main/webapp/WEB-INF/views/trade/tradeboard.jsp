@@ -31,8 +31,7 @@
 	    
 	    $(".class").click(function(){
 // 	    	alert($(this).val());
-	    	alert($(this).val());
-	    	////////////////////////////////////////////////////할부분
+			location.href = 'tradeboard?class='+ $(this).val();
 	    });
 	
 	});

@@ -75,4 +75,32 @@ public interface AdminLoginDao {
 	 */
 	public int delete_tbl_user(Connection conn, UserInfo userInfo);
 
+	/**
+	 * 사용자 정보 검색
+	 * 
+	 * @param connection DB객체
+	 * @param userInfo 사용자 아이디
+	 * @return 사용자 정보
+	 */
+	public UserInfo selectUser(Connection conn, UserInfo userInfo);
+
+	/**
+	 * 총 유저수 조회
+	 * 
+	 * @param conn DB객체
+	 * @param userInfo 사용자id
+	 * @return 테이블 전체 행수
+	 */
+	public int selectCntAll(Connection conn, UserInfo userInfo);
+
+	/**
+	 * 테이블 목록 조회
+	 * 
+	 * @param connection DB객체
+	 * @param paging 페이징객체
+	 * @param userInfo 사용자정보
+	 * @return
+	 */
+	public List<UserInfo> selectAll(Connection connection, Paging paging, UserInfo userInfo);
+
 }

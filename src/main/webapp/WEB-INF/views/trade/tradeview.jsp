@@ -12,6 +12,83 @@ img {
 	height : 300px;
 }
 </style>
+
+<!-- <script type="text/javascript"> -->
+<!-- // $(document).ready(function(){ -->
+<!-- // 	function paycalc(){ -->
+<!-- // 		console.log("계산하기") -->
+		
+<!-- // 		$.ajax({ -->
+<!-- // 			type: "post"			//요청 메소드 -->
+<!-- // 			,url: "./paymoney.jsp"	//요청 URL -->
+<!-- // 			,data: {				//요청 파라미터 -->
+<!-- // 				quanInput : $("#quanInput").val() -->
+<%-- 				, price : <%=productView.getProductPrice()%> --%>
+<!-- // 			} -->
+<!-- // 			,dataType: "html"		//응답 데이터 형식 -->
+<!-- // 			,success:function(res){ -->
+<!-- // 				console.log("AJAX 성공") -->
+				
+<!-- // 				//응답 데이터 반영 -->
+<!-- // 				$("#paymoney").html(res) -->
+<!-- // 			} -->
+<!-- // 			,error:function(){ -->
+<!-- // 				console.log("AJAX 실패") -->
+<!-- // 			} -->
+<!-- // 		}) -->
+		
+<!-- // 	} -->
+	
+<!-- //     $("#add").click(function(){ -->
+<!-- // 		console.log("#add click") -->
+<!-- // 		var quan = parseInt($("#quanInput").val())+1 -->
+<!-- // 		$("#quanInput").val(quan) -->
+<!-- // 		paycalc() -->
+<!-- //     }) -->
+<!-- //     $("#sub").click(function(){ -->
+<!-- // 		console.log("#add click") -->
+<!-- // 		var quan = parseInt($("#quanInput").val())-1 -->
+<!-- // 		if(quan<1){ -->
+<!-- // 			alert("수량은 1개 이상이어야 합니다") -->
+<!-- // 		}else{ -->
+<!-- // 			$("#quanInput").val(quan) -->
+<!-- // 			paycalc() -->
+<!-- // 		} -->
+<!-- //     }) -->
+
+
+<!-- // }) -->
+
+<!-- </script> -->
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	$("#btnCalc").click(function(){
+		console.log("#btnCalc 클릭")
+		
+		$.ajax({
+			type: "post"			//요청 메소드
+			,url: "./paymoney.jsp"	//요청 URL
+				,data: {				//요청 파라미터
+	 				quanInput : $("#quanInput").val()
+					, price : <%=productView.getProductPrice()%>
+	 			}
+			,dataType: "html"		//응답 데이터 형식
+			,success:function(res){
+				console.log("AJAX 성공")
+				
+				//응답 데이터 반영
+				$("#paymoney").html(res)
+			}
+			,error:function(){
+				console.log("AJAX 실패")
+			}
+		})
+	
+	})
+})
+</script>
+
 <br><br><br>
 <table>
 <tr>
@@ -40,16 +117,20 @@ img {
 
 <tr>
 <td>제품 가격 : </td>
-<td> <%=productView.getProductPrice() %></td>
+<td> <%=productView.getProductPrice() %>원</td>
 </tr>
-
 
 <!-- <tr> -->
 <!-- <td class="info">조회수</td> -->
 <%-- <td> <%=productView.getHit() %> </td> --%>
 <!-- </tr> -->
 
-
 </table>
+<button id="btnCalc">asd</button>
+수량 선택
+<button id="sub">-</button><input type="text" value="1" id="quanInput"><button id="add">+</button>
+<br>결제 금액<br>
+<div id="paymoney"></div>
+
 
 <%@ include file="../layout/footer.jsp"%>
