@@ -83,25 +83,25 @@
 
 	<div class="container">
 		<div class="row">
+		<form method="post" action="writeActon.jsp">
 			<table class="table table-striped" style="text-align : center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th style="background-color: #e4f7ba; text-align: center;">번호</th>
-						<th style="background-color: #e4f7ba; text-align: center;">제목</th>
-						<th style="background-color: #e4f7ba; text-align: center;">작성자</th>
-						<th style="background-color: #e4f7ba; text-align: center;">작성일</th>
+						<th colspan="2" style="background-color: #e4f7ba; text-align: center;">Planet</th>
+					
 					</tr>				
 				</thead>
 				<tbody>
 					<tr>
-						<td>1</td>					
-						<td>안녕하세요</td>					
-						<td>ㅁㄴㅇ</td>					
-						<td>2022-10-18</td>					
+						<td><input type="text" class="form-control" placeholder="글 제목" name="bbsTitle" maxlength="50"></td>					
+					</tr>
+					<tr>
+							<td><textarea class="form-control" placeholder="내용" name="bbsContent" maxlength="2048" style="height:350px;"></textarea></td>					
 					</tr>
 				</tbody>
 			</table>
-			<a href="write.jsp" class="btn btn-primary pull-right">글쓰기</a>
+			<input type="submit" class="btn btn-primary pull-right" value="저장">
+		</form>
 		</div>
 	</div>
 

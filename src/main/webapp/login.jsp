@@ -23,8 +23,8 @@
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="index.jsp">메인</a></li>
-				<li><a href="/board/main.jsp">게시판</a></li> <!-- 이게 게시판 보드임 -->
+				<li><a href="main.jsp">메인</a></li>
+				<li><a href="bbs.jsp">게시판</a></li> <!-- 이게 게시판 보드임 -->
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
@@ -58,6 +58,7 @@
 		<div class="col-lg-4"></div>
 	</div>
 	
+	<!-- 일단 로그인 완료 -->
 	
 	
 	<script src="https;//code.jquery-3.1.1.min.js"></script>
