@@ -4,31 +4,63 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/header.jsp"%>
-<% List<Product> boardlist = (List)request.getAttribute("boardList"); %>
+<% List<Product> boardList = (List)request.getAttribute("boardList"); %>
+<style>
+.tradeboard {
+	display : flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	
+	
+}
+.tradeitem{
+	margin-bottom: 50px;
+}
+.tradeitem img {
+	width : 250px;
+	height : 300px;
+	margin-bottom: 15px;
+}
+
+.classlist button {
+	margin-right: 50px;
+}
+</style>
+<script type="text/javascript">
+	$( document ).ready( function() {
+	    
+	    $(".class").click(function(){
+// 	    	alert($(this).val());
+			location.href = 'tradeboard?class='+ $(this).val();
+	    });
+	
+	});
+</script>
+<br><br>
+<button><a href="/trade/productupload">상품등록</a></button><br><br><br>
+<div class="classlist">
+
+	<button class="class" value="전체">전체</button>
+	<button class="class" value="관엽/공기정화식물">관엽/공기정화식물</button>
+	<button class="class" value="다육/선인장">다육/선인장</button>
+	<button class="class" value="야생화">야생화</button>
+	<button class="class" value="분재">분재</button>
+	<button class="class" value="동양란/서양란">동양란/서양란</button>
+	<button class="class" value="화분">화분</button>
+	<button class="class" value="원예자재류">원예자재류</button>
+
+</div>
+
+<br><br><br>
 
 <div class="tradeboard">
-<button><a href="/trade/productupload">상품등록</a></button><br><br><br>
 
-
-<!-- <table class="table table-bordered"> -->
-<!-- <tr> -->
-<!-- 	<th>제품명</th> -->
-<!-- 	<th>가격</th> -->
-<!-- 	<th>제품사진</th> -->
-<!-- </tr> -->
-<%-- <% for(int i=0; i <boardlist.size(); i++) { %> --%>
-<!-- <tr> -->
-<%-- 	<td><%=boardlist.get(i).getProductname()%></td>	 --%>
-<%-- 	<td><%=boardlist.get(i).getProductprice()%></td>	 --%>
-	
-<%-- 	<td><img src="/imagepath/<%=boardlist.get(i).getFilename()%>" width="100" height="200"></td> --%>
-<!-- </tr> -->
-<%-- <%} %> --%>
-<% for(int i=0; i <boardlist.size(); i++) { %>
-	<div>
-		<img src="/imagepath/<%=boardlist.get(i).getFilename()%>" width="100" height="200"><br>
-		제품명 : <%=boardlist.get(i).getProductname()%><br>
-		가격 : <%=boardlist.get(i).getProductprice()%> 원<br><br>
+<% for(int i=0; i <boardList.size(); i++) { %>
+	<div class="tradeitem"><a href="/tradeboard/tradeview?productno=<%=boardList.get(i).getProductNo()%>">
+		<img src="/imagepath/<%=boardList.get(i).getFileName()%>"><br>
+		제품명 : <%=boardList.get(i).getProductName()%><br>
+		가격 : <%=boardList.get(i).getProductPrice()%>원<br>
+		</a>
 	</div>
 <%} %>
 

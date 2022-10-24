@@ -18,8 +18,20 @@ public interface LoginDao {
 	public int insert(Connection conn, UserInfo userinfo);
 
 	public int selectLoginInfo(String u_id, String u_pw);
-
+	
+	//중복확인
 	public int idCheck(String u_id);
+	
+	public int nickCheck(String u_nick);
 
+	public int emailCheck(String u_email);
+
+	public int nameCheck(String u_name);
+	
+	// username을 이용해 회원정보 조회하기
+	public UserInfo selectUserInfoByU_name(Connection conn, UserInfo userinfo);
+	
+	//아이디 찾기
+	public UserInfo findId(String u_name, String u_email);
 
 }

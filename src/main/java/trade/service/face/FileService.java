@@ -18,6 +18,6 @@ public interface FileService {
 	public void cosFileupload(HttpServletRequest req);
 	
 
-	public List<Product> boardList(Product product);
+	public List<Product> boardList(Product product, String cl);
 
 }

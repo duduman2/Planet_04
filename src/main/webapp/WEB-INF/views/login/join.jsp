@@ -19,68 +19,183 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 
+<!-- 아이디 중복 확인 -->
 <script type="text/javascript">
-$('.input_id').focusout(function(){
-	let u_id = $('.input_id').val(); // input_id에 입력되는 값
+$(document).ready(function() {
 	
-	$.ajax({
-		url : "/join/con",
-		type : "post",
-		data : {u_id: u_id},
-		dataType : 'json',
-		success : function(result){
-			if(result == 0){
-				$("#idCheck").html('사용할 수 없는 아이디입니다.');
-				$("#idCheck").attr('color','red');
-			} else{
-				$("#idCheck").html('사용할 수 있는 아이디입니다.');
-				$("#idCheck").attr('color','green');
-			} 
-		},
-		error : function(){
-			alert("서버요청실패");
-		}
+	$('#u_id').focusout(function(){
+	console.log("#u_id focusout")
+		
+		let u_id = $('#u_id').val(); // input_id에 입력되는 값
+		
+		$.ajax({
+			url : "/idCheck/con",
+			type : "post",
+			data : {u_id: u_id},
+			dataType : 'json',
+			success : function(result){
+				if(result == 0){
+					$("#idCheck").html('사용 불가한 아이디입니다.');
+					$("#idCheck").attr('color','red');
+					
+					
+				} else{
+					$("#idCheck").html('사용 가능한 아이디입니다.');
+					$("#idCheck").attr('color','green');
+				} 
+			},
+			error : function(){
+				alert("서버요청실패");
+			}
+		})
+		 
 	})
-	 
+
+	$('#u_nick').focusout(function(){
+	console.log("#u_nick focusout")
+		
+		let u_nick = $('#u_nick').val(); // input_id에 입력되는 값
+		
+		$.ajax({
+			url : "/nickCheck/con",
+			type : "post",
+			data : {u_nick: u_nick},
+			dataType : 'json',
+			success : function(result){
+				if(result == 0){
+					$("#nickCheck").html('사용 불가한 닉네임입니다.');
+					$("#nickCheck").attr('color','red');
+					
+					
+				} else{
+					$("#nickCheck").html('사용 가능한 닉네임입니다.');
+					$("#nickCheck").attr('color','green');
+				} 
+			},
+			error : function(){
+				alert("서버요청실패");
+			}
+		})
+	})
+
+	$('#u_email').focusout(function(){
+	console.log("#u_email focusout")
+		
+		let u_email = $('#u_email').val(); // input_id에 입력되는 값
+		
+		$.ajax({
+			url : "/emailCheck/con",
+			type : "post",
+			data : {u_email: u_email},
+			dataType : 'json',
+			success : function(result){
+				if(result == 0){
+					$("#emailCheck").html('사용 불가한 이메일입니다.');
+					$("#emailCheck").attr('color','red');
+					
+					
+				} else{
+					$("#emailCheck").html('사용 가능한 이메일입니다.');
+					$("#emailCheck").attr('color','green');
+				} 
+			},
+			error : function(){
+				alert("서버요청실패");
+			}
+		})
+	})
+
 })
 
-
 </script>
+
+
+
+
+
 
 <script type="text/javascript">
 $(document).ready(function() {
 	
 	//입력창에 포커스주기
 	$("input").eq(0).focus()
-
-
-// 	$("#btn").click(function() {
-// 		console.log("btn 아이디 중복 클릭")
+	
+	
+	//빈칸 확인
+	$('#btnJoin').click(function() {
+		if($('#u_id').val()==''){
+			alert("아이디를 입력해주세요");
+			return false;
+		}
 		
-// 		$.ajax({
-// 			type: "post"		//요청 메소드
-// 			, url: "./con"		//요청 URL
-// 			, data: {		//요청 파라미터
-// 				u_id: $("#u_id").val()
-// 				, idCheck: $("#idCheck").val()
-// 			}
-// 			, dataType: "html"	//응답 데이터 형식
-// 				, success: function( res ) {
-// 					console.log("사용가능한 아이디입니다")
-					
-// 					//응답 데이터 반영
-// 					$("#result").html( res )
-					
-// 				}
-// 				, error: function() {
-// 					console.log("이미 사용중인 아이디입니다")
-					
-// 				}
-				
-// 		})
-// 	})
+		if($('#u_pw').val()==''){
+			alert("비밀번호를 입력해 주세요");
+			return false;
+		}
+		
+		if($('#pwCheck').val()==''){
+			alert("비밀번호 확인란에 입력해 주세요");
+			return false;
+		}
+		
+		if($('#u_name').val()==''){
+			alert("이름을 입력해 주세요");
+			return false;
+		}
+		
+		if($('#u_nick').val()==''){
+			alert("닉네임을 입력해 주세요");
+			return false;
+		}
+		
+		if($('#u_birth').val()==''){
+			alert("생년월일을 입력해 주세요");
+			return false;
+		}
+		
+		if($('#u_gender').val()==''){
+			alert("성별을 체크해 주세요");
+			return false;
+		}
+		
+		if($('#u_email').val()==''){
+			alert("이메일을 입력해 주세요");
+			return false;
+		}
+		
+		if($('#u_phone').val()==''){
+			alert("전화번호를 입력해 주세요");
+			return false;
+		}
+		
+		if($('#u_address').val()==''){
+			alert("주소를 입력해 주세요");
+			
+			return false;
+		}
+		
+		$(this).parents("form").submit();
+
+	})	
 	
+		
+/*	
+	//비밀번호 정규식
+	$('#u_pw').blur(function() {
+		var regexPw = /^[A-Za-z0-9`~!@#\$%\^&\*\(\)\{\}\[\]\-_=\+\\|;:'"<>,\./\?]{8,20}$/;
+		  if(!regexPw.test('#u_pw')) {
+		  	alert("8~20자 영문 대소문자, 숫자, 특수문자를 사용하세요.");
+		    return false;
+		  }
+		  
+		  return true;
+		
+	})
+*/
+
 	
+
+
 	//비밀번호 확인	
 	$('#pwCheck').blur(function(){
 		if($('#u_pw').val() != $('#pwCheck').val()){
@@ -93,10 +208,10 @@ $(document).ready(function() {
 	})  	 
 	
 	//회원가입 버튼
-	$("#btnJoin").click(function() {
-		$(this).parents("form").submit();
+// 	$("#btnJoin").click(function() {
+// 		$(this).parents("form").submit();
 		
-	})
+// 	})
 	
 	//취소 버튼
 	$("#btnCancel").click(function() {
@@ -229,31 +344,6 @@ label {
 	color: white;
 }
 
-#idCheck {
-	border: thin solid #128525;
-	border-radius: 3px;
-	background-color: white;
-	color: #128525;
-	height: 25px;
-}
-
-#dbCheckEmail {
-	border: thin solid #128525;
-	border-radius: 3px;
-	background-color: white;
-	color: #128525;
-	height: 25px;
-}
-
-
-#dbCheckNickname {
-	border: thin solid #128525;
-	border-radius: 3px;
-	background-color: white;
-	color: #128525;
-	height: 25px;
-}
-
 #address {
 	border: thin solid #128525;
 	border-radius: 3px;
@@ -272,6 +362,8 @@ label {
 	
 	
  } 
+ 
+
 
 </style>
 
@@ -321,19 +413,16 @@ label {
 <br><br><br>
 
 
-<form method="post" action="./con" class="form-horizontal" id="emailForm">
+<form method="post" action="./con" class="form-horizontal" id="emailForm" name="emailForm">
 <div class="signin-email cont"></div>
 <h3 style="color: #585252; text-align: center;">이메일 간편 회원 가입</h3><br><br>
 	
 		<div class="form-group">
 			<label for="id">아이디</label>
-			<input type="text" id="u_id" name="u_id" class = "input_id" required="required" style="width: 232px; height: 25px; border: 1px solid gray; margin-right: 20px;">
+			<input type="text" id="u_id" name="u_id" class = "input_id" placeholder="5자 이상 영문과 숫자를 조합해 작성해주세요" required="required" style="width: 232px; height: 25px; border: 1px solid gray;">
 
 			<!-- 로그인 중복확인 -->
-<!-- 			<button type="submit" name="idCheck" class="checkId" id="idCheck">중복확인</button> -->
-
-
-				<font id="idCheck" name="idCheck" size="3"></font>
+			<font id="idCheck" name="idCheck" size="2"></font>
 
 		</div>
 			<br>
@@ -353,6 +442,7 @@ label {
 		<div class="form-group">
 			<label for="name">이름</label> 
 			<input type="text" name="u_name" id="u_name" onchange="isSame" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
+			<span id="u_name_msg" class="msg"></span><br>
 		</div>
 			<br>
 		
@@ -361,8 +451,8 @@ label {
 			<input type="text" name="u_nick" id="u_nick" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
 			
 			<!-- 닉네임 중복확인 -->
-			<button type="submit" onclick="fn_dbCheckNickname()" name="dbCheckNickname" id="nickCheck" class="checkNickname">중복확인</button>
-			<input type="hidden" name="nicknameDuplication" value="nicknameUncheck">
+			<font id="nickCheck" name="nickCheck" size="2"></font>
+			
 		</div>
 			<br>
 			
@@ -386,13 +476,12 @@ label {
 			<input type="email" name="u_email" id="u_email" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
 			
 			<!-- 이메일 중복확인 -->
-			<button type="submit" onclick="fn_dbCheckEmail()" name="dbCheckEmail" id="dbCheckEmail" class="checkEmail">중복확인</button>
-			<input type="hidden" name="emailDuplication" value="emailUncheck"/>
+			<font id="emailCheck" name="emailCheck" size="2"></font>
 		</div>
 			<br>
 							
 		<div class="form-group">
-			<label for="tel">휴대폰</label>
+			<label for="tel">전화번호</label>
 			<input type="text" name="u_phone" id="phone" required="required" placeholder=" '-' 를 제외한 숫자만 입력하세요" style="width: 232px; height: 25px; border: 1px solid gray;">
 		</div>
 			<br>
@@ -432,3 +521,4 @@ label {
 
 </body>
 </html>
+
