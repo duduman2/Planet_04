@@ -13,7 +13,7 @@ import dto.Cart;
 import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
-
+// 장바구니 목록 조회 - 구현 완료
 @WebServlet("/carList/controller")
 public class CartListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

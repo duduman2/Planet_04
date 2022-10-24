@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
-
+// 마이페이지 메인
 @WebServlet("/mypage/controller")
-public class MypageController extends HttpServlet {
+public class MypageMainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// Service 객체 선언

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
-
+//회원 정보 
 @WebServlet("/userInfo/controller")
 public class UserInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,7 +24,7 @@ public class UserInfoController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/userInfo/controller [GET]");
 	
-		req.getRequestDispatcher("/WEB-INF/views/mypage/uInfoModify.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/mypage/userInfo.jsp").forward(req, resp);
 
 	}
 	
