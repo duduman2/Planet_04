@@ -7,38 +7,7 @@
 	font-weight: bold !important;
 }
 
-.viewmenu {
-	height: 40px;
-	width: 280px;
-	font-size: 15px;
-	line-height: 40px;
-	text-decoration: none;
-}
-
-.hidemenu {
-	height: 0px;
-	font-size: 0px;
-	line-height: 0px;
-}
 /* --------------------- */
-
-
-/* --- BootStrap 무시 --- */
-li > a {
-	color: black;
-}
-
-li > a:hover {
-	text-decoration : none;
-}
-/* --------------------- */
-
-
-#nav0 {
-	width: 1140px;
-	height: 100px;
-	margin: 0 auto;
-}
 
 #logo {
 	float:left;
@@ -54,9 +23,9 @@ li > a:hover {
 }
 
 #top-menu {
-	float: left;
 	width: 1140px;
 	height: 60px;
+	margin: 0 auto;
 }
 
 .category {
@@ -88,7 +57,9 @@ li > a:hover {
 }
 
 #sec-menu {
-	clear: both;
+	width: 1140px;
+	height: 60px;
+	margin: 0 auto;
 }
 
 ul.nav1 {
@@ -192,8 +163,9 @@ ul.nav2 > li:hover > ul > li {
 .headerhr {
 	margin-top: 0;
 	margin-bottom: 0px;
+	clear: both;
+	
 }
 
 footer {
-	clear: both;
 }
