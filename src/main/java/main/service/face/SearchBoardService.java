@@ -16,10 +16,37 @@ public interface SearchBoardService {
 	public List<BoardInfo> getList();
 
 	/**
+	 * 키워드가 포함된 게시글 전체 조회
 	 * 
-	 * @param keyword
-	 * @return
+	 * @param keyword - 입력한 검색어
+	 * @return List<BoardInfo> - 게시글 전체 조회 목록
+	 */
+	public List<BoardInfo> all(String keyword);
+
+	/**
+	 * 키워드가 포함된 게시글 전체 조회
+	 * 
+	 * @param keyword - 입력한 검색어
+	 * @return List<BoardInfo> - 게시글 전체 조회 목록
+	 */
+	public List<BoardInfo> title(String keyword);
+	
+	/**
+	 * 키워드가 포함된 게시글 전체 조회
+	 * 
+	 * @param keyword - 입력한 검색어
+	 * @return List<BoardInfo> - 게시글 전체 조회 목록
+	 */
+	public List<BoardInfo> content(String keyword);
+
+	/**
+	 * 키워드가 포함된 게시글 전체 조회
+	 * 
+	 * @param keyword - 입력한 검색어
+	 * @return List<BoardInfo> - 게시글 전체 조회 목록
 	 */
 	public List<BoardInfo> writer(String keyword);
+
+
 	
 }

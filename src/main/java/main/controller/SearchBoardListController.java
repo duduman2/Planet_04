@@ -53,18 +53,30 @@ public class SearchBoardListController extends HttpServlet {
 			if( type.equals("a") ) {//통합검색
 				
 				//전체 게시글에서 keyword이 포함된 게시글 찾기
+				List<BoardInfo> board = searchBoardService.all(keyword);
+				System.out.println( board );
+				
+				req.setAttribute("board", board);
 				
 				req.getRequestDispatcher("/WEB-INF/views/search/alist.jsp").forward(req, resp);
 				
 			} else if( type.equals("t") ) {//제목검색
 				
 				//전체 게시글에서 제목에 keyword가 포함된 게시글 찾기
+				List<BoardInfo> board = searchBoardService.title(keyword);
+				System.out.println( board );
+				
+				req.setAttribute("board", board);
 				
 				req.getRequestDispatcher("/WEB-INF/views/search/tlist.jsp").forward(req, resp);
 				
 			} else if( type.equals("c") ) {//내용검색
 				
 				//전체 게시글에서 내용에 keyword가 포함된 게시글 찾기
+				List<BoardInfo> board = searchBoardService.content(keyword);
+				System.out.println( board );
+				
+				req.setAttribute("board", board);
 				
 				req.getRequestDispatcher("/WEB-INF/views/search/clist.jsp").forward(req, resp);
 				
@@ -78,7 +90,6 @@ public class SearchBoardListController extends HttpServlet {
 				
 				req.getRequestDispatcher("/WEB-INF/views/search/nlist.jsp").forward(req, resp);
 			}
-			
 			
 		} else {
 			

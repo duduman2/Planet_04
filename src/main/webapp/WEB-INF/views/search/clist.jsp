@@ -15,6 +15,7 @@
 <tr>
 	<th>글번호</th>
 	<th>제목</th>
+	<th>본문</th>
 	<th>작성자</th>
 	<th>조회수</th>
 </tr>
@@ -23,6 +24,7 @@
 <tr>
 	<td><%=boardList.get(i).getBoardNo() %></td>
 	<td><%=boardList.get(i).getBoardTitle() %></td>
+	<td><%=boardList.get(i).getBoardContent() %></td>
 	<td><%=boardList.get(i).getUserNick() %></td>
 	<td><%=boardList.get(i).getBoardHit() %></td>
 </tr>
