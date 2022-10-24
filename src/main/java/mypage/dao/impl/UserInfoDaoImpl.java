@@ -57,7 +57,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 //				rs.getInt(); 조회결과시
 				
 				rs.getInt(0);
-				rs.getString(0);
+				rs.getString(0); // test
 				
 //				re.setU_no("userno");
 //				re.setU_id("userid");
