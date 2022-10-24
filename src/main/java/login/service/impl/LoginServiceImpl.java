@@ -45,28 +45,8 @@ public class LoginServiceImpl implements LoginService {
 	
 	@Override
 	public int login(String u_id, String u_pw) {
-		 String SQL = "SELECT userPassword FROM USER WHERE userID = ?";
-		 
-		 Connection conn = JDBCTemplate.getConnection();
-		 
-	        try {
-	            ps = conn.prepareStatement(SQL);
-	            ps.setString(1, u_id);
-	            rs = ps.executeQuery();
-	            if(rs.next()){
-	                if(rs.getString(1).equals(u_pw))
-	                    return 1;    // 로그인 성공
-	                else
-	                    return 0; // 비밀번호 불일치
-	            }
-	            return -1; // ID가 없음
-	            
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	        return -2; // DB 오류
-		
-		
+
+		return loginDao.selectLoginInfo(u_id, u_pw);
 		
 	}
 	
@@ -113,13 +93,8 @@ public class LoginServiceImpl implements LoginService {
 
 
 
-//	@Override
-//	public int idCheck(String u_id) {
-//		
-//		int result = loginDao.selectAllU_id(u_id);
-//		
-//		return result;
-//	}
+
+
 
 
 }

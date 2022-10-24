@@ -8,7 +8,7 @@
 
 <script type="text/javascript">
 
-alert("동일한 아이디가 없습니다.")
+alert("일치하는 아이디가 없습니다.")
 
 history.back();
 
