@@ -16,7 +16,7 @@
 	메뉴
 	</div>
 	<div class="righttopbox">
-	관리자 관리
+	게시글 관리
 	</div>
 </div>
 

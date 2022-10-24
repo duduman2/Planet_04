@@ -99,8 +99,35 @@ public interface AdminLoginDao {
 	 * @param connection DB객체
 	 * @param paging 페이징객체
 	 * @param userInfo 사용자정보
-	 * @return
+	 * @return 결과값
 	 */
 	public List<UserInfo> selectAll(Connection connection, Paging paging, UserInfo userInfo);
+
+	/**
+	 * 사용자 정보 변경
+	 * 
+	 * @param conn DB객체
+	 * @param userInfo 사용자정보
+	 * @return 결과값
+	 */
+	public int update_tbl_user(Connection conn, UserInfo userInfo);
+	
+	/**
+	 * 사용자 정보 검색
+	 * 
+	 * @param connection DB객체
+	 * @param userInfo 사용자 고유번호
+	 * @return 사용자 정보
+	 */
+	public UserInfo selectUser2(Connection connection, UserInfo userInfo);
+
+	/**
+	 * 관리자 아이디 검색
+	 * 
+	 * @param conn DB객체
+	 * @param adminInfo 사용자 ID값
+	 * @return 결과값
+	 */
+	public int select_tbl_admininfo2(Connection conn, AdminInfo adminInfo);
 
 }
