@@ -26,13 +26,16 @@ public class TradeBoardController extends HttpServlet {
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 			Product product = new Product();
-//			product = 
-			List<Product> boardList = fileService.boardList(product);
+			String cl = req.getParameter("class");
+			System.out.println("분류 : " + cl);
+			
+			List<Product> boardList = fileService.boardList(product, cl);
 			
 //			for(Product i : boardList) {
 //				System.out.println(i);
 //			}
-
+			
+			
 			//조회결과를 모델값으로 전달하기
 			req.setAttribute("boardList",boardList);
 
