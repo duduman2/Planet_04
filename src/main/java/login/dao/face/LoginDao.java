@@ -32,6 +32,11 @@ public interface LoginDao {
 	public UserInfo selectUserInfoByU_name(Connection conn, UserInfo userinfo);
 	
 	//아이디 찾기
-	public UserInfo findId(String u_name, String u_email);
-
+	public UserInfo selectUserInfoByU_nameU_email(Connection conn, UserInfo userinfo);
+	
+	//비밀번호 찾기
+	public UserInfo selectUserInfoByU_nameU_id(Connection conn, UserInfo userinfo);
+	
+	public UserInfo selectOneMember(Connection conn, String u_id, String u_pw);
+	
 }

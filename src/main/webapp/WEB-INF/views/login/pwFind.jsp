@@ -12,8 +12,10 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	//아이디 입력창에 포커스주기
-	$("input").eq(0).focus()
+	//비밀번호 찾기 버튼
+	$("#pwFind").click(function() {
+		$("form").submit();
+	})
 	
 	//아이디 찾기 버튼
 	$("#idFind").click(function() {
@@ -80,6 +82,12 @@ input{
 	border-radius: 7px;
 }
 
+form{
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);}
+
 </style>
 
 
@@ -87,15 +95,13 @@ input{
 <body>
 
 <div style="display: inline-block;">
-<form method="post" action="/id/find">
+<form method="post" action="/password/find">
 
 <br><br><h1 style="text-align:center; color: #5B9E28;">비밀번호 찾기</h1><br><br>
 
 <div>
-	
-	<input id="findName" placeholder="이름을 입력해 주세요"><br><br>
-	<input id="findId" placeholder="아이디를 입력해 주세요"><br><br>
-	<input id="findPhone" placeholder="전화번호를 입력해 주세요"><br><br><br>
+	<input id="findName" placeholder="이름을 입력해 주세요"><br><br><br>
+	<input id="findId" placeholder="아이디를 입력해 주세요"><br><br><br>
 </div>
 
 <div class="form-group">

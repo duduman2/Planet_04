@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import dto.UserInfo;
 import login.dao.face.LoginDao;
 import login.dao.impl.LoginDaoImpl;
+import login.service.face.LoginService;
 import login.service.impl.LoginServiceImpl;
 
 
@@ -22,7 +23,7 @@ import login.service.impl.LoginServiceImpl;
 public class IdFindController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private LoginDaoImpl loginDaoImpl = new LoginDaoImpl();
+	private LoginService loginService = new LoginServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,17 +42,17 @@ public class IdFindController extends HttpServlet {
 		//전달 파라미터에 대한 한글 인코딩 설정
 		req.setCharacterEncoding("UTF-8");
 		
-		String u_id = req.getParameter("u_id");
-		String u_name = req.getParameter("u_name");
-		String u_email = req.getParameter("u_email");
+		UserInfo userinfo = loginService.getFindUserInfo(req);
 		
-		System.out.println("u_id : " + u_id);
+		System.out.println(userinfo);
 		
-		//세션 객체
-		HttpSession session = req.getSession();
 		
-		//세션 정보 저장하기
-		session.setAttribute("loginid", u_id);
+		UserInfo u_id = loginService.findId(userinfo);
+		
+		System.out.println(u_id);
+
+
+		req.setAttribute("u_id", u_id);
 		
 		req.getRequestDispatcher("/WEB-INF/views/login/idFindAction.jsp").forward(req, resp);
 		

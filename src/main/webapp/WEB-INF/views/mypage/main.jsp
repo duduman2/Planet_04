@@ -1,26 +1,38 @@
+<%@page import="dto.UserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- <!DOCTYPE html> -->
-<!-- <html> -->
-<!-- <head> -->
-<!-- <meta charset="UTF-8"> -->
+
+<!-- <img src="sources/admin/favicon"></img> -->
+<title>마이페이지</title>
 
 <%@include file="../layout/header.jsp" %>
 
-<title>마이페이지</title>
+<%-- 모델값 전달받기 --%>
+<% 	UserInfo uList = (UserInfo) request.getAttribute("data"); %>
+
+
+
+<script type="text/javascript">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</script>
 
 <style type="text/css">
 @import url("../sources/mypage/mypage.css");
 
 </style>
+
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	$("#btnUpdate").click(function() {
-		$(location).attr("href", "/userInfo/controller")
+	$("#btnUserInfo").click(function() {
+		$(location).attr("href", "/user/info")
 	})
 	$("#btncartList").click(function() {
-		$(location).attr("href", "/carList/controller")
+		$(location).attr("href", "/cart/list")
 	})
 })
 
@@ -32,7 +44,7 @@ $(document).ready(function() {
 
 
 <h1>/mypage/main.jsp&nbsp;&nbsp;&nbsp;마이페이지 메인</h1>
-회원정보 조회,수정,탈퇴 / 내가 작성한 글 확인 / 내가 구매한 리스트 / 등급 확인 / 나의 장바구니 등 꾸미기
+회원정보 조회,수정,탈퇴 / 내가 작성한 글 확인,수정,삭제 / 장바구니 확인,수정,삭제 / 내가 구매한 리스트 / 등급 확인 / 등 꾸미기
 <hr>
 
 <div class="main" style="width: 100%;"> 
@@ -42,26 +54,34 @@ $(document).ready(function() {
 <table class="table">
 	<tr>
 		<th class="info" colspan="2">프로필 설정
-		<button type="button" style="float: right;" id="btnUpdate">설정(수정)</button></th>
+		<button type="button" style="float: right;" id="btnUserInfo">설정</button></th>
 	</tr>
+	
 	<tr style="height: 300px;">
-		<td colspan="2" style="text-align: center;"><img src="../sources/mypage/DefaultImage.png" alt="기본이미지" 
-		style="width: 200px; height:200px; border-radius: 50%; display: block; 
-		margin: auto; margin-top: 20px; padding: 10px;" ></img><h3>아이디?닉네임? 값 가져오기</h3></td>
+		<td colspan="2" style="text-align: center;"><img src="../sources/mypage/DefaultImage.png" 
+		alt="기본이미지" style="width: 200px; height:200px; border-radius: 50%; 
+		display: block; margin: auto; margin-top: 20px; padding: 10px;" ></img>
+		<h3><%=uList.getU_nick() %></h3>
+<!-- 		<h3>닉네임 불러오기</h3> -->
+		</td>
 	</tr>
+	
 	<tr>
 		<th style="text-align: center; height: 50px;">회원 등급</th>
-		<td >회원 등급값 가져오기</td>
+ 		<td><%=uList.getGrade() %></td>
+<!-- 		<td>회원 등급값 가져오기</td> -->
 	</tr>	
 
 	<tr>
 		<th style="text-align: center; height: 50px;">내 포인트</th>
 		<td>포인트값 가져오기 + P</td>
-	</tr>	
+	</tr>
+		
 	<tr>
 		<th style="text-align: center; height: 50px;">내가 쓴 글</th>
 		<td>내가쓴글ctn 가져오기</td>
 	</tr>
+	
 	</table>	
 </div>
 
@@ -142,8 +162,7 @@ $(document).ready(function() {
 </table>
 
 
-<div id="blank" style="height: 100px; margin-bottom: 700px;">blank </div>
-
+<div id="blank" style="height: 100px; margin-bottom: 700px;"> </div>
 
 <%@include file="../layout/footer.jsp" %>
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import common.Paging;
 import dto.AdminInfo;
+import dto.Notice;
 import dto.UserInfo;
 
 public interface AdminLoginDao {
@@ -129,5 +130,61 @@ public interface AdminLoginDao {
 	 * @return 결과값
 	 */
 	public int select_tbl_admininfo2(Connection conn, AdminInfo adminInfo);
+
+	/**
+	 * 총 공지사항 갯수 조회
+	 * 
+	 * @param conn DB객체
+	 * @param notice 제목
+	 * @return
+	 */
+	public int selectCntAll1(Connection conn, Notice notice);
+	
+	/**
+	 * 총 공지사항 갯수 조회
+	 * 
+	 * @param conn DB객체
+	 * @param notice 작성자 아이디
+	 * @return
+	 */
+	public int selectCntAll2(Connection conn, Notice notice);
+
+	/**
+	 * 공지사항 리스트 조회
+	 * 
+	 * @param connection DB객체
+	 * @param paging 페이징 값
+	 * @param notice admin_id 값
+	 * @return 결과
+	 */
+	public List<Notice> selectAll1(Connection connection, Paging paging, Notice notice);
+
+	/**
+	 * 공지사항 리스트 조회
+	 * 
+	 * @param connection DB객체
+	 * @param paging 페이징 값
+	 * @param notice admin_id 값
+	 * @return 결과
+	 */
+	public List<Notice> selectAll2(Connection connection, Paging paging, Notice notice);
+
+	/**
+	 * 클릭한 공지글 조회수 늘리기
+	 * 
+	 * @param conn DB객체
+	 * @param notice 공지번호
+	 * @return 조회수 반환
+	 */
+	public int updateHit(Connection conn, Notice notice);
+
+	/**
+	 * notice_no로 조건검색해서 공지사항 정보 가져오기
+	 * 
+	 * @param conn DB객체
+	 * @param notice_no 공지번호
+	 * @return 풀dto객체
+	 */
+	public Notice selectNoticeBynotice_no(Connection conn, Notice notice_no);
 
 }

@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="<%=request.getContextPath() %>/sources/admin/favicon.ico">
 <meta charset="UTF-8">
 <title>사용자 관리</title>
 
@@ -107,6 +108,9 @@ td {
 		<div class="menubutton" style="background-color: #e9ecef">
 			<a href="<%=request.getContextPath() %>/admin/mainuser">사용자 관리</a>
 		</div>
+		<div class="menubutton">
+			<a href="<%=request.getContextPath() %>/adminlogout">로그아웃</a>
+		</div>
 	</div>
 	<div class="rightbottombox">
 		<!-- 여기부터 달라진다 -->
@@ -118,7 +122,7 @@ td {
 			<button type="button" onclick="location.href='/admin/mainuser'">초기화</button>
 		</form>
 		<br>
-		<table class="admintable">
+		<table class="admintable table table-striped table-hover table-condensed">
 			<tr>
 				<th class="text-center">번호</th>
 				<th class="text-center">아이디</th>
@@ -130,7 +134,7 @@ td {
 				<th class="text-center">주소</th>
 				<th class="text-center">닉네임</th>
 				<th class="text-center">가입일자</th>
-				<th class="text-center">사업자유무</th>
+				<th class="text-center">사업자</th>
 				<th class="text-center">사업자번호</th>
 				<th class="text-center">등급</th>
 				<th class="text-center">신고</th>
@@ -141,13 +145,13 @@ td {
 				<td style="width: 3%"><%=userList.get(i).getU_no() %></td>
 				<td style="width: 7%"><%=userList.get(i).getU_id() %></td>
 				<td style="width: 5%"><%=userList.get(i).getU_name() %></td>
-				<td style="width: 5%"><%=userList.get(i).getU_birth() %></td>
+				<td style="width: 7%"><%=userList.get(i).getU_birth() %></td>
 				<td style="width: 3%"><%=userList.get(i).getU_gender() %></td>
 				<td style="width: 5%"><%=userList.get(i).getU_phone() %></td>
 				<td style="width: 12%"><%=userList.get(i).getU_email() %></td>
-				<td style="width: 27%"><%=userList.get(i).getU_address() %></td>
+				<td style="width: 23%"><%=userList.get(i).getU_address() %></td>
 				<td style="width: 7%"><%=userList.get(i).getU_nick() %></td>
-				<td style="width: 5%"><%=userList.get(i).getU_join_date() %></td>
+				<td style="width: 7%"><%=userList.get(i).getU_join_date() %></td>
 				<td style="width: 5%"><%=userList.get(i).getU_trade_user() %></td>
 				<td style="width: 7%"><%=userList.get(i).getB_business_number() %></td>
 				<td style="width: 3%"><%=userList.get(i).getGrade() %></td>

@@ -22,9 +22,18 @@ public interface LoginService {
 //	회원가입 처리
 	public void join(UserInfo userinfo);
 
-
-
-
+//	아이디 찾기
+	public UserInfo findId(UserInfo userinfo);
 	
+//	아이디 찾기 - 이름, 이메일 활용
+	public UserInfo getFindUserInfo(HttpServletRequest req);
+
+//	비밀번호 찾기
+	public UserInfo findPw(UserInfo userinfo);
+	
+	public UserInfo getFindPwUserInfo(HttpServletRequest req);
+	
+//	로그인 정보 확인
+	public UserInfo selectOneMember(String u_id, String u_pw);
 
 }

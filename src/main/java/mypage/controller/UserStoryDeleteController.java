@@ -12,7 +12,7 @@ import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
 
-@WebServlet("/userStoryDelete/controller")
+@WebServlet("/user/storyDelete")
 public class UserStoryDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -26,6 +26,7 @@ public class BoardListController extends HttpServlet {
 		System.out.println("/webapp/list [GET]");
 		
 		
+	
 		//View 지정 및 응답
 		req.getRequestDispatcher("/WEB-INF/webapp/bbs.jsp").forward(req, resp);
 		

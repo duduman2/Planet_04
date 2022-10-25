@@ -10,8 +10,8 @@ import java.sql.Statement;
 public class JDBCTemplate {
 	//OJDBC 드라이버
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
-			
-	//연결 정보
+	
+	//DB연결 정보
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	private static final String USERNAME = "scott";
 	private static final String PASSWORD = "tiger";
@@ -41,6 +41,8 @@ public class JDBCTemplate {
 				e.printStackTrace();
 			}
 		}
+
+		//DB연결 객체 반환
 		return conn;
 	}
 	

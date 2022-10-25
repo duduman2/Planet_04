@@ -56,9 +56,19 @@ public class SearchBoardListController extends HttpServlet {
 				List<BoardInfo> board = searchBoardService.all(keyword);
 				System.out.println( board );
 				
-				req.setAttribute("board", board);
+				//조회결과가 없을 경우
+				String msg = "에 대한 검색결과가 없습니다";
+				if( board.isEmpty() ) {
+					System.out.println(keyword + msg);
+					req.getRequestDispatcher("/WEB-INF/views/search/nofind.jsp").forward(req, resp);
+					
+				} else {
+					
+					req.setAttribute("board", board);
+					
+					req.getRequestDispatcher("/WEB-INF/views/search/alist.jsp").forward(req, resp);
+				}
 				
-				req.getRequestDispatcher("/WEB-INF/views/search/alist.jsp").forward(req, resp);
 				
 			} else if( type.equals("t") ) {//제목검색
 				
@@ -66,9 +76,17 @@ public class SearchBoardListController extends HttpServlet {
 				List<BoardInfo> board = searchBoardService.title(keyword);
 				System.out.println( board );
 				
-				req.setAttribute("board", board);
-				
-				req.getRequestDispatcher("/WEB-INF/views/search/tlist.jsp").forward(req, resp);
+				//조회결과가 없을 경우
+				String msg = "에 대한 검색결과가 없습니다";
+				if( board.isEmpty() ) {
+					System.out.println(keyword + msg);
+					req.getRequestDispatcher("/WEB-INF/views/search/nofind.jsp").forward(req, resp);
+					
+				} else {
+					req.setAttribute("board", board);
+					
+					req.getRequestDispatcher("/WEB-INF/views/search/tlist.jsp").forward(req, resp);
+				}
 				
 			} else if( type.equals("c") ) {//내용검색
 				
@@ -76,9 +94,17 @@ public class SearchBoardListController extends HttpServlet {
 				List<BoardInfo> board = searchBoardService.content(keyword);
 				System.out.println( board );
 				
-				req.setAttribute("board", board);
-				
-				req.getRequestDispatcher("/WEB-INF/views/search/clist.jsp").forward(req, resp);
+				//조회결과가 없을 경우
+				String msg = "에 대한 검색결과가 없습니다";
+				if( board.isEmpty() ) {
+					System.out.println(keyword + msg);
+					req.getRequestDispatcher("/WEB-INF/views/search/nofind.jsp").forward(req, resp);
+					
+				} else {
+					req.setAttribute("board", board);
+					
+					req.getRequestDispatcher("/WEB-INF/views/search/clist.jsp").forward(req, resp);
+				}
 				
 			} else {//작성자 검색
 				
@@ -86,9 +112,19 @@ public class SearchBoardListController extends HttpServlet {
 				List<BoardInfo> board = searchBoardService.writer(keyword);
 				System.out.println( board );
 				
-				req.setAttribute("board", board);
+				//조회결과가 없을 경우
+				String msg = "에 대한 검색결과가 없습니다";
+				if( board.isEmpty() ) {
+					System.out.println(keyword + msg);
+					req.getRequestDispatcher("/WEB-INF/views/search/nofind.jsp").forward(req, resp);
+					
+				} else {
 				
-				req.getRequestDispatcher("/WEB-INF/views/search/nlist.jsp").forward(req, resp);
+					req.setAttribute("board", board);
+					
+					req.getRequestDispatcher("/WEB-INF/views/search/nlist.jsp").forward(req, resp);
+				}
+				
 			}
 			
 		} else {

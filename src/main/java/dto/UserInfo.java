@@ -6,7 +6,7 @@ public class UserInfo {
 
 	private int u_no;		// 회원 번호
 	private String u_id;	// 회원 아이디
-	private String u_pw;	// 회원 아이디
+	private String u_pw;	// 회원 패스워드
 	private String u_name;	// 회원 이름
 	private Date u_birth;	// 생년월일
 	private String u_gender;// 성별
@@ -59,8 +59,8 @@ public class UserInfo {
 		return u_no;
 	}
 
-	public void setU_no(int u_no) {
-		this.u_no = u_no;
+	public void setU_no(int string) {
+		this.u_no = string;
 	}
 
 	public String getU_id() {

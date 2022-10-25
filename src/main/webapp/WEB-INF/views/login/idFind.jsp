@@ -44,7 +44,7 @@ $(document).ready(function() {
 	$('#u_email').focusout(function(){
 	console.log("#u_email focusout")
 		
-		let u_email = $('#u_email').val(); // input_id에 입력되는 값
+		let u_email = $('#u_email').val(); 
 		
 		$.ajax({
 			url : "/emailCheck/con",
@@ -76,11 +76,10 @@ $(document).ready(function() {
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	//아이디 찾기 버튼
 	$("#idFind").click(function() {
-		$(location).attr('href', '/id/find')
+		$("form").submit();
 	})
-	
+
 	//비밀번호 찾기 버튼
 	$("#pwFind").click(function() {
 		$(location).attr('href', '/password/find') //비밀번호 찾기 화면으로 가기
@@ -150,6 +149,12 @@ input{
 	border-radius: 7px;
 }
 
+	
+form{position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);}
+
 </style>
 
 
@@ -157,27 +162,28 @@ input{
 </head>
 <body>
 
-<div style="display: inline-block;">
-<form method="post" action="/id/find">
+<div style="margin: 0 auto; text-align: center;">
+
+<form method="post" action="/id/find" style="margin: 0 auto;">
 
 <br><br><h1 style="text-align:center; color: #5B9E28;">아이디 찾기</h1><br><br>
 
-<div class="form-group">
+<div class="form-group" style="margin: 0 auto;">
 	<input id="u_name" name="u_name" placeholder="이름을 입력해 주세요"><br><br>
 	<font id="nameCheck" name="nameCheck" size="2"></font><br><br>
 </div>
 
 
-<div class="form-group">
+<div class="form-group" style="margin: 0 auto;">
 	<input id="u_email" name="u_email" placeholder="이메일을 입력해 주세요"><br><br>
 	<font id="emailCheck" name="emailCheck" size="2"></font><br><br>
 </div>
 
-<div class="form-group">
-	<button type="button" class="btn btn-primary" id="idFind">아이디 찾기</button><br><br><br>
+<div class="form-group" style="margin: 0 auto;">
+	<button type="button" class="btn btn-primary" id="idFind" name="idFind">아이디 찾기</button><br><br><br>
 </div>
 
-<div class="form-group">
+<div class="form-group" style="margin: 0 auto;">
 	<button type="button" class="btn btn-primary" id="pwFind" style="margin-right: 6px;">비밀번호 찾기</button>
 	<button type="button" class="btn btn-primary" id="btnCancel">취소</button><br><br>
 </div>
