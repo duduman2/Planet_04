@@ -477,4 +477,36 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 		return adminDao.selectAll2(JDBCTemplate.getConnection(), paging, notice);
 	}
 
+	@Override
+	public Notice getNoticeno(HttpServletRequest req) {
+		//전달파라미터를 저장할 객체 생성
+		Notice notice = new Notice();
+		
+		//전달파라미터 notice_no 추출(파싱)
+		String param = req.getParameter("notice_no");
+		if( null != param && !"".equals(param) ) { //전달파라미터가 null 또는 ""빈문자열이 아닐 때 처리 
+			notice.setNotice_no( Integer.parseInt(param) );
+		}
+		
+		return notice;
+	}
+
+	@Override
+	public Notice noticeView(Notice notice_no) {
+		//DB연결 객체
+		Connection conn = JDBCTemplate.getConnection();
+		
+		if( adminDao.updateHit(conn, notice_no) > 0 ) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//게시글 조회
+		Notice notice = adminDao.selectNoticeBynotice_no(conn, notice_no);
+		
+		//조회된 게시글 리턴
+		return notice;
+	}
+
 }

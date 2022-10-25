@@ -829,4 +829,72 @@ System.out.println("AdminLoginDaoImpl.select_tbl_admininfo2 Start");
 		return noticeList; //최종 결과 반환
 	}
 
+	@Override
+	public int updateHit(Connection conn, Notice noticeno) {
+		System.out.println("AdminLoginDaoImpl.updateHit Start");
+		String sql = "";
+		sql += "UPDATE tbl_notice";
+		sql += "	SET hit = hit + 1";
+		sql += " WHERE notice_no = ?";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, noticeno.getNotice_no());
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.updateHit End");
+		
+		return res;
+	}
+
+	@Override
+	public Notice selectNoticeBynotice_no(Connection conn, Notice notice_no) {
+		System.out.println("AdminLoginDaoImpl.selectNoticeBynotice_no Start");
+		
+		String sql = "";
+		sql += "select n.notice_no, n.hit, n.title, n.notice_content, n.insert_dat, a.admin_id";
+		sql += "	from tbl_notice n left outer join tbl_admininfo a";
+		sql += "	on n.admin_no = a.admin_no where notice_no = ?";
+		
+		Notice notice = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, notice_no.getNotice_no());
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				notice = new Notice();
+				
+				notice.setNotice_no(rs.getInt("notice_no"));
+				notice.setHit(rs.getInt("hit"));
+				notice.setTitle(rs.getString("title"));
+				notice.setNotice_content(rs.getString("notice_content"));
+				notice.setInsert_dat(rs.getDate("insert_dat"));
+				notice.setAdmin_id(rs.getString("admin_id"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectNoticeBynotice_no End");
+		
+		return notice;
+	}
+
 }

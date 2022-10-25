@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="<%=request.getContextPath() %>/sources/admin/favicon.ico">
 <meta charset="UTF-8">
 <title>관리자 관리</title>
 
@@ -114,7 +115,7 @@ function deleteadmin() {
 			<button type="button" onclick="location.href='/admin/mainconfig'">초기화</button>
 		</form>
 		<br>
-		<table class="admintable">
+		<table class="admintable table table-striped table-hover table-condensed">
 			<tr>
 				<th class="text-center">번호</th>
 				<th class="text-center">아이디</th>
