@@ -14,9 +14,11 @@ import login.service.face.LoginService;
 
 public class LoginServiceImpl implements LoginService {
 
-	private LoginDao loginDao = new LoginDaoImpl();
+	
 	private PreparedStatement ps;
 	private ResultSet rs;
+	
+	private LoginDao loginDao = new LoginDaoImpl();
 	
 	@Override
 	public UserInfo getLoginUserInfo(HttpServletRequest req) {
@@ -79,6 +81,17 @@ public class LoginServiceImpl implements LoginService {
 	} 
 
 	@Override
+	public UserInfo getFindUserInfo(HttpServletRequest req) {
+		
+		UserInfo userinfo = new UserInfo();
+		
+		userinfo.setU_name( req.getParameter("u_name") );
+		userinfo.setU_email( req.getParameter("u_email") );
+		
+		return userinfo;
+	} 
+
+	@Override
 	public void join(UserInfo userinfo) {
 		
 		Connection conn = JDBCTemplate.getConnection();
@@ -90,10 +103,47 @@ public class LoginServiceImpl implements LoginService {
 		}
 		
 	}
+	
 
+	@Override
+	public UserInfo findId(UserInfo userinfo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		return loginDao.selectUserInfoByU_nameU_email(conn, userinfo);
+	}
 
+	@Override
+	public UserInfo findPw(UserInfo userinfo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		return loginDao.selectUserInfoByU_nameU_id(conn, userinfo);
+	}
 
+	@Override
+	public UserInfo getFindPwUserInfo(HttpServletRequest req) {
+		
+		UserInfo userinfo = new UserInfo();
+		
+		userinfo.setU_name( req.getParameter("u_name") );
+		userinfo.setU_email( req.getParameter("u_id") );
+		
+		return userinfo;
+	}
 
+	@Override
+	public UserInfo selectOneMember(String u_id, String u_pw) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		UserInfo userinfo = loginDao.selectOneMember(conn, u_id, u_pw);
+		JDBCTemplate.close(conn);
+
+		return userinfo;
+	}
+
+	
+	
+	
 }
 
 
