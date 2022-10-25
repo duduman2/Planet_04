@@ -12,7 +12,7 @@ import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
 
-@WebServlet(name = "UserStoryController", urlPatterns = { "/userStory/controller" })
+@WebServlet(name = "UserStoryController", urlPatterns = { "/user/story" })
 public class UserStoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

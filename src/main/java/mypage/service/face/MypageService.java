@@ -16,7 +16,7 @@ import mypage.dao.impl.UserInfoDaoImpl;
 public interface MypageService {
 	
 	/**
-	 * 장바구니 내역 조회
+	 * 마이페이지 - 장바구니 내역 조회
 	 * 
 	 * @return List<Cart> - 조회된 장바구니의 리스트 
 	 */
@@ -38,14 +38,28 @@ public interface MypageService {
 	
 	public List<AskBoard> showAsk(); //문의사항 확인  int
 	 
-	
-	public UserInfo showUserInfo(); //회원 정보 확인 int
+	/**
+	 * 마이페이지 - 회원 조회
+	 * 
+	 * @param param - DB 연결 객체
+	 * @return UserInfo - 회원 정보 조회
+	 */
+	public UserInfo showUserInfo(UserInfo param); //회원 정보 확인 int
 
 	
 	public int modifyUserInfo(); //회원 정보 수정 int, UserInfo
 	
 	
 	public int deleteUser(); //회원 탈퇴 int
+
+
+	/**
+	 * 마이페이지 - 회원 정보 조회 후 닉네임 꺼내기
+	 * 
+	 * @param param - DB 연결 객체 
+	 * @return UserInfo - 회원 정보 조회
+	 */
+//	public UserInfo askNick(UserInfo param);
 	
 	
 }

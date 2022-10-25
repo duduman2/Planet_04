@@ -38,13 +38,14 @@ public class UserCartDaoImple implements UserCartDao {
 			//조회결과처리
 			while(rs.next()) {
 				Cart cart = new Cart(); //조회 결과 행 저장 dto객체
-				
-				// wish_no, wish_total_price, product_no, wish_amount
 
 				cart.setCarNo( rs.getInt("wish_no"));
-				cart.setTotalPrice( rs.getInt("wish_total_price"));
 				cart.setProduct_no( rs.getInt("product_no"));
+				cart.setProduct_name( rs.getString("product_name"));
+				cart.setPrice( rs.getInt("price"));
+				cart.setDeliveryfee( rs.getInt("deliveryfee"));
 				cart.setWish_amount( rs.getInt("wish_amount"));
+				cart.setTotalPrice( rs.getInt("wish_total_price"));
 				
 				cartlist.add(cart); //리스트에 결과값 저장하기
 			}

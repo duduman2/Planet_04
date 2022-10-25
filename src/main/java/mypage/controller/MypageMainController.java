@@ -13,9 +13,9 @@ import dto.UserInfo;
 import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
-//로그인한 회원 본인의 정보 확인하기
-@WebServlet("/user/info")
-public class UserInfoController extends HttpServlet {
+// 마이페이지 메인
+@WebServlet("/mypage/main")
+public class MypageMainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// Service 객체 선언
@@ -23,37 +23,42 @@ public class UserInfoController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/user/info [GET]");
+		System.out.println("/mypage/main [GET] 시작");
+	
+// UserInfo 조회해서 닉네임 꺼내기
 	
 		//세션 정보 객체
 		HttpSession session = req.getSession();
-		String u_no = (String) session.getAttribute("u_no");
-
-		//테스트용으로 1을 설정했고
-		//	-> 나중에 int userNo = Integer.parseInt(u_no); 로 바꾸기
-//		int userNo = Integer.parseInt(u_no);
-//		int userNo = 1; 
-		int userNo = 2; 
+		String u_nick = (String) session.getAttribute("u_nick");		
+		String grade = (String) session.getAttribute("grade");	
+		// 포인트값/ 내가쓴글ctn 추가하기!!!
+		
 		
 		//전달 파라미터 객체 얻어오기
 		UserInfo param = new UserInfo();
-		param.setU_no(userNo);
+		param.setU_nick(u_nick);
+		param.setGrade(grade);
 		
-		//UserInfo 정보 조회하기
 		UserInfo data = mypageService.showUserInfo(param);
-		System.out.println("UserInfo 정보 조회 data :  " + data);
+		System.out.println("UserInfo 조회 data :  " + data);
+				
+		//UserInfo 정보 조회 후 닉네임 값 전달하기
+//		UserInfo nickData = mypageService.askNick(param);
+//		System.out.println("UserInfo 조회 nickData :  " + nickData);
 		
 		//조회 결과를 MODEL값 전달
-		req.setAttribute("data", data);
+		req.setAttribute("data", data);	
 		
-		//VIEW 지정 및 응답
-		req.getRequestDispatcher("/WEB-INF/views/mypage/userInfo.jsp").forward(req, resp);
 		
+	
+		
+		req.getRequestDispatcher("/WEB-INF/views/mypage/main.jsp").forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/user/info [POST]");
-		// [POST] 없어도 될듯?????
+		System.out.println("/mypage/main [Post]");
+
+	
 	}
 }
