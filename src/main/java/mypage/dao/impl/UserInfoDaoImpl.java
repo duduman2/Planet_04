@@ -54,27 +54,24 @@ public class UserInfoDaoImpl implements UserInfoDao {
 			
 			while( rs.next() ) {
 				
-//				rs.getInt(); 조회결과시
+//				rs.getInt(); 조회결과시 사용하는 코드
 				
-				rs.getInt(0);
-				rs.getString(0); // test
-				
-//				re.setU_no("userno");
-//				re.setU_id("userid");
-//				re.setU_pw("userpw");
-//				re.setU_name("name"); //4
-//				re.setU_birth("birth");
-//				re.setU_gender("gender");
-//				re.setU_phone("phone");
-//				re.setU_email("email");//8
-//				re.setU_address("add1");
-//				re.setU_nick("usernick");
-//				re.setU_join_date("joindate");
-//				re.setU_trade_user("tradeuser"); //12
-//				re.setB_business_number("userbsno");
-//				re.setGrade("grade");
-//				re.setReportcode("reportcode");
-//				re.setWishno("wish_no");  //16
+				re.setU_no( rs.getInt("userno"));
+				re.setU_id(rs.getString("userid"));
+				re.setU_pw(rs.getString("userpw"));
+				re.setU_name(rs.getString("name")); //4
+				re.setU_birth(rs.getDate("birth"));
+				re.setU_gender(rs.getString("gender"));
+				re.setU_phone(rs.getString("phone"));
+				re.setU_email(rs.getString("email"));//8
+				re.setU_address(rs.getString("add1"));
+				re.setU_nick(rs.getString("usernick"));
+				re.setU_join_date(rs.getDate("joindate"));
+				re.setU_trade_user(rs.getString("tradeuser")); //12
+				re.setB_business_number(rs.getString("userbsno"));
+				re.setGrade(rs.getString("grade"));
+				re.setReportcode(rs.getString("reportcode"));
+				re.setWishno(rs.getString("wish_no"));  //16
 				
 			}
 		} catch (SQLException e) {

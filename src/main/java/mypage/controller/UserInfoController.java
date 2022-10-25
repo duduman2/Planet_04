@@ -14,7 +14,7 @@ import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
 //로그인한 회원 본인의 정보 확인하기
-@WebServlet("/userInfo/controller")
+@WebServlet("/user/info")
 public class UserInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -23,36 +23,48 @@ public class UserInfoController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/userInfo/controller [GET]");
+		System.out.println("/user/info [GET]");
 	
 		//세션 정보 객체
-//		HttpSession session = req.getSession();
-		
-//		int u_no = (int) session.getAttribute("u_no");
+		HttpSession session = req.getSession();
+		String u_no = (String) session.getAttribute("u_no");
 
 		//테스트용으로 1을 설정했고
 		//	-> 나중에 int userNo = Integer.parseInt(u_no); 로 바꾸기
+//		int userNo = Integer.parseInt(u_no);
 //		int userNo = 1; 
+		int userNo = 2; 
 		
 		//전달 파라미터 객체 얻어오기
-//		UserInfo param = new UserInfo();
-//		param.setU_no(userNo);
+		UserInfo param = new UserInfo();
+		param.setU_no(userNo);
 		
 		//UserInfo 정보 조회하기
-//		UserInfo data = mypageService.showUserInfo(param);
-//		System.out.println("UserInfo 정보 조회 data :  " + data);
+		UserInfo data = mypageService.showUserInfo(param);
+		System.out.println("UserInfo 정보 조회 data :  " + data);
 		
 		//조회 결과를 MODEL값 전달
-//		req.setAttribute("data", data);
-//		req.setAttribute("path", req.getServletPath());
+		req.setAttribute("data", data);
 		
 		//VIEW 지정 및 응답
 		req.getRequestDispatcher("/WEB-INF/views/mypage/userInfo.jsp").forward(req, resp);
+		
+		
+		
+//		if() {
+//			
+//		} else {
+//			
+//		}
+		
+		
+		//main.jsp에서도 개인정보값 가져와야하는데...어케? 
+//		req.getRequestDispatcher("/WEB-INF/views/mypage/main.jsp").forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/userInfo/controller [POST]");
+		System.out.println("/user/info [POST]");
 		// [POST] 없어도 될듯?????
 	}
 }

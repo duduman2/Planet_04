@@ -9,6 +9,16 @@
 <%	List<Cart> cList = (List) request.getAttribute("cartlist"); %>
 
 <title>cartList</title>
+
+<script type="text/javascript">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</script>
+
+
 <style type="text/css">
 @import url("../sources/mypage/mypage.css");
 
@@ -39,7 +49,7 @@ th { text-align: center; }
 	<tbody> 
 		<% for(int i=0; i<cList.size(); i++) { %>
 		<tr>
-			<td><%= cList.get(i).getCarNo()	%> 번</td>
+			<td style="text-align: center;"><%= cList.get(i).getCarNo()	%> 번</td>
 			<td><%= cList.get(i).getProduct_no()	%></td>
 			<td><%= cList.get(i).getProduct_name()	%>상품명+링크</td>
 			<td><%= cList.get(i).getPrice()	%>제품 가격</td>
@@ -71,8 +81,11 @@ th { text-align: center; }
 		
 </tbody>		
 </table>	
-		<div id="pay">
-			<button style="width: 100px; height: 50px; float: center;" >결제하기</button>
+		<div class="text-center" >
+			<button style="width: 120px; height: 70px; float: center;" >결제하기</button>
+			&nbsp;&nbsp;&nbsp;
+			<button id="btnBack" class="btnBack" style="width: 120px; 
+				height: 50px;" onclick="history.go(-1)">되돌아가기</button>
 		</div>
 
 <div id="blank" style="height: 100px;"></div>

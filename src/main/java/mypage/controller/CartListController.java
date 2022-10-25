@@ -14,7 +14,7 @@ import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
 // 장바구니 목록 조회 - 구현 완료
-@WebServlet("/carList/controller")
+@WebServlet("/cart/list")
 public class CartListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -23,7 +23,7 @@ public class CartListController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/carList/controller [GET]");
+		System.out.println("/cart/list [GET]");
 		
 //		req.setCharacterEncoding("utf-8");
 		
@@ -32,8 +32,8 @@ public class CartListController extends HttpServlet {
 		
 		
 		//[test] 조회결과 확인 코드
-		System.out.println("<<--- 장바구니 목록 조회 --->>");
-		for(Cart c : cartlist) System.out.println( c );
+//		System.out.println("<<--- 장바구니 목록 조회 --->>");
+//		for(Cart c : cartlist) System.out.println( c );
 		
 		
 		//조회된 결과를 view에 전달하기 
@@ -45,7 +45,7 @@ public class CartListController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/carList/controller [POST]");
+		System.out.println("/cart/list [POST]");
 		
 		 // doPost 이거 필요없는거 같은데?????
 	}
