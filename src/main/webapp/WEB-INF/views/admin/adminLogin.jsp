@@ -98,7 +98,7 @@ button:hover {
 		<div class="middle1">
 		</div>
 		<div class="middle2">
-			<form action="<%=request.getContextPath() %>/admin/login" method="post">
+			<form action="<%=request.getContextPath() %>/adminlogin" method="post">
 				<div style="color: #029EE4; font-size: 1.2em">관리자 로그인<br><br></div>
 				<input type="text" name="userid" placeholder="로그인 아이디"><br><br>
 				<input type="password" name="userpw" placeholder="비밀번호"><br><br>

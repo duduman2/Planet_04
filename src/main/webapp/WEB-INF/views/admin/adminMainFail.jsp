@@ -8,7 +8,7 @@
 
 <script type="text/javascript">
 
-var url = "<%=request.getContextPath() %>/admin/login";
+var url = "<%=request.getContextPath() %>/adminlogin";
 
 alert("로그인된 관리자가 아닙니다.")
 

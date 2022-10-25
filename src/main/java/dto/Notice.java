@@ -10,11 +10,13 @@ public class Notice {
 	private String notice_content;
 	private Date insert_dat;
 	private int admin_no;
+	private String admin_id;
 	
 	public Notice() {
 	}
 
-	public Notice(int notice_no, int hit, String title, String notice_content, Date insert_dat, int admin_no) {
+	public Notice(int notice_no, int hit, String title, String notice_content, Date insert_dat, int admin_no,
+			String admin_id) {
 		super();
 		this.notice_no = notice_no;
 		this.hit = hit;
@@ -22,12 +24,14 @@ public class Notice {
 		this.notice_content = notice_content;
 		this.insert_dat = insert_dat;
 		this.admin_no = admin_no;
+		this.admin_id = admin_id;
 	}
 
 	@Override
 	public String toString() {
 		return "Notice [notice_no=" + notice_no + ", hit=" + hit + ", title=" + title + ", notice_content="
-				+ notice_content + ", insert_dat=" + insert_dat + ", admin_no=" + admin_no + "]";
+				+ notice_content + ", insert_dat=" + insert_dat + ", admin_no=" + admin_no + ", admin_id=" + admin_id
+				+ "]";
 	}
 
 	public int getNotice_no() {
@@ -76,6 +80,14 @@ public class Notice {
 
 	public void setAdmin_no(int admin_no) {
 		this.admin_no = admin_no;
+	}
+
+	public String getAdmin_id() {
+		return admin_id;
+	}
+
+	public void setAdmin_id(String admin_id) {
+		this.admin_id = admin_id;
 	}
 
 }

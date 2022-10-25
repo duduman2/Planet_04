@@ -48,8 +48,6 @@ public class JDBCTemplate {
 		
 		//DB연결 객체 반환
 
-		}
-
 		return conn;
 	}
 	

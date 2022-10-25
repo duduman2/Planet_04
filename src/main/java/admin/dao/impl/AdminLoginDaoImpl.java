@@ -14,6 +14,7 @@ import admin.dao.face.AdminLoginDao;
 import common.JDBCTemplate;
 import common.Paging;
 import dto.AdminInfo;
+import dto.Notice;
 import dto.UserInfo;
 
 public class AdminLoginDaoImpl implements AdminLoginDao {
@@ -200,7 +201,7 @@ public class AdminLoginDaoImpl implements AdminLoginDao {
 	@Override
 	public int selectCntAll(Connection conn, AdminInfo adminInfo) {
 		
-		System.out.println("AdminLoginDaoImpl.selectCntAll2 Start");
+		System.out.println("AdminLoginDaoImpl.selectCntAll Start");
 		
 		String sql = "SELECT count(*) cnt FROM tbl_admininfo where admin_id like ? ";
 		
@@ -225,7 +226,7 @@ public class AdminLoginDaoImpl implements AdminLoginDao {
 			JDBCTemplate.close(ps);
 		}
 		
-		System.out.println("AdminLoginDaoImpl.selectCntAll2 End");
+		System.out.println("AdminLoginDaoImpl.selectCntAll End");
 		
 		//최종 결과 반환
 		return count;
@@ -642,6 +643,190 @@ System.out.println("AdminLoginDaoImpl.select_tbl_admininfo2 Start");
 		System.out.println("AdminLoginDaoImpl.select_tbl_admininfo2 End");
 		
 		return cnt;
+	}
+
+	@Override
+	public int selectCntAll1(Connection conn, Notice notice) {
+		
+		System.out.println("AdminLoginDaoImpl.selectCntAll1 Start");
+		
+		String sql = "";
+		sql += "select count(*) cnt";
+		sql += "	from tbl_notice n left outer join tbl_admininfo a";
+		sql += "	on n.admin_no = a.admin_no where title like ? ";
+		
+		// 총 게시글 수 변수
+		int count = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			ps.setString(1, "%" + notice.getTitle() + "%");
+
+			rs = ps.executeQuery(); // SQL수행 및 결과 집합 저장
+
+			while( rs.next() ) {
+				count = rs.getInt("cnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectCntAll1 End");
+		
+		//최종 결과 반환
+		return count;
+		
+	}
+
+	@Override
+	public int selectCntAll2(Connection conn, Notice notice) {
+		
+		System.out.println("AdminLoginDaoImpl.selectCntAll2 Start");
+		
+		String sql = "";
+		sql += "select count(*) cnt";
+		sql += "	from tbl_notice n left outer join tbl_admininfo a";
+		sql += "	on n.admin_no = a.admin_no where admin_id like ? ";
+		
+		// 총 게시글 수 변수
+		int count = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			ps.setString(1, "%" + notice.getAdmin_id() + "%");
+
+			rs = ps.executeQuery(); // SQL수행 및 결과 집합 저장
+
+			while( rs.next() ) {
+				count = rs.getInt("cnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectCntAll2 End");
+		
+		//최종 결과 반환
+		return count;
+		
+	}
+
+	@Override
+	public List<Notice> selectAll1(Connection conn, Paging paging, Notice notice) {
+		System.out.println("AdminLoginDaoImpl.selectAll4 Start");
+		
+		// SQL작성
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += "	SELECT rownum rnum, B.* FROM (";
+		sql += "		select n.notice_no, n.hit, n.title, n.notice_content, n.insert_dat, a.admin_id";
+		sql += "		from tbl_notice n left outer join tbl_admininfo a";
+		sql += "		on n.admin_no = a.admin_no where title like ? order by notice_no asc";
+		sql += "	) B";
+		sql += " ) tbl_notice";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+		
+		// 결과 저장할 List
+		List<Notice> noticeList = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			
+			ps.setString(1, "%" + notice.getTitle() + "%");
+			ps.setInt(2, paging.getStartNo());
+			ps.setInt(3, paging.getEndNo());
+			
+			rs = ps.executeQuery(); // SQL수행 및 결과 집합 저장
+			
+			// 조회 결과 처리
+			while( rs.next() ) {
+				
+				Notice notice2 = new Notice(); //조회 결과 행 저장 DTO객체
+				
+				notice2.setNotice_no(rs.getInt("notice_no"));
+				notice2.setHit(rs.getInt("hit"));
+				notice2.setTitle(rs.getString("title"));
+				notice2.setNotice_content(rs.getString("notice_content"));
+				notice2.setInsert_dat(rs.getDate("insert_dat"));
+				notice2.setAdmin_id(rs.getString("admin_id"));
+				
+				// 리스트에 결과값 저장하기
+				noticeList.add(notice2);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectAll4 End");
+		
+		return noticeList; //최종 결과 반환
+	}
+
+	@Override
+	public List<Notice> selectAll2(Connection conn, Paging paging, Notice notice) {
+		System.out.println("AdminLoginDaoImpl.selectAll5 Start");
+		
+		// SQL작성
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += "	SELECT rownum rnum, B.* FROM (";
+		sql += "		select n.notice_no, n.hit, n.title, n.notice_content, n.insert_dat, a.admin_id";
+		sql += "		from tbl_notice n left outer join tbl_admininfo a";
+		sql += "		on n.admin_no = a.admin_no where admin_id like ? order by notice_no asc";
+		sql += "	) B";
+		sql += " ) tbl_notice";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+		
+		// 결과 저장할 List
+		List<Notice> noticeList = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			
+			ps.setString(1, "%" + notice.getAdmin_id() + "%");
+			ps.setInt(2, paging.getStartNo());
+			ps.setInt(3, paging.getEndNo());
+			
+			rs = ps.executeQuery(); // SQL수행 및 결과 집합 저장
+			
+			// 조회 결과 처리
+			while( rs.next() ) {
+				
+				Notice notice2 = new Notice(); //조회 결과 행 저장 DTO객체
+				
+				notice2.setNotice_no(rs.getInt("notice_no"));
+				notice2.setHit(rs.getInt("hit"));
+				notice2.setTitle(rs.getString("title"));
+				notice2.setNotice_content(rs.getString("notice_content"));
+				notice2.setInsert_dat(rs.getDate("insert_dat"));
+				notice2.setAdmin_id(rs.getString("admin_id"));
+				
+				// 리스트에 결과값 저장하기
+				noticeList.add(notice2);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectAll5 End");
+		
+		return noticeList; //최종 결과 반환
 	}
 
 }
