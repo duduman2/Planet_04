@@ -59,7 +59,7 @@ public class LoginController extends HttpServlet {
 			HttpSession session = req.getSession(true);
 			
 			//세션 정보 저장하기
-			session.setAttribute("login", true);		//로그인 상태
+//			session.setAttribute("login", true);		//로그인 상태
 			session.setAttribute("loginid", u_id);	//로그인한 아이디
 			
 			req.getRequestDispatcher("/WEB-INF/views/login/loginSuccess.jsp").forward(req, resp);
