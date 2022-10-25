@@ -48,7 +48,7 @@ public class BoardDao {
 	// 게시글 번호는 하나씩 늘어나므로 마지막에 쓰인 글을 가져와서 +1을 하면 다음 번호가 된다 
 	public int getNext() {
 		
-		String SQL = "SELECT bbsID FROM BBS ORDER BY bbsID DESC";
+		String SQL = "SELECT UserID FROM Boardinfo ORDER BY UserID DESC";
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -89,7 +89,7 @@ public class BoardDao {
 
 	public ArrayList<BoardInfo> getlist(int pageNumber) {
        
-		String SQL = "SELECT * FROM Boardinfo WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY UserID DESC LIMIT 10";
+		String SQL = "SELECT * FROM Boardinfo WHERE UserID < ? AND bbsAvailable = 1 ORDER BY UserID DESC LIMIT 10";
         
 		ArrayList<BoardInfo> list = new ArrayList<BoardInfo>();
        
@@ -124,7 +124,7 @@ public class BoardDao {
  
 	public boolean nextPage(int pageNumber) {
         
-		String SQL = "SELECT * FROM BoardInfo WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10";
+		String SQL = "SELECT * FROM BoardInfo WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY UserID DESC LIMIT 10";
         
 		try {
             PreparedStatement pstmt = conn.prepareStatement(SQL);
