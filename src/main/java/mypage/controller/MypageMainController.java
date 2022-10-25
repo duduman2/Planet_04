@@ -25,27 +25,32 @@ public class MypageMainController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/mypage/main [GET] 시작");
 	
+// UserInfo 조회해서 닉네임 꺼내기
+	
 		//세션 정보 객체
 		HttpSession session = req.getSession();
 		String u_nick = (String) session.getAttribute("u_nick");		
-		
-		// 조회해서 닉네임 꺼내기
-		
-		
-		//테스트용
-//		String userNick = "바나나";
+		String grade = (String) session.getAttribute("grade");	
+		// 포인트값/ 내가쓴글ctn 추가하기!!!
 		
 		
 		//전달 파라미터 객체 얻어오기
-//		UserInfo param = new UserInfo();
-//		param.setU_no(userNo);
+		UserInfo param = new UserInfo();
+		param.setU_nick(u_nick);
+		param.setGrade(grade);
 		
-		//UserInfo 정보 조회하기
-//		UserInfo data = mypageService.showUserInfo(param);
-//		System.out.println("UserInfo 정보 조회 data :  " + data);		
+		UserInfo data = mypageService.showUserInfo(param);
+		System.out.println("UserInfo 조회 data :  " + data);
+				
+		//UserInfo 정보 조회 후 닉네임 값 전달하기
+//		UserInfo nickData = mypageService.askNick(param);
+//		System.out.println("UserInfo 조회 nickData :  " + nickData);
 		
 		//조회 결과를 MODEL값 전달
-//		req.setAttribute("data", data);		
+		req.setAttribute("data", data);	
+		
+		
+	
 		
 		req.getRequestDispatcher("/WEB-INF/views/mypage/main.jsp").forward(req, resp);
 	}

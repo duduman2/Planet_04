@@ -1,17 +1,16 @@
 <%@page import="dto.UserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- <!DOCTYPE html> -->
-<!-- <html> -->
-<!-- <head> -->
-<!-- <meta charset="UTF-8"> -->
+
+<!-- <img src="sources/admin/favicon"></img> -->
+<title>마이페이지</title>
 
 <%@include file="../layout/header.jsp" %>
 
 <%-- 모델값 전달받기 --%>
 <% 	UserInfo uList = (UserInfo) request.getAttribute("data"); %>
 
-<title>마이페이지</title>
+
 
 <script type="text/javascript">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -63,14 +62,14 @@ $(document).ready(function() {
 		alt="기본이미지" style="width: 200px; height:200px; border-radius: 50%; 
 		display: block; margin: auto; margin-top: 20px; padding: 10px;" ></img>
 		<h3><%=uList.getU_nick() %></h3>
-		<h3>닉네임 불러오기</h3>
+<!-- 		<h3>닉네임 불러오기</h3> -->
 		</td>
 	</tr>
 	
 	<tr>
 		<th style="text-align: center; height: 50px;">회원 등급</th>
-<%--  		<td><%=uList.getGrade() %></td> --%>
-		<td>회원 등급값 가져오기</td>
+ 		<td><%=uList.getGrade() %></td>
+<!-- 		<td>회원 등급값 가져오기</td> -->
 	</tr>	
 
 	<tr>

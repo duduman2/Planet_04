@@ -49,17 +49,6 @@ public class UserInfoController extends HttpServlet {
 		//VIEW 지정 및 응답
 		req.getRequestDispatcher("/WEB-INF/views/mypage/userInfo.jsp").forward(req, resp);
 		
-		
-		
-//		if() {
-//			
-//		} else {
-//			
-//		}
-		
-		
-		//main.jsp에서도 개인정보값 가져와야하는데...어케? 
-//		req.getRequestDispatcher("/WEB-INF/views/mypage/main.jsp").forward(req, resp);
 	}
 	
 	@Override

@@ -2,13 +2,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<title>개인정보 수정하기</title>
 
 <%@include file="../layout/header.jsp" %>
 
 <%-- 모델값 전달받기 --%>
 <% 	UserInfo uList = (UserInfo) request.getAttribute("data"); %>
 
-<title>개인정보 수정하기</title>
 
 <script type="text/javascript">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">

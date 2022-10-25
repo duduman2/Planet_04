@@ -51,6 +51,15 @@ public interface MypageService {
 	
 	
 	public int deleteUser(); //회원 탈퇴 int
+
+
+	/**
+	 * 마이페이지 - 회원 정보 조회 후 닉네임 꺼내기
+	 * 
+	 * @param param - DB 연결 객체 
+	 * @return UserInfo - 회원 정보 조회
+	 */
+//	public UserInfo askNick(UserInfo param);
 	
 	
 }

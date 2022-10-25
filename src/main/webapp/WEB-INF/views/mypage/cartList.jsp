@@ -3,12 +3,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<title>장바구니 리스트</title>
+
 <%@include file="../layout/header.jsp" %>
 
 <%-- 모델값 전달받기 --%>
 <%	List<Cart> cList = (List) request.getAttribute("cartlist"); %>
 
-<title>cartList</title>
 
 <script type="text/javascript">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -27,8 +28,8 @@ table, tr, th, td { border: 1px solid #ccc; }
 th { text-align: center; }
 
 </style>
-</head>
-<body>
+<!-- </head> -->
+<!-- <body> -->
 
 <h1>장바구니 리스트</h1>
 <hr>
