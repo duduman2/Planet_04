@@ -180,5 +180,21 @@ public interface AdminLoginService {
 	 * @return
 	 */
 	public List<Notice> getList2(Paging paging, Notice notice);
+
+	/**
+	 * notice_no 받아다가 dto에 저장
+	 * 
+	 * @param req 요청정보
+	 * @return 반환되는 dto
+	 */
+	public Notice getNoticeno(HttpServletRequest req);
+
+	/**
+	 * dto의 정보 받아다가 전체정보 반환
+	 * 
+	 * @param notice notice_no
+	 * @return notice 풀정보
+	 */
+	public Notice noticeView(Notice notice);
 	
 }

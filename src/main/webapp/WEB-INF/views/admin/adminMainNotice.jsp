@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="<%=request.getContextPath() %>/sources/admin/favicon.ico">
 <meta charset="UTF-8">
 <title>공지사항</title>
 
@@ -154,7 +155,7 @@ function createnotice() {
 			
 			
 			<br>
-			<table class="admintable">
+			<table class="admintable table table-striped table-hover table-condensed">
 			<tr>
 				<th class="text-center">번호</th>
 				<th class="text-center">조회수</th>
@@ -167,7 +168,10 @@ function createnotice() {
 			<tr>
 				<td style="width: 5%"><%=noticeList.get(i).getNotice_no() %></td>
 				<td style="width: 5%"><%=noticeList.get(i).getHit() %></td>
-				<td style="width: 10%"><%=noticeList.get(i).getTitle() %></td>
+				<td style="width: 10%">
+					<a href="/admin/mainnotice/view?notice_no=<%=noticeList.get(i).getNotice_no() %>"><%=noticeList.get(i).getTitle() %>
+					</a>
+				</td>
 				<td style="width: 60%"><%=noticeList.get(i).getNotice_content() %></td>
 				<td style="width: 10%"><%=noticeList.get(i).getInsert_dat() %></td>
 				<td style="width: 10%"><%=noticeList.get(i).getAdmin_id() %></td>

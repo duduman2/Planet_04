@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="<%=request.getContextPath() %>/sources/admin/favicon.ico">
 <meta charset="UTF-8">
 <title>관리자 로그인</title>
 

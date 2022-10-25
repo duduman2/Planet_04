@@ -169,4 +169,22 @@ public interface AdminLoginDao {
 	 */
 	public List<Notice> selectAll2(Connection connection, Paging paging, Notice notice);
 
+	/**
+	 * 클릭한 공지글 조회수 늘리기
+	 * 
+	 * @param conn DB객체
+	 * @param notice 공지번호
+	 * @return 조회수 반환
+	 */
+	public int updateHit(Connection conn, Notice notice);
+
+	/**
+	 * notice_no로 조건검색해서 공지사항 정보 가져오기
+	 * 
+	 * @param conn DB객체
+	 * @param notice_no 공지번호
+	 * @return 풀dto객체
+	 */
+	public Notice selectNoticeBynotice_no(Connection conn, Notice notice_no);
+
 }
