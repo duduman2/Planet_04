@@ -41,7 +41,8 @@ public class ProductUpload extends HttpServlet {
 		//COS 파일 업로드 처리
 		fileservice.cosFileupload(req);
 
+		
 		//목록 페이지로 리다이렉트
-		resp.sendRedirect("/tradeboard");
+		resp.sendRedirect("/trade");
 	}
 }

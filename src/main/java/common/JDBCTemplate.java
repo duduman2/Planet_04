@@ -15,7 +15,7 @@ public class JDBCTemplate {
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	private static final String USERNAME = "scott";
 	private static final String PASSWORD = "tiger";
-
+	
 	//private 생성자
 	private JDBCTemplate() {}
 	
@@ -24,7 +24,6 @@ public class JDBCTemplate {
 	
 	//Connection객체 반환 메소드 - 싱글톤패턴 적용
 	public static Connection getConnection() {
-
 		//첫 DB연결일 때만 수행
 		if(conn == null) {
 			try {
@@ -41,9 +40,8 @@ public class JDBCTemplate {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
 		}
-		
+
 		//DB연결 객체 반환
 		return conn;
 	}
@@ -58,11 +56,9 @@ public class JDBCTemplate {
 	}
 	
 	//Statement 객체 닫기
-	public static void close(Statement st) {	
+	public static void close(Statement st) {
 		try {
-
 			if(st!=null && !st.isClosed()) st.close();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -88,7 +84,6 @@ public class JDBCTemplate {
 	
 	//commit 수행
 	public static void commit(Connection conn) {
-		
 		try {
 			if(conn!=null && !conn.isClosed()) conn.commit();
 		} catch (SQLException e) {
@@ -104,38 +99,5 @@ public class JDBCTemplate {
 			e.printStackTrace();
 		}
 	}
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
