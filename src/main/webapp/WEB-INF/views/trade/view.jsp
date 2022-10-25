@@ -135,7 +135,7 @@ $(document).ready(function(){
 			<br>결제 금액<br>
 			<p id="paymoney">원</p>
 			
-			<button id="goWish">장바구니 담기</button>
+			<button id="goWish">장바구니</button>
 <!-- 			</form> -->
 		</td>
 </tr>
