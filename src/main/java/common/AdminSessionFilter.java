@@ -12,9 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(value = { 
-		"/admin/mainconfig", "/admin/mainboard", "/admin/mainuser", "/admin/addadmin", "/admin/deladmin"
-		})
+//@WebFilter(value = {"", ""})
+@WebFilter("/admin/*")
 public class AdminSessionFilter implements Filter {
 	
 	@Override

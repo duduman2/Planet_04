@@ -14,7 +14,7 @@ import admin.service.face.AdminLoginService;
 import admin.service.impl.AdminLoginServiceImpl;
 import dto.AdminInfo;
 
-@WebServlet("/admin/login")
+@WebServlet("/adminlogin")
 public class AdminLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	AdminLoginService adminService = new AdminLoginServiceImpl();
@@ -22,7 +22,7 @@ public class AdminLoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/admin/login [GET] Start");
+		System.out.println("/adminlogin [GET] Start");
 		
 		req.getRequestDispatcher("/WEB-INF/views/admin/adminLogin.jsp").forward(req, resp);
 		
@@ -30,14 +30,14 @@ public class AdminLoginController extends HttpServlet {
 		// WEB-INF 내의 파일은 브라우저에서 직접 접근이 안된다. Controller로만 접근 가능.
 		//resp.sendRedirect("/admin/login"); 이건 됨
 		
-		System.out.println("/admin/login [GET] End");
+		System.out.println("/adminlogin [GET] End");
 		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/admin/login [POST] Start");
+		System.out.println("/adminlogin [POST] Start");
 		
 		AdminInfo adminInfo = new AdminInfo();
 		
@@ -52,7 +52,7 @@ public class AdminLoginController extends HttpServlet {
 			session.setAttribute("login", result);
 			session.setAttribute("userid", adminInfo.getAdminId());
 			
-			resp.sendRedirect("/admin/mainconfig"); // 이건 GET으로 보내고
+			resp.sendRedirect("/admin/mainnotice"); // 이건 GET으로 보내고
 //			req.getRequestDispatcher("/admin/main_config").forward(req, resp); // 이건 POST로 보내네
 			
 		} else {
@@ -61,7 +61,7 @@ public class AdminLoginController extends HttpServlet {
 			
 		}
 		
-		System.out.println("/admin/login [POST] End");
+		System.out.println("/adminlogin [POST] End");
 		
 	}
 
