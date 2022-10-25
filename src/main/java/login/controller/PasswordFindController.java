@@ -8,10 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.UserInfo;
+import login.service.face.LoginService;
+import login.service.impl.LoginServiceImpl;
+
 
 @WebServlet("/password/find")
 public class PasswordFindController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private LoginService loginService = new LoginServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,8 +28,26 @@ public class PasswordFindController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		
+		//전달 파라미터에 대한 한글 인코딩 설정
+		req.setCharacterEncoding("UTF-8");
+				
+//		UserInfo userinfo = loginService.getFindPwUserInfo(req);
+		
+		UserInfo userinfo = loginService.getFindUserInfo(req);
+		
+		System.out.println(userinfo);
+				
+				
+		UserInfo u_pw = loginService.findPw(userinfo);
+				
+		System.out.println(u_pw);
+
+
+		req.setAttribute("u_pw", u_pw);
+				
+		req.getRequestDispatcher("/WEB-INF/views/login/pwFindAction.jsp").forward(req, resp);
+	
 	}
 
 	

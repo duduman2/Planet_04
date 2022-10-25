@@ -152,8 +152,6 @@ public class LoginDaoImpl implements LoginDao {
 	}
 
 
-
-
 	@Override
 	public int idCheck(String u_id) {
 
@@ -270,7 +268,7 @@ public class LoginDaoImpl implements LoginDao {
 	@Override
 	public UserInfo selectUserInfoByU_name(Connection conn, UserInfo userinfo) {
 		String sql = "";
-		sql += "SELECT u_name, u_email, u_id FROM userinfo";
+		sql += "SELECT u_id FROM userinfo";
 		sql += " WHERE u_name = ?";
 		
 		UserInfo result = null;
@@ -302,12 +300,115 @@ public class LoginDaoImpl implements LoginDao {
 
 
 
+
 	@Override
-	public UserInfo findId(String u_name, String u_email) {
+	public UserInfo selectUserInfoByU_nameU_email(Connection conn, UserInfo userinfo) {
+		String sql = "";
+		sql += "SELECT u_id FROM userinfo";
+		sql += " WHERE u_name = ?";
+		sql += " AND u_email = ?";
 		
+		UserInfo result = null;
 		
-		return null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, userinfo.getU_name());
+			ps.setString(2, userinfo.getU_email());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				result = new UserInfo();
+				
+				result.setU_id( rs.getString("u_id") );
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+				
+		return result;
+		
 	}
+
+
+
+	@Override
+	public UserInfo selectUserInfoByU_nameU_id(Connection conn, UserInfo userinfo) {
+		String sql = "";
+		sql += "SELECT u_pw FROM userinfo";
+		sql += " WHERE u_name = ?";
+		sql += " AND u_id = ?";
+		
+		UserInfo result = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, userinfo.getU_name());
+			ps.setString(2, userinfo.getU_id());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				result = new UserInfo();
+				
+				result.setU_pw( rs.getString("u_pw") );
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+				
+		return result;
+		
+	}
+
+
+
+	@Override
+	public UserInfo selectOneMember(Connection conn, String u_id, String u_pw) {
+		UserInfo userinfo = null;
+		
+		String sql = "";
+		sql += "SELECT * FROM userinfo WHERE u_id=? AND u_pw=?";
+		
+		  try {
+	            ps = conn.prepareStatement(sql);
+	            ps.setString(1, u_id);
+	            ps.setString(2, u_pw);
+	            
+	            rs = ps.executeQuery();
+	            
+	            if(rs.next()){
+	               userinfo = new UserInfo();
+	               
+	               userinfo.setU_no(rs.getInt("u_no"));
+	               userinfo.setU_id(rs.getString("u_id"));
+	               userinfo.setU_pw(rs.getString("u_pw"));
+	               userinfo.setU_name(rs.getString("u_name"));
+	               userinfo.setU_nick(rs.getString("u_nick"));
+	               userinfo.setU_email(rs.getString("u_email"));
+	               userinfo.setU_gender(rs.getString("u_gender"));
+	               userinfo.setU_phone(rs.getString("u_phone"));
+	               userinfo.setU_address(rs.getString("u_address"));
+	            }
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	        	JDBCTemplate.close(rs);
+				JDBCTemplate.close(ps);
+	        }
+		return userinfo;
+		
+	}
+
 
 
 
