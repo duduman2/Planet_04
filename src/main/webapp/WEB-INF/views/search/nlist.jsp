@@ -6,6 +6,12 @@
 
 <% List<BoardInfo> boardList = (List) request.getAttribute("board"); %>
 
+<style type="text/css">
+table, th, td {
+	border: 1px solid #000;
+	border-collapse: collapse;
+}
+</style>
 <h1>서치결과페이지</h1>
 
 <h3>작성자 <%=session.getAttribute("keyword") %> 검색 결과</h3>
