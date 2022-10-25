@@ -342,7 +342,7 @@ $(document).ready(function() {
 			</ul>
 		</li>
 		<li>
-			<button onclick="location.href='/login/con'" class="btn_login">로그아웃</button>
+			<button onclick="location.href='/logout/con'" class="btn_login">로그아웃</button>
 		</li>
 		<li>
 			<button type="button" class="btn_login">게시글 작성</button>
