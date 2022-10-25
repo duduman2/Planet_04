@@ -6,6 +6,21 @@
 
 <% List<BoardInfo> boardList = (List) request.getAttribute("board"); %>
 
+<style type="text/css">
+table, th, td {
+	border: 1px solid #000;
+	border-collapse: collapse;
+}
+</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("title").html("통합검색")
+	
+})
+</script>
+
 <h1>서치결과페이지</h1>
 
 <h3><%=session.getAttribute("keyword") %> 검색 결과</h3>

@@ -26,7 +26,7 @@ public class SearchBoardDaoImpl implements SearchBoardDao {
 		sql += "SELECT";
 		sql += "	boardno, boardtitle, boardcontent, usernick, grade, boardhit, boarddate";
 		sql += "	FROM tbl_board";
-		sql += "	ORDER BY boardno DESC";
+		sql += "	ORDER BY boardhit DESC";
 		
 		List<BoardInfo> boardList = new ArrayList<>();
 		
@@ -107,6 +107,7 @@ public class SearchBoardDaoImpl implements SearchBoardDao {
 		}
 		
 		return boardList;
+		
 	}
 
 	@Override
