@@ -137,7 +137,7 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 	@Override
 	public Paging getPaging(HttpServletRequest req, AdminInfo adminInfo) {
 		
-		System.out.println("AdminServiceImpl.getPaging2 Start");
+		System.out.println("AdminServiceImpl.getPaging Start");
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
@@ -155,9 +155,7 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 		//Paging객체 생성
 		Paging paging = new Paging(totalCount, curPage);
 		
-		System.out.println(paging);
-		
-		System.out.println("AdminServiceImpl.getPaging2 End");
+		System.out.println("AdminServiceImpl.getPaging End");
 				
 		return paging;
 
@@ -166,9 +164,9 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 	@Override
 	public List<AdminInfo> getList(Paging paging, AdminInfo adminInfo) {
 		
-		System.out.println("AdminServiceImpl.getList2 Start");
+		System.out.println("AdminServiceImpl.getList Start");
 		
-		System.out.println("AdminServiceImpl.getList2 End");
+		System.out.println("AdminServiceImpl.getList End");
 		
 		return adminDao.selectAll(JDBCTemplate.getConnection(), paging, adminInfo);
 		
@@ -380,6 +378,103 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 		System.out.println("AdminServiceImpl.AdminCheck End");
 		
 		return false;
+	}
+
+	@Override
+	public Notice getNoticeInfo(HttpServletRequest req) {
+		
+		System.out.println("AdminServiceImpl.getNoticeInfo Start");
+		
+		Notice notice = new Notice();
+		
+		if( req.getParameter("title") != null) {
+			notice.setTitle( req.getParameter("title") );
+		} else {
+			notice.setTitle("");
+		}
+		
+		if( req.getParameter("admin_id") != null) {
+			notice.setAdmin_id( req.getParameter("admin_id") );
+		} else {
+			notice.setAdmin_id("");
+		}
+		
+		System.out.println("AdminServiceImpl.getNoticeInfo End");
+		
+		return notice;
+		
+	}
+
+	@Override
+	public Paging getPaging1(HttpServletRequest req, Notice notice) {
+		
+		System.out.println("AdminServiceImpl.getPaging1 Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//총 관리자리스트 수 조회하기
+		int totalCount = adminDao.selectCntAll1(conn, notice);
+		
+		//전달파라미터 curPage 추출하기
+		String param = req.getParameter("curPage"); // url의 curPage파라미터값 조회
+		
+		int curPage = 0;
+		if( param != null && !"".equals(param) ) {
+			curPage = Integer.parseInt(param);
+		}
+		
+		//Paging객체 생성
+		Paging paging = new Paging(totalCount, curPage);
+		
+		System.out.println("AdminServiceImpl.getPaging1 End");
+				
+		return paging;
+		
+	}
+
+	@Override
+	public Paging getPaging2(HttpServletRequest req, Notice notice) {
+		
+		System.out.println("AdminServiceImpl.getPaging2 Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//총 관리자리스트 수 조회하기
+		int totalCount = adminDao.selectCntAll2(conn, notice);
+		
+		//전달파라미터 curPage 추출하기
+		String param = req.getParameter("curPage"); // url의 curPage파라미터값 조회
+		
+		int curPage = 0;
+		if( param != null && !"".equals(param) ) {
+			curPage = Integer.parseInt(param);
+		}
+		
+		//Paging객체 생성
+		Paging paging = new Paging(totalCount, curPage);
+		
+		System.out.println("AdminServiceImpl.getPaging2 End");
+				
+		return paging;
+		
+	}
+
+	@Override
+	public List<Notice> getList1(Paging paging, Notice notice) {
+		System.out.println("AdminServiceImpl.getList1 Start");
+		
+		System.out.println("AdminServiceImpl.getList1 End");
+		
+		return adminDao.selectAll1(JDBCTemplate.getConnection(), paging, notice);
+	}
+
+	@Override
+	public List<Notice> getList2(Paging paging, Notice notice) {
+		System.out.println("AdminServiceImpl.getList2 Start");
+		
+		System.out.println("AdminServiceImpl.getList2 End");
+		
+		return adminDao.selectAll2(JDBCTemplate.getConnection(), paging, notice);
 	}
 
 }

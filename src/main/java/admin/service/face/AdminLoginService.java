@@ -136,5 +136,49 @@ public interface AdminLoginService {
 	 * @return 결과값
 	 */
 	public Boolean AdminCheck(AdminInfo adminInfo);
+
+	/**
+	 * adminMainNotice.jsp로부터 받아온 값 dto에 추가
+	 * 
+	 * @param req 요청정보(title이거나 admin_id거나)
+	 * @return 값이 추가된 dto
+	 */
+	public Notice getNoticeInfo(HttpServletRequest req);
+
+	/**
+	 * 공지사항 페이징 객체 생성
+	 * 
+	 * @param req 요청정보
+	 * @param notice Notice dto
+	 * @return 계산된 페이징 객체
+	 */
+	public Paging getPaging1(HttpServletRequest req, Notice notice);
+
+	/**
+	 * 공지사항 페이징 객체 생성
+	 * 
+	 * @param req 요청정보
+	 * @param notice Notice dto
+	 * @return 계산된 페이징 객체
+	 */
+	public Paging getPaging2(HttpServletRequest req, Notice notice);
+	
+	/**
+	 * 공지사항 리스트 조회
+	 * 
+	 * @param paging 계산된 페이징 객체
+	 * @param notice Notice dto(title)
+	 * @return
+	 */
+	public List<Notice> getList1(Paging paging, Notice notice);
+	
+	/**
+	 * 공지사항 리스트 조회
+	 * 
+	 * @param paging 계산된 페이징 객체
+	 * @param notice Notice dto(admin_id)
+	 * @return
+	 */
+	public List<Notice> getList2(Paging paging, Notice notice);
 	
 }

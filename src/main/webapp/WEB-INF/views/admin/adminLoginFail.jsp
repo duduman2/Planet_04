@@ -8,7 +8,7 @@
 
 <script type="text/javascript">
 
-var url = "<%=request.getContextPath() %>/admin/login";
+var url = "<%=request.getContextPath() %>/adminlogin";
 
 alert("아이디 또는 비밀번호가 틀립니다.")
 
