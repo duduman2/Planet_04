@@ -7,12 +7,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dto.Product;
 import trade.service.face.ProductViewService;
 import trade.service.impl.ProductViewServiceImpl;
 
-@WebServlet("/tradeboard/tradeview")
+@WebServlet("/trade/view")
 public class TradeViewController extends HttpServlet {
 
 	private ProductViewService productViewService  = new ProductViewServiceImpl();
@@ -27,12 +28,13 @@ public class TradeViewController extends HttpServlet {
 		
 		product = productViewService.getProductNo(req, product);
 		
-
 		productViewService.view(product);
-		
+
+		HttpSession session = req.getSession();
+		session.setAttribute("login", true);
+
 		req.setAttribute("view", product);
-		
-		req.getRequestDispatcher("/WEB-INF/views/trade/tradeview.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/trade/view.jsp").forward(req, resp);
 	}
 
 }

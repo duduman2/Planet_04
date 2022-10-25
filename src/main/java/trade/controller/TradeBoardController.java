@@ -15,7 +15,7 @@ import dto.Uploadfile;
 import trade.service.face.FileService;
 import trade.service.impl.FileServiceImpl;
 
-@WebServlet("/tradeboard")
+@WebServlet("/trade")
 public class TradeBoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,6 +40,6 @@ public class TradeBoardController extends HttpServlet {
 			req.setAttribute("boardList",boardList);
 
 			//View지정 및 포워드
-			req.getRequestDispatcher("/WEB-INF/views/trade/tradeboard.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/trade/trade.jsp").forward(req, resp);
 		}
 }

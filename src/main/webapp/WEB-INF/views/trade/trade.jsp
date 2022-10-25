@@ -25,15 +25,33 @@
 .classlist button {
 	margin-right: 50px;
 }
+
+#topButton {
+	position: fixed;
+	right: 2%;
+	bottom: 50px;
+	display: none;
+	z-index: 999;
+}
 </style>
 <script type="text/javascript">
 	$( document ).ready( function() {
 	    
 	    $(".class").click(function(){
 // 	    	alert($(this).val());
-			location.href = 'tradeboard?class='+ $(this).val();
+			location.href = 'trade?class='+ $(this).val();
 	    });
 	
+		$(window).scroll(function() {
+		    if ($(this).scrollTop() > 300) {
+		        $('#topButton').fadeIn();
+		    } else {
+		        $('#topButton').fadeOut();
+		    }
+		});
+		function goTop(){
+			$('html').scrollTop(0);
+		}
 	});
 </script>
 <br><br>
@@ -56,7 +74,7 @@
 <div class="tradeboard">
 
 <% for(int i=0; i <boardList.size(); i++) { %>
-	<div class="tradeitem"><a href="/tradeboard/tradeview?productno=<%=boardList.get(i).getProductNo()%>">
+	<div class="tradeitem"><a href="/trade/view?productno=<%=boardList.get(i).getProductNo()%>">
 		<img src="/imagepath/<%=boardList.get(i).getFileName()%>"><br>
 		제품명 : <%=boardList.get(i).getProductName()%><br>
 		가격 : <%=boardList.get(i).getProductPrice()%>원<br>
@@ -66,4 +84,8 @@
 
 </div> <!-- end tradeboard  -->
 
+<script type="text/javascript">
+
+</script>
+<button type="button" id="topButton" onclick="goTop()">맨 위로 ↑</button>
 <%@ include file="../layout/footer.jsp"%>
