@@ -136,7 +136,6 @@ public class LoginServiceImpl implements LoginService {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		UserInfo userinfo = loginDao.selectOneMember(conn, u_id, u_pw);
-		JDBCTemplate.close(conn);
 
 		return userinfo;
 	}

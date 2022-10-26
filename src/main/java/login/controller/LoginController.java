@@ -62,6 +62,8 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("login", true);		//로그인 상태
 			session.setAttribute("loginid", u_id);	//로그인한 아이디
 			
+			session.setMaxInactiveInterval(60*60); //60분- 초 단위
+			
 			req.getRequestDispatcher("/WEB-INF/views/login/loginSuccess.jsp").forward(req, resp);
 			
 			
