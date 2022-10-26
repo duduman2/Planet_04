@@ -25,7 +25,7 @@ public class SearchBoardListController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		System.out.println("/search [POST]");
-		
+		//---검색---
 		req.setCharacterEncoding("UTF-8");
 		
 		//요청 정보에서 전달 파라미터 추출
@@ -39,17 +39,9 @@ public class SearchBoardListController extends HttpServlet {
 		//keyword에 내용물을 입력하고 검색할 경우
 		if( null!=keyword && !"".equals(keyword) ) {
 			
-			HttpSession session = req.getSession();
+			req.setAttribute("type", type);
+			req.setAttribute("keyword", keyword);
 			
-			session.setAttribute("type", type);
-			session.setAttribute("keyword", keyword);
-			
-			//게시글 전체 조회
-//			List<BoardInfo> boardList = searchBoardService.getList();
-			
-			//조회결과 확인
-//			for(BoardInfo b : boardList) System.out.println(b);
-
 			if( type.equals("a") ) {//통합검색
 				
 				//전체 게시글에서 keyword이 포함된 게시글 찾기
@@ -57,16 +49,18 @@ public class SearchBoardListController extends HttpServlet {
 				System.out.println( board );
 				
 				//조회결과가 없을 경우
-				String msg = "에 대한 검색결과가 없습니다";
 				if( board.isEmpty() ) {
+					String msg = "에 대한 검색결과가 없습니다";
 					System.out.println(keyword + msg);
-					req.getRequestDispatcher("/WEB-INF/views/search/nofind.jsp").forward(req, resp);
+					
+					req.setAttribute("msg", msg);
+					req.getRequestDispatcher("/WEB-INF/views/search/list.jsp").forward(req, resp);
 					
 				} else {
 					
 					req.setAttribute("board", board);
 					
-					req.getRequestDispatcher("/WEB-INF/views/search/alist.jsp").forward(req, resp);
+					req.getRequestDispatcher("/WEB-INF/views/search/list.jsp").forward(req, resp);
 				}
 				
 				
@@ -80,12 +74,14 @@ public class SearchBoardListController extends HttpServlet {
 				String msg = "에 대한 검색결과가 없습니다";
 				if( board.isEmpty() ) {
 					System.out.println(keyword + msg);
-					req.getRequestDispatcher("/WEB-INF/views/search/nofind.jsp").forward(req, resp);
 					
+					req.setAttribute("msg", msg);
+					req.getRequestDispatcher("/WEB-INF/views/search/list.jsp").forward(req, resp);
+
 				} else {
 					req.setAttribute("board", board);
 					
-					req.getRequestDispatcher("/WEB-INF/views/search/tlist.jsp").forward(req, resp);
+					req.getRequestDispatcher("/WEB-INF/views/search/list.jsp").forward(req, resp);
 				}
 				
 			} else if( type.equals("c") ) {//내용검색
@@ -98,12 +94,15 @@ public class SearchBoardListController extends HttpServlet {
 				String msg = "에 대한 검색결과가 없습니다";
 				if( board.isEmpty() ) {
 					System.out.println(keyword + msg);
-					req.getRequestDispatcher("/WEB-INF/views/search/nofind.jsp").forward(req, resp);
+					
+					req.setAttribute("msg", msg);
+					req.getRequestDispatcher("/WEB-INF/views/search/list.jsp").forward(req, resp);
+
 					
 				} else {
 					req.setAttribute("board", board);
 					
-					req.getRequestDispatcher("/WEB-INF/views/search/clist.jsp").forward(req, resp);
+					req.getRequestDispatcher("/WEB-INF/views/search/list.jsp").forward(req, resp);
 				}
 				
 			} else {//작성자 검색
@@ -116,13 +115,15 @@ public class SearchBoardListController extends HttpServlet {
 				String msg = "에 대한 검색결과가 없습니다";
 				if( board.isEmpty() ) {
 					System.out.println(keyword + msg);
-					req.getRequestDispatcher("/WEB-INF/views/search/nofind.jsp").forward(req, resp);
 					
+					req.setAttribute("msg", msg);
+					req.getRequestDispatcher("/WEB-INF/views/search/list.jsp").forward(req, resp);
+
 				} else {
 				
 					req.setAttribute("board", board);
 					
-					req.getRequestDispatcher("/WEB-INF/views/search/nlist.jsp").forward(req, resp);
+					req.getRequestDispatcher("/WEB-INF/views/search/list.jsp").forward(req, resp);
 				}
 				
 			}

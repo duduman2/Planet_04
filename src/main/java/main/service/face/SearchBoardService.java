@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dto.BoardInfo;
+import dto.Product;
+import dto.Uploadfile;
 
 public interface SearchBoardService {
 	
@@ -47,6 +49,11 @@ public interface SearchBoardService {
 	 */
 	public List<BoardInfo> writer(String keyword);
 
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Product> getProductList();
 
-	
+
 }

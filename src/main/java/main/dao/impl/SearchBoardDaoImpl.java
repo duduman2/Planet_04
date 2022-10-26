@@ -10,6 +10,8 @@ import java.util.List;
 
 import common.JDBCTemplate;
 import dto.BoardInfo;
+import dto.Product;
+import dto.Uploadfile;
 import main.dao.face.SearchBoardDao;
 
 public class SearchBoardDaoImpl implements SearchBoardDao {
@@ -243,5 +245,45 @@ public class SearchBoardDaoImpl implements SearchBoardDao {
 		}
 		
 		return boardList;
+	}
+	
+	@Override
+	public List<Product> selectProductAll(Connection conn) {
+		//SQL
+		String sql = "";
+		sql += "SELECT";
+		sql += "	p.productno, p.fileno, p.productname, p.productprice, p.productclass, u.stored_name, u.filepath";
+		sql += "	FROM product p";	
+		sql += " 	inner join uploadfile u";
+		sql += "	on p.fileno = u.fileno";
+		sql += "	ORDER BY p.productno DESC";
+		
+		List<Product> list = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				Product p = new Product();
+				
+				p = new Product();
+				p.setProductNo(rs.getInt("productno"));
+				p.setProductName(rs.getString("productname"));
+				p.setProductPrice(rs.getInt("productprice"));
+				p.setFileName(rs.getString("stored_name"));
+				p.setFilePath(rs.getString("filepath"));
+				
+				list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);			
+		}
+		
+		return list;
 	}
 }
