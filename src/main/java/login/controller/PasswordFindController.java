@@ -32,9 +32,7 @@ public class PasswordFindController extends HttpServlet {
 		//전달 파라미터에 대한 한글 인코딩 설정
 		req.setCharacterEncoding("UTF-8");
 				
-//		UserInfo userinfo = loginService.getFindPwUserInfo(req);
-		
-		UserInfo userinfo = loginService.getFindUserInfo(req);
+		UserInfo userinfo = loginService.getFindPwUserInfo(req);
 		
 		System.out.println(userinfo);
 				

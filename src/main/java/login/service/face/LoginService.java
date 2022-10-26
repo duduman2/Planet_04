@@ -31,6 +31,7 @@ public interface LoginService {
 //	비밀번호 찾기
 	public UserInfo findPw(UserInfo userinfo);
 	
+//	비밀번호 찾기 - 이름, 아이디 활용
 	public UserInfo getFindPwUserInfo(HttpServletRequest req);
 	
 //	로그인 정보 확인

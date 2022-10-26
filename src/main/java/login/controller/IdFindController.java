@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dto.UserInfo;
-import login.dao.face.LoginDao;
-import login.dao.impl.LoginDaoImpl;
 import login.service.face.LoginService;
 import login.service.impl.LoginServiceImpl;
 
