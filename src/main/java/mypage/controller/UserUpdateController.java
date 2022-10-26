@@ -14,8 +14,8 @@ import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
 
-@WebServlet("/user/delete")
-public class UserDeleteController extends HttpServlet {
+@WebServlet("/user/update")
+public class UserUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// Service 객체 선언
@@ -24,8 +24,7 @@ public class UserDeleteController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/user/delete [GET]");
-	
+		System.out.println("/user/update [GET]");
 
 		//세션 정보 객체
 		HttpSession session = req.getSession();
@@ -37,24 +36,25 @@ public class UserDeleteController extends HttpServlet {
 //		int userNo = 1; 
 		int userNo = 2; 
 		
-		//전달 파라미터 객체 보내기
+		//전달 파라미터 객체 얻어오기
 		UserInfo param = new UserInfo();
 		param.setU_no(userNo);
 		
-		//로그인한 UserInfo 본인 회원 정보 삭제하기
-		int data = mypageService.deleteUser(param);
-		System.out.println("본인 회원 정보 삭제 data :  " + data);
+		//UserInfo 정보 조회하기
+		UserInfo data = mypageService.showUserInfo(param);
+		System.out.println("UserInfo 정보 조회 data :  " + data);
 		
 		//조회 결과를 MODEL값 전달
-		req.setAttribute("data", data);		
+		req.setAttribute("data", data);
 		
+		req.getRequestDispatcher("/WEB-INF/views/mypage/userInfoModify.jsp").forward(req, resp);
 		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/user/delete [POST]");
+		System.out.println("/user/update [POST]");
 
-	
+		resp.sendRedirect("/user/info");
 	}
 }

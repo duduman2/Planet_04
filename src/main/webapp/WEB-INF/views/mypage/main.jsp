@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<!-- <img src="sources/admin/favicon"></img> -->
+<link rel="icon" href="<%=request.getContextPath() %>/sources/admin/favicon.ico">
 <title>마이페이지</title>
 
 <%@include file="../layout/header.jsp" %>
@@ -13,12 +13,14 @@
 
 
 <script type="text/javascript">
+<script type="text/javascript">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>>
 </script>
+
 
 <style type="text/css">
 @import url("../sources/mypage/mypage.css");
@@ -43,7 +45,7 @@ $(document).ready(function() {
 
 
 
-<h1>/mypage/main.jsp&nbsp;&nbsp;&nbsp;마이페이지 메인</h1>
+<h3>&nbsp;&nbsp;&nbsp/mypage/main.jsp&nbsp;&nbsp;&nbsp;마이페이지 메인</h3>
 회원정보 조회,수정,탈퇴 / 내가 작성한 글 확인,수정,삭제 / 장바구니 확인,수정,삭제 / 내가 구매한 리스트 / 등급 확인 / 등 꾸미기
 <hr>
 
@@ -53,15 +55,17 @@ $(document).ready(function() {
 <div class="left_section" id="left_section" style="width: 30%; float: left;">
 <table class="table">
 	<tr>
-		<th class="info" colspan="2">프로필 설정
-		<button type="button" style="float: right;" id="btnUserInfo">설정</button></th>
+		<th class="info" colspan="2" style="color: #128525;">프로필 설정
+		<button type="button" style="float: right;" id="btnUserInfo" class="btn btn-default">설정</button></th>
 	</tr>
 	
 	<tr style="height: 300px;">
-		<td colspan="2" style="text-align: center;"><img src="../sources/mypage/DefaultImage.png" 
+		<td colspan="2" style="text-align: center;"><img src="<%=request.getContextPath() %>../sources/mypage/DefaultImage.png" 
 		alt="기본이미지" style="width: 200px; height:200px; border-radius: 50%; 
 		display: block; margin: auto; margin-top: 20px; padding: 10px;" ></img>
-		<h3><%=uList.getU_nick() %></h3>
+		
+		<%-- (font-style) (font-weight) (font-size)/줄간격(font-height) 글꼴(font-family)  --%>
+		<h3 style="font-style: italic; font-weight: bold; font-size= 2em; color: #5B9E28"><%=uList.getU_nick() %></h3>
 <!-- 		<h3>닉네임 불러오기</h3> -->
 		</td>
 	</tr>
@@ -94,43 +98,54 @@ $(document).ready(function() {
 
 
 <!-- right table's section -->
-<div class="right_section" id="right_section"  style="width: 67%; float: left;">
-	<table class="table">
+<div class="right_section" id="right_section"  style="width: 67%; float: left; text-align: center;">
+	<table class="table" style="text-align: center;" >
+<!-- 	<table style="text-align: center;" > -->
 		<tr>
-			<th class="info" colspan="3">나의 쇼핑<button style="float: right;">+전체보기</button></th>
+			<th class="info" colspan="3" style="color: #3471C;">나의 쇼핑<button style="float: right;" class="btn btn-default">+전체보기</button></th>
 		</tr>
 		<tr>
 <!-- 			<td><button id="btncartList">+장바구니</button></td> -->
-			<td><a id="btncartList">+장바구니</a></td>
-			<td>+배송 확인</td>
-			<td>+환불/반품</td>
+			<td><a id="btncartList"  class="btn btn-default" style="width: 150px; height: 100px; 
+				padding-top: 38px; font-size: larger;">+장바구니</a></td>
+				
+			<td><a id="deleveryCheck"  class="btn btn-default" style="width: 150px; height: 100px; 
+				padding-top: 38px; font-size: larger;">+배송 확인</a></td>
+				
+			<td><a id="refund"  class="btn btn-default" style="width: 150px; height: 100px; 
+				padding-top: 38px; font-size: larger;">+환불/반품</a></td>
 		</tr>
 		<tr>
-			<td>+포인트</td>
-			<td>+문의 사항</td>
-			<td>+고객센터</td>
+			<td><a id="point"  class="btn btn-default" style="width: 150px; height: 100px; 
+				padding-top: 38px; font-size: larger;">+포인트</a></td>
+				
+			<td><a id="question"  class="btn btn-default" style="width: 150px; height: 100px; 
+				padding-top: 38px; font-size: larger;">+문의 사항</a></td>
+				
+			<td><a id="costomerCenter"  class="btn btn-default" style="width: 150px; height: 100px; 
+				padding-top: 38px; font-size: larger;">+고객센터</a></td>
 		</tr>
 
 	</table>  <!-- first table end -->
 	
 	<table class="table">
 		<tr>
-			<th class="info" colspan="2">내가 작성한 글 확인하기<button style="float: right;">+전체보기</button></th>
+			<th class="info" colspan="2" style="color: #3471C;">내가 작성한 글 확인하기<button style="float: right;" class="btn btn-default">+전체보기</button></th>
 		</tr>
 		<tr>
 			<td>게시판</td>
-			<td><button>게시판 더보기</button></td>
+			<td><button class="btn btn-default">게시판 더보기</button></td>
 		</tr>
 		<tr>
 			<td>댓글</td>
-			<td><button>댓글 더보기</button></td>
+			<td><button class="btn btn-default">댓글 더보기</button></td>
 		</tr>
 
 	</table>  <!-- second table end -->
 	
 	<table class="table">
 		<tr>
-			<th class="info" colspan="2">내가 구매한 리스트<button style="float: right;">+전체보기</button></th>
+			<th class="info" colspan="2" style="color: #3471C;">내가 구매한 리스트<button style="float: right;" class="btn btn-default">+전체보기</button></th>
 		</tr>
 		<tr>
 			<td></td>
@@ -144,7 +159,7 @@ $(document).ready(function() {
 			
 	<table class="table">
 		<tr>
-			<th class="info" colspan="2">Q n A<button style="float: right;">+전체보기</button></th>
+			<th class="info" colspan="2" style="color: #3471C;">Q n A<button style="float: right;" class="btn btn-default">+전체보기</button></th>
 		</tr>
 		<tr>
 			<td></td>

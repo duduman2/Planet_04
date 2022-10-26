@@ -65,9 +65,9 @@ $(document).ready(function() {
 
 <% for(int i=0; i<3; i++) { %>
 <tr>
-	<td><%=boardList.get(i).getBoardTitle() %></td>
-	<td><%=boardList.get(i).getBoardContent() %></td>
-	<td><%=boardList.get(i).getBoardHit() %></td>
+<%-- 	<td><%=boardList.get(i).getBoardTitle() %></td> --%>
+<%-- 	<td><%=boardList.get(i).getBoardContent() %></td> --%>
+<%-- 	<td><%=boardList.get(i).getBoardHit() %></td> --%>
 </tr>
 <% } %>
 

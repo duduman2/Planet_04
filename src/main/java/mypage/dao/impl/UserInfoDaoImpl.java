@@ -27,8 +27,11 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		return 0;
 	}
 	@Override
-	public int deleteUser() {
+	public int deleteUser(Connection conn, UserInfo param) {
 
+		
+		
+		
 		return 0;
 	}
 	@Override
@@ -83,33 +86,33 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		return re; //최종 결과 반환
 	}
 	
-	@Override
-	public UserInfo askNick(Connection conn, UserInfo param) {
-		System.out.println("userInfoDao - askNick() - 시작");
-		
-		// sql 작성
-		String sql = "";
-		sql += "SELECT usernick";
-		sql += " FROM tbl_user";
-		
-		UserInfo re = new UserInfo();
-
-		try {
-			ps = conn.prepareStatement(sql);	// sql 수행 객체
-			ps.setString(1, param.getU_nick()); // sql 파라미터 전달
-			rs = ps.executeQuery();				// sql 수행 및 결과 집합 저장
-			
-			re.setU_nick(rs.getString("usernick"));
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rs);
-			JDBCTemplate.close(ps);
-		}
-		System.out.println("userInfoDao - askNick() - 끝");
-		return null;
-	}
+//	@Override
+//	public UserInfo askNick(Connection conn, UserInfo param) {
+//		System.out.println("userInfoDao - askNick() - 시작");
+//		
+//		// sql 작성
+//		String sql = "";
+//		sql += "SELECT usernick";
+//		sql += " FROM tbl_user";
+//		
+//		UserInfo re = new UserInfo();
+//
+//		try {
+//			ps = conn.prepareStatement(sql);	// sql 수행 객체
+//			ps.setString(1, param.getU_nick()); // sql 파라미터 전달
+//			rs = ps.executeQuery();				// sql 수행 및 결과 집합 저장
+//			
+//			re.setU_nick(rs.getString("usernick"));
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			JDBCTemplate.close(rs);
+//			JDBCTemplate.close(ps);
+//		}
+//		System.out.println("userInfoDao - askNick() - 끝");
+//		return null;
+//	}
 	
 	
 	
