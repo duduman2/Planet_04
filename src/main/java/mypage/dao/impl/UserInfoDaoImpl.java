@@ -26,17 +26,9 @@ public class UserInfoDaoImpl implements UserInfoDao {
 
 		return 0;
 	}
-	@Override
-	public int deleteUser(Connection conn, UserInfo param) {
 
-		
-		
-		
-		return 0;
-	}
 	@Override
 	public UserInfo showUserInfo(Connection conn, UserInfo param) {
-		System.out.println("userInfoDao - showUserInfo() - 시작");
 		
 		// sql 작성
 		String sql = "";
@@ -84,6 +76,41 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		
 		System.out.println("userInfoDao - showUserInfo() - 끝");
 		return re; //최종 결과 반환
+	}
+	
+	@Override
+	public int deleteUser(Connection conn, int userno) {
+		System.out.println("userInfoDao - deleteUser() - 시작");
+
+		// sql 작성
+		String sql = "";
+		sql += "DELETE tbl_user";
+		sql += " WHERE userno = ?";
+		
+		//삭제된 행의 수를 저장하는 변수
+		int res = 0;
+		
+		//sql 수행 객체 생성
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, userno);
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		System.out.println("userInfoDao - deleteUser() - 끝");
+		return res;
+	}
+	@Override
+	public int deleteUser(Connection conn, UserInfo param) {
+
+		
+		
+		return 0;
 	}
 	
 //	@Override

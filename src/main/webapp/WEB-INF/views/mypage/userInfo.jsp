@@ -36,6 +36,9 @@ $(document).ready(function() {
 	$("#btnUserInfoUpdate").click(function() {
 		$(location).attr("href", "/user/update")
 	})
+	$("#btnUserInfoDeleteMenu").click(function() {
+		$(location).attr("href", "/user/delete")
+	})	
 	
 })
 
@@ -45,17 +48,24 @@ $(document).ready(function() {
 
 <h3>&nbsp;&nbsp;&nbsp개인정보 확인하기</h3>
 <hr>
-<div class="main" style="width: 100%;">
+<div class="main">
 
 	<div id="uinfoMenu">
-		<ul>
-			<li><a id="btnUserInfo">회원 정보 확인</a></li>
-			<li><a id="btnUserInfoModi">회원 정보 수정</a></li>
-			<li><a>회원 탈퇴</a></li>
-		</ul>
+<!-- 		<ul> -->
+<!-- 			<li><a id="btnUserInfo">회원 정보 확인</a></li> -->
+<!-- 			<li><a id="btnUserInfoModi">회원 정보 수정</a></li> -->
+<!-- 			<li><a id="btnUserInfoDeleteMenu">회원 탈퇴</a></li> -->
+<!-- 		</ul> -->
+		<table class="table">
+			<tr><th>메뉴</th></tr>
+			<tr><td><a id="btnUserInfo">회원 정보 확인</a></td></tr>
+			<tr><td><a id="btnUserInfoModi">회원 정보 수정</a></td></tr>
+			<tr><td><a id="btnUserInfoDeleteMenu">회원 탈퇴</a></td></tr>
+		</table>
+		
 	</div>
 
-
+	<div class="line" id="line">  </div>
 
 	<div id="uinfoRight">
 		<table class="table table-striped table-hover" id="userinfo">

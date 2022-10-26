@@ -159,7 +159,8 @@ $(document).ready(function() {
 			
 	<table class="table">
 		<tr>
-			<th class="info" colspan="2" style="color: #3471C;">Q n A<button style="float: right;" class="btn btn-default">+전체보기</button></th>
+			<th class="info" colspan="2" style="color: #3471C;">Q n Aq
+			<button style="float: right;" class="btn btn-default" id="">+전체보기</button></th>
 		</tr>
 		<tr>
 			<td></td>

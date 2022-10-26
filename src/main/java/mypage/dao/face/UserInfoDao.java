@@ -18,6 +18,9 @@ public interface UserInfoDao {
 	 */
 	public int deleteUser(Connection conn, UserInfo param); // int 반환, 유저 정보 삭제
 
+	
+	public int deleteUser(Connection conn, int userno);
+
 	/**
 	 * 마이페이지 - 회원정보 조회
 	 * 
@@ -26,6 +29,7 @@ public interface UserInfoDao {
 	 * @return - UserInfo 로그인한 회원 본인의 정보 조회
 	 */
 	public UserInfo showUserInfo(Connection conn, UserInfo param);
+
 
 	/**
 	 * 마이페이지 - 회원 정보 조회 후 닉네임 꺼내기

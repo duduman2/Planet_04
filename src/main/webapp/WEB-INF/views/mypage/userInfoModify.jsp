@@ -33,7 +33,9 @@ $(document).ready(function() {
 	$("#btnUserInfoModi").click(function() {
 		$(location).attr("href", "/user/update")
 	})
-
+	$("#btnUserInfoDeleteMenu").click(function() {
+		$(location).attr("href", "/user/delete")
+	})
 	
 })
 
@@ -48,8 +50,8 @@ $(document).ready(function() {
 	<div id="uinfoMenu">
 		<ul>
 			<li><a id="btnUserInfo">회원 정보 확인</a></li>
-			<li><a id=btnUserInfoModi>회원 정보 수정</a></li>
-			<li><a>회원 탈퇴</a></li>
+			<li><a id="btnUserInfoModi">회원 정보 수정</a></li>
+			<li><a id="btnUserInfoDeleteMenu">회원 탈퇴</a></li>
 		</ul>
 	</div>
 
