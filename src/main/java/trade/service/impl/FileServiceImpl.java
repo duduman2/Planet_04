@@ -19,6 +19,7 @@ import trade.dao.face.UploadfileDao;
 import trade.dao.impl.ProductDaoImpl;
 import trade.dao.impl.UploadfileDaoImpl;
 import trade.service.face.FileService;
+import trade.util.Paging;
 
 public class FileServiceImpl implements FileService {
 
@@ -122,8 +123,26 @@ public class FileServiceImpl implements FileService {
 
 
 	@Override
-	public List<Product> boardList(Product product, String cl) {
-		return productDao.selectBoardList(JDBCTemplate.getConnection(),product, cl);
+	public List<Product> boardList(Product product, String cl, Paging paging) {
+		return productDao.selectBoardList(JDBCTemplate.getConnection(),product, cl, paging);
+	}
+
+
+	@Override
+	public Paging getPaging(HttpServletRequest req, String cl) {
+		//총 게시글 수 조회하기
+		int totalCount = productDao.selectCntAll(JDBCTemplate.getConnection(),cl);
+		
+		//전달파라미터 curPage 추출하기
+		String param = req.getParameter("curPage");
+		int curPage = 0;
+		if(param != null && !"".equals(param)) {
+			curPage = Integer.parseInt(param);
+		}
+		
+		//Paging객체 생성
+		Paging paging = new Paging(totalCount, curPage);
+		return paging;
 	}
 
 

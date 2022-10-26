@@ -34,14 +34,14 @@ th, td {
 			<td>
 				분류 <br>
 				<input type="hidden" name="class" value="전체" checked="checked">
-				<input type="radio" name="class" id="class1" value="관엽/공기정화식물"><label for="class1">관엽/공기정화식물</label>
-				<input type="radio" name="class" id="class2" value="다육/선인장"><label for="class2">다육/선인장</label>
-				<input type="radio" name="class" id="class3" value="야생화"><label for="class3">야생화</label>
-				<input type="radio" name="class" id="class4" value="분재"><label for="class4">분재</label><br>
-				<input type="radio" name="class" id="class5" value="동양란/서양란"><label for="class5">동양란/서양란</label>
-				<input type="radio" name="class" id="class6" value="화분"><label for="class6">화분</label>
-				<input type="radio" name="class" id="class7" value="원예자재류"><label for="class7">원예자재류</label>
-				<input type="radio" name="class" id="class8" value="기타"><label for="class8">기타</label>
+				<input type="radio" name="class" id="class1" value="air"><label for="class1">관엽/공기정화식물</label>
+				<input type="radio" name="class" id="class2" value="cac"><label for="class2">다육/선인장</label>
+				<input type="radio" name="class" id="class3" value="wild"><label for="class3">야생화</label>
+				<input type="radio" name="class" id="class4" value="bon"><label for="class4">분재</label><br>
+				<input type="radio" name="class" id="class5" value="orc"><label for="class5">동양란/서양란</label>
+				<input type="radio" name="class" id="class6" value="pot"><label for="class6">화분</label>
+				<input type="radio" name="class" id="class7" value="mate"><label for="class7">원예자재류</label>
+				<input type="radio" name="class" id="class8" value="etc"><label for="class8">기타</label>
 
 			</td>
 			<td>
