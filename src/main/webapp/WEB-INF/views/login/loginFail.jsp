@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 
 <!-- 파비콘 -->
-<link rel="icon" href="/sources/admin/logo.png">
+<link rel="icon" href="/sources/favicon.ico">
+
 
 <style type="text/css">
 
