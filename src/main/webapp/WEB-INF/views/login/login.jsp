@@ -10,7 +10,8 @@
 <title>Insert title here</title>
 
 <!-- 파비콘 -->
-<link rel="icon" href="/sources/admin/logo.png">
+<link rel="icon" href="/sources/favicon.ico">
+
 
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -190,7 +191,7 @@ window.fbAsyncInit = function() {
 					<br>
 				
 				<div class="form-group">
-					<button type="button" class="btn btn-primary" id="btnCancel" >취소</button>
+					<button type="button" class="btn btn-primary" id="btnCancel" >메인페이지</button>
 				</div>
 					<br><br><br>
 					
