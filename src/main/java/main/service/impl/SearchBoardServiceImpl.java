@@ -5,6 +5,8 @@ import java.util.List;
 
 import common.JDBCTemplate;
 import dto.BoardInfo;
+import dto.Product;
+import dto.Uploadfile;
 import main.dao.face.SearchBoardDao;
 import main.dao.impl.SearchBoardDaoImpl;
 import main.service.face.SearchBoardService;
@@ -45,6 +47,13 @@ public class SearchBoardServiceImpl implements SearchBoardService {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		return searchBoardDao.selectByWriter(conn, keyword);
+	}
+	
+	@Override
+	public List<Product> getProductList() {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		return searchBoardDao.selectProductAll(conn);
 	}
 	
 }

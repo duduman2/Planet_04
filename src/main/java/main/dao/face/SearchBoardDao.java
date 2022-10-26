@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.List;
 
 import dto.BoardInfo;
+import dto.Product;
+import dto.Uploadfile;
 
 public interface SearchBoardDao {
 
@@ -50,5 +52,13 @@ public interface SearchBoardDao {
 	 * @return List<BoardInfo> - 테이블 전체 조회 목록
 	 */
 	public List<BoardInfo> selectByWriter(Connection conn, String keyword);
-	
+
+	/**
+	 * 
+	 * @param conn
+	 * @param product
+	 * @return
+	 */
+	public List<Product> selectProductAll(Connection conn);
+
 }
