@@ -1,11 +1,21 @@
 package admin.service.impl;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import admin.dao.face.AdminLoginDao;
 import admin.dao.impl.AdminLoginDaoImpl;
@@ -14,6 +24,7 @@ import common.JDBCTemplate;
 import common.Paging;
 import dto.AdminInfo;
 import dto.Notice;
+import dto.NoticeFile;
 import dto.UserInfo;
 
 public class AdminLoginServiceImpl implements AdminLoginService {
@@ -479,6 +490,8 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 
 	@Override
 	public Notice getNoticeno(HttpServletRequest req) {
+		System.out.println("AdminServiceImpl.getNoticeno Start");
+		
 		//전달파라미터를 저장할 객체 생성
 		Notice notice = new Notice();
 		
@@ -488,11 +501,13 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 			notice.setNotice_no( Integer.parseInt(param) );
 		}
 		
+		System.out.println("AdminServiceImpl.getNoticeno End");
 		return notice;
 	}
 
 	@Override
 	public Notice noticeView(Notice notice_no) {
+		System.out.println("AdminServiceImpl.noticeView Start");
 		//DB연결 객체
 		Connection conn = JDBCTemplate.getConnection();
 		
@@ -506,7 +521,215 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 		Notice notice = adminDao.selectNoticeBynotice_no(conn, notice_no);
 		
 		//조회된 게시글 리턴
+		System.out.println("AdminServiceImpl.noticeView End");
 		return notice;
+	}
+
+	@Override
+	public void write(HttpServletRequest req) {
+		System.out.println("AdminServiceImpl.write Start");
+		
+		// 지금 응답데이터가 multipart형식인지 알아보는 메소드. true / false로 반환함
+		boolean isMultipart = ServletFileUpload.isMultipartContent(req);
+		
+		// multipart가 아니면 fileupload 메소드 중단
+		if( !isMultipart ) {
+			System.out.println("[ERROR] 파일 업로드 형식 데이터가 아님");
+			return; // fileupload 메소드를 여기서 중단시켜버리고 반환해버림. 밑의 코드는 진행되지 않는다.
+		}
+		
+		// DiskFileItemFactory : 디스크 기반으로 FileItem을 처리하는 팩토리 클래스. 파일 용량이 적으면 메모리에, 크면 하드에서 처리
+		// FileItemFactory : FileItem객체를 처리하는 방식에 대한 설정값을 저장해둔 클래스
+		// FileItem : 클라이언트에서 전송한 전달 파라미터를 객체로 만든 것(폼필드, 파일 모두 객체화)
+		// 폼필드 : 파일이 아닌 전달 파라미터
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		
+		//메모리 처리 사이즈 설정
+		int maxMem = 1 * 1024 * 1024;	// 1024B * 1024B = 즉 1MB를 의미
+		factory.setSizeThreshold(maxMem); // 1MB보다 작으면 메모리에서 처리
+
+		//서블릿 컨텍스트 객체
+		// 요청받은 데이터(req)를 처리하고 있는 서블릿의 정보를 확인할 수 있다. ServletContext 클래스타입의 변수에만 담을 수 있음.
+		ServletContext context = req.getServletContext();
+		
+		//임시 파일 저장 폴더
+		String path = context.getRealPath("tmp"); // 서블릿 정보를 통해 실제 서버의 "tmp"폴더 경로를 알아낸다
+		File tmpRepository = new File(path); // tmpPath를 가지고 임시 파일을 저장할 File객체 생성
+		tmpRepository.mkdir(); // 폴더 생성하기. tmp 폴더가 있으면 생성하지 않는다.
+		factory.setRepository(tmpRepository); // temRepository 객체를 토대로 임시 파일을 저장할 폴더를 factory 객체에 설정.
+
+		// 파일 업로드를 수행하는 upload 객체 생성 // 파라미터로 factory 객체 필요
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		
+		//파일 업로드 용량 제한
+		int maxFile = 10 * 1024 * 1024; // 10MB // 최대 업로드 허용 사이즈
+		upload.setFileSizeMax(maxFile); // 파일 업로드 용량 제한
+
+		//파일 업로드된 데이터 파싱
+		List<FileItem> items = null;  // FileItem 클래스 형식으로 제네릭설정하여 List객체로 items 변수 생성
+		try {
+			// 요청객체에 담겨있는 전달 파라미터를 파싱
+			// 폼 필드를 추출하면서 파일도 서버로 업로드를 수행함
+			items = upload.parseRequest(req);
+		} catch (FileUploadException e) {
+			e.printStackTrace();
+		}
+		
+		// 추출된 전달 파라미터 데이터를 처리해야 함. List<FileItem> 객체에 파일과 폼필드 데이터가 파싱되어 들어있음.
+		// 용량이 0인 빈 파일은 무시하고 파일은 디스크에 저장.
+		// 폼필드 정보와 파일 정보는 DTO객체에 저장해서 DB에도 삽입 필요.
+
+		//공지사항 정보 DTO객체
+		Notice notice = new Notice();
+		
+		//공지사항 첨부파일 정보 DTO객체
+		NoticeFile noticeFile = new NoticeFile();
+	
+		//파일아이템의 반복자
+		Iterator<FileItem> iter = items.iterator(); // <FileItem>은 제네릭 형식이고 items는 List객체의 변수지?
+
+		while( iter.hasNext() ) { // FileItem에 처리할 놈이 있으면 true, 없으면 false임.
+			
+			FileItem item = iter.next(); // 전달 파라미터 FileItem을 하나씩 꺼내서 적용하기
+			
+			//--- 1) 빈 파일에 대한 처리 ---
+			if( item.getSize() <= 0 ) { //전달 데이터의 크기 // 빈 파일이면 바로 다음 파일로 while문 진행
+				//빈 파일은 무시하고 다음 FileItem처리로 넘어간다
+				continue;
+			}
+			
+			//--- 2) 폼 필드에 대한 처리 ---
+			if( item.isFormField() ) { // FileItem 객체의 값이 폼필드 형식이면
+				
+				// 폼필드는 key=value쌍으로 전달됨
+				// key는 item.getFieldName()으로, value는 item.getString("UTF-8")으로 얻어올 수 있음
+				
+				//키(key) 추출하기
+				String key = item.getFieldName();
+				
+				//값(value) 추출하기
+				String value = null;
+				try {
+					value = item.getString("UTF-8"); //한글 인코딩 지정
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+				
+				//key에 맞게 value를 DTO에 삽입하기
+				if( "title".equals(key) ) {
+					notice.setTitle(value);
+				}
+				if( "notice_content".equals(key) ) {
+					notice.setNotice_content(value);
+				}
+			} // if( item.isFormField() ) end
+			
+			
+			
+			//--- 3) 파일에 대한 처리 ---
+			if( !item.isFormField() ) { // FileItem 객체의 값이 폼필드 형식이 아니면 = 즉 파일이면
+				
+				// 서버는 파일의 이름을 원본과 다르게 바꿔서 저장해야 함(중복 방지)
+				// 그러므로 원본 이름과 변경되는 이름 둘다 DB에 기록 필요
+				
+				// 날짜를 문자열로 변환해주는 SimpleDateFormat 객체 생성
+				
+				//저장 파일명 처리
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssS");
+				String rename = sdf.format(new Date()); //현재시간
+				
+				//파일 업로드 폴더
+				File uploadFolder = new File( context.getRealPath("upload") );
+				uploadFolder.mkdir();
+				
+				// new File(context.getRealPath("upload")).mkdir(); 이거랑 같은 이야기지.
+				
+				// 파일경로는 알고. mkdir();이 폴더 생성하는 메소드지? 근데 이 메소드 File클래스 꺼지?
+				// 그래서 File객체 new로 새롭게 생성해주면서 메소드 쓰는거지. 이게 자바의 특성임. 
+				// 특정 클래스의 메소드 쓰려면 그 클래스 객체로 인스턴스 생성하는거.
+				
+				//업로드할 파일 객체 생성하기
+				File up = new File(uploadFolder, rename);
+				try {
+					item.write(up);	//임시파일을 실제 업로드 파일로 출력한다
+					item.delete(); //임시파일 제거
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				//업로드된 파일의 정보를 DTO객체에 저장하기
+				noticeFile.setOriginname(item.getName());
+				noticeFile.setStoredname(rename);
+				noticeFile.setFilesize((int)item.getSize());
+				
+			} // if( !item.isFormField() ) end
+			
+		} // while( iter.hasNext() ) end
+
+		
+		//DB연결 객체
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//게시글 번호 생성
+		int noticeno = adminDao.selectNextNoticeno(conn);
+		
+		
+		//게시글 번호 삽입
+		notice.setNotice_no(noticeno);
+
+		//작성자 ID 처리
+		notice.setAdmin_id( (String) req.getSession().getAttribute("userid") );
+		
+		if( adminDao.insert(conn, notice, req) > 0 ) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+
+		
+		//첨부파일 정보 삽입
+		if( noticeFile.getFilesize() != 0 ) { //첨부 파일이 존재할 때에만 동작
+			
+			//게시글 번호 삽입 (FK)
+			noticeFile.setnoticeno(noticeno);
+			
+			if( adminDao.insertFile(conn, noticeFile) > 0 ) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+			
+		}
+		
+		//----------------------------------------------
+		
+		System.out.println("AdminServiceImpl.write End");
+	}
+
+	@Override
+	public String getOriginname(Notice notice) {
+		System.out.println("AdminServiceImpl.getOriginname Start");
+		
+		System.out.println("AdminServiceImpl.getOriginname End");
+		return adminDao.selectOriginname(JDBCTemplate.getConnection(), notice);
+	}
+	
+	@Override
+	public String getStoredname(Notice notice) {
+		System.out.println("AdminServiceImpl.getStoredname Start");
+		
+		System.out.println("AdminServiceImpl.getStoredname End");
+		return adminDao.selectStoredname(JDBCTemplate.getConnection(), notice);
+	}
+
+	@Override
+	public void deleteNotice(Notice notice) {
+		System.out.println("AdminServiceImpl.deleteNotice Start");
+		
+		adminDao.deleteNotice(JDBCTemplate.getConnection(), notice);
+		
+		System.out.println("AdminServiceImpl.deleteNotice End");
 	}
 
 }

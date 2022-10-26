@@ -3,9 +3,12 @@ package admin.dao.face;
 import java.sql.Connection;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import common.Paging;
 import dto.AdminInfo;
 import dto.Notice;
+import dto.NoticeFile;
 import dto.UserInfo;
 
 public interface AdminLoginDao {
@@ -186,5 +189,50 @@ public interface AdminLoginDao {
 	 * @return 풀dto객체
 	 */
 	public Notice selectNoticeBynotice_no(Connection conn, Notice notice_no);
+
+	/**
+	 * 시퀀스를 이용하여 다음 게시글 번호 조회하기
+	 * 
+	 * @param conn DB 객체
+	 * @return 다음 게시글 번호
+	 */
+	public int selectNextNoticeno(Connection conn);
+
+	/**
+	 * 게시글 입력
+	 * 
+	 * @param conn DB객체
+	 * @param notice 게시글dto
+	 * @param req 
+	 * @return 수행 결과
+	 */
+	public int insert(Connection conn, Notice notice, HttpServletRequest req);
+
+	/**
+	 * 첨부파일 삽입
+	 * 
+	 * @param conn DB 객체
+	 * @param noticeFile 첨부파일 정보
+	 * @return 수행 결과
+	 */
+	public int insertFile(Connection conn, NoticeFile noticeFile);
+
+	/**
+	 * notice_no로 originname이나 storedname 찾기
+	 * 
+	 * @param connection DB 객체
+	 * @param notice notice_no
+	 * @return 원본명 또는 저장명 반환
+	 */
+	public String selectOriginname(Connection connection, Notice notice);
+	public String selectStoredname(Connection connection, Notice notice);
+
+	/**
+	 * 공지 삭제
+	 * 
+	 * @param connection db 객체
+	 * @param notice 공지 번호
+	 */
+	public void deleteNotice(Connection connection, Notice notice);
 
 }

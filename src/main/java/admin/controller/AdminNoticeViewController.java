@@ -24,10 +24,15 @@ public class AdminNoticeViewController extends HttpServlet {
 		//전달파라미터 객체 얻어오기
 		Notice notice = adminService.getNoticeno(req);
 		
+		String originname = adminService.getOriginname( notice );
+		String storedname = adminService.getStoredname( notice );
+		
 		//게시글 상세보기 조회 결과 얻어오기
 		Notice viewNotice = adminService.noticeView( notice );
 		
 		//조회결과를 MODEL값으로 전달
+		req.setAttribute("originname", originname);
+		req.setAttribute("storedname", storedname);
 		req.setAttribute("viewNotice", viewNotice);
 		
 		//View 지정 및 응답

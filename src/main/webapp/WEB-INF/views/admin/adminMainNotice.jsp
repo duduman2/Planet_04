@@ -77,8 +77,8 @@ $(document).ready(function() {
 
 function createnotice() {
 	
-	const width = 600;
-	const height = 600;
+	const width = 800;
+	const height = 650;
 	let left = (document.body.offsetWidth / 2) - (width / 2);
 	let tops = (document.body.offsetHeight / 2) - (height / 2);
 	left += window.screenLeft;

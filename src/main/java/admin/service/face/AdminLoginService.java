@@ -196,5 +196,28 @@ public interface AdminLoginService {
 	 * @return notice 풀정보
 	 */
 	public Notice noticeView(Notice notice);
+
+	/**
+	 * 작성한 게시글을 DB에 저장
+	 * 
+	 * @param req 요청 정보 객체
+	 */
+	public void write(HttpServletRequest req);
+
+	/**
+	 * 공지번호로 파일 원본명, 저장명 가져오기
+	 * 
+	 * @param notice 공지번호
+	 * @return 파일 원본명 저장명
+	 */
+	public String getOriginname(Notice notice);
+	public String getStoredname(Notice notice);
+
+	/**
+	 * 공지 삭제
+	 * 
+	 * @param notice 공지 번호
+	 */
+	public void deleteNotice(Notice notice);
 	
 }
