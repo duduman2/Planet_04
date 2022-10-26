@@ -10,11 +10,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import admin.dao.face.AdminLoginDao;
 import common.JDBCTemplate;
 import common.Paging;
 import dto.AdminInfo;
 import dto.Notice;
+import dto.NoticeFile;
 import dto.UserInfo;
 
 public class AdminLoginDaoImpl implements AdminLoginDao {
@@ -895,6 +898,180 @@ System.out.println("AdminLoginDaoImpl.select_tbl_admininfo2 Start");
 		System.out.println("AdminLoginDaoImpl.selectNoticeBynotice_no End");
 		
 		return notice;
+	}
+
+	@Override
+	public int selectNextNoticeno(Connection conn) {
+		System.out.println("AdminLoginDaoImpl.selectNextNoticeno Start");
+		
+		String sql = "";
+		sql += "SELECT tbl_notice_seq.nextval FROM dual";
+		
+		int nextNoticeno = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				nextNoticeno = rs.getInt("nextval");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectNextNoticeno End");
+		return nextNoticeno;
+		
+	}
+
+	@Override
+	public int insert(Connection conn, Notice notice, HttpServletRequest req) {
+		System.out.println("AdminLoginDaoImpl.insert Start");
+		
+		String sql = "";
+		sql += "INSERT INTO tbl_notice ( notice_no, hit, title, notice_content, insert_dat, admin_no )";
+		sql += " VALUES ( ?, 0, ?, ?, sysdate, (select admin_no from tbl_admininfo where admin_id = ?) )";
+		
+		int res = 0;
+
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, notice.getNotice_no());
+			ps.setString(2, notice.getTitle());
+			ps.setString(3, notice.getNotice_content());
+			ps.setString(4, (String) req.getSession().getAttribute("userid"));
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.insert End");
+		return res;
+	}
+
+	@Override
+	public int insertFile(Connection conn, NoticeFile noticeFile) {
+		System.out.println("AdminLoginDaoImpl.insertFile Start");
+		
+		String sql = "";
+		sql += "INSERT INTO tbl_notice_file( file_no, notice_no, originname, storedname, filesize, write_date )";
+		sql += " VALUES( tbl_notice_file_seq.nextval, ?, ?, ?, ?, sysdate )";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, noticeFile.getnoticeno());
+			ps.setString(2, noticeFile.getOriginname());
+			ps.setString(3, noticeFile.getStoredname());
+			ps.setInt(4, noticeFile.getFilesize());
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.insertFile End");
+		return res;
+	}
+
+	@Override
+	public String selectOriginname(Connection conn, Notice notice) {
+		System.out.println("AdminLoginDaoImpl.selectOriginname Start");
+		
+		String sql = "select originname from tbl_notice_file where notice_no = ?";
+		
+		String originName = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, notice.getNotice_no());
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				originName = rs.getString("originname");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectOriginname End");
+		return originName;
+	}
+
+	@Override
+	public String selectStoredname(Connection conn, Notice notice) {
+		System.out.println("AdminLoginDaoImpl.selectStoredname Start");
+		
+		String sql = "select storedname from tbl_notice_file where notice_no = ?";
+		
+		String storedname = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, notice.getNotice_no());
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				storedname = rs.getString("storedname");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectStoredname End");
+		return storedname;
+	}
+
+	@Override
+	public void deleteNotice(Connection conn, Notice notice) {
+		
+		System.out.println("AdminLoginDaoImpl.deleteNotice Start");
+		
+		String sql = "delete from tbl_notice where notice_no = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, notice.getNotice_no());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.deleteNotice End");
+		
 	}
 
 }

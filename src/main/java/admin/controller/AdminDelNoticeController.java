@@ -10,19 +10,24 @@ import javax.servlet.http.HttpServletResponse;
 
 import admin.service.face.AdminLoginService;
 import admin.service.impl.AdminLoginServiceImpl;
+import dto.Notice;
 
-@WebServlet("/admin/loginfail")
-public class AdminLoginFailController extends HttpServlet {
+@WebServlet("/admin/mainnotice/delete")
+public class AdminDelNoticeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	AdminLoginService adminService = new AdminLoginServiceImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("/admin/mainnotice/delete [GET] Start");
 		
-		System.out.println("/admin/loginfail [GET] Start");
+		Notice notice = adminService.getNoticeno(req);
 		
-		req.getRequestDispatcher("/WEB-INF/views/admin/adminLoginFail.jsp").forward(req, resp);
+		adminService.deleteNotice(notice);
 		
-		System.out.println("/admin/loginfail [GET] End");
+		req.getRequestDispatcher("/WEB-INF/views/admin/deletenotice.jsp").forward(req, resp);
+		
+		System.out.println("/admin/mainnotice/delete [GET] End");
 		
 	}
 

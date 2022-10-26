@@ -1,8 +1,11 @@
+<%@page import="dto.NoticeFile"%>
 <%@page import="dto.Notice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%	Notice viewNotice = (Notice) request.getAttribute("viewNotice"); %>
+<%  String originname = (String) request.getAttribute("originname"); %>
+<%  String storedname = (String) request.getAttribute("storedname"); %>
 
 <%@ include file="./header.jsp" %>
     
@@ -70,10 +73,17 @@ $(document).ready(function() {
 
 </table>
 
+첨부파일<br>
+<a href="/upload/<%=storedname %>" download="<%=originname %>">
+<%=originname %></a>
+
 <div class="text-center">
 	<button id="btnList" class="btn btn-primary">목록</button>
 	<button id="btnUpdate" class="btn btn-info">수정</button>
-	<button id="btnDelete" class="btn btn-danger">삭제</button>
+	<form action="<%=request.getContextPath() %>/admin/mainnotice/delete" method="get" style="display: inline;">
+		<input type="text" name="notice_no" value="<%=viewNotice.getNotice_no() %>" style="display: none;">
+		<button id="btnDelete" class="btn btn-danger">삭제</button>
+	</form>
 </div>
 
 </body>
