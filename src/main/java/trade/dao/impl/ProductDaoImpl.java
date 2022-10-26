@@ -10,6 +10,7 @@ import java.util.List;
 import common.JDBCTemplate;
 import dto.Product;
 import trade.dao.face.ProductDao;
+import trade.util.Paging;
 
 public class ProductDaoImpl implements ProductDao {
 
@@ -35,7 +36,7 @@ public class ProductDaoImpl implements ProductDao {
 			ps.setString(1, product.getProductName());
 			ps.setString(2, product.getProductContent());
 			ps.setInt(3, product.getProductPrice());
-			ps.setString(4, product.getProductClass()+"전체");
+			ps.setString(4, product.getProductClass()+"all");
 			
 			res= ps.executeUpdate();
 			
@@ -49,29 +50,35 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public List<Product> selectBoardList(Connection conn, Product product, String cl) {
+	public List<Product> selectBoardList(Connection conn, Product product, String cl, Paging paging) {
 
 		String sql = "";
 		
 //		sql += "SELECT productname, productprice, fileno";
 //		sql += " FROM product";
 		
-		sql += "select p.productno, p.fileno, p.productname, p.productprice, p.productclass, u.stored_name, u.filepath";
-		sql += " from product p";
-		sql += " inner join uploadfile u";
-		sql += " on p.fileno = u.fileno";
+		sql += " select * from (";
+		sql += " 	SELECT rownum rnum, pu.* FROM (";
+		sql += " 		select p.productno, p.fileno, p.productname, p.productprice, p.productclass, u.stored_name, u.filepath";
+		sql += " 		from product p";
+		sql += " 		inner join uploadfile u";
+		sql += " 		on p.fileno = u.fileno";
 //		sql += " where p.productclass like (?)";
-		sql += " where instr(p.productclass,?) > 0";
-		sql += " order by p.productno desc";
+		sql += " 		where instr(p.productclass,?) > 0";
+		sql += " 	order by p.productno desc)pu";
+		sql += " ) pro";
+		sql += " where rnum between ? and ?";
 		
 		List<Product> list = new ArrayList<>();
 		try {
 			ps = conn.prepareStatement(sql);
 			
 			if(cl==null) {
-				cl = "전체"; 
+				cl = "all"; 
 			}
 			ps.setString(1, cl);
+			ps.setInt(2, paging.getStartNo());
+			ps.setInt(3, paging.getEndNo());
 			
 			rs = ps.executeQuery();
 			
@@ -140,6 +147,33 @@ public class ProductDaoImpl implements ProductDao {
 		}
 
 		return product;
+	}
+
+	@Override
+	public int selectCntAll(Connection conn, String cl) {
+		String sql = "";
+		sql += "SELECT count(*) cnt FROM product";
+		sql += " where instr(productclass,?) > 0";
+		//총 게시글 수 변수
+		int count = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, cl);
+//			System.out.println(cl);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				count = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return count;
 	}
 
 

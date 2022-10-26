@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import dto.BoardInfo;
 import dto.Product;
 import dto.Uploadfile;
+import trade.util.Paging;
 
 public interface FileService {
 
@@ -18,6 +19,9 @@ public interface FileService {
 	public void cosFileupload(HttpServletRequest req);
 	
 
-	public List<Product> boardList(Product product, String cl);
+	public List<Product> boardList(Product product, String cl, Paging paging);
+
+
+	public Paging getPaging(HttpServletRequest req, String cl);
 
 }
