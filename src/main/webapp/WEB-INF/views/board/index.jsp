@@ -9,7 +9,7 @@
 <body>
 
 	<script>
-		location.href = 'bbs.jsp';
+		location.href = '/board/bbs.jsp';
 	</script>
 
 
