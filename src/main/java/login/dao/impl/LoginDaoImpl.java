@@ -300,7 +300,7 @@ public class LoginDaoImpl implements LoginDao {
 
 
 
-
+	//아이디 찾기
 	@Override
 	public UserInfo selectUserInfoByU_nameU_email(Connection conn, UserInfo userinfo) {
 		String sql = "";
@@ -335,7 +335,7 @@ public class LoginDaoImpl implements LoginDao {
 	}
 
 
-
+	//비밀번호 찾기
 	@Override
 	public UserInfo selectUserInfoByU_nameU_id(Connection conn, UserInfo userinfo) {
 		String sql = "";
@@ -370,7 +370,7 @@ public class LoginDaoImpl implements LoginDao {
 	}
 
 
-
+	//로그인 
 	@Override
 	public UserInfo selectOneMember(Connection conn, String u_id, String u_pw) {
 		UserInfo userinfo = null;

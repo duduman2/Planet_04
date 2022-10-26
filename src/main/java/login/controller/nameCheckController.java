@@ -32,9 +32,9 @@ public class nameCheckController extends HttpServlet {
 
 		// 성공여부 확인 : 개발자용
 		if (nameCHcek == 0) {
-			System.out.println("이미 존재하는 아이디입니다.");
+			System.out.println("이미 존재하는 정보입니다.");
 		} else if (nameCHcek == 1) {
-			System.out.println("사용 가능한 아이디입니다.");
+			System.out.println("이름 정보가 없습니다.");
 		}
 				
 		out.write(nameCHcek + ""); // --> ajax 결과값인 result가 됨

@@ -81,17 +81,6 @@ public class LoginServiceImpl implements LoginService {
 	} 
 
 	@Override
-	public UserInfo getFindUserInfo(HttpServletRequest req) {
-		
-		UserInfo userinfo = new UserInfo();
-		
-		userinfo.setU_name( req.getParameter("u_name") );
-		userinfo.setU_email( req.getParameter("u_email") );
-		
-		return userinfo;
-	} 
-
-	@Override
 	public void join(UserInfo userinfo) {
 		
 		Connection conn = JDBCTemplate.getConnection();
@@ -104,14 +93,29 @@ public class LoginServiceImpl implements LoginService {
 		
 	}
 	
-
+//	아이디 찾기
 	@Override
 	public UserInfo findId(UserInfo userinfo) {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		return loginDao.selectUserInfoByU_nameU_email(conn, userinfo);
 	}
+	
+	
+//	아이디 찾기 - 이름, 이메일
+	@Override
+	public UserInfo getFindUserInfo(HttpServletRequest req) {
+		
+		UserInfo userinfo = new UserInfo();
+		
+		userinfo.setU_name( req.getParameter("u_name") );
+		userinfo.setU_email( req.getParameter("u_email") );
+		
+		return userinfo;
+	} 
 
+	
+//	비밀번호 찾기
 	@Override
 	public UserInfo findPw(UserInfo userinfo) {
 		Connection conn = JDBCTemplate.getConnection();
@@ -119,17 +123,20 @@ public class LoginServiceImpl implements LoginService {
 		return loginDao.selectUserInfoByU_nameU_id(conn, userinfo);
 	}
 
+	
+//	비밀번호 찾기 - 이름, 아이디
 	@Override
 	public UserInfo getFindPwUserInfo(HttpServletRequest req) {
 		
 		UserInfo userinfo = new UserInfo();
 		
 		userinfo.setU_name( req.getParameter("u_name") );
-		userinfo.setU_email( req.getParameter("u_id") );
+		userinfo.setU_id( req.getParameter("u_id") );
 		
 		return userinfo;
 	}
 
+	//로그인
 	@Override
 	public UserInfo selectOneMember(String u_id, String u_pw) {
 		

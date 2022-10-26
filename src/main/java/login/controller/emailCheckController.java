@@ -33,9 +33,9 @@ public class emailCheckController extends HttpServlet {
 
 		// 성공여부 확인 : 개발자용
 		if (emailCHcek == 0) {
-			System.out.println("이미 존재하는 아이디입니다.");
+			System.out.println("이미 존재하는 이메일입니다.");
 		} else if (emailCHcek == 1) {
-			System.out.println("사용 가능한 아이디입니다.");
+			System.out.println("사용 가능한 이메일입니다.");
 		}
 				
 		out.write(emailCHcek + ""); // --> ajax 결과값인 result가 됨

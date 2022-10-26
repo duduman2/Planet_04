@@ -13,6 +13,10 @@
 
 <style type="text/css">
 
+body{margin: 0 auto;}
+
+h1{color:#5B9E28;}
+
 div{
 	position: absolute;
     top: 50%;
@@ -25,11 +29,11 @@ div{
 <body>
 
 <div>
+<h1>비밀번호 찾기 결과</h1><br>
 
-<h1 style="margin: 0 auto; text-align:center; color: #5B9E28;">비밀번호 찾기 결과</h1><br><br>
+<hr><br>
 
-<h3 style="margin: 0 auto; text-align:center;">비밀번호는 <%=((UserInfo)request.getAttribute("u_pw")).getU_pw() %>입니다.</h3>
-
+<h3>비밀번호는 <%=((UserInfo)request.getAttribute("u_pw")).getU_pw() %>입니다.</h3>
 
 </div>
 

@@ -38,29 +38,6 @@ public class JoinController extends HttpServlet {
 
 		//전달 파라미터에 대한 한글 인코딩 설정
 		req.setCharacterEncoding("UTF-8");
-		
-		String u_id = req.getParameter("u_id");
-		// join.jsp에서 받아온 key값이 userId이고
-		// value값은 유저가 실제로 적은 값, String userId에는 value값이 들어간다.
-		PrintWriter out = resp.getWriter();
-				
-		LoginDao loginDao = new LoginDaoImpl();
-				
-		int idCHcek = loginDao.idCheck(u_id);
-
-		// 성공여부 확인 : 개발자용
-		if (idCHcek == 0) {
-			System.out.println("이미 존재하는 아이디입니다.");
-		} else if (idCHcek == 1) {
-			System.out.println("사용 가능한 아이디입니다.");
-		}
-				
-		out.write(idCHcek + ""); // --> ajax 결과값인 result가 됨
-				// --> String으로 값을 내보낼 수 있도록 + "" 를 해준다
-		
-		
-
-		
 	
 		//회원가입 전달파라미터 추출하기
 		UserInfo userinfo = loginService.getJoinUserInfo(req);

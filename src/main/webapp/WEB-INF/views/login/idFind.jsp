@@ -27,14 +27,12 @@ $(document).ready(function() {
 			data : {u_name: u_name},
 			dataType : 'json',
 			success : function(result){
-				if(result != 0){
-					$("#nameCheck").html('이름 확인 성공');
-					$("#nameCheck").attr('color','green');
-					
-					
-				} else{
+				if(result = 0){
 					$("#nameCheck").html('이름 정보가 없습니다');
 					$("#nameCheck").attr('color','red');
+				} else{
+					$("#nameCheck").html('이름 확인 성공');
+					$("#nameCheck").attr('color','green');
 				} 
 			},
 			error : function(){
@@ -55,20 +53,19 @@ $(document).ready(function() {
 			data : {u_email: u_email},
 			dataType : 'json',
 			success : function(result){
-				if(result != 0){
-					$("#emailCheck").html('이메일 확인 성공');
-					$("#emailCheck").attr('color','green');
-					
-					
-				} else{
+				if(result = 0){
 					$("#emailCheck").html('이메일 정보가 없습니다');
 					$("#emailCheck").attr('color','red');
+				} else{
+					$("#emailCheck").html('이메일 확인 성공');
+					$("#emailCheck").attr('color','green');
 				} 
 			},
 			error : function(){
 				alert("서버요청실패");
 			}
 		})
+		 
 	})
 	
 })
@@ -79,7 +76,14 @@ $(document).ready(function() {
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	$("#idFind").click(function() {
+	//아이디 찾기 버튼
+	$("#idFind").click(function() { //아이디 검색
+		if($("input").val()==''){
+			alert("정보를 입력해주세요");
+			return false;
+		} else {
+			return true;
+		}
 		$("form").submit();
 	})
 
