@@ -31,8 +31,8 @@
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="main.jsp">메인</a></li>
-				<li class="active"><a href="bbs.jsp">게시판</a></li> <!-- 이게 게시판 보드임 -->
+				<li><a href="/board/main.jsp">메인</a></li>
+				<li class="active"><a href="/board/bbs.jsp">게시판</a></li> <!-- 이게 게시판 보드임 -->
 			</ul>
 
 			<%
@@ -65,7 +65,7 @@
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">회원관리<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="logoutAction.jsp">로그아웃</a><li>
+						<li><a href="">로그아웃</a><li>
 					</ul>
 				</li>	
 			</ul>
@@ -97,11 +97,11 @@
 						<td>1</td>					
 						<td>안녕하세요</td>					
 						<td>ㅁㄴㅇ</td>					
-						<td>2022-10-18</td>					
+						<td>2022-12-31</td>					
 					</tr>
 				</tbody>
 			</table>
-			<a href="write.jsp" class="btn btn-primary pull-right">글쓰기</a>
+			<a href="/board/write.jsp" class="btn btn-primary pull-right">글쓰기</a>
 		</div>
 	</div>
 
