@@ -81,17 +81,20 @@ $(document).ready(function(){
 		})
 	}
 	
-	$("#goWish").click(function(){		// 장바구니 담기 버튼 클릭
+	$.loginCheck = function(){
 		var sessionData = <%=session.getAttribute("login")%>
-		console.log("goWish click")
-		if(null==sessionData || !sessionData){ // 로그인 안됐을경우
+		if(null==sessionData || !sessionData){// 로그인 안됐을경우
 			console.log("state : logout")
 			if(confirm("로그인이 필요합니다\n로그인페이지로 이동하시겠습니까?")){
 				location.replace('/login/con') //로그인 페이지 이동
-			}else {
-				return
 			}
-		} else{	//로그인 돼있을경우
+		}else{
+			return true
+		}
+	}
+	$("#goWish").click(function(){		// 장바구니 담기 버튼 클릭
+		console.log("goWish click")
+		if($.loginCheck()){
 			if(confirm("장바구니에 담겼습니다\n장바구니로 이동하시겠습니까?")){
 				$.cartInsert()
 				location.replace('/cart/list') //장바구니 페이지 이동
