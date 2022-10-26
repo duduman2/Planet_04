@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<link rel="icon" href="<%=request.getContextPath() %>/sources/admin/favicon.ico">
 <title>장바구니 리스트</title>
 
 <%@include file="../layout/header.jsp" %>
@@ -16,7 +17,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>>
 </script>
 
 
@@ -31,7 +32,7 @@ th { text-align: center; }
 <!-- </head> -->
 <!-- <body> -->
 
-<h1>장바구니 리스트</h1>
+<h3>&nbsp;&nbsp;&nbsp장바구니 리스트</h3>
 <hr>
 
 <div id="cartResult">
@@ -86,7 +87,7 @@ th { text-align: center; }
 			<button style="width: 120px; height: 70px; float: center;" >결제하기</button>
 			&nbsp;&nbsp;&nbsp;
 			<button id="btnBack" class="btnBack" style="width: 120px; 
-				height: 50px;" onclick="history.go(-1)">되돌아가기</button>
+				height: 50px;" onclick="history.go(-1)">이전으로</button>
 		</div>
 
 <div id="blank" style="height: 100px;"></div>

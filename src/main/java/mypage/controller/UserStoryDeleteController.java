@@ -22,13 +22,15 @@ public class UserStoryDeleteController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/userStoryDelete/controller [GET]");
-	
+		System.out.println("/user/storyDelete [GET]");
+		
+		
+		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/userStoryDelete/controller [POST]");
+		System.out.println("/user/storyDelete [POST]");
 
 	
 	}

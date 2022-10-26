@@ -35,8 +35,12 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public int deleteUser() {
-
+	public int deleteUser(int userno) {
+		System.out.println("MypageService - deleteUser(userno) - DB 연결 객체 생성완료 ");
+		
+		System.out.println("MypageService - deleteUser(userno) - DAO 호출 후");
+		
+		// DB 조회 결과 반환
 		return 0;
 	}
 
@@ -93,6 +97,16 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public int modifyUserInfo() {
 
+		return 0;
+	}
+
+	@Override
+	public int deleteUser(UserInfo param) {
+		System.out.println("MypageService - deleteUser(param) - DB 연결 객체 생성완료 ");
+		
+		System.out.println("MypageService - deleteUser(param) - DAO 호출 후");
+		
+		// DB 조회 결과 반환
 		return 0;
 	}
 

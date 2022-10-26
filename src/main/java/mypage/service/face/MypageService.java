@@ -50,7 +50,23 @@ public interface MypageService {
 	public int modifyUserInfo(); //회원 정보 수정 int, UserInfo
 	
 	
-	public int deleteUser(); //회원 탈퇴 int
+	/**
+	 * 마이페이지 회원 정보 삭제
+	 * 
+	 * @param param - DB 연결 객체
+	 * @return UserInfo - 회원 정보 삭제
+	 */
+	
+	/**
+	 * 마이페이지 - userno를 이용하여 회원 정보 삭제
+	 * 
+	 * @param param
+	 * @return userno - 삭제할 회원의 PK
+	 */
+	public int deleteUser(UserInfo param); //회원 탈퇴 int
+
+
+	public int deleteUser(int userno);
 
 
 	/**
