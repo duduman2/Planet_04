@@ -191,7 +191,7 @@ window.fbAsyncInit = function() {
 					<br>
 				
 				<div class="form-group">
-					<button type="button" class="btn btn-primary" id="btnCancel" >취소</button>
+					<button type="button" class="btn btn-primary" id="btnCancel" >메인페이지</button>
 				</div>
 					<br><br><br>
 					

@@ -193,7 +193,7 @@ form{position: absolute;
 
 <div class="form-group" style="margin: 0 auto;">
 	<button type="button" class="btn btn-primary" id="pwFind" style="margin-right: 6px;">비밀번호 찾기</button>
-	<button type="button" class="btn btn-primary" id="btnCancel">취소</button><br><br>
+	<button type="button" class="btn btn-primary" id="btnCancel">메인페이지</button><br><br>
 </div>
 
 
