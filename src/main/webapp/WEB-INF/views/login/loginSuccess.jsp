@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<!-- 파비콘 -->
+<link rel="icon" href="/sources/admin/logo.png">
+
 <style type="text/css">
 
 h1{color: blue; text-align: center;}
@@ -40,7 +43,8 @@ a{color:#5B9E28; font-weight: bold; text-decoration: none;}
 	
 	<h3><%=session.getAttribute("loginid") %>님, 로그인되었습니다</h3><br><br>
 	
-	<a href="/main">메인 화면</a><br>
+	<a href="/main" style="margin-left: 15px;">메인 화면</a>
+	<a href="/logout/con">로그아웃</a><br>
 	
 </div>
 

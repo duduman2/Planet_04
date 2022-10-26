@@ -8,6 +8,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<!-- 파비콘 -->
+<link rel="icon" href="/sources/admin/logo.png">
+
 <style type="text/css">
 
 div{

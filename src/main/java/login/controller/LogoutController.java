@@ -18,16 +18,18 @@ public class LogoutController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		HttpSession session= req.getSession();
-		
 		//세션 정보 삭제 - 로그아웃
 		req.getSession().invalidate();
+		
+		System.out.println("로그아웃 성공");
 		
 		//메인페이지로 리다이렉트
 		resp.sendRedirect("/main");
 
 	}
 
+	
+	
 	
 	
 }
