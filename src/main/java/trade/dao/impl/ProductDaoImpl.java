@@ -24,8 +24,8 @@ public class ProductDaoImpl implements ProductDao {
 		int res= 0;
 		
 		String sql = "";
-		sql += "INSERT INTO product (productno, productname, productcontent, productprice,productclass, fileno)";
-		sql += " VALUES( boardd_seq.nextval, ?, ? , ?, ?, uploadfile_seq.CURRVAL)"; 
+		sql += "INSERT INTO product (productno, productname, productcontent, productprice,productclass, userid, fileno)";
+		sql += " VALUES(product_seq.nextval, ?, ? , ?, ?,?, uploadfile_seq.CURRVAL)"; 
 						// boardd_seq 바꿔야댐
 						//
 						//
@@ -37,6 +37,7 @@ public class ProductDaoImpl implements ProductDao {
 			ps.setString(2, product.getProductContent());
 			ps.setInt(3, product.getProductPrice());
 			ps.setString(4, product.getProductClass()+"all");
+			ps.setString(5, product.getProuserId());
 			
 			res= ps.executeUpdate();
 			
@@ -113,7 +114,7 @@ public class ProductDaoImpl implements ProductDao {
 //		sql += " FROM product";
 //		sql += " WHERE productno= ?";
 		
-		sql += "select p.productno, p.fileno, p.productname,p.productcontent, p.productprice, p.productdate, u.stored_name, u.filepath";
+		sql += "select p.productno, p.fileno, p.productname,p.productcontent, p.productprice, p.productdate, u.stored_name, u.filepath, p.userid";
 		sql += " from product p";
 		sql += " inner join uploadfile u";
 		sql += " on p.fileno = u.fileno";
@@ -136,9 +137,9 @@ public class ProductDaoImpl implements ProductDao {
 				product.setFilePath(rs.getString("filepath"));
 //				product.setHit(rs.getInt("hit"));
 				product.setProductDate(rs.getDate("productdate"));
-				
+				product.setProuserId(rs.getString("userid"));
 			}
-			System.out.println("[Dao]조회완료");
+			System.out.println("[글 상세보기 DAO]조회완료");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

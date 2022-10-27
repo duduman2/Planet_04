@@ -124,6 +124,8 @@ $(document).ready(function(){
 		<%=productView.getProductName()%><br><hr>
 		등록일 :<br>
 		<%=productView.getProductDate() %><br><hr>
+		판매자 :<br>
+		<%=productView.getProuserId() %><br><hr>
 		제품 설명 :<br>
 		<%=productView.getProductContent() %><br><hr>
 		제품 가격 : <br>
@@ -139,6 +141,7 @@ $(document).ready(function(){
 			<p id="paymoney">원</p>
 			
 			<button id="goWish">장바구니</button>
+			<button id="goBuy">구매하기</button>
 <!-- 			</form> -->
 		</td>
 </tr>
