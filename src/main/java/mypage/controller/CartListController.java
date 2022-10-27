@@ -8,8 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dto.Cart;
+import dto.Product;
+import dto.UserInfo;
+import mypage.dao.face.UserCartDao;
 import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
@@ -25,11 +29,28 @@ public class CartListController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/cart/list [GET]");
 		
-//		req.setCharacterEncoding("utf-8");
+// UserInfo 조회해서 cart/product 변수들 꺼내기
 		
+		//세션 정보 객체
+		HttpSession session = req.getSession();
+		String u_no = (String) session.getAttribute("u_no");
+
+		//테스트용으로 1을 설정했고
+		//	-> 나중에 int userNo = Integer.parseInt(u_no); 로 바꾸기
+//		int userNo = Integer.parseInt(u_no);
+//		int userNo = 1; 
+		int userNo = 2; 
+		
+		//전달 파라미터 얻어오기
+		UserInfo param = new UserInfo();
+		param.setU_no(userNo);
+
+
 		//장바구니 전체 목록을 조회하기 - MypageService 이용함
-		List<Cart> cartlist = mypageService.checkCart();
+//		List<Cart> cartlist = mypageService.checkCart(); // 내 DB 전체 장바구니 보여짐...
+		List<Cart> cartlist = mypageService.checkCart(param);
 		
+		System.out.println( "cart/list/ userNo :" + userNo);
 		
 		//[test] 조회결과 확인 코드
 //		System.out.println("<<--- 장바구니 목록 조회 --->>");
@@ -47,6 +68,11 @@ public class CartListController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/cart/list [POST]");
 		
-		 // doPost 이거 필요없는거 같은데?????
+//		req.setCharacterEncoding("utf-8");
+
+		
+//		Product product = UserCartDao.getParam(req);
+
+		
 	}
 }

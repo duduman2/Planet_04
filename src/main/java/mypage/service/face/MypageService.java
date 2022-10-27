@@ -17,11 +17,11 @@ public interface MypageService {
 	
 	/**
 	 * 마이페이지 - 장바구니 내역 조회
-	 * 
+	 * @param param 
 	 * @return List<Cart> - 조회된 장바구니의 리스트 
 	 */
 	
-	public List<Cart> checkCart(); //장바구니 내역 조회 int
+	public List<Cart> checkCart(UserInfo param); //장바구니 내역 조회 int
 
 	
 	public int deleteCart(); //장바구니 내역 삭제 int

@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<link rel="icon" href="<%=request.getContextPath() %>/sources/admin/favicon.ico">
 <title>마이페이지</title>
 
 <%@include file="../layout/header.jsp" %>
