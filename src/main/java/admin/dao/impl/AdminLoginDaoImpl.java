@@ -16,6 +16,7 @@ import admin.dao.face.AdminLoginDao;
 import common.JDBCTemplate;
 import common.Paging;
 import dto.AdminInfo;
+import dto.BoardInfo;
 import dto.Notice;
 import dto.NoticeFile;
 import dto.UserInfo;
@@ -1074,4 +1075,256 @@ System.out.println("AdminLoginDaoImpl.select_tbl_admininfo2 Start");
 		
 	}
 
+	@Override
+	public void deleteNoticeFile(Connection conn, Notice notice) {
+		System.out.println("AdminLoginDaoImpl.deleteNoticeFile Start");
+		
+		String sql = "delete from tbl_notice_file where notice_no = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, notice.getNotice_no());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.deleteNoticeFile End");
+	}
+
+	@Override
+	public Notice selectNoticeByNoticeno(Connection conn, Notice noticeno) {
+		System.out.println("AdminLoginDaoImpl.selectNoticeByNoticeno Start");
+		
+		String sql = "";
+		sql += "select n.notice_no, n.hit, n.title, n.notice_content, n.insert_dat, n.admin_no, a.admin_id";
+		sql += "	from tbl_notice n left outer join tbl_admininfo a";
+		sql += "	on n.admin_no = a.admin_no";
+		sql += "	WHERE notice_no = ?";
+		
+		Notice notice = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, noticeno.getNotice_no());
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				notice = new Notice();
+				
+				notice.setNotice_no(rs.getInt("notice_no"));
+				notice.setHit(rs.getInt("hit"));
+				notice.setTitle(rs.getString("title"));
+				notice.setNotice_content(rs.getString("notice_content"));
+				notice.setInsert_dat(rs.getDate("insert_dat"));
+				notice.setAdmin_no(rs.getInt("admin_no"));
+				notice.setAdmin_id(rs.getString("admin_id"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectNoticeByNoticeno End");
+		return notice;
+	}
+
+	@Override
+	public NoticeFile selectFile(Connection conn, Notice updateNotice) {
+		System.out.println("AdminLoginDaoImpl.selectFile Start");
+		
+		String sql = "";
+		sql += "SELECT";
+		sql += "	file_no, notice_no, storedname, originname, filesize, write_date";
+		sql += "	FROM tbl_notice_file";
+		sql += "	WHERE notice_no = ?";
+		
+		//조회 결과 객체
+		NoticeFile noticeFile = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, updateNotice.getNotice_no());
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				noticeFile = new NoticeFile();
+				
+				noticeFile.setFileno( rs.getInt("file_no") );
+				noticeFile.setnoticeno( rs.getInt("notice_no"));
+				noticeFile.setStoredname( rs.getString("storedname") );
+				noticeFile.setOriginname( rs.getString("originname") );
+				noticeFile.setFilesize( rs.getInt("filesize") );
+				noticeFile.setWrite_date( rs.getDate("write_date") );
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectFile End");
+		return noticeFile;
+		
+	}
+
+	@Override
+	public int update(Connection conn, Notice notice) {
+		
+		System.out.println("AdminLoginDaoImpl.update Start");
+		
+		String sql = "";
+		sql += "UPDATE tbl_notice ";
+		sql += " SET";
+		sql += "	title = ?";
+		sql += "	, notice_content = ?";
+		sql += " WHERE notice_no = ?";
+		
+		int res = 0;
+
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, notice.getTitle());
+			ps.setString(2, notice.getNotice_content());
+			ps.setInt(3, notice.getNotice_no());
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.update End");
+		return res;
+
+	}
+
+	@Override
+	public int selectCntAll(Connection conn, BoardInfo boardInfo) {
+		System.out.println("AdminLoginDaoImpl.selectCntAll4 Start");
+		
+		String sql = "SELECT count(*) cnt FROM tbl_board where title like ? ";
+		
+		// 총 게시글 수 변수
+		int count = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			ps.setString(1, "%" + boardInfo.getBoardTitle() + "%");
+
+			rs = ps.executeQuery(); // SQL수행 및 결과 집합 저장
+			
+
+			while( rs.next() ) {
+				count = rs.getInt("cnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectCntAll4 End");
+		
+		//최종 결과 반환
+		return count;
+	}
+
+	@Override
+	public List<BoardInfo> selectAll(Connection conn, Paging paging, BoardInfo boardInfo) {
+		System.out.println("AdminLoginDaoImpl.selectAll6 Start");
+		
+		// SQL작성
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += "	SELECT rownum rnum, B.* FROM (";
+		sql += "		select b.boardno, b.title, b.board_content, b.insert_dat, b.update_dat, b.hit, b.cateno, u.userid";
+		sql += "		from tbl_board b left outer join tbl_user u";
+		sql += "		on b.userno = u.userno where title like ? ORDER BY boardno asc";
+		sql += "	) B";
+		sql += " ) tbl_board";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+		
+		// 결과 저장할 List
+		List<BoardInfo> boardList = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			
+			ps.setString(1, "%" + boardInfo.getBoardTitle() + "%");
+			ps.setInt(2, paging.getStartNo());
+			ps.setInt(3, paging.getEndNo());
+			
+			rs = ps.executeQuery(); // SQL수행 및 결과 집합 저장
+			
+			// 조회 결과 처리
+			while( rs.next() ) {
+				
+				BoardInfo boardInfo2 = new BoardInfo();
+				
+				boardInfo2.setBoardNo( rs.getInt("boardno") );
+				boardInfo2.setBoardTitle( rs.getString("title") );
+				boardInfo2.setBoardContent( rs.getString("board_content") );
+				boardInfo2.setBoardDate( rs.getDate("insert_dat") );
+				boardInfo2.setBoardDate( rs.getDate("update_dat") );
+				boardInfo2.setBoardHit( rs.getInt("hit") );
+				boardInfo2.setCateno( rs.getInt("cateno") );
+				boardInfo2.setUserId(rs.getString("userid") );
+				
+				// 리스트에 결과값 저장하기
+				boardList.add(boardInfo2);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectAll6 End");
+		
+		return boardList; //최종 결과 반환
+	}
+
+	@Override
+	public void deleteBoard(Connection conn, BoardInfo boardInfo) {
+		System.out.println("AdminLoginDaoImpl.deleteBoard Start");
+		
+		String sql = "delete from tbl_board where boardno = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			
+			ps.setInt(1, boardInfo.getBoardNo());
+
+			ps.executeUpdate(); // SQL수행 및 결과 집합 저장
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.deleteBoard End");
+		
+	}
+		
 }

@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import common.Paging;
 import dto.AdminInfo;
+import dto.BoardInfo;
 import dto.Notice;
+import dto.NoticeFile;
 import dto.UserInfo;
 
 public interface AdminLoginService {
@@ -219,5 +221,44 @@ public interface AdminLoginService {
 	 * @param notice 공지 번호
 	 */
 	public void deleteNotice(Notice notice);
+
+	/**
+	 * 공지 첨부파일 삭제
+	 * 
+	 * @param notice 공지 번호
+	 * @param req 요청정보
+	 */
+	public void deleteNoticeFile(Notice notice, HttpServletRequest req);
+
+	/**
+	 * 공지사항 상세조회
+	 * 
+	 * @param noticeno 공지번호
+	 * @return 공지값 저장된 dto객체
+	 */
+	public Notice view(Notice noticeno);
+
+	/**
+	 * 첨부파일 정보 반환
+	 * 
+	 * @param updateNotice Notice의 공지번호로 찾겠지?
+	 * @return 첨부파일 정보 담긴 NoticeFile dto
+	 */
+	public NoticeFile viewFile(Notice updateNotice);
+
+	/**
+	 * 공지 수정
+	 * 
+	 * @param req 요청 정보 객체
+	 */
+	public void update(HttpServletRequest req);
+
+	public BoardInfo getBoardInfo(HttpServletRequest req);
+
+	public Paging getPaging(HttpServletRequest req, BoardInfo boardInfo);
+
+	public List<BoardInfo> getList(Paging paging, BoardInfo boardInfo);
+
+	public void deleteBoard(BoardInfo boardInfo);
 	
 }

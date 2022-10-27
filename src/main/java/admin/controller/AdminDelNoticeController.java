@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import admin.service.face.AdminLoginService;
 import admin.service.impl.AdminLoginServiceImpl;
 import dto.Notice;
+import dto.NoticeFile;
 
 @WebServlet("/admin/mainnotice/delete")
 public class AdminDelNoticeController extends HttpServlet {
@@ -24,6 +25,8 @@ public class AdminDelNoticeController extends HttpServlet {
 		Notice notice = adminService.getNoticeno(req);
 		
 		adminService.deleteNotice(notice);
+		
+		adminService.deleteNoticeFile(notice, req);
 		
 		req.getRequestDispatcher("/WEB-INF/views/admin/deletenotice.jsp").forward(req, resp);
 		

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import common.Paging;
 import dto.AdminInfo;
+import dto.BoardInfo;
 import dto.Notice;
 import dto.NoticeFile;
 import dto.UserInfo;
@@ -234,5 +235,46 @@ public interface AdminLoginDao {
 	 * @param notice 공지 번호
 	 */
 	public void deleteNotice(Connection connection, Notice notice);
+
+	/**
+	 * 공지 파일 삭제
+	 * 
+	 * @param connection db 객체
+	 * @param notice 공지 번호
+	 */
+	public void deleteNoticeFile(Connection connection, Notice notice);
+
+	/**
+	 * noticeno로 공지사항 상세정보 조회
+	 * 
+	 * @param conn DB객체
+	 * @param noticeno 공지번호
+	 * @return 상세정보 dto 리턴
+	 */
+	public Notice selectNoticeByNoticeno(Connection conn, Notice noticeno);
+
+	/**
+	 * 공지번호로 첨부파일정보 찾기
+	 * 
+	 * @param connection DB객체
+	 * @param updateNotice 공지번호
+	 * @return 첨부파일정보가 저장된 NoticeFile DTO
+	 */
+	public NoticeFile selectFile(Connection connection, Notice updateNotice);
+
+	/**
+	 * 공지 수정
+	 * 
+	 * @param conn DB객체
+	 * @param notice 수정할 내용을 담은 객체
+	 * @return 수정 결과
+	 */
+	public int update(Connection conn, Notice notice);
+
+	public int selectCntAll(Connection conn, BoardInfo boardInfo);
+
+	public List<BoardInfo> selectAll(Connection connection, Paging paging, BoardInfo boardInfo);
+
+	public void deleteBoard(Connection conn, BoardInfo boardInfo);
 
 }

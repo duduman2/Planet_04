@@ -28,8 +28,6 @@ public class AdminMainUserController extends HttpServlet {
 		
 		userInfo = adminService.getUserInfo(req); // jsp로부터 가져온 요청정보 dto에 저장
 		
-		System.out.println(userInfo);
-		
 		// 전달파라미터에서 현재 페이징 객체 계산하기
 		Paging paging = adminService.getPaging(req, userInfo);
 					
