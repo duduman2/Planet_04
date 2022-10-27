@@ -45,9 +45,13 @@ $(document).ready(function() {
 <body>
 
 <header id="header">
+
 <div id="top-menu">
+	
 	<div id="logo"><a href="/main"><img src="../sources/admin/logo.png" style="height:60px;"></a></div>
+	
 	<div class="store"> | <button onclick="location.href='/tradeboard'">플래닛 스토어</button></div>
+	
 	<div class="search">
 		<form action="/search" method="post">
 			<select name="searchType" id="searchType" style="height:26px;">
@@ -62,7 +66,7 @@ $(document).ready(function() {
 				<img src="../sources/main/img/search.png" style="height:18px;">
 			</button>
 		</form>
-	</div>
+	</div><!-- search end -->
 	
 	<ul class="nav1-2">
 		<li>
@@ -93,15 +97,17 @@ $(document).ready(function() {
 			<button onclick="location.href='/logout/con'" class="btn_login">로그아웃</button>
 		</li>
 		<li style="margin-top:-3px;">
-			<button type="button" class="btn_login">게시글 작성</button>
+			<button onclick="location.href='/board/write'"class="btn_login">게시글 작성</button>
 		</li>
 		<% } %>
-	</ul>
-	
+	</ul><!-- nav1 end -->
 	
 </div><!-- top-menu end -->
+
 <hr class="headerhr">
+
 <div id="sec-menu">
+
 	<ul class="nav2">
 		<li class="category">
 		<img src="../sources/main/img/menu-burger.png" style="height:17px;"> 전체메뉴
