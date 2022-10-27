@@ -26,8 +26,8 @@ public class BoardDaoImpl implements BoardDao {
 		//SQL작성
 		String sql = "";
 		sql += "SELECT";
-		sql += "	boardno, title, userid, hit, write_date";
-		sql += " FROM board";
+		sql += "	boardno, title, userid, hit, board_date";
+		sql += " FROM boardinfo";
 		sql += " ORDER BY boardno DESC";
 		
 		//결과 저장할 List
@@ -42,9 +42,9 @@ public class BoardDaoImpl implements BoardDao {
 			while(rs.next()) {
 				BoardInfo b = new BoardInfo(); //조회 결과 행 저장 DTO객체
 				
+				b.setUserId(rs.getString("userid"));
 				b.setBoardNo(rs.getInt("boardno"));
 				b.setBoardTitle(rs.getString("title"));
-				b.setUserId(rs.getString("userid"));
 				b.setBoardHit(rs.getInt("hit"));
 //				b.setWriteDate(rs.getDate("write_date"));
 				
@@ -120,7 +120,7 @@ public class BoardDaoImpl implements BoardDao {
 	public int selectCntAll(Connection conn) {
 		
 		String sql = "";
-		sql += "SELECT count(*) cnt FROM board";
+		sql += "SELECT count(*) cnt FROM boardinfo";
 		
 		//총 게시글 수 변수
 		int count = 0;
@@ -174,9 +174,9 @@ public class BoardDaoImpl implements BoardDao {
 		
 		String sql = "";
 		sql += "SELECT";
-		sql += "	boardno, title, userid";
-		sql += "	, content, hit, write_date";
-		sql += " FROM board";
+		sql += "	boardno, boardtitle, userid";
+		sql += "	, boardcontent, boardHit, boarddate";
+		sql += " FROM boardinfo";
 		sql += " WHERE boardno = ?";
 		
 		BoardInfo board = null;
@@ -190,9 +190,9 @@ public class BoardDaoImpl implements BoardDao {
 			while( rs.next() ) {
 				board = new BoardInfo();
 				
-				board.setBoardNo( rs.getInt("boardno") );
-				board.setBoardTitle( rs.getString("title") );
 				board.setUserId( rs.getString("userid") );
+				board.setBoardNo( rs.getInt("boardno") );
+				board.setBoardTitle( rs.getString("boardtitle") );
 				board.setBoardContent( rs.getString("boardcontent") );
 				board.setBoardHit( rs.getInt("boardhit") );
 //				board.setWriteDate( rs.getDate("write_date") );
@@ -243,7 +243,7 @@ public class BoardDaoImpl implements BoardDao {
 	public int insert(Connection conn, BoardInfo board) {
 
 		String sql = "";
-		sql += "INSERT INTO board ( boardno, title, userid, content, hit )";
+		sql += "INSERT INTO boardinfo ( boardno, boardtitle, userid, boardcontent, boardhit )";
 		sql += " VALUES ( ?, ?, ?, ?, 0 )";
 		
 		int res = 0;
@@ -255,6 +255,7 @@ public class BoardDaoImpl implements BoardDao {
 			ps.setString(2, board.getBoardTitle());
 			ps.setString(3, board.getUserId());
 			ps.setString(4, board.getBoardContent());
+			ps.setInt(5, board.getBoardHit());
 			
 			res = ps.executeUpdate();
 			
