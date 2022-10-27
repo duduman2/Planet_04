@@ -116,9 +116,11 @@ section {
 
 </style>
 
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v10.0&appId=83895073079499" nonce="SiOBIhLG"></script>
+<!-- 
 
-<script>
+<script type="text/javascript" sync defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v10.0&appId=83895073079499" nonce="SiOBIhLG"></script>
+
+<script type="text/javascript">
 //기존 로그인 상태를 가져오기 위해 Facebook에 대한 호출
 function statusChangeCallback(res){
 	statusChangeCallback(response);
@@ -149,10 +151,9 @@ window.fbAsyncInit = function() {
 	});
 	FB.AppEvents.logPageView();   
 };
-  
-  
 </script>
 
+ -->
 
 </head>
 
@@ -240,38 +241,62 @@ window.fbAsyncInit = function() {
 <!-- 	</li> -->
 <!-- </ul> -->
 
+
 <!-- 네이버 -->
+<a id="naverIdLogin_loginButton" href="javascript:void(0)" style="margin-right: 40px;"><svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet"><g fill="none" fill-rule="evenodd"><path fill="#00C63B" d="M0 24C0 10.745 10.745 0 24 0s24 10.745 24 24-10.745 24-24 24S0 37.255 0 24z"></path><path fill="#FFF" d="M21 25.231V34h-7V15h7l6 8.769V15h7v19h-7l-6-8.769z"></path></g></svg></a>
+
+<!-- 네이버 스크립트 -->
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+
+<script>
+
+var naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "IahXu6d4TYMETpsiP8w7", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
+			callbackUrl: "http://localhost:8888/main", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+			isPopup: false,
+			callbackHandle: true
+		}
+	);	
+
+naverLogin.init();
+
+window.addEventListener('load', function () {
+	naverLogin.getLoginStatus(function (status) {
+		if (status) {
+			var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
+    		
+			console.log(naverLogin.user); 
+    		
+            if( email == undefined || email == null) {
+				alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
+				naverLogin.reprompt();
+				return;
+			}
+		} else {
+			console.log("callback 처리에 실패하였습니다.");
+		}
+	});
+});
 
 
+var testPopUp;
+function openPopUp() {
+    testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+}
+function closePopUp(){
+    testPopUp.close();
+}
 
-<!-- <a datatype="naver" class="css-l0qndx e1ufx3to0" style="margin-right: 40px;"><svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet"><g fill="none" fill-rule="evenodd"><path fill="#00C63B" d="M0 24C0 10.745 10.745 0 24 0s24 10.745 24 24-10.745 24-24 24S0 37.255 0 24z"></path><path fill="#FFF" d="M21 25.231V34h-7V15h7l6 8.769V15h7v19h-7l-6-8.769z"></path></g></svg></a> -->
-
-<!-- <ul> -->
-<!-- 	<li> -->
-<!--       아래와같이 아이디를 꼭 써준다. -->
-<!--       <a id="naverIdLogin_loginButton" href="javascript:void(0)"> -->
-<!--           <span>네이버 로그인</span> -->
-<!--       </a> -->
-<!-- 	</li> -->
-<!-- 	<li onclick="naverLogout(); return false;"> -->
-<!--       <a href="javascript:void(0)"> -->
-<!--           <span>네이버 로그아웃</span> -->
-<!--       </a> -->
-<!-- 	</li> -->
-<!-- </ul> -->
-
-
-<!-- 페이스북 -->
-<a datatype="facebook" class="css-l0qndx e1ufx3to0" style="margin-right: 40px;"id="fnFbCustomLogin" onclick="fnFbCustomLogin();" href="javascript:void(0)"><svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet"><g fill="none" fill-rule="evenodd"><path fill="#3B5998" d="M0 24C0 10.745 10.745 0 24 0s24 10.745 24 24-10.745 24-24 24S0 37.255 0 24z"></path><path fill="#FFF" d="M25.77 35V24h3.384v-3.385h-3.385v-2.538c-.012-.756.08-1.285 1.693-1.692h1.692V13h-3.385c-3.25 0-4.52 1.84-4.23 5.077v2.538H19V24h2.538v11h4.231z"></path></g></svg></a>
-
-<!-- <ul> -->
-<!--  <li onclick="fnFbCustomLogin();"> -->
-<!--   <a href="javascript:void(0)"> -->
-<!--    <span>Login with Facebook</span> -->
-<!--   </a> -->
-<!--  </li> -->
-<!-- </ul> -->
-
+function naverLogout() {
+	openPopUp();
+	setTimeout(function() {
+		closePopUp();
+		}, 1000);
+	
+	
+}
+</script>
 
 
 

@@ -17,58 +17,92 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	$('#u_name').focusout(function(){
-	console.log("#u_name focusout")
-		
-		let u_name = $('#u_name').val(); 
-		
-		$.ajax({
-			url : "/nameCheck/con",
-			type : "post",
-			data : {u_name: u_name},
-			dataType : 'json',
-			success : function(result){
-				if(result = 0){
-					$("#nameCheck").html('이름 정보가 없습니다');
-					$("#nameCheck").attr('color','red');
-				} else{
-					$("#nameCheck").html('이름 확인 성공');
-					$("#nameCheck").attr('color','green');
-				} 
-			},
-			error : function(){
-				alert("서버요청실패");
-			}
-		})
-		 
-	})
+// 	$('#u_name').focusout(function(){
+// 		console.log("#u_name focusout")
+			
+// 			let u_name = $('#u_name').val(); // input_id에 입력되는 값
+			
+// 			$.ajax({
+// 				url : "/nameCheck/con",
+// 				type : "post",
+// 				data : {u_name: u_name},
+// 				dataType : 'json',
+// 				success : function(result){
+// 					if(result == 0){
+// 						$("#nameCheck").html('이름 정보가 없습니다');
+// 						$("#nameCheck").attr('color','red');
+						
+						
+// 					} else{
+// 						$("#nameCheck").html('이름 확인 성공');
+// 						$("#nameCheck").attr('color','green');
+// 					} 
+// 				},
+// 				error : function(){
+// 					alert("서버요청실패");
+// 				}
+// 			})
+			 
+// 		})
 
-	$('#u_email').focusout(function(){
-	console.log("#u_email focusout")
-		
-		let u_email = $('#u_email').val(); 
-		
-		$.ajax({
-			url : "/emailCheck/con",
-			type : "post",
-			data : {u_email: u_email},
-			dataType : 'json',
-			success : function(result){
-				if(result = 0){
-					$("#emailCheck").html('이메일 정보가 없습니다');
-					$("#emailCheck").attr('color','red');
-				} else{
-					$("#emailCheck").html('이메일 확인 성공');
-					$("#emailCheck").attr('color','green');
-				} 
-			},
-			error : function(){
-				alert("서버요청실패");
-			}
+	$('#u_name').focusout(function(){
+		console.log("#u_name focusout")
+			
+			let u_name = $('#u_name').val(); // input_id에 입력되는 값
+			
+			$.ajax({
+				url : "/nameCheck/con",
+				type : "post",
+				data : {u_name: u_name},
+				dataType : 'json',
+				success : function(result){
+					if(result == 0){
+						$("#nameCheck").html('이름 정보가 없습니다');
+						$("#nameCheck").attr('color','red');
+						
+						
+					} else{
+						$("#nameCheck").html('이름 확인 성공');
+						$("#nameCheck").attr('color','green');
+					} 
+				},
+				error : function(){
+					alert("서버요청실패");
+				}
+			})
+			 
 		})
-		 
-	})
-	
+
+
+		$('#u_email').focusout(function(){
+		console.log("#u_email focusout")
+			
+			let u_email = $('#u_email').val(); // input_id에 입력되는 값
+			
+			$.ajax({
+				url : "/emailCheck/con",
+				type : "post",
+				data : {u_email: u_email},
+				dataType : 'json',
+				success : function(result){
+					if(result == 0){
+						$("#emailCheck").html('이메일 정보가 없습니다');
+						$("#emailCheck").attr('color','red');
+						
+						
+					} else{
+						$("#emailCheck").html('이메일 확인 성공');
+						$("#emailCheck").attr('color','green');
+					} 
+				},
+				error : function(){
+					alert("서버요청실패");
+				}
+			})
+		})
+
+
+		
 })
 
 </script>
@@ -79,12 +113,7 @@ $(document).ready(function() {
 	
 	//아이디 찾기 버튼
 	$("#idFind").click(function() { //아이디 검색
-		if($("input").val()==''){
-			alert("정보를 입력해주세요");
-			return false;
-		} else {
-			return true;
-		}
+		
 		$("form").submit();
 	})
 
@@ -193,7 +222,7 @@ form{position: absolute;
 
 <div class="form-group" style="margin: 0 auto;">
 	<button type="button" class="btn btn-primary" id="pwFind" style="margin-right: 6px;">비밀번호 찾기</button>
-	<button type="button" class="btn btn-primary" id="btnCancel">메인페이지</button><br><br>
+	<button type="button" class="btn btn-primary" id="btnCancel">취소</button><br><br>
 </div>
 
 
