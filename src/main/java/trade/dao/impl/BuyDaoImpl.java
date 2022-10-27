@@ -15,58 +15,31 @@ public class BuyDaoImpl implements BuyDao {
 	private ResultSet rs;
 	
 	@Override
-	public int buyersub(Connection conn, String loginId, int point) {
-
+	public int pointView(Connection conn,String loginId) {
 		String sql = "";
-		sql += "UPDATE tbl_user";
-		sql += " SET userpoint = userpoint - ?";
+		sql += "select userpoint from tbl_user";
 		sql += " WHERE userid = ?";
 
-		int res = 0;
-		
+		int point = 0;
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			ps.setInt(1, point);
-			ps.setString(2, loginId);
+			ps.setString(1, loginId);
+			rs = ps.executeQuery();
 			
-			res = ps.executeUpdate();
-			
-
+			while(rs.next()) {
+				point = rs.getInt("userpoint");
+				System.out.println("[BuyDAO]내 포인트 : " + point);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(ps);
 		}
-		return res;
+		return point;
 	}
 
-	@Override
-	public int selleradd(Connection conn, String sellUserId, int point) {
 
-		String sql = "";
-		sql += "UPDATE tbl_user";
-		sql += " SET userpoint = userpoint + ?";
-		sql += " WHERE userid = ?";
-
-		int res = 0;
-		
-		try {
-			ps = conn.prepareStatement(sql);
-			
-			ps.setInt(1, point);
-			ps.setString(2, sellUserId);
-			
-			res = ps.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rs);
-			JDBCTemplate.close(ps);
-		}
-		return res;
-	}
-
+	
 }

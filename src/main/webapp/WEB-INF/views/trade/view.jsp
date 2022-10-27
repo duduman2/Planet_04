@@ -107,7 +107,6 @@ $(document).ready(function(){
 	
 	$("#goBuy").click(function(){	
 		if($.loginCheck()){		//로그인 확인
-			var quan = $("#quanInput").val()
 			location.replace('/buybuy') //구매페이지 이동
 		}
 	})
