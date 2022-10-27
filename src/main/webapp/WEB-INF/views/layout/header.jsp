@@ -117,37 +117,37 @@ $(document).ready(function() {
 		</li>
 		
 		<li class="cate_list">
-			<a href="/board/main.jsp">커뮤니티</a>
+			<a href="/board/list">커뮤니티</a>
 			<ul>
-				<li><a href="/board/main.jsp">일반 게시판</a></li>
-				<li><a href="/board/main.jsp">자랑하기</a></li>
-				<li><a href="/board/main.jsp">소품 추천</a></li>
-				<li><a href="/board/main.jsp">인테리어 후기</a></li>
-				<li><a href="/board/main.jsp">모임 게시판</a></li>
+				<li><a href="/board/list">일반 게시판</a></li>
+				<li><a href="/board/list">자랑하기</a></li>
+				<li><a href="/board/list">소품 추천</a></li>
+				<li><a href="/board/list">인테리어 후기</a></li>
+				<li><a href="/board/list">모임 게시판</a></li>
 			</ul>
 		</li>
 		
 		<li class="cate_list">
-			<a href="/board/main.jsp">Q&A</a>
+			<a href="/board/list">Q&A</a>
 			<ul>
-				<li><a href="/board/main.jsp">일반 게시판</a></li>
-				<li><a href="/board/main.jsp">자랑하기</a></li>
-				<li><a href="/board/main.jsp">소품 추천</a></li>
-				<li><a href="/board/main.jsp">인테리어 후기</a></li>
-				<li><a href="/board/main.jsp">모임 게시판</a></li>
+				<li><a href="/board/list">일반 게시판</a></li>
+				<li><a href="/board/list">자랑하기</a></li>
+				<li><a href="/board/list">소품 추천</a></li>
+				<li><a href="/board/list">인테리어 후기</a></li>
+				<li><a href="/board/list">모임 게시판</a></li>
 			</ul>
 		</li>
 		
 		<li style="border:none;" class="cate_list">
 			<a href="/trade">분양/중고거래</a>
 			<ul>
-				<li><a href="/trade?class=관엽/공기정화식물">관엽/공기정화식물</a></li>
-				<li><a href="/trade?class=다육/선인장">다육/선인장</a></li>
-				<li><a href="/trade?class=야생화">야생화</a></li>
-				<li><a href="/trade?class=분재">분재</a></li>
-				<li><a href="/trade?class=동양란/서양란">동양란/서양란</a></li>
-				<li><a href="/trade?class=화분">화분</a></li>
-				<li><a href="/trade?class=원예자재류">원예자재류</a></li>
+            <li><a href="/trade?cate=air">관엽/공기정화식물</a></li>
+            <li><a href="/trade?cate=cac">다육/선인장</a></li>
+            <li><a href="/trade?cate=wild">야생화</a></li>
+            <li><a href="/trade?cate=bon">분재</a></li>
+            <li><a href="/trade?cate=orc">동양란/서양란</a></li>
+            <li><a href="/trade?cate=pot">화분</a></li>
+            <li><a href="/trade?cate=mate">원예자재류</a></li>
 			</ul>
 		</li>
 	</ul>
