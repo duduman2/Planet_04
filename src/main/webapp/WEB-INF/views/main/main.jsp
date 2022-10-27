@@ -13,7 +13,6 @@
 <style type="text/css">
 #hitRank {
 	height: 350px;
-	border: 1px solid orange;
 	box-sizing: border-box;
 }
 
@@ -49,9 +48,7 @@ table, th, td {
 </style>
 
 <div id="hitRank">
-<p>판매상품</p>
-
-<p>최신업로드순으로 추천</p>
+<h3>🔥방금 올라온 상품</h3>
 <% for(int i=0; i<5; i++) { %>
 <table class="sellList">
 <tr>
@@ -63,9 +60,14 @@ table, th, td {
 </table>
 <% } %>
 
+<br>
+<br>
+<br>
+<p style="clear: both; text-align:right; padding: 30px 0;"><a href="/trade">더보기</a></p>
+
 </div>
 
-<p>인기 추천글</p>
+<h2>인기 추천글</h2>
 <div id="commRank">
 <p>커뮤니티 게시글 조회수순으로 추천</p>
 <table>
