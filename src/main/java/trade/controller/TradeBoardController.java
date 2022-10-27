@@ -24,6 +24,7 @@ public class TradeBoardController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cl = req.getParameter("cate");
+		if(cl==null) cl="all";
 		System.out.println("분류 : " + cl);
 		
 		Paging paging = fileService.getPaging(req,cl);

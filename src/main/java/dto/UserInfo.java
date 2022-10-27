@@ -20,13 +20,14 @@ public class UserInfo {
 	private String grade;		// 등급코드
 	private String reportcode;	// 신고코드
 	private String wishno;		// 장바구니번호 
+	private int u_point;	//포인트
 	
 	public UserInfo() {
 	}
 
 	public UserInfo(int u_no, String u_id, String u_pw, String u_name, Date u_birth, String u_gender, String u_phone,
 			String u_email, String u_address, String u_nick, Date u_join_date, String u_trade_user,
-			String b_business_number, String grade, String reportcode, String wishno) {
+			String b_business_number, String grade, String reportcode, String wishno, int u_point) {
 		super();
 		this.u_no = u_no;
 		this.u_id = u_id;
@@ -44,6 +45,7 @@ public class UserInfo {
 		this.grade = grade;
 		this.reportcode = reportcode;
 		this.wishno = wishno;
+		this.u_point = u_point;
 	}
 
 	@Override
@@ -52,15 +54,15 @@ public class UserInfo {
 				+ u_birth + ", u_gender=" + u_gender + ", u_phone=" + u_phone + ", u_email=" + u_email + ", u_address="
 				+ u_address + ", u_nick=" + u_nick + ", u_join_date=" + u_join_date + ", u_trade_user=" + u_trade_user
 				+ ", b_business_number=" + b_business_number + ", grade=" + grade + ", reportcode=" + reportcode
-				+ ", wishno=" + wishno + "]";
+				+ ", wishno=" + wishno + ", u_point=" + u_point + "]";
 	}
 
 	public int getU_no() {
 		return u_no;
 	}
 
-	public void setU_no(int string) {
-		this.u_no = string;
+	public void setU_no(int u_no) {
+		this.u_no = u_no;
 	}
 
 	public String getU_id() {
@@ -182,5 +184,15 @@ public class UserInfo {
 	public void setWishno(String wishno) {
 		this.wishno = wishno;
 	}
+
+	public int getU_point() {
+		return u_point;
+	}
+
+	public void setU_point(int u_point) {
+		this.u_point = u_point;
+	}
+
+	
 	
 }

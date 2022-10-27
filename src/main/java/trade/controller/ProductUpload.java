@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
@@ -22,12 +23,15 @@ public class ProductUpload extends HttpServlet {
 		
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		
 		req.getRequestDispatcher("/WEB-INF/views/trade/fileupload.jsp").forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		
 		//파일 업로드 형식 검증
 		if( !ServletFileUpload.isMultipartContent(req) ) {
 			System.out.println("[ERROR] Multipart 형식이 아님");

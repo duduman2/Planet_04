@@ -72,12 +72,27 @@ $( document ).ready( function() {
 	function goTop(){
 		$('html').scrollTop(0);
 	}
+	$.loginCheck = function(){
+		var sessionData = <%=session.getAttribute("login")%>
+		if(null==sessionData || !sessionData){// 로그인 안됐을경우
+			console.log("state : logout")
+			if(confirm("로그인이 필요합니다\n로그인페이지로 이동하시겠습니까?")){
+				location.replace('/login/con') //로그인 페이지 이동
+			}
+		}else{
+			return true
+		}
+	}
+	$("#proWrite").click(function(){	
+		$.loginCheck()
+	})
+	
 });
 </script>
 
 
 <br><br>
-<button><a href="/trade/productupload">상품등록</a></button><br><br><br>
+<button id="proWrite"><a href="/trade/productupload">상품등록</a></button><br><br><br>
 <div class="catelist">
 
 	<button class="cate" value="all">전체</button>

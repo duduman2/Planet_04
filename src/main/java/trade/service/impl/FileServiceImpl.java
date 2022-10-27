@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -106,13 +107,16 @@ public class FileServiceImpl implements FileService {
 				
 				Product product = new Product();
 				
+				HttpSession session = req.getSession();
 				
+				System.out.println("로그인 session id확인 : " + session.getAttribute("loginid"));
 				
 				product.setProductName(mul.getParameter("title"));
 				product.setProductContent(mul.getParameter("content"));
 				product.setProductPrice(Integer.parseInt(mul.getParameter("price")));
 				product.setProductClass(mul.getParameter("class"));
-				
+				product.setProuserId((String) session.getAttribute("loginid"));
+				System.out.println(product);
 				int res2 = productDao.insert(conn,product);
 				if(res2 >0 ) {
 					JDBCTemplate.commit(conn);
