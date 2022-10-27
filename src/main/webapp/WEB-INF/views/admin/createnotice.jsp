@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항 작성</title>
 
 <!-- 스마트 에디터2 설치 -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/sources/admin/se2/js/service/HuskyEZCreator.js"></script>

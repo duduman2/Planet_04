@@ -23,12 +23,12 @@ import admin.service.face.AdminLoginService;
 import common.JDBCTemplate;
 import common.Paging;
 import dto.AdminInfo;
+import dto.BoardInfo;
 import dto.Notice;
 import dto.NoticeFile;
 import dto.UserInfo;
 
 public class AdminLoginServiceImpl implements AdminLoginService {
-	
 	AdminLoginDao adminDao = new AdminLoginDaoImpl();
 
 	@Override
@@ -646,7 +646,7 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 				
 				// 파일경로는 알고. mkdir();이 폴더 생성하는 메소드지? 근데 이 메소드 File클래스 꺼지?
 				// 그래서 File객체 new로 새롭게 생성해주면서 메소드 쓰는거지. 이게 자바의 특성임. 
-				// 특정 클래스의 메소드 쓰려면 그 클래스 객체로 인스턴스 생성하는거.
+				// 특정 클래d스의 메소드 쓰려면 그 클래스 객체로 인스턴스 생성하는거.
 				
 				//업로드할 파일 객체 생성하기
 				File up = new File(uploadFolder, rename);
@@ -727,9 +727,278 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 	public void deleteNotice(Notice notice) {
 		System.out.println("AdminServiceImpl.deleteNotice Start");
 		
-		adminDao.deleteNotice(JDBCTemplate.getConnection(), notice);
+		Connection conn = JDBCTemplate.getConnection();
+		adminDao.deleteNotice(conn, notice);
+		JDBCTemplate.commit(conn);
 		
 		System.out.println("AdminServiceImpl.deleteNotice End");
+	}
+
+	@Override
+	public void deleteNoticeFile(Notice notice, HttpServletRequest req) {
+		System.out.println("AdminServiceImpl.deleteNoticeFile Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		String storedname = adminDao.selectStoredname(conn, notice);
+		String result = "\\";
+		
+		ServletContext context = req.getServletContext();
+		File file = new File( context.getRealPath("upload") + result + storedname );
+			
+		if( file.exists() ) {
+			file.delete();
+		}
+		
+		adminDao.deleteNoticeFile(conn, notice);
+		JDBCTemplate.commit(conn);
+		
+		System.out.println("AdminServiceImpl.deleteNoticeFile End");
+	}
+
+	@Override
+	public Notice view(Notice noticeno) {
+		
+		System.out.println("AdminServiceImpl.view Start");
+		
+		//DB연결 객체
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//조회수 증가
+		if( adminDao.updateHit(conn, noticeno) > 0 ) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//게시글 조회
+		Notice notice = adminDao.selectNoticeByNoticeno(conn, noticeno);
+		
+		//조회된 게시글 리턴
+		System.out.println("AdminServiceImpl.view End");
+		return notice;
+		
+	}
+
+	@Override
+	public NoticeFile viewFile(Notice updateNotice) {
+		System.out.println("AdminServiceImpl.viewFile Start");
+		
+		System.out.println("AdminServiceImpl.viewFile End");
+		
+		return adminDao.selectFile(JDBCTemplate.getConnection(), updateNotice);
+	}
+
+	@Override
+	public void update(HttpServletRequest req) {
+		System.out.println("AdminServiceImpl.update Start");
+		
+				//multipart/form-data 인코딩 확인
+				boolean isMultipart = ServletFileUpload.isMultipartContent(req);
+				
+				//multipar형식이 아닐 경우 처리 중단
+				if( !isMultipart ) {
+					System.out.println("[ERROR] 파일 업로드 형식 데이터가 아님");
+					return;
+				}
+				
+				DiskFileItemFactory factory = new DiskFileItemFactory();
+				
+				//메모리 처리 사이즈 설정
+				int maxMem = 1 * 1024 * 1024;	// 1 MB == 1048576 B
+				factory.setSizeThreshold(maxMem);
+
+				//서블릿 컨텍스트 객체
+				ServletContext context = req.getServletContext();
+				
+				//임시 파일 저장 폴더
+				String path = context.getRealPath("tmp");
+				File tmpRepository = new File(path);
+				tmpRepository.mkdir();
+				factory.setRepository(tmpRepository);
+
+				//파일 업로드 수행 객체
+				ServletFileUpload upload = new ServletFileUpload(factory);
+				
+				//파일 업로드 용량 제한
+				int maxFile = 10 * 1024 * 1024; // 10MB
+				upload.setFileSizeMax(maxFile);
+
+				//파일 업로드된 데이터 파싱
+				List<FileItem> items = null;
+				try {
+					items = upload.parseRequest(req);
+				} catch (FileUploadException e) {
+					e.printStackTrace();
+				}
+
+				//게시글 정보 DTO객체
+				Notice notice = new Notice();
+				
+				//게시글 첨부파일 정보 DTO객체
+				NoticeFile noticeFile = new NoticeFile();
+			
+				//파일아이템의 반복자
+				Iterator<FileItem> iter = items.iterator();
+
+				while( iter.hasNext() ) {
+					FileItem item = iter.next();
+					
+					//--- 1) 빈 파일에 대한 처리 ---
+					if( item.getSize() <= 0 ) { //전달 데이터의 크기
+						//빈 파일은 무시하고 다음 FileItem처리로 넘어간다
+						continue;
+					}
+					
+					//--- 2) 폼 필드에 대한 처리 ---
+					if( item.isFormField() ) {
+						
+						//키(key) 추출하기
+						String key = item.getFieldName();
+						
+						//값(value) 추출하기
+						String value = null;
+						try {
+							value = item.getString("UTF-8"); //한글 인코딩 지정
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+						
+						//key에 맞게 value를 DTO에 삽입하기
+						if( "notice_no".equals(key) ) {
+							notice.setNotice_no(Integer.parseInt(value));
+						}
+						if( "title".equals(key) ) {
+							notice.setTitle(value);
+						}
+						if( "notice_content".equals(key) ) {
+							notice.setNotice_content(value);
+						}
+						
+					} // if( item.isFormField() ) end
+					
+					
+					
+					//--- 3) 파일에 대한 처리 ---
+					if( !item.isFormField() ) {
+						
+						//저장 파일명 처리
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssS");
+						String rename = sdf.format(new Date()); //현재시간
+						
+						//파일 업로드 폴더
+						File uploadFolder = new File( context.getRealPath("upload") );
+						uploadFolder.mkdir();
+						
+						//업로드할 파일 객체 생성하기
+						File up = new File(uploadFolder, rename);
+						try {
+							item.write(up);	//임시파일을 실제 업로드 파일로 출력한다
+							item.delete(); //임시파일 제거
+							
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						
+						//업로드된 파일의 정보를 DTO객체에 저장하기
+						noticeFile.setOriginname(item.getName());
+						noticeFile.setStoredname(rename);
+						noticeFile.setFilesize((int)item.getSize());
+						
+					} // if( !item.isFormField() ) end
+					
+				} // while( iter.hasNext() ) end
+
+				
+				//DB연결 객체
+				Connection conn = JDBCTemplate.getConnection();
+				
+				if( adminDao.update(conn, notice) > 0 ) {
+					JDBCTemplate.commit(conn);
+				} else {
+					JDBCTemplate.rollback(conn);
+				}
+
+				
+				//첨부파일 정보 삽입
+				if( noticeFile.getFilesize() != 0 ) { //첨부 파일이 존재할 때에만 동작
+					
+					//게시글 번호 삽입 (FK)
+					noticeFile.setnoticeno(notice.getNotice_no());
+					
+					if( adminDao.insertFile(conn, noticeFile) > 0 ) {
+						JDBCTemplate.commit(conn);
+					} else {
+						JDBCTemplate.rollback(conn);
+					}
+					
+				}
+		
+		System.out.println("AdminServiceImpl.update End");
+		
+	}
+
+	@Override
+	public BoardInfo getBoardInfo(HttpServletRequest req) {
+		System.out.println("AdminServiceImpl.getBoardInfo Start");
+		
+		BoardInfo boardInfo = new BoardInfo();
+		
+		if( req.getParameter("title") != null) {
+			boardInfo.setBoardTitle( req.getParameter("title") );
+		} else {
+			boardInfo.setBoardTitle("");
+		}
+		System.out.println("AdminServiceImpl.getBoardInfo End");
+		
+		return boardInfo;
+	}
+
+	@Override
+	public Paging getPaging(HttpServletRequest req, BoardInfo boardInfo) {
+		
+		System.out.println("AdminServiceImpl.getPaging4 Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//총 관리자리스트 수 조회하기
+		int totalCount = adminDao.selectCntAll(conn, boardInfo);
+		
+		//전달파라미터 curPage 추출하기
+		String param = req.getParameter("curPage"); // url의 curPage파라미터값 조회
+		
+		int curPage = 0;
+		if( param != null && !"".equals(param) ) {
+			curPage = Integer.parseInt(param);
+		}
+		
+		//Paging객체 생성
+		Paging paging = new Paging(totalCount, curPage);
+		
+		System.out.println("AdminServiceImpl.getPagingr4 End");
+				
+		return paging;
+	}
+
+	@Override
+	public List<BoardInfo> getList(Paging paging, BoardInfo boardInfo) {
+		System.out.println("AdminServiceImpl.getList4 Start");
+		
+		System.out.println("AdminServiceImpl.getList4 End");
+		
+		return adminDao.selectAll(JDBCTemplate.getConnection(), paging, boardInfo);
+	}
+
+	@Override
+	public void deleteBoard(BoardInfo boardInfo) {
+		System.out.println("AdminServiceImpl.deleteBoard Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		adminDao.deleteBoard(conn, boardInfo);
+		
+		JDBCTemplate.commit(conn);
+		
+		System.out.println("AdminServiceImpl.deleteBoard End");
 	}
 
 }

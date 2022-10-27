@@ -26,6 +26,10 @@ $(document).ready(function() {
 		$(location).attr("href", "../mainnotice")
 	})
 	
+	$("#btnUpdate").click(function() {
+		$(location).attr('href', './update?notice_no=<%=viewNotice.getNotice_no() %>')
+	})
+	
 })
 </script>
 </head>
@@ -84,6 +88,8 @@ $(document).ready(function() {
 		<input type="text" name="notice_no" value="<%=viewNotice.getNotice_no() %>" style="display: none;">
 		<button id="btnDelete" class="btn btn-danger">삭제</button>
 	</form>
+</div>
+
 </div>
 
 </body>

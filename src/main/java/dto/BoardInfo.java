@@ -12,6 +12,8 @@ public class BoardInfo {
 	private String boardContent;
 	private Date boardDate;
 	private int boardHit;
+	private int cateno;
+	private int userno;
 	
 	public BoardInfo() {
 	}
@@ -98,6 +100,22 @@ public class BoardInfo {
 
 	public void setBoardHit(int boardHit) {
 		this.boardHit = boardHit;
+	}
+
+	public int getCateno() {
+		return cateno;
+	}
+
+	public void setCateno(int cateno) {
+		this.cateno = cateno;
+	}
+
+	public int getUserno() {
+		return userno;
+	}
+
+	public void setUserno(int userno) {
+		this.userno = userno;
 	}
 	
 }
