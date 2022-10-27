@@ -105,6 +105,13 @@ $(document).ready(function(){
 		}
 	})
 	
+	$("#goBuy").click(function(){	
+		if($.loginCheck()){		//로그인 확인
+			var quan = $("#quanInput").val()
+			location.replace('/buybuy') //구매페이지 이동
+		}
+	})
+	
 })
 
 
@@ -119,30 +126,33 @@ $(document).ready(function(){
 	</td>
 	<td>
 		제품 번호 : <br>
-		<%=productView.getProductNo() %><br><hr>
+		<%=productView.getProductNo()%><br><hr>
 		제목 :<br>
 		<%=productView.getProductName()%><br><hr>
 		등록일 :<br>
-		<%=productView.getProductDate() %><br><hr>
+		<%=productView.getProductDate()%><br><hr>
 		판매자 :<br>
-		<%=productView.getProuserId() %><br><hr>
+		<%=productView.getProuserId()%><br><hr>
 		제품 설명 :<br>
-		<%=productView.getProductContent() %><br><hr>
+		<%=productView.getProductContent()%><br><hr>
 		제품 가격 : <br>
-		<%=productView.getProductPrice() %>원<hr>
+		<%=productView.getProductPrice()%>원<hr>
 	</td>
 </tr>
 <tr>
 		<td>
-<!-- 			<form action="/cart/list" method="get"> -->
+			<form action="/buybuy" method="get">
 			수량 선택
 			<button type="button" id="sub">-</button><input type="text" value="1" name ="productQuan" id="quanInput"><button type="button" id="add">+</button>
 			<br>결제 금액<br>
 			<p id="paymoney">원</p>
+			<input type="hidden" name="productNo" value=<%=productView.getProductNo()%> >
+			<input type="hidden" name="productUser" value=<%=productView.getProuserId()%> >
+			<input type="hidden" name="productPrice" value=<%=productView.getProductPrice()%> >
 			
 			<button id="goWish">장바구니</button>
 			<button id="goBuy">구매하기</button>
-<!-- 			</form> -->
+			</form>
 		</td>
 </tr>
 
