@@ -21,11 +21,12 @@ div{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding-top: 40px;
-    padding-bottom: 40px;
-    padding-right: 70px;
-    padding-left: 70px;
-    border: 1px solid #5B9E28;
+}
+
+fieldset {
+	border: 1px solid #5B9E28;
+	text-align: center;
+	width: 450px;
 }
 
 a{color:#5B9E28; font-weight: bold;}
@@ -35,14 +36,18 @@ a{color:#5B9E28; font-weight: bold;}
 </head>
 <body>
 
-<div>
-	<h1 style="color: red;">로그인 실패</h1><br>
+<div style="display: inline-block;">
+
+<fieldset>
+	<br><br><h1 style="color: red;">로그인 실패</h1><br>
 	<hr><br><br>
 	
 	<h3>ID와 PASSWORD를 다시 확인하세요</h3><br><br>
 	
-	<a href="/main" style="margin-right: 10px;">메인화면</a>
-	<a href="/login/con">로그인 페이지</a><br>
+	<a href="/main" style="margin-right: 20px;">메인화면</a>
+	<a href="/login/con">로그인 페이지</a><br><br><br>
+	
+</fieldset>
 
 </div>
 

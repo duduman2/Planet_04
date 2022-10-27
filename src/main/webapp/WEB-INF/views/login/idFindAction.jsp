@@ -11,38 +11,46 @@
 <!-- 파비콘 -->
 <link rel="icon" href="/sources/favicon.ico">
 
-
 <style type="text/css">
 
-body{margin: 0 auto;}
-
-div{position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align:center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    padding-right: 70px;
-    padding-left: 70px;
-    border: 1px solid #5B9E28;
-}
+body{margin: 0 auto; width: 900px; height:1000px;}
 
 h1{color:#5B9E28;}
+
+a{color:#5B9E28; font-weight: bold; text-decoration: none;} 
+
+
+div{
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);}
+    
+
+fieldset {
+	border: 1px solid #5B9E28;
+	text-align: center;
+	width: 450px;
+}
 
 </style>
 
 </head>
 <body>
 
-<div>
+<div style="display: inline-block;">
+<fieldset>
 
-<h1>아이디 찾기 결과</h1><br>
+<br><br><h1>아이디 찾기 결과</h1><br>
 
 <hr><br>
 
-<h3>아이디는 <%=((UserInfo)request.getAttribute("u_id")).getU_id() %>입니다.</h3>
+<h3>아이디는 <%=((UserInfo)request.getAttribute("u_id")).getU_id() %>입니다.</h3><br>
 
+<a href="/login/con" style="margin-right: 20px;">로그인</a>
+<a href="/main">메인 페이지</a><br><br><br>
+
+</fieldset>
 
 </div>
 

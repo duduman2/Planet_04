@@ -27,12 +27,12 @@ $(document).ready(function() {
 			data : {u_name: u_name},
 			dataType : 'json',
 			success : function(result){
-				if(result = 0){
-					$("#nameCheck").html('이름 정보가 없습니다');
-					$("#nameCheck").attr('color','red');
-				} else{
+				if(result == 0){
 					$("#nameCheck").html('이름 확인 성공');
 					$("#nameCheck").attr('color','green');
+				} else{
+					$("#nameCheck").html('이름 정보가 없습니다');
+					$("#nameCheck").attr('color','red');
 				} 
 			},
 			error : function(){
@@ -42,33 +42,36 @@ $(document).ready(function() {
 		 
 	})
 
-	$('#u_id').focusout(function(){
-	console.log("#u_id focusout")
-		
-		let u_id = $('#u_id').val(); 
-		
-		$.ajax({
-			url : "/nickCheck/con",
-			type : "post",
-			data : {u_id: u_id},
-			dataType : 'json',
-			success : function(result){
-				if(result = 0){
-					$("#idCheck").html('아이디 정보가 없습니다');
-					$("#idCheck").attr('color','red');
-				} else{
-					$("#idCheck").html('아이디 확인 성공');
-					$("#idCheck").attr('color','green');
-				} 
-			},
-			error : function(){
-				alert("서버요청실패");
-			}
-		})
-		 
-	})
 	
+	$('#u_id').focusout(function(){
+		console.log("#u_id focusout")
+			
+			let u_id = $('#u_id').val(); // input_id에 입력되는 값
+			
+			$.ajax({
+				url : "/idCheck/con",
+				type : "post",
+				data : {u_id: u_id},
+				dataType : 'json',
+				success : function(result){
+					if(result == 0){
+						$('#idCheck').html('아이디 확인 성공');
+						$('#idCheck').attr('color','green');
+						
+						
+					} else{
+						$('#idCheck').html('아이디 정보가 없습니다');
+						$('#idCheck').attr('color','red');
+					} 
+				},
+				error : function(){
+					alert("서버요청실패");
+				}
+			})
+			 
+		})
 })
+
 
 </script>
 
@@ -77,16 +80,6 @@ $(document).ready(function() {
 	
 	//비밀번호 찾기 버튼
 	$("#pwFind").click(function() {
-
-		
-		/*
-		if($("input").val()==''){
-			alert("정보를 입력해주세요");
-			return false;
-		} else {
-			return true;
-		}
-		*/
 		
 		$("form").submit();
 	})
@@ -180,12 +173,13 @@ form{
 <div class="form-group">
 	<input id="u_name" name="u_name" placeholder="이름을 입력해 주세요"><br><br>
 	
-	<span id="nameCheck" name="nameCheck" size="2"></span><br><br>
+	<font id="nameCheck" name="nameCheck" size="2"></font><br><br>
 	
 	
 	<input id="u_id" name="u_id" placeholder="아이디를 입력해 주세요"><br><br>
 	
-	<span id=idCheck" name="idCheck" size="2"></span><br><br>
+	<font id="idCheck" name="idCheck" size="2"></font><br><br>
+	
 </div>
 
 

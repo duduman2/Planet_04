@@ -97,8 +97,6 @@ $(document).ready(function() {
 				if(result == 0){
 					$("#emailCheck").html('사용 불가한 이메일입니다.');
 					$("#emailCheck").attr('color','red');
-					
-					
 				} else{
 					$("#emailCheck").html('사용 가능한 이메일입니다.');
 					$("#emailCheck").attr('color','green');
@@ -124,7 +122,9 @@ $(document).ready(function() { 
 		var e_RegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;        
 		
 		//전화번호 유효성 검사
-		var regExpPhone = /^\d{2,3}-\d{3,4}-\d{4}$/;
+// 		var regExpPhone = /^\d{2,3}-\d{3,4}-\d{4}$/;
+		
+		var regExpPhone = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
 		
 		var n_RegExp = /^[가-힣]{2,15}$/; //이름 유효성검사 정규식
 		               
@@ -213,15 +213,17 @@ $(document).ready(function() { 
 		
 		// ================ phone 유효성검사 ================ //    
 		
-// 		if(objPhone.value ==''){            
-// 			alert("전화번호를 입력해주세요.");            
-// 			return false;        
-// 		} 
+		if(objPhone.value ==''){            
+			alert("전화번호를 입력해주세요.");            
+			return false;        
+		} 
 		
-// 		if(!regExpPhone.test(objPhone.value)){ //전화번호 유효성 검사            
-// 			alert("올바른 전화번호 형식이 아닙니다.");            
-// 			return false;        
-// 		} 
+		if(!regExpPhone.test(objPhone.value)){ //전화번호 유효성 검사            
+			alert("올바른 전화번호 형식이 아닙니다.");            
+			return false;        
+		} 
+		
+		// ================ address 유효성검사 ================ //    
 		
 		if(objAddress.value ==''){            
 			alert("주소를 입력해주세요.");            
@@ -401,10 +403,6 @@ label {
 	margin-left: 50px;
 }
 
-	
-
- 
-
 
 </style>
 
@@ -425,11 +423,79 @@ label {
 
 <!-- 네이버 -->
 
+<!-- <ul> -->
+<!-- 	<li> -->
+<!--       <a id="naverIdLogin_loginButton" href="javascript:void(0)"> -->
+<!--           <span>네이버 로그인</span> -->
+<!--       </a> -->
+<!-- 	</li> -->
+<!-- 	<li onclick="naverLogout(); return false;"> -->
+<!--       <a href="javascript:void(0)"> -->
+<!--           <span>네이버 로그아웃</span> -->
+<!--       </a> -->
+<!-- 	</li> -->
+<!-- </ul> -->
+
 
 
 <!-- <a datatype="naver" class="css-l0qndx e1ufx3to0" id="naverIdLogin_loginButton" href="javascript:void(0)"  style="margin-right: 40px;"><svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet"><g fill="none" fill-rule="evenodd"><path fill="#00C63B" d="M0 24C0 10.745 10.745 0 24 0s24 10.745 24 24-10.745 24-24 24S0 37.255 0 24z"></path><path fill="#FFF" d="M21 25.231V34h-7V15h7l6 8.769V15h7v19h-7l-6-8.769z"></path></g></svg></a> -->
 
-<a datatype="naver" class="css-l0qndx e1ufx3to0" id="naverIdLogin_loginButton" href="javascript:void(0)"  style="margin-right: 40px;"><svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet"><g fill="none" fill-rule="evenodd"><path fill="#00C63B" d="M0 24C0 10.745 10.745 0 24 0s24 10.745 24 24-10.745 24-24 24S0 37.255 0 24z"></path><path fill="#FFF" d="M21 25.231V34h-7V15h7l6 8.769V15h7v19h-7l-6-8.769z"></path></g></svg></a>
+<a id="naverIdLogin_loginButton" href="javascript:void(0)" style="margin-right: 40px;"><svg width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="xMidYMid meet"><g fill="none" fill-rule="evenodd"><path fill="#00C63B" d="M0 24C0 10.745 10.745 0 24 0s24 10.745 24 24-10.745 24-24 24S0 37.255 0 24z"></path><path fill="#FFF" d="M21 25.231V34h-7V15h7l6 8.769V15h7v19h-7l-6-8.769z"></path></g></svg></a>
+
+<!-- 네이버 스크립트 -->
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+
+<script>
+
+var naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "IahXu6d4TYMETpsiP8w7", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
+			callbackUrl: "http://localhost:8888/main", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+			isPopup: false,
+			callbackHandle: true
+		}
+	);	
+
+naverLogin.init();
+
+window.addEventListener('load', function () {
+	naverLogin.getLoginStatus(function (status) {
+		if (status) {
+			var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
+    		
+			console.log(naverLogin.user); 
+    		
+            if( email == undefined || email == null) {
+				alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
+				naverLogin.reprompt();
+				return;
+			}
+		} else {
+			console.log("callback 처리에 실패하였습니다.");
+		}
+	});
+});
+
+
+var testPopUp;
+function openPopUp() {
+    testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+}
+function closePopUp(){
+    testPopUp.close();
+}
+
+function naverLogout() {
+	openPopUp();
+	setTimeout(function() {
+		closePopUp();
+		}, 1000);
+	
+	
+}
+</script>
+
+
 
 <!-- 구글 -->
 <a datatype="google" id="GgCustomLogin" class="css-l0qndx e1ufx3to0" href="javascript:void(0)">
@@ -464,7 +530,6 @@ label {
 
 			<!-- 로그인 중복확인 -->
 			<font id="idCheck" name="idCheck" size="2"></font>
-			
 
 		</div>
 			<br>
@@ -494,8 +559,7 @@ label {
 			<input type="text" name="u_nick" id="u_nick" required="required" style="width: 232px; height: 25px; border: 1px solid gray;"> 
 			
 			<!-- 닉네임 중복확인 -->
-			<font id="nickCheck" name="nickCheck" size="2"></font>
-			
+			<font id="nickCheck" name="nickCheck" size="2"></font>			
 		</div>
 			<br>
 			
@@ -524,9 +588,9 @@ label {
 			<br>
 							
 		<div class="form-group">
-			<label for="tel">전화번호</label>
-			<input type="text" name="u_phone" id="phone" required="required" placeholder=" '-' 를 제외한 숫자만 입력하세요" style="width: 232px; height: 25px; border: 1px solid gray;">
-			<font id="phoneCheck" name="phoneCheck" size="2"></font>
+			<label for="phone">전화번호</label>
+			<input type="text" name="u_phone" id="u_phone" required="required" placeholder=" '-' 를 포함해 입력해주세요" style="width: 232px; height: 25px; border: 1px solid gray;">
+			<span id="phoneCheck" name="phoneCheck"></span>
 		</div>
 			<br>
 			

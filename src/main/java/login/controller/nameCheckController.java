@@ -28,7 +28,7 @@ public class nameCheckController extends HttpServlet {
 				
 		LoginDao loginDao = new LoginDaoImpl();
 				
-		int nameCHcek = loginDao.idCheck(u_name);
+		int nameCHcek = loginDao.nameCheck(u_name);
 
 		// 성공여부 확인 : 개발자용
 		if (nameCHcek == 0) {
