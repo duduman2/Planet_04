@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.service.face.BoardService;
 import board.service.impl.BoardServiceImpl;
+import dto.BoardFile;
 import dto.BoardInfo;
 
 
@@ -45,10 +46,10 @@ public class BoardViewController extends HttpServlet {
 
 		
 		//첨부파일 정보 조회
-//		BoardFile boardFile = boardService.viewFile(viewBoard);
+		BoardFile boardFile = boardService.viewFile(viewBoard);
 		
 		//첨부파일 정보를 MODEL값 전달
-//		req.setAttribute("boardFile", boardFile);
+		req.setAttribute("boardFile", boardFile);
 
 		
 		//View 지정 및 응답
