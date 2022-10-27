@@ -2,8 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<link rel="icon" href="<%=request.getContextPath() %>/sources/admin/favicon.ico">
-<title>개인정보 확인하기</title>
+<title>회원 정보 확인하기</title>
 
 <%@include file="../layout/header.jsp" %>
 
@@ -46,22 +45,22 @@ $(document).ready(function() {
 <!-- </head> -->
 <!-- <body> -->
 
-<h3>&nbsp;&nbsp;&nbsp개인정보 확인하기</h3>
+<h3>&nbsp;&nbsp;&nbsp회원 정보 확인하기</h3>
 <hr>
 <div class="main">
 
 	<div id="uinfoMenu">
-<!-- 		<ul> -->
-<!-- 			<li><a id="btnUserInfo">회원 정보 확인</a></li> -->
-<!-- 			<li><a id="btnUserInfoModi">회원 정보 수정</a></li> -->
-<!-- 			<li><a id="btnUserInfoDeleteMenu">회원 탈퇴</a></li> -->
-<!-- 		</ul> -->
-		<table class="table">
-			<tr><th>메뉴</th></tr>
-			<tr><td><a id="btnUserInfo">회원 정보 확인</a></td></tr>
-			<tr><td><a id="btnUserInfoModi">회원 정보 수정</a></td></tr>
-			<tr><td><a id="btnUserInfoDeleteMenu">회원 탈퇴</a></td></tr>
-		</table>
+		<ul>
+			<li><a id="btnUserInfo">회원 정보 확인</a></li>
+			<li><a id="btnUserInfoModi">회원 정보 수정</a></li>
+			<li><a id="btnUserInfoDeleteMenu">회원 탈퇴</a></li>
+		</ul>
+<!-- 		<table class="table"> -->
+<!-- 			<tr><th>메뉴</th></tr> -->
+<!-- 			<tr><td><a id="btnUserInfo">회원 정보 확인</a></td></tr> -->
+<!-- 			<tr><td><a id="btnUserInfoModi">회원 정보 수정</a></td></tr> -->
+<!-- 			<tr><td><a id="btnUserInfoDeleteMenu">회원 탈퇴</a></td></tr> -->
+<!-- 		</table> -->
 		
 	</div>
 
@@ -145,18 +144,25 @@ $(document).ready(function() {
 		<!-- </tr> -->
 		<%-- 16개--%>
 		<%-- <% } %> --%>
+		
+		
 		</table>
 	</div>
 
 <div class="text-center" >
-<button id="btnUserInfoUpdate"  class="btn btn-info"
-style="width: 100px; height: 50px;">수정하기</button> 
-&nbsp;&nbsp;&nbsp;
-<button id="btnBack"  class="btn btn-default" style="width: 120px; 
-height: 50px;" onclick="history.go(-1)">이전으로</button>
+	<button id="btnUserInfoUpdate"  class="btn btn-info"
+	style="width: 100px; height: 50px;">수정하기</button> 
+	
+	&nbsp;&nbsp;&nbsp;
+	
+	<button id="btnBack"  class="btn btn-default" style="width: 120px; 
+	height: 50px;" onclick="history.go(-1)">이전으로</button>
+	
+<!-- 	<button onclick="/mypage/main">마이페이지-메인</button> -->
+	<%-- <%=request.getContextPath() %> --%>
 </div>
 
-<div></div>
+
 
 <div id="blank" style="height: 100px;"> </div>
 

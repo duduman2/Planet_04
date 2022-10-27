@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<link rel="icon" href="<%=request.getContextPath() %>/sources/admin/favicon.ico">
 <title>회원 탈퇴하기</title>
 
 <%@include file="../layout/header.jsp" %>
@@ -33,14 +32,24 @@ $(document).ready(function() {
 	$("#btnUserInfoModi").click(function() {
 		$(location).attr("href", "/user/update")
 	})
-	$("#btnUserInfoDeleteMenu").click(function() {
+	$("#btnUserInfoDeleteMenu").click(function() { //메뉴- 회원탈퇴
 		$(location).attr("href", "/user/delete")
 	})
-	$("#btnUserInfoDelete").click(function(){
-		alert("탈퇴하시겠습니까??")
+	$("#btnUserInfoDelete").click(function(){ //하단의 탈퇴하기 버튼
+// 		alert("탈퇴하시겠습니까??")
+		uinfoDelete()
 	})
 	
+
 })
+function uinfoDelete() {
+	var result = confirm("탈퇴하시겠습니까????");
+	if(result==true) {
+		alert("회원 탈퇴 - 확인을 눌렀습니다")
+	} else {
+		alert("회원 탈퇴 - 취소을 눌렀습니다")
+	}
+}	
 
 </script>
 <!-- </head> -->
@@ -62,26 +71,29 @@ $(document).ready(function() {
 
 	<div id="uinfoRight">
 
-		<form action="">
+		<form action="" method="post" style="font-size: 1.2em;">
 		탈퇴할 경우 재사용 및 복구가 불가능합니다<br><br>
 		탈퇴 안내<br>
 		~~안내사항~~<br><br>
 		
 		<label><input type="checkbox" name="uDelete" value=""> 이에 동의합니다</label>
 
+<!-- 		<div class="text-center" > -->
+		<div>
+			<br><br>
+			<button id="btnUserInfoDelete"  class="btn btn-info"
+			style="width: 100px; height: 50px;">탈퇴하기</button> 
+			&nbsp;&nbsp;&nbsp;
+			<button id="btnBack"  class="btn btn-default" style="width: 120px; 
+			height: 50px;" onclick="history.go(-1)">이전으로</button>
+		</div>
+		
+		
 		</form>
-	</div>
+	</div><%-- uinfoRight end --%>
 
-<div class="text-center" >
 
-	<button id="btnUserInfoDelete"  class="btn btn-info"
-	style="width: 100px; height: 50px;">탈퇴하기</button> 
-	&nbsp;&nbsp;&nbsp;
-	<button id="btnBack"  class="btn btn-default" style="width: 120px; 
-	height: 50px;" onclick="history.go(-1)">이전으로</button>
-</div>
 
-<div></div>
 
 <div id="blank" style="height: 100px;"> </div>
 

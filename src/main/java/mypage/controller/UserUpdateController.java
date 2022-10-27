@@ -54,7 +54,26 @@ public class UserUpdateController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/user/update [POST]");
+		
+		//전달 파라미터의 한글 인코딩 설정
+		req.setCharacterEncoding("UTF-8");
 
+		//세션 정보 객체
+		HttpSession session = req.getSession();
+		String u_no = (String) session.getAttribute("u_no");
+		
+//		int userNo = Integer.parseInt(u_no);
+//		int userNo = 1; 
+		int userNo = 2; 		
+		
+		//전달 파라미터 보내기
+		UserInfo param = new UserInfo();
+		
+		param.setU_no(userNo);
+		param.setU_name( req.getParameter("name"));
+		
+		
+		
 		resp.sendRedirect("/user/info");
 	}
 }

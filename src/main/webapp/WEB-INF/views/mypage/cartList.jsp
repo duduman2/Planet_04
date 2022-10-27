@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<link rel="icon" href="<%=request.getContextPath() %>/sources/admin/favicon.ico">
 <title>장바구니 리스트</title>
 
 <%@include file="../layout/header.jsp" %>
@@ -32,31 +31,42 @@ th { text-align: center; }
 <!-- </head> -->
 <!-- <body> -->
 
-<h3>&nbsp;&nbsp;&nbsp장바구니 리스트</h3>
+<h3>&nbsp;&nbsp;&nbsp장바구니 리스트</h3>&nbsp;&nbsp;&nbsp장바구니 내역 보여주기 
 <hr>
 
 <div id="cartResult">
-	장바구니 내역 보여주기 
 
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>번호</th>
-			<th>제품 번호</th>
-			<th>제품명</th>
-			<th>제품 가격</th>
+<!-- 			<th>번호</th> -->
+
+			<th>체크</th>
+			<th>상품 번호</th>
+			<th>상품명</th>
+			<th>상품 가격</th>
+			<th>수량</th>
 			<th>배송비</th>
 		</tr>	
 	</thead>
 	<tbody> 
 		<% for(int i=0; i<cList.size(); i++) { %>
 		<tr>
-			<td style="text-align: center;"><%= cList.get(i).getCarNo()	%> 번</td>
+<!-- 			<td>수정할것!! 추가사항</td> -->
+<!-- 			<td>상품번호 productNo
+					상품명 productName
+					가격 productPrice
+					수량 productQuan </td> -->
+
+<%-- 			<td style="text-align: center;"><%= cList.get(i).getCarNo()	%> 번</td> --%>
+			<td style="text-align: center;"><input type="checkbox" name="" value=""></td>
 			<td><%= cList.get(i).getProduct_no()	%></td>
 			<td><%= cList.get(i).getProduct_name()	%>상품명+링크</td>
 			<td><%= cList.get(i).getPrice()	%>제품 가격</td>
-			<td><%= cList.get(i).getDeliveryfee()	%>배송비유무</td>
-<!-- 			<td>제품세부사항(컬러, 사이즈)+수정하기</td> -->
+			<td style="text-align: center;">수량</td>
+			<td style="text-align: center;"><%= cList.get(i).getDeliveryfee()	%>배송비유무?금액?</td>
+
+
 
 		</tr>
 		<% } %>

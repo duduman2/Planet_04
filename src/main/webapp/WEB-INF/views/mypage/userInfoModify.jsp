@@ -2,8 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<link rel="icon" href="<%=request.getContextPath() %>/sources/admin/favicon.ico">
-<title>개인정보 수정하기</title>
+<title>회원 정보 수정하기</title>
 
 <%@include file="../layout/header.jsp" %>
 
@@ -43,7 +42,7 @@ $(document).ready(function() {
 <!-- </head> -->
 <!-- <body> -->
 
-<h3>&nbsp;&nbsp;&nbsp개인정보 수정하기</h3>
+<h3>&nbsp;&nbsp;&nbsp회원 정보 수정하기</h3>
 <hr>
 <div class="main" style="width: 100%;">
 
@@ -65,6 +64,8 @@ $(document).ready(function() {
 <!-- 			<th>회원 번호</th> -->
 <%-- 			<td><input type="text" name="uNo" value="<%=uList.getU_no() %>"></td> --%>
 <!-- 		</tr> -->
+
+
 		<tr>
 			<th>회원 아이디</th>
 			<td><input type="text" name="u" value="<%=uList.getU_id() %>"></td>
@@ -136,6 +137,11 @@ $(document).ready(function() {
 		<!-- </tr> -->
 		<%-- 16개--%>
 		<%-- <% } %> --%>
+		<tr>
+			<th>이미지 교체</th>
+			<td></td>
+		</tr>
+		
 		</table>
 	</div>
 
