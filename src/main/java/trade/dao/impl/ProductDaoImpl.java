@@ -26,10 +26,7 @@ public class ProductDaoImpl implements ProductDao {
 		String sql = "";
 		sql += "INSERT INTO product (productno, productname, productcontent, productprice,productclass, userid, fileno)";
 		sql += " VALUES(product_seq.nextval, ?, ? , ?, ?,?, uploadfile_seq.CURRVAL)"; 
-						// boardd_seq 바꿔야댐
-						//
-						//
-						//
+
 		try {
 			ps = conn.prepareStatement(sql);
 			
