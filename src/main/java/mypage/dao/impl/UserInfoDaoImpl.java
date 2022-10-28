@@ -1,6 +1,7 @@
 package mypage.dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,14 +18,71 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	
 	
 	@Override
-	public UserInfo selectUserInfoByUserNo() {
+	public int updateUserInfo(Connection conn, UserInfo param) {
+		System.out.println("userInfoDao - updateUserInfo() - 시작");
 
-		return null;
-	}
-	@Override
-	public int updateUserInfo() {
+		// sql 작성
+		String sql = "";
+		sql += "UPDATE tbl_user";
+		sql += " SET userno = ?";
+		sql += " SET userid = ?"; 
+		sql += " SET userpw = ?";
+		sql += " SET name = ?"; 
+		sql += " SET birth = ?"; //5
+		
+		sql += " SET gender = ?"; 
+		sql += " SET phone = ?"; 
+		sql += " SET email = ?"; 
+		sql += " SET add1 = ?"; 
+		sql += " SET usernick = ?"; //10
+		
+		sql += " SET joindate = ?";
+		sql += " SET tradeuser = ?";
+		sql += " SET userbsno = ?";
+		sql += " SET grade = ?";
+		
+		sql += " SET reportcode = ?";
+		sql += " SET wish_no = ?"; //16
+		sql += " WHERE userno = ?"; 
+		
+		int result = 0; //결과를 저장할 객체
 
-		return 0;
+		try {
+			// sql 수행 객체
+			ps = conn.prepareStatement(sql);
+			
+			// sql 파라미터 전달
+			ps.setInt(1, param.getU_no());
+			ps.setString(2, param.getU_id());
+			ps.setString(3, param.getU_pw());
+			ps.setString(4, param.getU_name());
+			
+			ps.setDate(5, (Date) param.getU_birth());
+			ps.setString(6, param.getU_gender());
+			ps.setString(7, param.getU_phone());
+			ps.setString(8, param.getU_email());
+			
+			ps.setString(9, param.getU_address());
+			ps.setString(10, param.getU_nick());
+			ps.setDate(11, (Date) param.getU_join_date());
+			ps.setString(12, param.getU_trade_user());
+			
+			ps.setString(13, param.getB_business_number());
+			ps.setString(14, param.getGrade());
+			ps.setString(15, param.getReportcode());
+			ps.setString(16, param.getWishno());
+			
+			// sql 수행 및 결과 집합 저장
+			result = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		System.out.println("userInfoDao - updateUserInfo() - 끝");
+		return result; //최종 결과 반환
 	}
 
 	@Override
@@ -112,6 +170,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		
 		return 0;
 	}
+
 	
 //	@Override
 //	public UserInfo askNick(Connection conn, UserInfo param) {
@@ -138,7 +197,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 //			JDBCTemplate.close(ps);
 //		}
 //		System.out.println("userInfoDao - askNick() - 끝");
-//		return null;
+//		return re;
 //	}
 	
 	

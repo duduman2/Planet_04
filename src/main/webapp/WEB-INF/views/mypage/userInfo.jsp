@@ -8,6 +8,7 @@
 
 <%-- 모델값 전달받기 --%>
 <% 	UserInfo uList = (UserInfo) request.getAttribute("data"); %>
+<% 	UserInfo uResultList = (UserInfo) request.getAttribute("result"); %>
 
 
 <script type="text/javascript">
@@ -38,6 +39,9 @@ $(document).ready(function() {
 	$("#btnUserInfoDeleteMenu").click(function() {
 		$(location).attr("href", "/user/delete")
 	})	
+	$("#btnMyMain").click(function() {
+		$(location).attr("href", "/mypage/main")
+	})
 	
 })
 
@@ -116,8 +120,8 @@ $(document).ready(function() {
 			<td><%=uList.getU_nick() %></td>
 		</tr>
 <!-- 		<tr> -->
-<!-- 			<th>생성날짜</th> -->
-<%-- 			<td><%=uList.getU_join_date() %></td> --%>
+			<th>가입날짜</th>
+			<td><%=uList.getU_join_date() %></td>
 <!-- 		</tr> -->
 		<tr>
 			<th>사업자유저</th>
@@ -150,16 +154,19 @@ $(document).ready(function() {
 	</div>
 
 <div class="text-center" >
+	<button id="btnBack"  class="btn btn-default" style="width: 120px; 
+	height: 50px;" onclick="history.go(-1)">이전으로</button>
+
+	&nbsp;&nbsp;&nbsp;
+	
 	<button id="btnUserInfoUpdate"  class="btn btn-info"
 	style="width: 100px; height: 50px;">수정하기</button> 
 	
 	&nbsp;&nbsp;&nbsp;
 	
-	<button id="btnBack"  class="btn btn-default" style="width: 120px; 
-	height: 50px;" onclick="history.go(-1)">이전으로</button>
-	
-<!-- 	<button onclick="/mypage/main">마이페이지-메인</button> -->
-	<%-- <%=request.getContextPath() %> --%>
+	<button id="btnMyMain" class="btn btn-default"  
+	style="width: 155px; height: 50px;">마이페이지-메인으로</button>
+<%-- 	<%=request.getContextPath() %> --%>
 </div>
 
 

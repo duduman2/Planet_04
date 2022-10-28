@@ -14,6 +14,7 @@ public interface UserCartDao {
 
 	/**
 	 * 로그인한 회원의 장바구니 조회
+	 * 
 	 * @param conn
 	 * @param param
 	 * @return
@@ -26,7 +27,7 @@ public interface UserCartDao {
 
 	/**
 	 * 장바구니 내역 조회 
-	 * -- 이건 DB에 있는 모든 tbe_wish 리스트보여줌 / 잘못만듬,,ㅜㅜ
+	 * -- 이건 DB에 있는 모든 tbl_wish 리스트 전부 보여줌 / 잘못만듬,,ㅜㅜ
 	 * 
 	 * @param conn - DB 연결 객체
 	 * @return List<Cart> - 장바구니 전체 조회 목록
@@ -35,6 +36,10 @@ public interface UserCartDao {
 
 	
 	public Product getParam(HttpServletRequest req);
+
+	
+	
+	public List<Product> checkCarts(Connection conn, UserInfo param);
 
 
 

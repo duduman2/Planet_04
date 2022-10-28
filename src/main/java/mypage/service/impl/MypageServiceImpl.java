@@ -5,6 +5,7 @@ import java.util.List;
 
 import common.JDBCTemplate;
 import dto.Cart;
+import dto.Product;
 import dto.UserInfo;
 import mypage.dao.face.UserBoardDao;
 import mypage.dao.face.UserCartDao;
@@ -52,18 +53,6 @@ public class MypageServiceImpl implements MypageService {
 
 		// DB 조회 결과 반환
 		return userCartDao.checkCart(JDBCTemplate.getConnection(), param);
-		
-//------------------------------------------------------------
-//		Connection conn = JDBCTemplate.getConnection();
-//		System.out.println("MypageService - List<Cart> checkCart() - DB 연결 객체 생성완료 ");
-//		
-//		//tbl_wish  전체 조회 - userCartDao 이용
-//		List<Cart> list = userCartDao.checkCart(conn);
-//		
-//		System.out.println("MypageService - List<Cart> checkCart() - DAO 호출 후");
-//
-//		//조회 결과 리턴
-//		return list;
 	}
 
 	@Override
@@ -94,11 +83,6 @@ public class MypageServiceImpl implements MypageService {
 		return userInfoDao.showUserInfo(JDBCTemplate.getConnection(), param);
 	}
 
-	@Override
-	public int modifyUserInfo() {
-
-		return 0;
-	}
 
 	@Override
 	public int deleteUser(UserInfo param) {
@@ -107,7 +91,33 @@ public class MypageServiceImpl implements MypageService {
 		System.out.println("MypageService - deleteUser(param) - DAO 호출 후");
 		
 		// DB 조회 결과 반환
+		return userInfoDao.deleteUser(JDBCTemplate.getConnection(), param);
+	}
+
+	@Override
+	public int updateUserInfo(UserInfo param) {
+		System.out.println("MypageService - updateUserInfo(param) - DB 연결 객체 생성완료 ");
+		
+		System.out.println("MypageService - updateUserInfo(param) - DAO 호출 후");
+		
+		// DB 조회 결과 반환
+		return userInfoDao.updateUserInfo(JDBCTemplate.getConnection(), param);
+	}
+
+	@Override
+	public int modifyUserInfo() {
 		return 0;
+	}
+
+	@Override
+	public List<Product> checkCarts(UserInfo param) {
+		
+		System.out.println("MypageService - List<Product> checkCarts - DB 연결 객체 생성완료 ");
+		
+		System.out.println("MypageService - List<Product> checkCarts - DAO 호출 후");
+		
+		// DB 조회 결과 반환
+		return userCartDao.checkCarts(JDBCTemplate.getConnection(), param);
 	}
 
 //	@Override
