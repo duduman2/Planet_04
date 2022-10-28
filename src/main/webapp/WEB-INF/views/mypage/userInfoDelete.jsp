@@ -39,6 +39,9 @@ $(document).ready(function() {
 // 		alert("탈퇴하시겠습니까??")
 		uinfoDelete()
 	})
+	$("#btnMyMain").click(function() {
+		$(location).attr("href", "/mypage/main")
+	})
 	
 
 })
@@ -81,11 +84,19 @@ function uinfoDelete() {
 <!-- 		<div class="text-center" > -->
 		<div>
 			<br><br>
-			<button id="btnUserInfoDelete"  class="btn btn-info"
-			style="width: 100px; height: 50px;">탈퇴하기</button> 
-			&nbsp;&nbsp;&nbsp;
+			
 			<button id="btnBack"  class="btn btn-default" style="width: 120px; 
 			height: 50px;" onclick="history.go(-1)">이전으로</button>
+				
+			&nbsp;&nbsp;&nbsp;
+	
+			<button id="btnMyMain" class="btn btn-default"  
+			style="width: 155px; height: 50px;">마이페이지-메인으로</button>
+			
+			&nbsp;&nbsp;&nbsp;
+			
+			<button id="btnUserInfoDelete"  class="btn btn-info"
+			style="width: 100px; height: 50px;">탈퇴하기</button> 
 		</div>
 		
 		

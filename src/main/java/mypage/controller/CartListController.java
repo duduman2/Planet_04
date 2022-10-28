@@ -37,9 +37,9 @@ public class CartListController extends HttpServlet {
 
 		//테스트용으로 1을 설정했고
 		//	-> 나중에 int userNo = Integer.parseInt(u_no); 로 바꾸기
-//		int userNo = Integer.parseInt(u_no);
+		int userNo = Integer.parseInt(u_no);
 //		int userNo = 1; 
-		int userNo = 2; 
+//		int userNo = 2; 
 		
 		//전달 파라미터 얻어오기
 		UserInfo param = new UserInfo();
@@ -48,18 +48,21 @@ public class CartListController extends HttpServlet {
 
 		//장바구니 전체 목록을 조회하기 - MypageService 이용함
 //		List<Cart> cartlist = mypageService.checkCart(); // 내 DB 전체 장바구니 보여짐...
-		List<Cart> cartlist = mypageService.checkCart(param);
+//		List<Cart> cartlist = mypageService.checkCart(param);
+		List<Product> productlist = mypageService.checkCarts(param);
 		
 		System.out.println( "cart/list/ userNo :" + userNo);
 		
 		//[test] 조회결과 확인 코드
 //		System.out.println("<<--- 장바구니 목록 조회 --->>");
 //		for(Cart c : cartlist) System.out.println( c );
+		for(Product p : productlist) System.out.println( p );
 		
 		
 		//조회된 결과를 view에 전달하기 
 		// -> httpservletrequest 이용해서 -> cartlist로 jsp에 list 객체 전달하기
-		req.setAttribute("cartlist", cartlist);
+//		req.setAttribute("cartlist", cartlist);
+		req.setAttribute("productlist", productlist);
 
 		req.getRequestDispatcher("/WEB-INF/views/mypage/cartList.jsp").forward(req, resp);
 	}

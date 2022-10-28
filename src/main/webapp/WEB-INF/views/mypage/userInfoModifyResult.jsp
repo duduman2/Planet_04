@@ -2,12 +2,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<title>회원 정보 수정하기</title>
+<title>회원 정보 수정 완료</title>
 
 <%@include file="../layout/header.jsp" %>
 
 <%-- 모델값 전달받기 --%>
 <% 	UserInfo uList = (UserInfo) request.getAttribute("data"); %>
+<% 	UserInfo uResultList = (UserInfo) request.getAttribute("result"); %>
 
 
 <script type="text/javascript">
@@ -38,10 +39,6 @@ $(document).ready(function() {
 	$("#btnMyMain").click(function() {
 		$(location).attr("href", "/mypage/main")
 	})
-	$("#btnUserInfoUpdate").click(function() { //하단의 수정완료 버튼
-		$(location).attr("href", "/user/updateResult")
-// 		$(location).attr("href", "/user/info")
-	})
 	
 })
 
@@ -49,7 +46,7 @@ $(document).ready(function() {
 <!-- </head> -->
 <!-- <body> -->
 
-<h3>&nbsp;&nbsp;&nbsp회원 정보 수정하기</h3>
+<h3>&nbsp;&nbsp;&nbsp회원 정보 완료 확인하기</h3>
 <hr>
 <div class="main" style="width: 100%;">
 
@@ -64,7 +61,6 @@ $(document).ready(function() {
 
 
 	<div id="uinfoRight">
-	<form action="/user/update" method="post">
 		<table class="table table-striped table-hover" id="userinfo">
 		
 		<%-- <% for(int i=0; i<uList.size(); i++) { %> --%>
@@ -76,64 +72,63 @@ $(document).ready(function() {
 
 		<tr>
 			<th>회원 아이디</th>
-			<td><input type="text" name="u" value="<%=uList.getU_id() %>"></td>
+<%-- 			<td><%=uResultList.getU_id() %></td> --%>
 		</tr>
 		<tr>
 			<th>회원 패스워드</th>
-			<td><input type="text" name="u" value="<%=uList.getU_pw() %>"></td>
+<%-- 			<td><%=uResultList.getU_pw() %></td> --%>
 		</tr>
 		<tr>
 			<th>회원 이름</th>
-			<td><input type="text" name="u" value="<%=uList.getU_name() %>"></td>
+<%-- 			<td><%=uResultList.getU_name() %></td> --%>
 		</tr>
 		<%-- 4개 --%>
 		
 		<tr>
 			<th>생년월일</th>
-			<td><input type="text" name="" value="<%=uList.getU_birth() %>"></td>
-<%-- 			<td><%=uList.getU_birth() %></td> --%>
+<%-- 			<td><%=uResultList.getU_birth() %></td> --%>
 		</tr>
 		<tr>
 			<th>성별</th>
-			<td><input type="text" name="" value="<%=uList.getU_gender() %>"></td>
+<%-- 			<td><%=uResultList.getU_gender() %></td> --%>
 		</tr>
 		<tr>
 			<th>전화번호</th>
-			<td><input type="text" name="" value="<%=uList.getU_phone() %>"></td>
+<%-- 			<td><%=uResultList.getU_phone() %></td> --%>
 		</tr>
 		<tr>
 			<th>이메일</th>
-			<td><input type="text" name="" value="<%=uList.getU_email() %>"></td>
+<%-- 			<td><%=uResultList.getU_email() %></td> --%>
 		</tr>
 		<%-- 8개--%>
 		
 		
 		<tr>
 			<th>주소</th>
-			<td><input type="text" name="" value="<%=uList.getU_address() %>"></td>
+<%-- 			<td><%=uResultList.getU_address() %></td> --%>
 		</tr>
 		<tr>
 			<th>회원 닉네임</th>
-			<td><input type="text" name="" value="<%=uList.getU_nick() %>"></td>
+<%-- 			<td><%=uResultList.getU_nick() %></td> --%>
 		</tr>
 		<tr>
 			<th>가입날짜</th>
-			<td><%=uList.getU_join_date() %></td>
+<%-- 			<td><%=uResultList.getU_join_date() %></td> --%>
 		</tr>
 		<tr>
 			<th>사업자유저</th>
-			<td><input type="text" name="" value="<%=uList.getB_business_number() %>"></td>
+<%-- 			<td><%=uResultList.getB_business_number() %></td> --%>
 		</tr>
 		<%-- 12개--%>
 		
 		
 		<tr>
 			<th>사업자번호</th>
-			<td><input type="text" name="" value="<%=uList.getB_business_number() %>"></td>
+<%-- 			<td><%=uResultList.getB_business_number() %></td> --%>
 		</tr>
 		<tr>
 			<th>등급코드</th>
-			<td><%=uList.getGrade() %></td>
+<%-- 			<td><%=uResultList.getGrade() %></td> --%>
 		</tr>
 		<!-- <tr> -->
 		<!-- 	<th>신고코드</th> -->
@@ -150,18 +145,17 @@ $(document).ready(function() {
 			<td></td>
 		</tr>
 		
-		</form>
 		</table>
 	</div>
 
 <div class="text-center" >
-	<button id="btnBack"  class="btn btn-default" style="width: 120px; 
-	height: 50px;" onclick="history.go(-1)">이전으로</button>
+<!-- 	<button id="btnBack"  class="btn btn-default" style="width: 120px;  -->
+<!-- 	height: 50px;" onclick="history.go(-1)">이전으로</button> -->
 	
-	&nbsp;&nbsp;&nbsp;
+<!-- 	&nbsp;&nbsp;&nbsp; -->
 	
-	<button id="btnUserInfoUpdate"  class="btn btn-info"
-	style="width: 100px; height: 50px;">수정 완료</button> 
+<!-- 	<button id="btnUserInfoUpdate"  class="btn btn-info" -->
+<!-- 	style="width: 100px; height: 50px;">수정 완료</button>  -->
 		
 	&nbsp;&nbsp;&nbsp;
 	

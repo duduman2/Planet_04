@@ -12,8 +12,8 @@ import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
 
-@WebServlet("/user/storyDelete")
-public class UserStoryDeleteController extends HttpServlet {
+@WebServlet("/cart/update")
+public class CartUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// Service 객체 선언
@@ -22,7 +22,7 @@ public class UserStoryDeleteController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/user/storyDelete [GET]");
+		System.out.println("/cart/update [GET]");
 		
 		
 		
@@ -30,7 +30,7 @@ public class UserStoryDeleteController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/user/storyDelete [POST]");
+		System.out.println("/cart/update [POST]");
 
 	
 	}
