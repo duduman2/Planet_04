@@ -16,7 +16,7 @@ import main.service.impl.SearchBoardServiceImpl;
 import trade.service.face.ProductViewService;
 import trade.service.impl.ProductViewServiceImpl;
 
-@WebServlet("/main")
+@WebServlet("/")
 public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -27,7 +27,7 @@ public class MainController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/main [GET]");
+		System.out.println("/ [GET]");
 		
 		//게시글 전체 조회
 		List<BoardInfo> boardList = searchBoardService.getList();
@@ -48,7 +48,7 @@ public class MainController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/main [POST]");
+		System.out.println("/ [POST]");
 		
 		
 	}
