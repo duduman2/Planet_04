@@ -32,9 +32,9 @@ public class UserDeleteController extends HttpServlet {
 
 		//테스트용으로 1을 설정했고
 		//	-> 나중에 int userNo = Integer.parseInt(u_no); 로 바꾸기
-		int userNo = Integer.parseInt(u_no);
+//		int userNo = Integer.parseInt(u_no);
 //		int userNo = 1; 
-//		int userNo = 2; 
+		int userNo = 2; 
 		
 		//전달 파라미터 객체 보내기
 		UserInfo param = new UserInfo();
@@ -55,7 +55,7 @@ public class UserDeleteController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/user/delete [POST]");
 
-		resp.sendRedirect("/main"); //홈페이지 메인으로 
+//		resp.sendRedirect("/"); //홈페이지 메인으로?? 
 	
 	}
 }

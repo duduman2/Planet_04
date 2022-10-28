@@ -4,7 +4,7 @@
 
 <title>회원 정보 확인하기</title>
 
-<%@include file="../layout/header.jsp" %>
+<%@include file="../layout/header2.jsp" %>
 
 <%-- 모델값 전달받기 --%>
 <% 	UserInfo uList = (UserInfo) request.getAttribute("data"); %>

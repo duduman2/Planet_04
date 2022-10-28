@@ -51,7 +51,6 @@ public class UserUpdateController extends HttpServlet {
 		req.setAttribute("data", data);
 		
 		req.getRequestDispatcher("/WEB-INF/views/mypage/userInfoModify.jsp").forward(req, resp);
-		
 	}
 	
 	@Override
@@ -65,9 +64,9 @@ public class UserUpdateController extends HttpServlet {
 		HttpSession session = req.getSession();
 		String u_no = (String) session.getAttribute("u_no");
 		
-		int userNo = Integer.parseInt(u_no);
+//		int userNo = Integer.parseInt(u_no);
 //		int userNo = 1; 
-//		int userNo = 2; 		
+		int userNo = 2; 		
 		
 		//전달 파라미터 보내기
 		UserInfo param = new UserInfo();
