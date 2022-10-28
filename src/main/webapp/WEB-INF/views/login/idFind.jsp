@@ -16,7 +16,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	
+
 // 	$('#u_name').focusout(function(){
 // 		console.log("#u_name focusout")
 			
@@ -45,7 +45,7 @@ $(document).ready(function() {
 			 
 // 		})
 
-	$('#u_name').focusout(function(){
+		$('#u_name').focusout(function(){
 		console.log("#u_name focusout")
 			
 			let u_name = $('#u_name').val(); // input_id에 입력되는 값
@@ -57,13 +57,13 @@ $(document).ready(function() {
 				dataType : 'json',
 				success : function(result){
 					if(result == 0){
-						$("#nameCheck").html('이름 정보가 없습니다');
-						$("#nameCheck").attr('color','red');
+						$("#nameCheck").html('이름 확인 성공');
+						$("#nameCheck").attr('color','green');
 						
 						
 					} else{
-						$("#nameCheck").html('이름 확인 성공');
-						$("#nameCheck").attr('color','green');
+						$("#nameCheck").html('이름 정보가 없습니다');
+						$("#nameCheck").attr('color','red');
 					} 
 				},
 				error : function(){
