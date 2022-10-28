@@ -6,7 +6,7 @@
 
 <title>장바구니 리스트</title>
 
-<%@include file="../layout/header.jsp" %>
+<%@include file="../layout/header2.jsp" %>
 
 <%-- 모델값 전달받기 --%>
 <%	List<Cart> cList = (List) request.getAttribute("cartlist"); %>

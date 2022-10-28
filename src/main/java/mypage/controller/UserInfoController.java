@@ -28,6 +28,7 @@ public class UserInfoController extends HttpServlet {
 		//세션 정보 객체
 		HttpSession session = req.getSession();
 		String u_no = (String) session.getAttribute("u_no");
+//		int u_no = (int) session.getAttribute("u_no");
 
 		//테스트용으로 1을 설정했고
 		//	-> 나중에 int userNo = Integer.parseInt(u_no); 로 바꾸기
@@ -38,6 +39,7 @@ public class UserInfoController extends HttpServlet {
 		//전달 파라미터 객체 얻어오기
 		UserInfo param = new UserInfo();
 		param.setU_no(userNo);
+//		param.setU_no(u_no);
 		
 		//UserInfo 정보 조회하기
 		UserInfo data = mypageService.showUserInfo(param);
@@ -51,9 +53,5 @@ public class UserInfoController extends HttpServlet {
 		
 	}
 	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/user/info [POST]");
-		// [POST] 없어도 될듯?????
-	}
+
 }

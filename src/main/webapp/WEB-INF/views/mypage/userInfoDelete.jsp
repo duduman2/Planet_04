@@ -4,7 +4,7 @@
 
 <title>회원 탈퇴하기</title>
 
-<%@include file="../layout/header.jsp" %>
+<%@include file="../layout/header2.jsp" %>
 
 <%-- 모델값 전달받기 --%>
 <%-- <% 	UserInfo uList = (UserInfo) request.getAttribute("data"); %> --%>
@@ -90,10 +90,10 @@ function uinfoDelete() {
 				
 			&nbsp;&nbsp;&nbsp;
 	
-			<button id="btnMyMain" class="btn btn-default"  
-			style="width: 155px; height: 50px;">마이페이지-메인으로</button>
+<!-- 			<button id="btnMyMain" class="btn btn-default"   -->
+<!-- 			style="width: 155px; height: 50px;">마이페이지-메인으로</button> -->
 			
-			&nbsp;&nbsp;&nbsp;
+<!-- 			&nbsp;&nbsp;&nbsp; -->
 			
 			<button id="btnUserInfoDelete"  class="btn btn-info"
 			style="width: 100px; height: 50px;">탈퇴하기</button> 

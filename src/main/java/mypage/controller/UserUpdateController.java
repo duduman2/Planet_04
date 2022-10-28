@@ -35,9 +35,9 @@ public class UserUpdateController extends HttpServlet {
 
 		//테스트용으로 1을 설정했고
 		//	-> 나중에 int userNo = Integer.parseInt(u_no); 로 바꾸기
-//		int userNo = Integer.parseInt(u_no);
+		int userNo = Integer.parseInt(u_no);
 //		int userNo = 1; 
-		int userNo = 2; 
+//		int userNo = 2; 
 		
 		//전달 파라미터 객체 얻어오기
 		UserInfo param = new UserInfo();
@@ -51,7 +51,6 @@ public class UserUpdateController extends HttpServlet {
 		req.setAttribute("data", data);
 		
 		req.getRequestDispatcher("/WEB-INF/views/mypage/userInfoModify.jsp").forward(req, resp);
-		
 	}
 	
 	@Override

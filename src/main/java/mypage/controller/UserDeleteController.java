@@ -55,7 +55,7 @@ public class UserDeleteController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/user/delete [POST]");
 
-		resp.sendRedirect("/main"); //홈페이지 메인으로 
+//		resp.sendRedirect("/"); //홈페이지 메인으로?? 
 	
 	}
 }
