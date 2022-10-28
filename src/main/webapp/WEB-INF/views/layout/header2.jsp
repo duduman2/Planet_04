@@ -48,7 +48,7 @@ $(document).ready(function() {
 
 <div id="top-menu">
 	
-	<div id="logo"><a href="/"><img src="../sources/admin/logo.png" style="height:60px;"></a></div>
+	<div id="logo"><a href="/main"><img src="../sources/admin/logo.png" style="height:60px;"></a></div>
 	
 	<div class="store"> | <button onclick="location.href='/tradeboard'">플래닛 스토어</button></div>
 	
