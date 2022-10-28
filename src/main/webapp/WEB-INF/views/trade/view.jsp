@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%Product productView = (Product)request.getAttribute("view"); %>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <%@ include file="../layout/header.jsp"%>
 <style>
 table {
@@ -20,6 +20,7 @@ table img {
 #paymoney{
 	font-size: 25px;
 }
+
 </style>
 
 <script type="text/javascript">
@@ -142,15 +143,15 @@ $(document).ready(function(){
 		<td>
 			<form action="/buybuy" method="get">
 			수량 선택
-			<button type="button" id="sub">-</button><input type="text" value="1" name ="productQuan" id="quanInput"><button type="button" id="add">+</button>
-			<br>결제 금액<br>
+			<button type="button" id="sub" class="btn btn-success">-</button><input type="text" value="1" name ="productQuan" id="quanInput" size="5" ><button type="button" id="add" class="btn btn-success">+</button>
+			<br><br>결제 금액<br>
 			<p id="paymoney">원</p>
 			<input type="hidden" name="productNo" value=<%=productView.getProductNo()%> >
 			<input type="hidden" name="productUser" value=<%=productView.getProuserId()%> >
 			<input type="hidden" name="productPrice" value=<%=productView.getProductPrice()%> >
 			
-			<button id="goWish">장바구니</button>
-			<button id="goBuy">구매하기</button>
+			<button id="goWish" class="btn btn-success">장바구니</button>
+			<button id="goBuy" class="btn btn-success">구매하기</button>
 			</form>
 		</td>
 </tr>

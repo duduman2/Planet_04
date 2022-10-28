@@ -84,25 +84,27 @@ $( document ).ready( function() {
 		}
 	}
 	$("#proWrite").click(function(){	
-		$.loginCheck()
+		$.loginCheck(location.href="/trade/productupload")
+		
 	})
 	
 });
 </script>
 
-
+<h1>분양 / 중고 거래</h1>
+<hr>
 <br><br>
-<button id="proWrite"><a href="/trade/productupload">상품등록</a></button><br><br><br>
 <div class="catelist">
 
-	<button class="cate" value="all">전체</button>
-	<button class="cate" value="air">관엽/공기정화식물</button>
-	<button class="cate" value="cac">다육/선인장</button>
-	<button class="cate" value="wild">야생화</button>
-	<button class="cate" value="bon">분재</button>
-	<button class="cate" value="orc">동양란/서양란</button>
-	<button class="cate" value="pot">화분</button>
-	<button class="cate" value="mate">원예자재류</button>
+	<button id="proWrite" class="proWrite btn btn-success">상품등록</button><br><br><br>
+	<button class="cate btn btn-success" value="all">전체</button>
+	<button class="cate btn btn-success" value="air">관엽/공기정화식물</button>
+	<button class="cate btn btn-success" value="cac">다육/선인장</button>
+	<button class="cate btn btn-success" value="wild">야생화</button>
+	<button class="cate btn btn-success" value="bon">분재</button>
+	<button class="cate btn btn-success" value="orc">동양란/서양란</button>
+	<button class="cate btn btn-success" value="pot">화분</button>
+	<button class="cate btn btn-success" value="mate">원예자재류</button>
 
 </div>
 
@@ -120,6 +122,6 @@ $( document ).ready( function() {
 </div>
 
 
-<button type="button" id="topButton" onclick="goTop()">맨 위로 ↑</button>
+<button type="button" id="topButton" class="btn btn-success" onclick="goTop()">맨 위로 ↑</button>
 <%@ include file="/WEB-INF/views/trade/paging2.jsp"%> <!-- ./paging2.jsp로 하면 추가가 안됩니다 -->
 <%@ include file="../layout/footer.jsp"%>

@@ -33,10 +33,47 @@ $(document).ready(function(){
 
 </script>
 
-판매글 번호 : <%=productView.getProductNo()%> <br>
-판매자 : <%=productView.getProuserId()%>	<br>
-금액 : <%=productView.getProductPrice()%><br>
-수량 : <%=request.getAttribute("proquan")%><br>
-내 보유 포인트 : <%=request.getAttribute("mypoint")%>
-<button id="goPayment">결제하기</button>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<style>
+.table{
+	margin : 0 auto;
+	width : 600px;
+}
+</style>
+<h1>결제 페이지</h1>
+<hr>
+
+<table class="table">
+<tr>
+	<td>판매자</td>
+	<td><%=productView.getProuserId()%></td>
+</tr>
+<tr>
+	<td>금액</td>
+	<td><%=productView.getProductPrice()%></td>
+</tr>
+<tr>
+	<td>수량</td>
+	<td><%=request.getAttribute("proquan")%></td>
+</tr>
+<tr>
+	<td>결제 예정 포인트</td>
+	<td><%=(int)request.getAttribute("proquan") * productView.getProductPrice()%></td>
+</tr>
+<tr>
+	<td>내 보유 포인트</td>
+	<td><%=request.getAttribute("mypoint")%></td>
+</tr>
+<tr>
+<td colspan="2" align="right">
+<% if( ((int)request.getAttribute("proquan") * productView.getProductPrice()) > (int)request.getAttribute("mypoint")) {%>
+<span>잔여 포인트가 부족합니다</span> <button id="goCharge"class="btn btn-success" >충전하기</button>
+<% }else {%>
+<button id="goPayment"class="btn btn-success" >결제하기</button>
+<%} %>
+</td>
+</tr>
+</table>
+<%-- 판매글 번호 : <%=productView.getProductNo()%> <br> --%>
 <%@ include file="../layout/footer.jsp"%>
