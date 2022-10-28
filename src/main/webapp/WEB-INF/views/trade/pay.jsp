@@ -3,6 +3,6 @@
 <!DOCTYPE html>
 <%@ include file="../layout/header.jsp"%>
 
-<h1>안팔아</h1>
+<h1>결제가 완료되었습니다</h1>
 
 <%@ include file="../layout/footer.jsp"%>
