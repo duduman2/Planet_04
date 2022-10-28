@@ -9,7 +9,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <!-- 메뉴 스타일 css -->
-<link rel="stylesheet" type="text/css" href="../sources/main/menuStyle.css">
+<link rel="stylesheet" type="text/css" href="../sources/main/menuStyle2.css">
 
 <!-- 파비콘 -->
 <link rel="icon" href="../sources/admin/favicon.ico">
@@ -107,42 +107,67 @@ $(document).ready(function() {
 <hr class="headerhr">
 
 <div id="sec-menu">
-<div class="dropdown">
-	<ul class="nav2">
-		<li class="category">
-		<img src="../sources/main/img/menu-burger.png" style="height:17px;"> 전체메뉴
-		</li>
-		
-		<li>
-			<a href="/board/list">커뮤니티</a>
-			<ul>
-				<li><a href="/board/list">일반 게시판</a></li>
-				<li><a href="/board/list">자랑하기</a></li>
-				<li><a href="/board/list">소품 추천</a></li>
-				<li><a href="/board/list">인테리어 후기</a></li>
-				<li><a href="/board/list">모임 게시판</a></li>
-			</ul>
-		</li>
-		
-		<li>
-			<a href="/board/list">질문답변</a>
-		</li>
-		
-		<li style="border:none;">
-			<a href="/trade">분양/중고거래</a>
-			<ul>
-            <li><a href="/trade?cate=air">관엽/공기정화식물</a></li>
+  <div class="nav2">
+    <div class="dropbtn" style="width:130px; text-align: left;">
+    <img src="../sources/main/img/menu-burger.png" style="height:17px;">전체 메뉴</div>
+    <div class="dropdown-content">
+      <div class="row">
+        <ul class="column" style="width:130px;"></ul>
+        <ul class="column">
+	        <li><a href="/board/list">일반 게시판</a></li>
+			<li><a href="/board/list">자랑하기</a></li>
+			<li><a href="/board/list">소품 추천</a></li>
+			<li><a href="/board/list">인테리어 후기</a></li>
+			<li><a href="/board/list">모임 게시판</a></li>
+        </ul>
+        <ul class="column">
+	        <li><a href="/trade?cate=air">관엽/공기정화식물</a></li>
+	        <li><a href="/trade?cate=cac">다육/선인장</a></li>
+	        <li><a href="/trade?cate=wild">야생화</a></li>
+	        <li><a href="/trade?cate=bon">분재</a></li>
+	        <li><a href="/trade?cate=orc">동양란/서양란</a></li>
+	        <li><a href="/trade?cate=pot">화분</a></li>
+	        <li><a href="/trade?cate=mate">원예자재류</a></li>
+        </ul>
+        <ul class="column">
+        </ul>
+      </div><!-- row end -->
+    </div><!-- dropdown-content end -->
+  </div><!-- nav2 end -->
+  <div class="nav2">
+    <div class="dropbtn"><a href="/board/list">커뮤니티</a></div>
+    <div class="dropdown-content">
+      <div class="row">
+        <ul class="column2">
+        	<li><a href="/board/list">일반 게시판</a></li>
+			<li><a href="/board/list">자랑하기</a></li>
+			<li><a href="/board/list">소품 추천</a></li>
+			<li><a href="/board/list">인테리어 후기</a></li>
+			<li><a href="/board/list">모임 게시판</a></li>
+        </ul>
+      </div><!-- row end -->
+    </div><!-- dropdown-content end -->
+  </div><!-- nav2 end -->
+  <div class="nav2">
+    <div class="dropbtn"><a href="/trade">분양/중고거래</a></div>
+    <div class="dropdown-content">
+      <div class="row">
+        <ul class="column2">
+         	<li><a href="/trade?cate=air">관엽/공기정화식물</a></li>
             <li><a href="/trade?cate=cac">다육/선인장</a></li>
             <li><a href="/trade?cate=wild">야생화</a></li>
             <li><a href="/trade?cate=bon">분재</a></li>
             <li><a href="/trade?cate=orc">동양란/서양란</a></li>
             <li><a href="/trade?cate=pot">화분</a></li>
             <li><a href="/trade?cate=mate">원예자재류</a></li>
-			</ul>
-		</li>
-	</ul>
+        </ul>
+      </div><!-- row end -->
+    </div><!-- dropdown-content end -->
+  </div><!-- nav2 end -->
+  <div class="nav2">
+    <div class="dropbtn" style="border:none;"><a href="/board/list">질문답변</a></div>
+  </div><!-- nav2 end -->
 </div>
-</div><!-- sec-menu end -->
 <hr class="headerhr">
 </header>
 
