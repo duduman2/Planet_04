@@ -8,7 +8,7 @@
 <% List<BoardInfo> boardList = (List) request.getAttribute("boardlist"); %>
 <% List<Product> productList = (List)request.getAttribute("view"); %>
 
-<%@ include file="../layout/header.jsp"%>
+<%@ include file="../layout/header2.jsp"%>
 
 <style type="text/css">
 #hitRank {

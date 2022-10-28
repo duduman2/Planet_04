@@ -215,56 +215,90 @@ ul.nav1-2 > li > ul > li > a {
 	margin: 0 auto;
 }
 
-/* second navigation */
-ul.nav2 {
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
+#sec-menu ul li{
+  float: left;
+  font-size: 16px;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
-ul.nav2 > li {
-	float: left;
-	border-right: 1px solid #d9d9d9;
-	width: 200px;
-	font-size: 16px;
-	letter-spacing: -1px;
-	text-align: center;
-	position: relative;
+.nav2 {
+  float: left;
+/*   overflow: hidden; */
 }
 
-ul.nav2 > li > a {
-	text-decoration: none;
+.nav2 .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: black;
+  text-align: center;
+  width: 150px;
+  background-color: white;
+  margin: 3px 0 0 0;
+  border-right: 1px solid #d9d9d9;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.nav2:hover .dropdown-content {
+  display: block;
+}
+
+.column {
+  float: left;
+  width: 150px;
+  margin: 13px 0 0 -16px;
+  padding: 10px;
+  background-color: lightgray;
+  height: 350px;
+}
+
+.column li {
+  color: black;
+  width: 150px;
+  padding: 16px;
+  margin-left: -16px;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+letter-spacing: -1px;
+  text-align: left;
+}
+
+.column li a {
 	color: black;
 }
 
-ul.nav2 > li > ul > li > a {
-	text-decoration: none;
+.column2 {
+  float: left;
+  width: 150px;
+  margin: 13px 0 0 -13px;
+  padding: 10px;
+  background-color: lightgray;
+}
+
+.column2 li {
+  color: black;
+  width: 150px;
+  padding: 16px;
+  margin-left: -16px;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+letter-spacing: -1px;
+  text-align: left;
+}
+
+.column2 li a {
 	color: black;
-}
-
-ul.nav2 > li > ul {
-	position: absolute;
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
-}
-
-ul.nav2 > li > ul > li {
-	height: 0;
-	font-size: 0;
-	line-height: 0;
-}
-
-ul.nav2 > li:hover > ul > li {
-	height: 40px;
-	width: 190px;
-	padding-left: 10px;
-	font-size: 15px;
-	letter-spacing: -1px;
-	text-align: left;
-	line-height: 40px;
-	background: lightgray;
-	text-decoration: none;
 }
 
 .category {
