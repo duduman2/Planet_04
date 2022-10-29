@@ -8,13 +8,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import admin.service.face.AdminLoginService;
+import admin.service.impl.AdminLoginServiceImpl;
+import common.Paging;
 import dto.BoardInfo;
+import dto.Notice;
 import dto.Product;
+import dto.UserInfo;
 import main.service.face.SearchBoardService;
 import main.service.impl.SearchBoardServiceImpl;
-import trade.service.face.ProductViewService;
-import trade.service.impl.ProductViewServiceImpl;
 
 @WebServlet("/main")
 public class MainController extends HttpServlet {
@@ -22,7 +26,6 @@ public class MainController extends HttpServlet {
 
 	//서비스 객체
 	private SearchBoardService searchBoardService = new SearchBoardServiceImpl();
-	private ProductViewService productViewService  = new ProductViewServiceImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,14 +45,6 @@ public class MainController extends HttpServlet {
 		req.setAttribute("view", productList);
 		
 		req.getRequestDispatcher("/WEB-INF/views/main/main.jsp").forward(req, resp);
-		
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		System.out.println("/main [POST]");
-		
 		
 	}
 	

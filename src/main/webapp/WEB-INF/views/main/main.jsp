@@ -35,7 +35,7 @@ a {
 
 .sellList {
 	float: left;
-	margin: 0 20px 0 0;
+	margin: 0 20px 20px 0;
 	width: 100px;
 }
 
@@ -59,6 +59,11 @@ a {
 	border-collapse: collapse;
 }
 
+.img {
+	width: 200px;
+	height: 200px;
+}
+
 .gray {
 	background-color: #f3f3f3;
 }
@@ -66,7 +71,7 @@ a {
 .link {
 	clear: both;
 	text-align:right;
-	padding: 30px 0;
+	padding: 0 0 20px 0;
 	margin: 0;
 }
 
@@ -125,70 +130,138 @@ $(document).ready(function() {
 })
 </script>
 
-<div id="hitRank">
-<h3>🔥방금 올라온 상품</h3>
-<% for(int i=0; i<5; i++) { %>
-<table class="sellList">
-<tr>
-	<td><a href="/trade/view?productno=<%=productList.get(i).getProductNo()%>"><img src="/imagepath/<%=productList.get(i).getFileName()%>" style="height:200px;"></a></td>
-</tr>
-<tr>
-	<td><a href="/trade/view?productno=<%=productList.get(i).getProductNo()%>" style="font-weight: bold; font-size: 18px;"><%=productList.get(i).getProductName() %></a></td>
-</tr>
-</table>
-<% } %>
-
-<br>
-<br>
-<br>
-<p class="link">
-	<a href="/trade" class="linkin"> > 더보기</a></p>
+<div id="notice">
+<h2>공지사항</h2>
 
 </div>
 
 <hr>
 
+<div id="hitRank">
+<h3>🔥방금 올라온 상품</h3>
+
+<!-- 상품이 존재할 때만 리스트 보이기 -->
+<% if ( productList.isEmpty() == false ) { %>
+	
+	<!-- 상품이 5개 이하일 경우 리스트 갯수만큼 반환 -->
+	<% if ( productList.size() < 5 ) { %>
+		<% for(int i=0; i<productList.size(); i++) { %>
+		<table class="sellList">
+		<tr class="img">
+			<td><a href="/trade/view?productno=<%=productList.get(i).getProductNo()%>"><img src="/imagepath/<%=productList.get(i).getFileName()%>" style="width:200px;"></a></td>
+		</tr>
+		<tr>
+			<td><a href="/trade/view?productno=<%=productList.get(i).getProductNo()%>" style="font-weight: bold; font-size: 18px;"><%=productList.get(i).getProductName() %></a></td>
+		</tr>
+		</table>
+		<% } %>
+		
+	<!-- 상품이 5개 이상일 경우 5개까지만 화면에 보이기 -->
+	<% } else { %>
+		<% for(int i=0; i<5; i++) { %>
+		<table class="sellList">
+		<tr class="img">
+			<td><a href="/trade/view?productno=<%=productList.get(i).getProductNo()%>"><img src="/imagepath/<%=productList.get(i).getFileName()%>" style="width:200px;"></a></td>
+		</tr>
+		<tr>
+			<td><a href="/trade/view?productno=<%=productList.get(i).getProductNo()%>" style="font-weight: bold; font-size: 18px;"><%=productList.get(i).getProductName() %></a></td>
+		</tr>
+		</table>
+		<% } %>
+	<p class="link">
+		<a href="/trade" class="linkin"> > 더보기</a></p>
+	<% } %>
+<% } else { %>
+<h4>상품이 존재하지 않습니다</h4>
+<% } %>
+</div><!-- hitRank end -->
+
+<hr style="clear:both;">
+
 <h2>인기 추천글</h2>
 <div id="commRank">
-<h3>🔥커뮤니티</h3>
-<table class="table">
-<tr>
-	<th style="width:10%;">no</th>
-	<th style="width:60%;">제목</th>
-	<th style="width:20%;">작성자</th>
-	<th style="width:10%;">조회수</th>
-</tr>
+<h3>🔥<a href="/board/list">커뮤니티</a></h3>
 
-<% for(int i=0; i<boardList.size(); i++) { %>
-<tr>
-	<td class="tabletd"><a href=""><%=boardList.get(i).getBoardNo() %></a></td>
-	<td class="tabletd"><a href=""><%=boardList.get(i).getBoardTitle() %></a></td>
-	<td class="tabletd"><a href=""><%=boardList.get(i).getUserNick() %></a></td>
-	<td class="tabletd"><a href=""><%=boardList.get(i).getBoardHit() %></a></td>
-</tr>
+<!-- 게시글이 존재할 때만 리스트 보이기 -->
+<% if( boardList.isEmpty() == false ) { %>
+	<table class="table">
+	<tr>
+		<th style="width:10%;">no</th>
+		<th style="width:60%;">제목</th>
+		<th style="width:20%;">작성자</th>
+		<th style="width:10%;">조회수</th>
+	</tr>
+	
+	<!-- 게시글 10개까지만 보이게 하기 -->
+	<% if( boardList.size() > 10 ) { %>
+		<% for(int i=0; i<10; i++) { %>
+		<tr>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getBoardNo() %></a></td>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getBoardTitle() %></a></td>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getUserNick() %></a></td>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getBoardHit() %></a></td>
+		</tr>
+		<% } %>
+	<!-- 게시글이 10개보다 적은 경우 -->
+	<% } else { %>
+		<% for(int i=0; i<boardList.size(); i++) { %>
+		<tr>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getBoardNo() %></a></td>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getBoardTitle() %></a></td>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getUserNick() %></a></td>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getBoardHit() %></a></td>
+		</tr>
+		<% } %>
+	<% } %>
+	
+	</table>
+	
+<!-- 게시글이 존재하지 않을 경우 -->
+<%} else { %>
+<h4>게시글이 존재하지 않습니다</h4>
 <% } %>
-
-</table>
-
 </div>
 
 <div id="qnaRank">
-<h3>🔥질문답변</h3>
-<table class="table">
-<tr>
-	<th style="width:10%;">no</th>
-	<th style="width:60%;">제목</th>
-	<th style="width:20%;">작성자</th>
-	<th style="width:10%;">조회수</th>
-</tr>
+<h3>🔥<a href="/board/list">질문답변</a></h3>
 
-<% for(int i=0; i<boardList.size(); i++) { %>
-<tr>
-	<td class="tabletd"><a href=""><%=boardList.get(i).getBoardNo() %></a></td>
-	<td class="tabletd"><a href=""><%=boardList.get(i).getBoardTitle() %></a></td>
-	<td class="tabletd"><a href=""><%=boardList.get(i).getUserNick() %></a></td>
-	<td class="tabletd"><a href=""><%=boardList.get(i).getBoardHit() %></a></td>
-</tr>
+<!-- 게시글이 존재할 때만 리스트 보이기 -->
+<% if( boardList.isEmpty() == false ) { %>
+	<table class="table">
+	<tr>
+		<th style="width:10%;">no</th>
+		<th style="width:60%;">제목</th>
+		<th style="width:20%;">작성자</th>
+		<th style="width:10%;">조회수</th>
+	</tr>
+	
+	<!-- 게시글 10개까지만 보이게 하기 -->
+	<% if( boardList.size() > 10 ) { %>
+		<% for(int i=0; i<10; i++) { %>
+		<tr>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getBoardNo() %></a></td>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getBoardTitle() %></a></td>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getUserNick() %></a></td>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getBoardHit() %></a></td>
+		</tr>
+		<% } %>
+	<!-- 게시글이 10개보다 적은 경우 -->
+	<% } else { %>
+		<% for(int i=0; i<boardList.size(); i++) { %>
+		<tr>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getBoardNo() %></a></td>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getBoardTitle() %></a></td>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getUserNick() %></a></td>
+			<td class="tabletd"><a href=""><%=boardList.get(i).getBoardHit() %></a></td>
+		</tr>
+		<% } %>
+	<% } %>
+	
+	</table>
+	
+<!-- 게시글이 존재하지 않을 경우 -->
+<%} else { %>
+<h4>게시글이 존재하지 않습니다</h4>
 <% } %>
 
 </table>
