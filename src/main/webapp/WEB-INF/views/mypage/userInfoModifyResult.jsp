@@ -8,7 +8,7 @@
 
 <%-- 모델값 전달받기 --%>
 <% 	UserInfo uList = (UserInfo) request.getAttribute("data"); %>
-<% 	UserInfo uResultList = (UserInfo) request.getAttribute("result"); %>
+<%-- <% 	UserInfo uResultList = (UserInfo) request.getAttribute("result"); %> --%>
 
 
 <script type="text/javascript">
@@ -39,6 +39,9 @@ $(document).ready(function() {
 	$("#btnMyMain").click(function() {
 		$(location).attr("href", "/mypage/main")
 	})
+	$("#btnGradeInfo").click(function() {
+		$(location).attr("href", "/grade/info")
+	})
 	
 })
 
@@ -46,12 +49,13 @@ $(document).ready(function() {
 <!-- </head> -->
 <!-- <body> -->
 
-<h3>&nbsp;&nbsp;&nbsp회원 정보 완료 확인하기</h3>
+<h3>&nbsp;&nbsp;&nbsp;회원 정보 완료 확인하기</h3>
 <hr>
 <div class="main" style="width: 100%;">
 
 	<div id="uinfoMenu">
-		<ul>
+		<ul style="list-style: none;">
+			<li><a id="btnGradeInfo">회원 등급 안내</a></li>
 			<li><a id="btnUserInfo">회원 정보 확인</a></li>
 			<li><a id="btnUserInfoModi">회원 정보 수정</a></li>
 			<li><a id="btnUserInfoDeleteMenu">회원 탈퇴</a></li>
@@ -64,71 +68,71 @@ $(document).ready(function() {
 		<table class="table table-striped table-hover" id="userinfo">
 		
 		<%-- <% for(int i=0; i<uList.size(); i++) { %> --%>
-<!-- 		<tr> -->
-<!-- 			<th>회원 번호</th> -->
-<%-- 			<td><input type="text" name="uNo" value="<%=uList.getU_no() %>"></td> --%>
-<!-- 		</tr> -->
+		<tr>
+			<th>회원 번호</th>
+			<td><%=uList.getU_no() %></td>
+		</tr>
 
 
 		<tr>
 			<th>회원 아이디</th>
-<%-- 			<td><%=uResultList.getU_id() %></td> --%>
+<%-- 			<td><%=uList.getU_id() %></td> --%>
 		</tr>
 		<tr>
 			<th>회원 패스워드</th>
-<%-- 			<td><%=uResultList.getU_pw() %></td> --%>
+<%-- 			<td><%=uList.getU_pw() %></td> --%>
 		</tr>
 		<tr>
 			<th>회원 이름</th>
-<%-- 			<td><%=uResultList.getU_name() %></td> --%>
+<%-- 			<td><%=uList.getU_name() %></td> --%>
 		</tr>
 		<%-- 4개 --%>
 		
 		<tr>
 			<th>생년월일</th>
-<%-- 			<td><%=uResultList.getU_birth() %></td> --%>
+<%-- 			<td><%=uList.getU_birth() %></td> --%>
 		</tr>
 		<tr>
 			<th>성별</th>
-<%-- 			<td><%=uResultList.getU_gender() %></td> --%>
+<%-- 			<td><%=uList.getU_gender() %></td> --%>
 		</tr>
 		<tr>
 			<th>전화번호</th>
-<%-- 			<td><%=uResultList.getU_phone() %></td> --%>
+<%-- 			<td><%=uList.getU_phone() %></td> --%>
 		</tr>
 		<tr>
 			<th>이메일</th>
-<%-- 			<td><%=uResultList.getU_email() %></td> --%>
+<%-- 			<td><%=uList.getU_email() %></td> --%>
 		</tr>
 		<%-- 8개--%>
 		
 		
 		<tr>
 			<th>주소</th>
-<%-- 			<td><%=uResultList.getU_address() %></td> --%>
+<%-- 			<td><%=uList.getU_address() %></td> --%>
 		</tr>
 		<tr>
 			<th>회원 닉네임</th>
-<%-- 			<td><%=uResultList.getU_nick() %></td> --%>
+<%-- 			<td><%=uList.getU_nick() %></td> --%>
 		</tr>
 		<tr>
 			<th>가입날짜</th>
-<%-- 			<td><%=uResultList.getU_join_date() %></td> --%>
+<%-- 			<td><%=uList.getU_join_date() %></td> --%>
 		</tr>
 		<tr>
 			<th>사업자유저</th>
-<%-- 			<td><%=uResultList.getB_business_number() %></td> --%>
+			<td><%=uList.getB_business_number() %></td>
 		</tr>
 		<%-- 12개--%>
 		
 		
 		<tr>
 			<th>사업자번호</th>
-<%-- 			<td><%=uResultList.getB_business_number() %></td> --%>
+<%-- 			<td><%=uList.getB_business_number() %></td> --%>
 		</tr>
 		<tr>
 			<th>등급코드</th>
-<%-- 			<td><%=uResultList.getGrade() %></td> --%>
+<%-- 			<td><%=uList.getGrade() %></td> --%>
 		</tr>
 		<!-- <tr> -->
 		<!-- 	<th>신고코드</th> -->
@@ -138,7 +142,11 @@ $(document).ready(function() {
 		<!-- 	<th>장바구니번호</th> -->
 		<%-- 	<td><input type="text" name="" value="<%=uList.getWishno() %>"></td> --%>
 		<!-- </tr> -->
-		<%-- 16개--%>
+		<tr>
+			<th>보유 포인트</th>
+<%-- 			<td><%=uList.getU_point() %> P</td> --%>
+		</tr>
+		<%-- 17개--%>
 		<%-- <% } %> --%>
 		<tr>
 			<th>이미지 교체</th>

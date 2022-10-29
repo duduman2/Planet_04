@@ -42,7 +42,8 @@ $(document).ready(function() {
 <!-- </head> -->
 <!-- <body> -->
 
-<h3>&nbsp;&nbsp;&nbsp장바구니 리스트</h3>&nbsp;&nbsp;&nbsp장바구니 내역 보여주기 
+<h3>&nbsp;&nbsp;&nbsp;장바구니 리스트</h3>
+<!-- &nbsp;&nbsp;&nbsp;장바구니 내역 보여주기  -->
 <hr>
 
 <div id="cartResult">

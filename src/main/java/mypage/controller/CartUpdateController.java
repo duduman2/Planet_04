@@ -24,14 +24,11 @@ public class CartUpdateController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/cart/update [GET]");
 		
-		
-		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/cart/update [POST]");
 
-	
 	}
 }

@@ -1,0 +1,176 @@
+-- 마이페이지에 필요한 tables
+
+CREATE TABLE tbl_user (
+    userno NUMBER PRIMARY KEY -- 회원 번호
+    , userid VARCHAR2(20) UNIQUE NOT NULL -- 회원 아이디
+    , userpw VARCHAR2(20) NOT NULL -- 회원 아이디
+    , name VARCHAR2(20) NOT NULL -- 회원 이름
+    , birth DATE NOT NULL -- 생년월일
+    , gender VARCHAR2(10) NOT NULL -- 성별  
+    , phone VARCHAR2(20) -- 전화번호   
+    , email VARCHAR2(50) NOT NULL -- 이메일    
+    , add1 VARCHAR2(50) -- 주소
+    , usernick VARCHAR2(20) NOT NULL -- 회원 닉네임
+    , joindate DATE default sysdate  -- 생성날짜
+    , tradeuser VARCHAR2(10) NOT NULL -- 사업자유저
+    , userbsno  VARCHAR2(20) -- 사업자번호  
+    , grade VARCHAR2(20) DEFAULT '씨앗' -- 등급코드 
+    , reportcode VARCHAR2(20) -- 신고코드
+    , wish_no NUMBER -- 장바구니번호  REFERENCES tbl_wish (wish_no)
+    , userpoint NUMBER DEFAULT 0-- 포인트
+);
+
+CREATE table boardinfo (
+    userno NUMBER REFERENCES tbl_user(userno)
+    , boardNo NUMBER primary key
+    , boardTitle VARCHAR2(500)
+    , boardContent VARCHAR2(4000)
+    , boardDate DATE DEFAULT sysdate
+    , boardHit NUMBER 
+);
+
+CREATE TABLE uploadfile(
+    fileno NUMBER PRIMARY KEY 
+    , origin_name VARCHAR2(1000)
+    , stored_name VARCHAR2(1000)
+    , filepath VARCHAR2(1000)
+    , boardno NUMBER REFERENCES boardinfo(boardNo)
+    );  
+
+CREATE TABLE product (
+    productno number PRIMARY KEY
+    , productname VARCHAR2(100)
+    , productcontent VARCHAR2(100)
+    , productprice number
+    , productdate date DEFAULT sysdate
+    , fileno NUMBER references uploadfile (fileno)
+    , productclass VARCHAR2(1000)
+    , productQuan number
+);
+
+CREATE TABLE tbl_wish (
+    wish_no NUMBER CONSTRAINT tbl_wish_pk PRIMARY KEY -- 장바구니 번호
+    , wish_total_price NUMBER -- 장바구니 총 금액
+    , wish_amount NUMBER -- 장바구니 총 수량
+    , deliveryfee NUMBER default 0  -- 배송비 => VARCHAR2(20) default '무료'?
+    , productno number 
+);
+
+commit;
+---------------------------
+SELECT * FROM tbl_user; 
+SELECT * FROM uploadfile;
+SELECT * FROM boardinfo;
+SELECT * FROM product;
+SELECT * FROM tbl_wish;
+---------------------------
+--?제약조건?삭제
+--ALTER?TABLE?'테이블명'?DROP?CONSTRAINT?'제약조건명';
+ALTER TABLE tbl_user DROP CONSTRAINT WISH_NO_FK;
+
+commit;
+---------------------------
+CREATE SEQUENCE tbl_user_seq;
+CREATE SEQUENCE tbl_wish_seq;
+CREATE SEQUENCE boardinfo_seq;
+CREATE SEQUENCE uploadfile_seq;
+CREATE SEQUENCE productno_seq;
+---------------------------
+DROP TABLE tbl_user;
+DROP TABLE tbl_wish;
+DROP TABLE boardinfo;
+DROP TABLE uploadfile;
+DROP table product;
+---------------------------
+SELECT * FROM tbl_user; 
+SELECT * FROM uploadfile;
+SELECT * FROM boardinfo;
+SELECT * FROM product;
+SELECT * FROM tbl_wish;
+---------------------------
+DROP SEQUENCE tbl_user_seq;
+DROP SEQUENCE tbl_wish_seq;
+DROP SEQUENCE boardinfo_seq;
+DROP SEQUENCE uploadfile_seq;
+DROP SEQUENCE productno_seq;
+---------------------------
+insert INTO tbl_user 
+VALUES ( tbl_user_seq.nextval, 'apple', 'apple1234', '김사과'
+    , to_date('1991-11-05 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
+    , 'femail', '01012341234', 'qwer@gmail.com', 'newyork', '사과'
+    , to_date('2022-05-09 10:00:00', 'YYYY-MM-DD HH24:MI:SS')
+    , 'tradeuser', '1111', '나무', '신고코드1', 1, 200000);
+insert INTO tbl_user ( userno, userid, userpw, name, birth
+    , gender, phone, email, add1, usernick, joindate
+    , tradeuser, userbsno, grade, reportcode, wish_no, userpoint )
+VALUES ( tbl_user_seq.nextval, 'banana', 'banana1234', '이바나나'
+    , to_date('2000-01-18 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
+    , 'mail', '01023456789', 'asdf@naver.com', 'newyork', '바나나'
+    , to_date('2022-05-09 10:00:00', 'YYYY-MM-DD HH24:MI:SS')
+    , 'tradeuser', '2222', '나무', '신고코드2', 2, 50000);
+insert INTO tbl_user ( userno, userid, userpw, name, birth
+    , gender, phone, email, add1, usernick, joindate
+    , tradeuser, userbsno, grade, reportcode, wish_no, userpoint )
+VALUES ( tbl_user_seq.nextval, 'cherry', 'cherry123', '박체리'
+    , to_date('2000-01-18 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
+    , 'femail', '01023456789', 'asdf@naver.com', 'newyork', '체리'
+    , to_date('2022-05-09 10:00:00', 'YYYY-MM-DD HH24:MI:SS')
+    , 'tradeuser', '33333322222', '씨앗', '신고코드3', 3, ?);
+------
+insert INTO tbl_wish ( wish_no, wish_total_price, wish_amount
+    , deliveryfee, productno )
+VALUES ( tbl_wish_seq.nextval, 100000, 4, default, 1 );
+
+insert INTO tbl_wish ( wish_no, wish_total_price, wish_amount
+    , deliveryfee, productno )
+VALUES ( tbl_wish_seq.nextval, 300000, 7, default, 4 );
+------
+insert INTO boardinfo ( userno, boardNo, boardTitle, boardContent, boardDate, boardHit )
+VALUES ( 1, boardinfo_seq.nextval, 'boardTitle1', 'boardContent1', sysdate, 12  );
+
+insert INTO boardinfo ( userno, boardNo, boardTitle, boardContent, boardDate, boardHit )
+VALUES ( 2, boardinfo_seq.nextval, 'boardTitle2', 'boardContent2', sysdate, 29  );
+------
+insert INTO uploadfile ( fileno, origin_name, stored_name, filepath, boardno )
+VALUES ( uploadfile_seq.nextval, 'origin_name1', 'stored_name1', 'filepath1', 1 );
+
+insert INTO uploadfile ( fileno, origin_name, stored_name, filepath, boardno )
+VALUES ( uploadfile_seq.nextval, 'origin_name2', 'stored_name2', 'filepath2', 21 );
+------
+insert INTO product ( productno, productname, productcontent
+    , productprice, productdate, fileno, productclass, productQuan )
+VALUES ( productno_seq.nextval, '상품이름1', '상품내용1', 10000
+    , sysdate, 1, 'productclass1', 2 );
+    
+insert INTO product ( productno, productname, productcontent
+    , productprice, productdate, fileno, productclass, productQuan )
+VALUES ( productno_seq.nextval, '상품이름2', '상품내용2', 220000
+    , sysdate, 7, 'productclass2', 9 );
+    
+commit;
+---------------------------
+ALTER TABLE tbl_user
+ADD CONSTRAINT wish_no_fk foreign KEY(wish_no) 
+REFERENCES tbl_wish(wish_no);
+---------------------------
+--ALTER TABLE product
+--ADD CONSTRAINT file_no_fk foreign KEY(fileno) 
+--REFERENCES uploadfile(fileno); 
+
+--ALTER TABLE uploadfile
+--ADD CONSTRAINT board_no_fk foreign KEY(boardNo) 
+--REFERENCES boardinfo(boardNo); 
+
+--ALTER TABLE boardinfo
+--ADD CONSTRAINT user_no_fk foreign KEY(userno) 
+--REFERENCES tbl_user(userno);
+
+--ALTER TABLE tbl_user
+--ADD CONSTRAINT wish_no_fk foreign KEY(wish_no) 
+--REFERENCES tbl_wish(wish_no);
+
+--ALTER TABLE tbl_wish
+--ADD CONSTRAINT product_no_fk foreign KEY(productno) 
+--REFERENCES product(productno);
+
+commit;

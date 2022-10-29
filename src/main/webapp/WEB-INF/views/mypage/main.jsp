@@ -35,6 +35,13 @@ $(document).ready(function() {
 	$("#btncartList").click(function() {
 		$(location).attr("href", "/cart/list")
 	})
+	$("#btnBoard").click(function() { //일반 게시판 페이지 이동
+		$(location).attr("href", "/board/list")
+	})
+	$("#btnMeetBoard").click(function() { //모임 게시판 페이지 이동
+		$(location).attr("href", "/board/list")
+	})
+
 })
 
 </script>
@@ -43,18 +50,20 @@ $(document).ready(function() {
 <!-- <body> -->
 
 
+<link rel="icon" href="<%=request.getContextPath() %>/sources/admin/favicon.ico">
 
-<h3>&nbsp;&nbsp;&nbsp/mypage/main.jsp&nbsp;&nbsp;&nbsp;마이페이지 메인</h3>
-회원정보 조회,수정,탈퇴 / 내가 작성한 글 확인,수정,삭제 / 장바구니 확인,수정,삭제 / 내가 구매한 리스트 / 등급 확인 / 등 꾸미기
+<h3>&nbsp;&nbsp;&nbsp;마이페이지</h3>
+<!-- 회원정보 조회,수정,탈퇴 / 내가 작성한 글 확인,수정,삭제 / 장바구니 확인,수정,삭제 / 내가 구매한 리스트 / 등급 확인 / 등 꾸미기 -->
 <hr>
 
 <div class="main" style="width: 100%;"> 
 
 <!-- left profile section -->
 <div class="left_section" id="left_section" style="width: 30%; float: left;">
-<table class="table">
+<table class="table ">
 	<tr>
-		<th class="info" colspan="2" style="color: #128525;">프로필 설정
+		<th class="bg-success" colspan="2" style="color: #128525;">
+		<a href="/user/info" style="color: #5B9E28">프로필 설정</a>
 		<button type="button" style="float: right;" id="btnUserInfo" class="btn btn-default">설정</button></th>
 	</tr>
 	
@@ -64,7 +73,8 @@ $(document).ready(function() {
 		display: block; margin: auto; margin-top: 20px; padding: 10px;" ></img>
 		
 		<%-- (font-style) (font-weight) (font-size)/줄간격(font-height) 글꼴(font-family)  --%>
-		<h3 style="font-style: italic; font-weight: bold; font-size= 2em; color: #5B9E28"><%=uList.getU_nick() %></h3>
+		<h3 style="font-style: italic; font-weight: bold; font-size= 2em;">
+		<a href="/grade/info" style="color: #5B9E28"><%=uList.getU_nick() %></a></h3>
 <!-- 		<h3>닉네임 불러오기</h3> -->
 		</td>
 	</tr>
@@ -77,7 +87,8 @@ $(document).ready(function() {
 
 	<tr>
 		<th style="text-align: center; height: 50px;">내 포인트</th>
-		<td>포인트값 가져오기 + P</td>
+<!-- 		<td>포인트값 가져오기 + P</td> -->
+		<td><%=uList.getU_point() %> P</td>
 	</tr>
 		
 	<tr>
@@ -98,10 +109,10 @@ $(document).ready(function() {
 
 <!-- right table's section -->
 <div class="right_section" id="right_section"  style="width: 67%; float: left; text-align: center;">
-	<table class="table" style="text-align: center;" >
+	<table class="table " style="text-align: center;" >
 <!-- 	<table style="text-align: center;" > -->
 		<tr>
-			<th class="info" colspan="3" style="color: #3471C;">나의 쇼핑<button style="float: right;" class="btn btn-default">+전체보기</button></th>
+			<th class="bg-success" colspan="3" style="color: #3471C;">나의 쇼핑<button style="float: right;" class="btn btn-default">+전체보기</button></th>
 		</tr>
 		<tr>
 <!-- 			<td><button id="btncartList">+장바구니</button></td> -->
@@ -129,22 +140,23 @@ $(document).ready(function() {
 	
 	<table class="table">
 		<tr>
-			<th class="info" colspan="2" style="color: #3471C;">내가 작성한 글 확인하기<button style="float: right;" class="btn btn-default">+전체보기</button></th>
+			<th class="bg-success" colspan="2" style="color: #3471C;">내가 작성한 글 확인하기<button style="float: right;" class="btn btn-default">+전체보기</button></th>
 		</tr>
 		<tr>
 			<td>게시판</td>
-			<td><button class="btn btn-default">게시판 더보기</button></td>
+			<td><button class="btn btn-default" id="btnBoard">일반 게시판</button>
+			<button class="btn btn-default" id="btnMeetBoard">모임 게시판</button></td>
 		</tr>
 		<tr>
 			<td>댓글</td>
-			<td><button class="btn btn-default">댓글 더보기</button></td>
+			<td><button class="btn btn-default">나의 댓글</button></td>
 		</tr>
 
 	</table>  <!-- second table end -->
 	
 	<table class="table">
 		<tr>
-			<th class="info" colspan="2" style="color: #3471C;">내가 구매한 리스트<button style="float: right;" class="btn btn-default">+전체보기</button></th>
+			<th class="bg-success" colspan="2" style="color: #3471C;">내가 구매한 리스트<button style="float: right;" class="btn btn-default">+전체보기</button></th>
 		</tr>
 		<tr>
 			<td></td>
@@ -158,7 +170,7 @@ $(document).ready(function() {
 			
 	<table class="table">
 		<tr>
-			<th class="info" colspan="2" style="color: #3471C;">Q n Aq
+			<th class="bg-success" colspan="2" style="color: #3471C;">Q n A
 			<button style="float: right;" class="btn btn-default" id="">+전체보기</button></th>
 		</tr>
 		<tr>
