@@ -42,8 +42,8 @@ td {
 </style>
 
 <script type="text/javascript">
-function deleteboard( url ) {
-	location.href="<%=request.getContextPath() %>/admin/mainboard/delete?boardno=" + url
+function deleteboard( url1, url2, url3 ) {
+	location.href="<%=request.getContextPath() %>/admin/mainboard/delete?boardno=" + url1 + "&boardtitle=" + url2 + "&boardcontent=" + url3
 }
 
 </script>
@@ -73,6 +73,9 @@ function deleteboard( url ) {
 		</div>
 		<div class="menubutton">
 			<a href="<%=request.getContextPath() %>/admin/mainuser">사용자 관리</a>
+		</div>
+		<div class="menubutton">
+			<a href="<%=request.getContextPath() %>/admin/management">관리자 로그</a>
 		</div>
 		<div class="menubutton">
 			<a href="<%=request.getContextPath() %>/adminlogout">로그아웃</a>
@@ -111,7 +114,7 @@ function deleteboard( url ) {
 				<td style="width: 5%"><%=boardList.get(i).getCateno() %></td>
 				<td style="width: 10%"><%=boardList.get(i).getUserId() %></td>
 				<td style="width: 3%">
-				<input type="button" value="삭제" onclick="deleteboard('<%=boardList.get(i).getBoardNo() %>')"/>
+				<input type="button" value="삭제" onclick="deleteboard('<%=boardList.get(i).getBoardNo() %>', '<%=boardList.get(i).getBoardTitle() %>', '<%=boardList.get(i).getBoardContent() %>')"/>
 				<!-- 자바스크립트 함수에 String 매개변수 넣을거면 꼭 ''으로 감싸줘야 한다. ""도 안됨. -->
 				</td>
 			</tr>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import common.Paging;
 import dto.AdminInfo;
+import dto.AdminRecode;
 import dto.BoardInfo;
 import dto.Notice;
 import dto.NoticeFile;
@@ -276,5 +277,29 @@ public interface AdminLoginDao {
 	public List<BoardInfo> selectAll(Connection connection, Paging paging, BoardInfo boardInfo);
 
 	public void deleteBoard(Connection conn, BoardInfo boardInfo);
+
+	public void sendAdminLogin(Connection conn, String adminId);
+
+	public void sendAdminLogout(Connection conn, String adminId);
+
+	public int selectCntAll(Connection conn, AdminRecode adminRecode);
+
+	public List<AdminRecode> selectAll(Connection connection, Paging paging, AdminRecode adminRecode);
+
+	public void sendAdminCreate(Connection conn, String adminId, AdminInfo adminInfo);
+
+	public void sendAdminDelete(Connection conn, String adminId, AdminInfo adminInfo);
+
+	public void sendBoardDelete(Connection conn, String adminId, BoardInfo boardInfo);
+
+	public void sendUserCreate(Connection conn, String adminId, UserInfo userInfo);
+
+	public void sendUserDelete(Connection conn, String adminId, UserInfo userInfo);
+
+	public void sendUserUpdate(Connection conn, String adminId, UserInfo userInfo);
+
+	public void sendNoticeUpdate(Connection conn, String adminId, int test);
+
+	public void sendNoticeDelete(Connection conn, String adminId, Notice notice);
 
 }

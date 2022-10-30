@@ -109,6 +109,9 @@ td {
 			<a href="<%=request.getContextPath() %>/admin/mainuser">사용자 관리</a>
 		</div>
 		<div class="menubutton">
+			<a href="<%=request.getContextPath() %>/admin/management">관리자 로그</a>
+		</div>
+		<div class="menubutton">
 			<a href="<%=request.getContextPath() %>/adminlogout">로그아웃</a>
 		</div>
 	</div>

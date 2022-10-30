@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import admin.service.face.AdminLoginService;
 import admin.service.impl.AdminLoginServiceImpl;
@@ -23,6 +24,10 @@ public class AdminDelNoticeController extends HttpServlet {
 		System.out.println("/admin/mainnotice/delete [GET] Start");
 		
 		Notice notice = adminService.getNoticeno(req);
+		
+		HttpSession session = req.getSession();
+		String adminId = (String) session.getAttribute("userid");
+		adminService.sendNoticeDelete(adminId, notice);
 		
 		adminService.deleteNotice(notice);
 		

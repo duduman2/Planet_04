@@ -76,7 +76,7 @@ function updateContents() {
 
 <form action="<%=request.getContextPath() %>/admin/mainnotice/update" method="post" enctype="multipart/form-data">
 
-<input type="hidden" name="notice_no" value="<%=updateNotice.getNotice_no() %>">
+<input type="hidden" id="notice_no" name="notice_no" value="<%=updateNotice.getNotice_no() %>">
 
 <table class="table table-bordered">
 <tr><td class="info">아이디</td><td><%=updateNotice.getAdmin_id() %></td></tr>

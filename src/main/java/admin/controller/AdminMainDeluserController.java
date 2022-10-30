@@ -42,6 +42,10 @@ public class AdminMainDeluserController extends HttpServlet {
 		
 		if( result ) {
 			
+			HttpSession session = req.getSession();
+			String adminId = (String) session.getAttribute("userid");
+			adminService.sendUserDelete(adminId, userInfo);
+			
 			resp.sendRedirect("/admin/delsuc");
 			
 		} else {

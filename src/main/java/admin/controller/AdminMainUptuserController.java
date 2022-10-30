@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import admin.service.face.AdminLoginService;
 import admin.service.impl.AdminLoginServiceImpl;
@@ -49,6 +50,10 @@ public class AdminMainUptuserController extends HttpServlet {
 		Boolean result = adminService.UserUpdate(userInfo); // dto 정보로 관리자 생성
 		
 		if( result ) {
+			
+			HttpSession session = req.getSession();
+			String adminId = (String) session.getAttribute("userid");
+			adminService.sendUserUpdate(adminId, userInfo);
 			
 			resp.sendRedirect("/admin/cresuc");
 			

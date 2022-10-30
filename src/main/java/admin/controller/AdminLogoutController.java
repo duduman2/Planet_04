@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import admin.service.face.AdminLoginService;
+import admin.service.impl.AdminLoginServiceImpl;
+
 @WebServlet("/adminlogout")
 public class AdminLogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	AdminLoginService adminService = new AdminLoginServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -19,6 +23,10 @@ public class AdminLogoutController extends HttpServlet {
 
 		// 세션 객체 생성
 		HttpSession session = req.getSession();
+		
+		String adminId = (String) session.getAttribute("userid");
+		
+		adminService.sendAdminLogout( adminId );
 		
 		// 세션 객체 삭제
 		// -> 세션 정보를 포함한 모든 것이 삭제된다

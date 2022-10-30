@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import admin.service.face.AdminLoginService;
 import admin.service.impl.AdminLoginServiceImpl;
@@ -49,7 +50,11 @@ public class AdminNoticeUptController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/admin/mainnotice/update [POST] START");
 		
-		adminService.update(req);
+		int test = adminService.update(req);
+		
+		HttpSession session = req.getSession();
+		String adminId = (String) session.getAttribute("userid");
+		adminService.sendNoticeUpdate(adminId, test);
 		
 		resp.sendRedirect("/admin/uptnotice/success");
 		

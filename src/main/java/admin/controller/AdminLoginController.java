@@ -52,6 +52,8 @@ public class AdminLoginController extends HttpServlet {
 			session.setAttribute("login", result);
 			session.setAttribute("userid", adminInfo.getAdminId());
 			
+			adminService.sendAdminLogin( adminInfo.getAdminId() );
+			
 			resp.sendRedirect("/admin/mainnotice"); // 이건 GET으로 보내고
 //			req.getRequestDispatcher("/admin/main_config").forward(req, resp); // 이건 POST로 보내네
 			

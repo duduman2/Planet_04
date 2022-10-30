@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import admin.service.face.AdminLoginService;
 import admin.service.impl.AdminLoginServiceImpl;
@@ -39,6 +40,10 @@ public class AdminMainAdduserController extends HttpServlet {
 		Boolean result = adminService.UserCreate(userInfo); // dto 정보로 사용자 생성
 		
 		if( result ) {
+			
+			HttpSession session = req.getSession();
+			String adminId = (String) session.getAttribute("userid");
+			adminService.sendUserCreate(adminId, userInfo);
 			
 			resp.sendRedirect("/admin/cresuc");
 			

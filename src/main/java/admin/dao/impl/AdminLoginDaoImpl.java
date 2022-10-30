@@ -16,6 +16,7 @@ import admin.dao.face.AdminLoginDao;
 import common.JDBCTemplate;
 import common.Paging;
 import dto.AdminInfo;
+import dto.AdminRecode;
 import dto.BoardInfo;
 import dto.Notice;
 import dto.NoticeFile;
@@ -53,8 +54,7 @@ public class AdminLoginDaoImpl implements AdminLoginDao {
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(ps);
 		}
-		
-		System.out.println("AdminLoginDaoImpl.select_tbl_admininfo End");
+				System.out.println("AdminLoginDaoImpl.select_tbl_admininfo End");
 		
 		return cnt;
 	}
@@ -1325,6 +1325,332 @@ System.out.println("AdminLoginDaoImpl.select_tbl_admininfo2 Start");
 		
 		System.out.println("AdminLoginDaoImpl.deleteBoard End");
 		
+	}
+
+	@Override
+	public void sendAdminLogin(Connection conn, String adminId) {
+		System.out.println("AdminLoginDaoImpl.sendAdminLogin Start");
+		
+		String sql = "insert into tbl_admin_recode";
+		sql += "	values (tbl_admin_recode_seq.nextval, ?, 'login', to_char(sysdate, 'yyyy-mm-dd/hh24.mi.ss'))";
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			
+			ps.setString(1, adminId);
+
+			ps.executeUpdate(); // SQL수행 및 결과 집합 저장
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.sendAdminLogin End");
+	}
+
+	@Override
+	public void sendAdminLogout(Connection conn, String adminId) {
+		System.out.println("AdminLoginDaoImpl.sendAdminLogout Start");
+		
+		String sql = "insert into tbl_admin_recode";
+		sql += "	values (tbl_admin_recode_seq.nextval, ?, 'logout', to_char(sysdate, 'yyyy-mm-dd/hh24.mi.ss'))";
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			
+			ps.setString(1, adminId);
+
+			ps.executeUpdate(); // SQL수행 및 결과 집합 저장
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.sendAdminLogout End");
+	}
+
+	@Override
+	public int selectCntAll(Connection conn, AdminRecode adminRecode) {
+		System.out.println("AdminLoginDaoImpl.selectCntAll5 Start");
+		
+		String sql = "SELECT count(*) cnt FROM tbl_admin_recode where adminid like ? ";
+		
+		// 총 게시글 수 변수
+		int count = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			ps.setString(1, "%" + adminRecode.getAdminid() + "%");
+
+			rs = ps.executeQuery(); // SQL수행 및 결과 집합 저장
+			
+
+			while( rs.next() ) {
+				count = rs.getInt("cnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectCntAll5 End");
+		
+		//최종 결과 반환
+		return count;
+	}
+
+	@Override
+	public List<AdminRecode> selectAll(Connection conn, Paging paging, AdminRecode adminRecode) {
+		System.out.println("AdminLoginDaoImpl.selectAll5 Start");
+		
+		// SQL작성
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += "	SELECT rownum rnum, B.* FROM (";
+		sql += "		select manageno, adminid, behavior, time";
+		sql += "		from tbl_admin_recode";
+		sql += "		where adminid like ? order by manageno asc";
+		sql += "	) B";
+		sql += " ) tbl_admin_recode";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+		
+		// 결과 저장할 List
+		List<AdminRecode> noticeList = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			
+			ps.setString(1, "%" + adminRecode.getAdminid() + "%");
+			ps.setInt(2, paging.getStartNo());
+			ps.setInt(3, paging.getEndNo());
+			
+			rs = ps.executeQuery(); // SQL수행 및 결과 집합 저장
+			
+			// 조회 결과 처리
+			while( rs.next() ) {
+				
+				AdminRecode adminRecode2 = new AdminRecode();
+				
+				adminRecode2.setManageno( rs.getInt("manageno") );
+				adminRecode2.setAdminid( rs.getString("adminid") );
+				adminRecode2.setBehavior( rs.getString("behavior") );
+				adminRecode2.setTime( rs.getString("time") );
+				
+				// 리스트에 결과값 저장하기
+				noticeList.add(adminRecode2);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.selectAll5 End");
+		
+		return noticeList; //최종 결과 반환
+	}
+
+	@Override
+	public void sendAdminCreate(Connection conn, String adminId, AdminInfo adminInfo) {
+		System.out.println("AdminLoginDaoImpl.sendAdminCreate Start");
+		
+		String sql = "insert into tbl_admin_recode";
+		sql += "	values (tbl_admin_recode_seq.nextval, ?, ?, to_char(sysdate, 'yyyy-mm-dd/hh24.mi.ss'))";
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			
+			ps.setString(1, adminId);
+			ps.setString(2, "create adminId : " + adminInfo.getAdminId());
+
+			ps.executeUpdate(); // SQL수행 및 결과 집합 저장
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.sendAdminCreate End");
+	}
+
+	@Override
+	public void sendAdminDelete(Connection conn, String adminId, AdminInfo adminInfo) {
+		System.out.println("AdminLoginDaoImpl.sendAdminDelete Start");
+		
+		String sql = "insert into tbl_admin_recode";
+		sql += "	values (tbl_admin_recode_seq.nextval, ?, ?, to_char(sysdate, 'yyyy-mm-dd/hh24.mi.ss'))";
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			
+			ps.setString(1, adminId);
+			ps.setString(2, "delete adminId : " + adminInfo.getAdminId());
+
+			ps.executeUpdate(); // SQL수행 및 결과 집합 저장
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.sendAdminDelete End");
+	}
+
+	@Override
+	public void sendBoardDelete(Connection conn, String adminId, BoardInfo boardInfo) {
+		System.out.println("AdminLoginDaoImpl.sendBoardDelete Start");
+		
+		String sql = "insert into tbl_admin_recode";
+		sql += "	values (tbl_admin_recode_seq.nextval, ?, ?, to_char(sysdate, 'yyyy-mm-dd/hh24.mi.ss'))";
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			
+			ps.setString(1, adminId);
+			ps.setString(2, "delete boardNo / boardTitle / boardContent : " + boardInfo.getBoardNo()  + " / " + boardInfo.getBoardTitle() 
+			+ " / " + boardInfo.getBoardContent());
+
+			ps.executeUpdate(); // SQL수행 및 결과 집합 저장
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.sendBoardDelete End");
+	}
+
+	@Override
+	public void sendUserCreate(Connection conn, String adminId, UserInfo userInfo) {
+		System.out.println("AdminLoginDaoImpl.sendUserCreate Start");
+		
+		String sql = "insert into tbl_admin_recode";
+		sql += "	values (tbl_admin_recode_seq.nextval, ?, ?, to_char(sysdate, 'yyyy-mm-dd/hh24.mi.ss'))";
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			
+			ps.setString(1, adminId);
+			ps.setString(2, "create userId : " + userInfo.getU_id());
+
+			ps.executeUpdate(); // SQL수행 및 결과 집합 저장
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.sendUserCreate End");
+	}
+
+	@Override
+	public void sendUserDelete(Connection conn, String adminId, UserInfo userInfo) {
+		System.out.println("AdminLoginDaoImpl.sendUserDelete Start");
+		
+		String sql = "insert into tbl_admin_recode";
+		sql += "	values (tbl_admin_recode_seq.nextval, ?, ?, to_char(sysdate, 'yyyy-mm-dd/hh24.mi.ss'))";
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			
+			ps.setString(1, adminId);
+			ps.setString(2, "delete userId : " + userInfo.getU_id());
+
+			ps.executeUpdate(); // SQL수행 및 결과 집합 저장
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.sendUserDelete End");
+	}
+
+	@Override
+	public void sendUserUpdate(Connection conn, String adminId, UserInfo userInfo) {
+		System.out.println("AdminLoginDaoImpl.sendUserUpdate Start");
+		
+		String sql = "insert into tbl_admin_recode";
+		sql += "	values (tbl_admin_recode_seq.nextval, ?, ?, to_char(sysdate, 'yyyy-mm-dd/hh24.mi.ss'))";
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			
+			ps.setString(1, adminId);
+			ps.setString(2, "Update userNo : " + userInfo.getU_no());
+
+			ps.executeUpdate(); // SQL수행 및 결과 집합 저장
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.sendUserUpdate End");
+	}
+
+	@Override
+	public void sendNoticeUpdate(Connection conn, String adminId, int test) {
+		System.out.println("AdminLoginDaoImpl.sendNoticeUpdate Start");
+		
+		String sql = "insert into tbl_admin_recode";
+		sql += "	values (tbl_admin_recode_seq.nextval, ?, ?, to_char(sysdate, 'yyyy-mm-dd/hh24.mi.ss'))";
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			
+			ps.setString(1, adminId);
+			ps.setString(2, "Update noticeNo : " + test);
+
+			ps.executeUpdate(); // SQL수행 및 결과 집합 저장
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.sendNoticeUpdate End");
+	}
+
+	@Override
+	public void sendNoticeDelete(Connection conn, String adminId, Notice notice) {
+		System.out.println("AdminLoginDaoImpl.sendNoticeDelete Start");
+		
+		String sql = "insert into tbl_admin_recode";
+		sql += "	values (tbl_admin_recode_seq.nextval, ?, ?, to_char(sysdate, 'yyyy-mm-dd/hh24.mi.ss'))";
+		
+		try {
+			ps = conn.prepareStatement(sql); // SQL수행 객체
+			
+			ps.setString(1, adminId);
+			ps.setString(2, "Delete noticeNo / noticeTitle / noticeContent : " + notice.getNotice_no() + " / " + notice.getTitle() 
+			+ " / " + notice.getNotice_content());
+
+			ps.executeUpdate(); // SQL수행 및 결과 집합 저장
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("AdminLoginDaoImpl.sendNoticeDelete End");
 	}
 		
 }
