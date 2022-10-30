@@ -13,6 +13,8 @@
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
+
+<!-- 
 <script type="text/javascript">
 $(document).ready(function() {
 	
@@ -72,6 +74,7 @@ $(document).ready(function() {
 		})
 })
 
+ -->
 
 </script>
 
@@ -80,8 +83,32 @@ $(document).ready(function() {
 	
 	//비밀번호 찾기 버튼
 	$("#pwFind").click(function() {
+		var n_RegExp = /^[가-힣]{2,15}$/; //이름 유효성검사 정규식
+		var RegExp = /^[a-zA-Z0-9]{4,12}$/; //id와 pwassword 유효성 검사 정규식
+		var objName = document.getElementById("u_name"); //이름
+		var objId = document.getElementById("u_id"); //아이디
+		
+		if(objName.value ==''){            
+			alert("이름을 입력해주세요.");            
+			return false;        
+		}        
+		if(!n_RegExp.test(objName.value)){            
+			alert("이름에 특수문자,영어,숫자는 사용할수 없습니다. 한글만 입력하여주세요.");            
+			return false;        
+		} 
+		
+		if(objId.value==''){            
+			alert("아이디를 입력해주세요.");            
+			return false;        
+		}        
+		
+		if(!RegExp.test(objId.value)){ //아이디 유효성검사            
+			alert("아이디는 4~12자의 영문 대소문자와 숫자로만 입력하여 주세요.");                    
+			return false;        
+		}                
 		
 		$("form").submit();
+
 	})
 	
 	//아이디 찾기 버튼
@@ -101,6 +128,8 @@ $(document).ready(function() {
 
 })
 </script>
+
+
 
 <style type="text/css">
 body{margin: 0 auto; width: 700px; height:1000px;}

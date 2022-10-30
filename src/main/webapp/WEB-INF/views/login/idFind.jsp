@@ -17,7 +17,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-// 	$('#u_name').focusout(function(){
+// 		$('#u_name').focusout(function(){
 // 		console.log("#u_name focusout")
 			
 // 			let u_name = $('#u_name').val(); // input_id에 입력되는 값
@@ -29,13 +29,13 @@ $(document).ready(function() {
 // 				dataType : 'json',
 // 				success : function(result){
 // 					if(result == 0){
-// 						$("#nameCheck").html('이름 정보가 없습니다');
-// 						$("#nameCheck").attr('color','red');
+// 						$("#nameCheck").html('이름 확인 성공');
+// 						$("#nameCheck").attr('color','green');
 						
 						
 // 					} else{
-// 						$("#nameCheck").html('이름 확인 성공');
-// 						$("#nameCheck").attr('color','green');
+// 						$("#nameCheck").html('이름 정보가 없습니다');
+// 						$("#nameCheck").attr('color','red');
 // 					} 
 // 				},
 // 				error : function(){
@@ -45,64 +45,58 @@ $(document).ready(function() {
 			 
 // 		})
 
-		$('#u_name').focusout(function(){
-		console.log("#u_name focusout")
+
+// 		$('#u_email').focusout(function(){
+// 		console.log("#u_email focusout")
 			
-			let u_name = $('#u_name').val(); // input_id에 입력되는 값
+// 			let u_email = $('#u_email').val(); // input_id에 입력되는 값
 			
-			$.ajax({
-				url : "/nameCheck/con",
-				type : "post",
-				data : {u_name: u_name},
-				dataType : 'json',
-				success : function(result){
-					if(result == 0){
-						$("#nameCheck").html('이름 확인 성공');
-						$("#nameCheck").attr('color','green');
+// 			$.ajax({
+// 				url : "/emailCheck/con",
+// 				type : "post",
+// 				data : {u_email: u_email},
+// 				dataType : 'json',
+// 				success : function(result){
+// 					if(result == 0){
+// 						$("#emailCheck").html('이메일 정보가 없습니다');
+// 						$("#emailCheck").attr('color','red');
 						
 						
-					} else{
-						$("#nameCheck").html('이름 정보가 없습니다');
-						$("#nameCheck").attr('color','red');
-					} 
-				},
-				error : function(){
-					alert("서버요청실패");
-				}
-			})
-			 
-		})
-
-
-		$('#u_email').focusout(function(){
-		console.log("#u_email focusout")
-			
-			let u_email = $('#u_email').val(); // input_id에 입력되는 값
-			
-			$.ajax({
-				url : "/emailCheck/con",
-				type : "post",
-				data : {u_email: u_email},
-				dataType : 'json',
-				success : function(result){
-					if(result == 0){
-						$("#emailCheck").html('이메일 정보가 없습니다');
-						$("#emailCheck").attr('color','red');
-						
-						
-					} else{
-						$("#emailCheck").html('이메일 확인 성공');
-						$("#emailCheck").attr('color','green');
-					} 
-				},
-				error : function(){
-					alert("서버요청실패");
-				}
-			})
-		})
-
-
+// 					} else{
+// 						$("#emailCheck").html('이메일 확인 성공');
+// 						$("#emailCheck").attr('color','green');
+// 					} 
+// 				},
+// 				error : function(){
+// 					alert("서버요청실패");
+// 				}
+// 			})
+// 		})
+// $('#idFind').click(function Validation(){ 
+// 		var objName = document.getElementById("u_name"); //이름       
+// 		var objEmail = document.getElementById("u_email");//이메일   
 		
+// 		if(objName.value ==''){            
+// 			alert("이름을 입력해주세요.");            
+// 			return false;        
+// 		}        
+// 		if(!n_RegExp.test(objName.value)){            
+// 			alert("이름에 특수문자,영어,숫자는 사용할수 없습니다. 한글만 입력하여주세요.");            
+// 			return false;        
+// 		} 
+	
+// 		if(objEmail.value == ''){ // 이메일 입력여부 검사            
+// 			alert("이메일을 입력해주세요.");            
+// 			return false;        
+// 		}                
+// 		if(!e_RegExp.test(objEmail.value)){ //이메일 유효성 검사            
+// 			alert("올바른 이메일 형식이 아닙니다.");            
+// 			return false;        
+// 		}     
+		
+// 		$("form").submit();   
+		
+// 	})
 })
 
 </script>
@@ -113,6 +107,29 @@ $(document).ready(function() {
 	
 	//아이디 찾기 버튼
 	$("#idFind").click(function() { //아이디 검색
+		
+		var objName = document.getElementById("u_name"); //이름       
+		var objEmail = document.getElementById("u_email");//이메일   
+		var n_RegExp = /^[가-힣]{2,15}$/; //이름 유효성검사 정규식
+		var e_RegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		
+		if(objName.value ==''){            
+			alert("이름을 입력해주세요.");            
+			return false;        
+		}        
+		if(!n_RegExp.test(objName.value)){            
+			alert("이름에 특수문자,영어,숫자는 사용할수 없습니다. 한글만 입력하여주세요.");            
+			return false;        
+		} 
+	
+		if(objEmail.value == ''){ // 이메일 입력여부 검사            
+			alert("이메일을 입력해주세요.");            
+			return false;        
+		}                
+		if(!e_RegExp.test(objEmail.value)){ //이메일 유효성 검사            
+			alert("올바른 이메일 형식이 아닙니다.");            
+			return false;        
+		}     
 		
 		$("form").submit();
 	})
@@ -127,9 +144,6 @@ $(document).ready(function() {
 		$(location).attr('href', '/login/con') //로그인 화면으로 가기
 	})
 	
-	$("input").eq(0).blur(function() {
-		
-	})
 	
 })
 </script>
