@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import common.JDBCTemplate;
+import dto.BoardInfo;
 import dto.Cart;
 import dto.Product;
 import dto.UserInfo;
@@ -23,17 +24,17 @@ public class MypageServiceImpl implements MypageService {
 	private UserBoardDao userBoardDao = new UserBoardDaoImpl();
 	private UserInfoDao userInfoDao = new UserInfoDaoImpl();
 	
-	@Override
-	public int deleteCart() {
-
-		return 0;
-	}
-
-	@Override
-	public int deleteAllCart() {
-
-		return 0;
-	}
+//	@Override
+//	public int deleteCart() {
+//
+//		return 0;
+//	}
+//
+//	@Override
+//	public int deleteAllCart() {
+//
+//		return 0;
+//	}
 
 	@Override
 	public int deleteUser(int userno) {
@@ -56,22 +57,31 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<dto.StoryBoard> showStory() {
-
-		return null;
+	public int showStory(UserInfo param) {
+		System.out.println("MypageService - showStory() - DB 연결 객체 생성완료 ");
+		
+		//총 게시글 수 조회하기
+//		int totalCount = userBoardDao.selectStoryByUserNo(JDBCTemplate.getConnection(), param);
+		
+//		String param = req.get
+		
+		System.out.println("MypageService - showStory() - DAO 호출 후");
+		
+		// DB 조회 결과 반환
+		return userBoardDao.selectStoryByUserNo(JDBCTemplate.getConnection(), param);
 	}
 
-	@Override
-	public List<dto.StoryBoard> deleteStory() {
-
-		return null;
-	}
-
-	@Override
-	public List<dto.AskBoard> showAsk() {
-
-		return null;
-	}
+//	@Override
+//	public List<dto.StoryBoard> deleteStory() {
+//
+//		return null;
+//	}
+//
+//	@Override
+//	public List<dto.AskBoard> showAsk() {
+//
+//		return null;
+//	}
 
 	@Override
 	public dto.UserInfo showUserInfo(UserInfo param) {
@@ -104,10 +114,6 @@ public class MypageServiceImpl implements MypageService {
 		return userInfoDao.updateUserInfo(JDBCTemplate.getConnection(), param);
 	}
 
-	@Override
-	public int modifyUserInfo() {
-		return 0;
-	}
 
 	@Override
 	public List<Product> checkCarts(UserInfo param) {
@@ -119,6 +125,12 @@ public class MypageServiceImpl implements MypageService {
 		// DB 조회 결과 반환
 		return userCartDao.checkCarts(JDBCTemplate.getConnection(), param);
 	}
+
+//	@Override
+//	public int modifyUserInfo() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
 //	@Override
 //	public UserInfo askNick(UserInfo param) {

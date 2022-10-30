@@ -17,7 +17,7 @@ import mypage.dao.face.UserCartDao;
 import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
-// 장바구니 목록 조회 - 구현 완료
+// 장바구니 목록 조회 - 구현중
 @WebServlet("/cart/list")
 public class CartListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -37,8 +37,8 @@ public class CartListController extends HttpServlet {
 
 		//테스트용으로 1을 설정했고
 		//	-> 나중에 int userNo = Integer.parseInt(u_no); 로 바꾸기
-		int userNo = Integer.parseInt(u_no);
-//		int userNo = 1; 
+//		int userNo = Integer.parseInt(u_no);
+		int userNo = 1; 
 //		int userNo = 2; 
 		
 		//전달 파라미터 얻어오기

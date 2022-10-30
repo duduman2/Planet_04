@@ -21,9 +21,9 @@ public interface UserCartDao {
 	 */
 	public List<Cart> checkCart(Connection conn, UserInfo param); //장바구니 내역 조회
 	
-	public int deleteCart(); // int 반환, 장바구니 내역 삭제
+//	public int deleteCart(); // int 반환, 장바구니 내역 삭제
 	
-	public int deleteAllCart(); // int 반환, 장바구니 내역 전체 삭제
+//	public int deleteAllCart(); // int 반환, 장바구니 내역 전체 삭제
 
 	/**
 	 * 장바구니 내역 조회 
@@ -35,7 +35,7 @@ public interface UserCartDao {
 	public List<Cart> checkCart(Connection conn);
 
 	
-	public Product getParam(HttpServletRequest req);
+//	public Product getParam(HttpServletRequest req);
 
 	
 	

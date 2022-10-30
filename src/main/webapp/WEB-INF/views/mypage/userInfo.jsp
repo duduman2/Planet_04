@@ -8,7 +8,7 @@
 
 <%-- 모델값 전달받기 --%>
 <% 	UserInfo uList = (UserInfo) request.getAttribute("data"); %>
-<% 	UserInfo uResultList = (UserInfo) request.getAttribute("result"); %>
+<%-- <% 	UserInfo uResultList = (UserInfo) request.getAttribute("result"); %> --%>
 
 
 <script type="text/javascript">
@@ -42,19 +42,22 @@ $(document).ready(function() {
 	$("#btnMyMain").click(function() {
 		$(location).attr("href", "/mypage/main")
 	})
-	
+	$("#btnGradeInfo").click(function() {
+		$(location).attr("href", "/grade/info")
+	})
 })
 
 </script>
 <!-- </head> -->
 <!-- <body> -->
 
-<h3>&nbsp;&nbsp;&nbsp회원 정보 확인하기</h3>
+<h3>&nbsp;&nbsp;&nbsp;회원 정보 확인하기</h3>
 <hr>
 <div class="main">
 
 	<div id="uinfoMenu">
-		<ul>
+		<ul style="list-style: none;">
+			<li><a id="btnGradeInfo">회원 등급 안내</a></li>
 			<li><a id="btnUserInfo">회원 정보 확인</a></li>
 			<li><a id="btnUserInfoModi">회원 정보 수정</a></li>
 			<li><a id="btnUserInfoDeleteMenu">회원 탈퇴</a></li>
@@ -119,10 +122,10 @@ $(document).ready(function() {
 			<th>회원 닉네임</th>
 			<td><%=uList.getU_nick() %></td>
 		</tr>
-<!-- 		<tr> -->
+		<tr>
 			<th>가입날짜</th>
 			<td><%=uList.getU_join_date() %></td>
-<!-- 		</tr> -->
+		</tr>
 		<tr>
 			<th>사업자유저</th>
 			<td><%=uList.getB_business_number() %></td>
@@ -146,7 +149,12 @@ $(document).ready(function() {
 		<!-- 	<th>장바구니번호</th> -->
 		<%-- 	<td><%=uList.getWishno() %></td> --%>
 		<!-- </tr> -->
-		<%-- 16개--%>
+		<tr>
+			<th>보유 포인트</th>
+			<td><%=uList.getU_point() %> P</td>
+		</tr>
+		
+		<%-- 17개--%>
 		<%-- <% } %> --%>
 		
 		
