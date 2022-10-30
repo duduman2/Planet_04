@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <%Product productView = (Product)request.getAttribute("view"); %>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<%@ include file="../layout/header.jsp"%>
+<%@ include file="../layout/header2.jsp"%>
 <style>
 table {
 	border : 1px solid #444444;
@@ -63,14 +63,14 @@ $(document).ready(function(){
 	$("#paymoney").html(price).append("원")
 	
 	$.cartInsert = function(){	// 카트담기
-			console.log("ajax 시작")
+		console.log("ajax 시작")
 		$.ajax({
 			type: "get"			//요청 메소드
 			,url: "/cart/list"	//요청 URL
 			,data: {				//요청 파라미터
 				productNo : '<%=productView.getProductNo() %>'
 				, productName : '<%=productView.getProductName() %>'
-				, productPrice : <%=productView.getProductPrice()%>
+				, productPrice : '<%=productView.getProductPrice()%>'
 				, productQuan : $("#quanInput").val()
 			}
 			,success:function(res){
@@ -87,7 +87,7 @@ $(document).ready(function(){
 		if(null==sessionData || !sessionData){// 로그인 안됐을경우
 			console.log("state : logout")
 			if(confirm("로그인이 필요합니다\n로그인페이지로 이동하시겠습니까?")){
-				location.replace('/login/con') //로그인 페이지 이동
+				location.href='/login/con' //로그인 페이지 이동
 			}
 		}else{
 			return true
@@ -98,7 +98,7 @@ $(document).ready(function(){
 		if($.loginCheck()){
 			if(confirm("장바구니에 담겼습니다\n장바구니로 이동하시겠습니까?")){
 				$.cartInsert()
-				location.replace('/cart/list') //장바구니 페이지 이동
+				location.href='/cart/list' //장바구니 페이지 이동
 			}else {
 				$.cartInsert()
 				return
@@ -108,7 +108,7 @@ $(document).ready(function(){
 	
 	$("#goBuy").click(function(){	
 		if($.loginCheck()){		//로그인 확인
-			location.replace('/buybuy') //구매페이지 이동
+			$("#proinfo").attr("action","/buybuy").submit();
 		}
 	})
 	
@@ -141,7 +141,7 @@ $(document).ready(function(){
 </tr>
 <tr>
 		<td>
-			<form action="/buybuy" method="get">
+			<form id="proinfo">
 			수량 선택
 			<button type="button" id="sub" class="btn btn-success">-</button><input type="text" value="1" name ="productQuan" id="quanInput" size="5" ><button type="button" id="add" class="btn btn-success">+</button>
 			<br><br>결제 금액<br>
@@ -150,8 +150,8 @@ $(document).ready(function(){
 			<input type="hidden" name="productUser" value=<%=productView.getProuserId()%> >
 			<input type="hidden" name="productPrice" value=<%=productView.getProductPrice()%> >
 			
-			<button id="goWish" class="btn btn-success">장바구니</button>
-			<button id="goBuy" class="btn btn-success">구매하기</button>
+			<button type="button" id="goWish" class="btn btn-success">장바구니</button>
+			<button type="button" id="goBuy" class="btn btn-success">구매하기</button>
 			</form>
 		</td>
 </tr>

@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% List<Product> boardList = (List)request.getAttribute("boardList"); %>
-<%@ include file="../layout/header.jsp"%>
+<%@ include file="../layout/header2.jsp"%>
 
 <!-- 부트스트랩 3-->
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -38,29 +38,8 @@
 $( document ).ready( function() {
 	    
 	 $(".cate").click(function(){
-// 	    	alert($(this).val());
 			location.href = '?cate='+ $(this).val();
 	    });
-//     $(".cate").click(function(){
-//     	$(".tradeboard").hide()
-// 		$.ajax({
-// 			type: "post"			//요청 메소드
-// 			,url: "/tradelist"	//요청 URL
-// 			,data: {				//요청 파라미터
-// 				cate : $(this).val()
-// 			}
-// 			,dataType: "html"		//응답 데이터 형식
-// 			,success:function(res){
-// 				console.log("AJAX 성공")
-				
-// 				//응답 데이터 반영
-// 				$(".tradeboard2").html(res)
-// 			}
-// 			,error:function(){
-// 				console.log("AJAX 실패")
-// 			}
-// 		})
-//     });
 	
 	$(window).scroll(function() {
 	    if ($(this).scrollTop() > 300) {
@@ -84,8 +63,9 @@ $( document ).ready( function() {
 		}
 	}
 	$("#proWrite").click(function(){	
-		$.loginCheck(location.href="/trade/productupload")
-		
+		if($.loginCheck()){
+			location.href="/trade/productupload"
+		}
 	})
 	
 });

@@ -16,7 +16,7 @@ import trade.service.impl.BuyServiceImpl;
 import trade.service.impl.PaymentServiceImpl;
 
 @WebServlet("/paypay")
-public class PaymentController extends HttpServlet {
+public class PaymentPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private PaymentService paymentService = new PaymentServiceImpl();
@@ -24,11 +24,11 @@ public class PaymentController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/trade/pay.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/trade/buysuccess.jsp").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("결제완료페이지!!!");
+		System.out.println("구매완료페이지!!!");
 		Product product = new Product();
 		System.out.println(req.getParameter("productNo"));
 		product.setProductNo(Integer.parseInt(req.getParameter("productNo")));
@@ -47,10 +47,12 @@ public class PaymentController extends HttpServlet {
 		String loginId = (String) session.getAttribute("loginid");
 		
 		int point = product.getProductPrice() * proquan; //차감될 포인트 
-		
+		System.out.println("차감될 포인트 : " + point);
 		int mypointBefore = buyService.myPoint(loginId); //차감전 포인트
+		System.out.println("차감전 포인트 : " + point);
 		paymentService.pointSend(loginId, sellUserId, point);
 		int mypointAfter = buyService.myPoint(loginId);	//차감후 포인트
+		System.out.println("차감후 포인트 : " + point);
 		
 		
 		req.setAttribute("buyinfo",product);

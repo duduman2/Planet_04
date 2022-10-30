@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="../layout/header.jsp"%>
+<%@ include file="../layout/header2.jsp"%>
 <%Product productView = (Product)request.getAttribute("buyinfo"); %>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -29,6 +29,10 @@ $(document).ready(function(){
 			}
 		})
 	})
+	$("#goCharge").click(function(){	
+		window.open('/charging', '_blank','width=500, height=700, left=600, top=200');
+	})
+	
 })
 
 </script>
@@ -41,7 +45,7 @@ $(document).ready(function(){
 	width : 600px;
 }
 </style>
-<h1>결제 페이지</h1>
+<h1>구매 페이지</h1>
 <hr>
 
 <table class="table">
@@ -51,7 +55,7 @@ $(document).ready(function(){
 </tr>
 <tr>
 	<td>금액</td>
-	<td><%=productView.getProductPrice()%></td>
+	<td><%=productView.getProductPrice()%> P</td>
 </tr>
 <tr>
 	<td>수량</td>
@@ -59,11 +63,11 @@ $(document).ready(function(){
 </tr>
 <tr>
 	<td>결제 예정 포인트</td>
-	<td><%=(int)request.getAttribute("proquan") * productView.getProductPrice()%></td>
+	<td><%=(int)request.getAttribute("proquan") * productView.getProductPrice()%> P</td>
 </tr>
 <tr>
 	<td>내 보유 포인트</td>
-	<td><%=request.getAttribute("mypoint")%></td>
+	<td><%=request.getAttribute("mypoint")%> P</td>
 </tr>
 <tr>
 <td colspan="2" align="right">
