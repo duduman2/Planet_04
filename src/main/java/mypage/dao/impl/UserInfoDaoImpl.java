@@ -23,9 +23,9 @@ public class UserInfoDaoImpl implements UserInfoDao {
 
 		// sql 작성
 		String sql = "";
-		sql += "UPDATE tbl_user SET";
-//		sql += " userid = ?"; 
-//		sql += " , userpw = ?";
+		sql += "UPDATE tbl_user SET ";
+		sql += "  userid = ?"; 
+		sql += " , userpw = ?";
 //		sql += " , name = ?"; 
 //		sql += " , birth = ?"; //5
 //		
@@ -44,11 +44,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 //		sql += " , wish_no = ?"; //16
 //		sql += " , userpoint = ?"; //17
 		
-		
-		sql += " tradeuser = ?";
-		sql += " , userbsno = ?";
-		
-		sql += " WHERE userno = ?"; 
+		sql += " WHERE userno = ?"; //1
 		
 		int result = 0; //결과를 저장할 객체
 
@@ -57,29 +53,29 @@ public class UserInfoDaoImpl implements UserInfoDao {
 			ps = conn.prepareStatement(sql);
 			
 			// sql 파라미터 전달
-//			ps.setString(1, param.getU_id());
-//			ps.setString(2, param.getU_pw());
+			ps.setString(1, param.getU_id());
+			ps.setString(2, param.getU_pw());
 //			ps.setString(3, param.getU_name());
+			
+//			ps.setDate(4, (Date) param.getU_birth()); //4
+//			ps.setString(3, param.getU_gender());
+//			ps.setString(3, param.getU_phone());
+//			ps.setString(3, param.getU_email()); //7
 //			
-//			ps.setDate(4, (Date) param.getU_birth());
-//			ps.setString(5, param.getU_gender());
-//			ps.setString(6, param.getU_phone());
-//			ps.setString(7, param.getU_email());
+//			ps.setString(3, param.getU_address());
+//			ps.setString(3, param.getU_nick());
+//			ps.setDate(3, (Date) param.getU_join_date()); //10
+//			ps.setString(3, param.getU_trade_user());
 //			
-//			ps.setString(8, param.getU_address());
-//			ps.setString(9, param.getU_nick());
-//			ps.setDate(10, (Date) param.getU_join_date());
-//			ps.setString(11, param.getU_trade_user());
-//			
-//			ps.setString(12, param.getB_business_number());
-//			ps.setString(13, param.getGrade());
+//			ps.setString(3, param.getB_business_number());
+//			ps.setString(13, param.getGrade()); //---수정 불가------------
 //			ps.setString(14, param.getReportcode());
 //			ps.setString(15, param.getWishno());
-//			ps.setInt(16, param.getU_point());
-
+//			ps.setInt(16, param.getU_point()); //----수정 불가-----------			
 			
-			ps.setString(1, param.getU_trade_user());
-			ps.setString(2, param.getB_business_number());
+//			ps.setInt(17, param.getU_no());
+			ps.setInt(3, param.getU_no());
+			
 			
 			// sql 수행 및 결과 집합 저장
 			result = ps.executeUpdate();
@@ -151,8 +147,40 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		return re; //최종 결과 반환
 	}
 	
+//	@Override
+//	public int deleteUser(Connection conn, int userno) {
+//		System.out.println("userInfoDao - deleteUser() - 시작");
+//
+//		// sql 작성
+//		String sql = "";
+//		sql += "DELETE * FROM tbl_user";
+//		sql += " WHERE userno = ?";
+//		
+//		//삭제된 행의 수를 저장하는 변수
+//		int res = 0;
+//		
+//		//sql 수행 객체 생성
+//		try {
+//			ps = conn.prepareStatement(sql);
+//			ps.setInt(1, userno);
+//			res = ps.executeUpdate();
+//			
+//			if(res > 0) {
+//				JDBCTemplate.commit(conn);
+//			} else {
+//				JDBCTemplate.rollback(conn);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			JDBCTemplate.close(rs);
+//			JDBCTemplate.close(ps);
+//		}
+//		System.out.println("userInfoDao - deleteUser() - 끝");
+//		return res;
+//	}
 	@Override
-	public int deleteUser(Connection conn, int userno) {
+	public int deleteUser(Connection conn, UserInfo param) {
 		System.out.println("userInfoDao - deleteUser() - 시작");
 
 		// sql 작성
@@ -166,7 +194,9 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		//sql 수행 객체 생성
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, userno);
+			
+			ps.setInt(1, param.getU_no());
+			
 			res = ps.executeUpdate();
 			
 			if(res > 0) {
@@ -182,13 +212,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		}
 		System.out.println("userInfoDao - deleteUser() - 끝");
 		return res;
-	}
-	@Override
-	public int deleteUser(Connection conn, UserInfo param) {
-
-		
-		
-		return 0;
 	}
 
 	

@@ -8,7 +8,7 @@ public interface UserInfoDao {
 
 
 	/**
-	 * 마이페이지 - 회원정보 삭제
+	 * 마이페이지 - userno를 이용하여 회원정보 삭제
 	 * 
 	 * @param conn - DB 연결 객체
 	 * @param param - 회원 정보
@@ -17,7 +17,7 @@ public interface UserInfoDao {
 	public int deleteUser(Connection conn, UserInfo param); // int 반환, 유저 정보 삭제
 
 	
-	public int deleteUser(Connection conn, int userno);
+//	public int deleteUser(Connection conn, int userno);
 
 	/**
 	 * 마이페이지 - 회원정보 조회

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-// 회원 탈퇴 정상 페이지
+//회원 탈퇴 정상 페이지 - views만 완료(디비는 아직)
 @WebServlet("/userdelete/result")
 public class UserDeleteResult extends HttpServlet {
 	private static final long serialVersionUID = 1L;

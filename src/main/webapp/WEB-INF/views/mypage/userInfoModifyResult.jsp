@@ -76,48 +76,48 @@ $(document).ready(function() {
 
 		<tr>
 			<th>회원 아이디</th>
-<%-- 			<td><%=uList.getU_id() %></td> --%>
+			<td><%=uList.getU_id() %></td>
 		</tr>
 		<tr>
 			<th>회원 패스워드</th>
-<%-- 			<td><%=uList.getU_pw() %></td> --%>
+			<td><%=uList.getU_pw() %></td>
 		</tr>
 		<tr>
 			<th>회원 이름</th>
-<%-- 			<td><%=uList.getU_name() %></td> --%>
+			<td><%=uList.getU_name() %></td>
 		</tr>
 		<%-- 4개 --%>
 		
 		<tr>
 			<th>생년월일</th>
-<%-- 			<td><%=uList.getU_birth() %></td> --%>
+			<td><%=uList.getU_birth() %></td>
 		</tr>
 		<tr>
 			<th>성별</th>
-<%-- 			<td><%=uList.getU_gender() %></td> --%>
+			<td><%=uList.getU_gender() %></td>
 		</tr>
 		<tr>
 			<th>전화번호</th>
-<%-- 			<td><%=uList.getU_phone() %></td> --%>
+			<td><%=uList.getU_phone() %></td>
 		</tr>
 		<tr>
 			<th>이메일</th>
-<%-- 			<td><%=uList.getU_email() %></td> --%>
+			<td><%=uList.getU_email() %></td>
 		</tr>
 		<%-- 8개--%>
 		
 		
 		<tr>
 			<th>주소</th>
-<%-- 			<td><%=uList.getU_address() %></td> --%>
+			<td><%=uList.getU_address() %></td>
 		</tr>
 		<tr>
 			<th>회원 닉네임</th>
-<%-- 			<td><%=uList.getU_nick() %></td> --%>
+			<td><%=uList.getU_nick() %></td>
 		</tr>
 		<tr>
 			<th>가입날짜</th>
-<%-- 			<td><%=uList.getU_join_date() %></td> --%>
+			<td><%=uList.getU_join_date() %></td>
 		</tr>
 		<tr>
 			<th>사업자유저</th>
@@ -128,11 +128,11 @@ $(document).ready(function() {
 		
 		<tr>
 			<th>사업자번호</th>
-<%-- 			<td><%=uList.getB_business_number() %></td> --%>
+			<td><%=uList.getB_business_number() %></td>
 		</tr>
 		<tr>
 			<th>등급코드</th>
-<%-- 			<td><%=uList.getGrade() %></td> --%>
+			<td><%=uList.getGrade() %></td>
 		</tr>
 		<!-- <tr> -->
 		<!-- 	<th>신고코드</th> -->
@@ -144,7 +144,7 @@ $(document).ready(function() {
 		<!-- </tr> -->
 		<tr>
 			<th>보유 포인트</th>
-<%-- 			<td><%=uList.getU_point() %> P</td> --%>
+			<td><%=uList.getU_point() %> P</td>
 		</tr>
 		<%-- 17개--%>
 		<%-- <% } %> --%>

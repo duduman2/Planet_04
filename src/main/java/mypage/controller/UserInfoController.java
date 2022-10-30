@@ -13,7 +13,7 @@ import dto.UserInfo;
 import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
-//로그인한 회원 본인의 정보 확인하기
+//로그인한 회원 본인의 정보 확인하기 - 구현완료
 @WebServlet("/user/info")
 public class UserInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -33,7 +33,7 @@ public class UserInfoController extends HttpServlet {
 		//테스트용으로 1을 설정했고
 		//	-> 나중에 int userNo = Integer.parseInt(u_no); 로 바꾸기
 //		int userNo = Integer.parseInt(u_no);
-		int userNo = 1; 
+		int userNo = 31; 
 //		int userNo = 2; 
 		
 		//전달 파라미터 객체 얻어오기

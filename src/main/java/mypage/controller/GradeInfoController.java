@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//회원 등급 안내
+//회원 등급 안내 - views만 완료
+//			(디비는 아직-게시글과 댓글의 수를 이용하여 등급올리기)
 @WebServlet("/grade/info")
 public class GradeInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

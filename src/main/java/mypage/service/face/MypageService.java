@@ -3,6 +3,7 @@ package mypage.service.face;
 import java.util.List;
 
 import dto.AskBoard;
+import dto.BoardInfo;
 import dto.Cart;
 import dto.Product;
 import dto.StoryBoard;
@@ -24,17 +25,22 @@ public interface MypageService {
 	
 	public List<Cart> checkCart(UserInfo param); //장바구니 내역 조회 int
 	
-	public int deleteCart(); //장바구니 내역 삭제 int
+//	public int deleteCart(); //장바구니 내역 삭제 int
 	
-	public int deleteAllCart(); //장바구니 내역 전체 삭제 int
+//	public int deleteAllCart(); //장바구니 내역 전체 삭제 int
 	
-	public List<StoryBoard> showStory(); //내가 쓴 글 확인 int
+	/**
+	 * userno를 이용하여 userno가 쓴 게시글 수 확인
+	 * @param param
+	 * @return int
+	 */
+	public int showStory(UserInfo param); //내가 쓴 글 확인 int
 
-	public List<StoryBoard> deleteStory(); //내가 쓴 글 삭제 int
+//	public List<StoryBoard> deleteStory(); //내가 쓴 글 삭제 int
 	
-	public List<AskBoard> showAsk(); //문의사항 확인  int
+//	public List<AskBoard> showAsk(); //문의사항 확인  int
 	 
-	public int modifyUserInfo();
+//	public int modifyUserInfo();
 
 	public int deleteUser(int userno);
 	

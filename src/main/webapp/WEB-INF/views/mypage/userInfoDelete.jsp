@@ -70,7 +70,7 @@ function checkYN() {
 		uinfoDelete()
 	} else  {
 		console.log("checked not yet")
-		alert("회원 탈퇴 - 체크박스를 클릭해주세요")
+		alert("회원 탈퇴 동의 여부 - 체크박스를 클릭해주세요")
 // 		history.go(0);
 // 		location.href = "/user/delete";
 // 		var res = window.open("/user/delete", '_self')

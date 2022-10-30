@@ -93,7 +93,8 @@ $(document).ready(function() {
 		
 	<tr>
 		<th style="text-align: center; height: 50px;">내가 쓴 글</th>
-		<td>내가쓴글ctn 가져오기</td>
+<!-- 		<td>내가쓴글ctn 가져오기</td> -->
+		<td> </td>
 	</tr>
 	
 	</table>	

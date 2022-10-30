@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
-// 장바구니 삭제하기 - 
+// 장바구니 삭제하기 - x
 @WebServlet("/cart/delete")
 public class CartDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

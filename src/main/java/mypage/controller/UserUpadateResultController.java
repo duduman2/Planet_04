@@ -13,7 +13,8 @@ import dto.UserInfo;
 import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
-
+//필요없는 파일!!!!
+//로그인한 회원 본인의 정보 확인하기 - views만 완료(디비는 아직)
 @WebServlet(name = "UserUpdateResultController", urlPatterns = { "/user/updateResult" })
 public class UserUpadateResultController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,7 +32,7 @@ public class UserUpadateResultController extends HttpServlet {
 		String u_no = (String) session.getAttribute("u_no");
 		
 //		int userNo = Integer.parseInt(u_no);
-		int userNo = 1;
+		int userNo = 31;
 //		int userNo = 2; 
 		
 		//전달 파라미터 객체 얻어오기

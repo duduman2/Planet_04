@@ -63,7 +63,7 @@ $(document).ready(function() {
 	<thead> 
 	<tr style="border-bottom: double;">
 		<th style="color: black;">등급 이름</th>
-		<th style="color: black;">수행 조건</th>
+		<th style="color: black;">회원 등급 업그레이드 조건</th>
 	</tr>
 	</thead>
 

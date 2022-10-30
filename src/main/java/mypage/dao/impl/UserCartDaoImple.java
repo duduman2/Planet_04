@@ -170,21 +170,21 @@ public class UserCartDaoImple implements UserCartDao {
 		System.out.println("UserCartDao - List<Cart> checkCart() 끝! ");
 		return cartlist; //최종결과값반환
 	}
-	@Override
-	public int deleteCart() {
-
-		return 0;
-	}
-	@Override
-	public int deleteAllCart() {
-
-		return 0;
-	}
-	@Override
-	public Product getParam(HttpServletRequest req) {
-
-		return null;
-	}
+//	@Override
+//	public int deleteCart() {
+//
+//		return 0;
+//	}
+//	@Override
+//	public int deleteAllCart() {
+//
+//		return 0;
+//	}
+//	@Override
+//	public Product getParam(HttpServletRequest req) {
+//
+//		return null;
+//	}
 	
 	
 	

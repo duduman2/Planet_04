@@ -8,7 +8,7 @@
 
 <%-- 모델값 전달받기 --%>
 <% 	UserInfo uList = (UserInfo) request.getAttribute("data"); %>
-<% 	UserInfo uResultList = (UserInfo) request.getAttribute("result"); %>
+<%-- <% 	UserInfo uResultList = (UserInfo) request.getAttribute("result"); %> --%>
 
 
 <script type="text/javascript">
@@ -122,10 +122,10 @@ $(document).ready(function() {
 			<th>회원 닉네임</th>
 			<td><%=uList.getU_nick() %></td>
 		</tr>
-<!-- 		<tr> -->
+		<tr>
 			<th>가입날짜</th>
 			<td><%=uList.getU_join_date() %></td>
-<!-- 		</tr> -->
+		</tr>
 		<tr>
 			<th>사업자유저</th>
 			<td><%=uList.getB_business_number() %></td>

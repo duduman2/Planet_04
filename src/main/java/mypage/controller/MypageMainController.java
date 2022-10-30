@@ -13,7 +13,7 @@ import dto.UserInfo;
 import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
-// 마이페이지 메인
+// 마이페이지 메인 - 구현중
 @WebServlet("/mypage/main")
 public class MypageMainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -37,7 +37,7 @@ public class MypageMainController extends HttpServlet {
 		
 //		Integer.parseInt(u_no);
 //		int userNo = Integer.parseInt(u_no);
-		int userNo = 1;
+		int userNo = 31;
 //		int userNo = 2; 
 		
 		//전달 파라미터 객체 얻어오기
@@ -45,14 +45,18 @@ public class MypageMainController extends HttpServlet {
 		param.setU_no(userNo);
 		
 		
-		//UserInfo 정보 조회 후 닉네임 값 전달하기
+		//UserInfo 정보 조회 후 값 전달하기
 		UserInfo data = mypageService.showUserInfo(param);
 		System.out.println("UserInfo 조회 data :  " + data);
 
-		System.out.println("UserInfo 조회 u_nick :  " + data.getU_nick());
-		System.out.println("UserInfo 조회 grade :  " + data.getGrade());
-		System.out.println("UserInfo 조회 getU_point :  " + data.getU_point());
+//		System.out.println("UserInfo 조회 u_nick :  " + data.getU_nick());
+//		System.out.println("UserInfo 조회 grade :  " + data.getGrade());
+//		System.out.println("UserInfo 조회 getU_point :  " + data.getU_point());
 
+//		int boardcnt = mypageService.showStory(param);
+//		System.out.println("UserInfo 조회 후 boardcnt : " + boardcnt);
+		
+		
 		//조회 결과를 MODEL값 전달
 		req.setAttribute("data", data);	
 		

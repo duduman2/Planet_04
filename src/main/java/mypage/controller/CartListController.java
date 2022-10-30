@@ -17,7 +17,7 @@ import mypage.dao.face.UserCartDao;
 import mypage.service.face.MypageService;
 import mypage.service.impl.MypageServiceImpl;
 
-// 장바구니 목록 조회 - 구현 완료
+// 장바구니 목록 조회 - 구현중
 @WebServlet("/cart/list")
 public class CartListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
