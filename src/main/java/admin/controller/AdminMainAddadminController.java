@@ -41,6 +41,10 @@ public class AdminMainAddadminController extends HttpServlet {
 		
 		if( result ) {
 			
+			HttpSession session = req.getSession();
+			String adminId = (String) session.getAttribute("userid");
+			adminService.sendAdminCreate(adminId, adminInfo);
+			
 			resp.sendRedirect("/admin/cresuc");
 			
 		} else {

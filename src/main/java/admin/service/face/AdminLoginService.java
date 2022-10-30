@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import common.Paging;
 import dto.AdminInfo;
+import dto.AdminRecode;
 import dto.BoardInfo;
 import dto.Notice;
 import dto.NoticeFile;
@@ -250,8 +251,9 @@ public interface AdminLoginService {
 	 * 공지 수정
 	 * 
 	 * @param req 요청 정보 객체
+	 * @return 
 	 */
-	public void update(HttpServletRequest req);
+	public int update(HttpServletRequest req);
 
 	public BoardInfo getBoardInfo(HttpServletRequest req);
 
@@ -260,5 +262,33 @@ public interface AdminLoginService {
 	public List<BoardInfo> getList(Paging paging, BoardInfo boardInfo);
 
 	public void deleteBoard(BoardInfo boardInfo);
-	
+
+	public void sendAdminLogin(String adminId);
+
+	public void sendAdminLogout(String adminId);
+
+	public AdminRecode getAdminInfo2(HttpServletRequest req);
+
+	public Paging getPaging(HttpServletRequest req, AdminRecode adminRecode);
+
+	public List<AdminRecode> getList(Paging paging, AdminRecode adminRecode);
+
+	public void sendAdminCreate(String adminId, AdminInfo adminInfo);
+
+	public void sendAdminDelete(String adminId, AdminInfo adminInfo);
+
+	public void sendBoardDelete(String adminId, BoardInfo boardInfo);
+
+	public BoardInfo selectBoard(HttpServletRequest req);
+
+	public void sendUserCreate(String adminId, UserInfo userInfo);
+
+	public void sendUserDelete(String adminId, UserInfo userInfo);
+
+	public void sendUserUpdate(String adminId, UserInfo userInfo);
+
+	public void sendNoticeUpdate(String adminId, int test);
+
+	public void sendNoticeDelete(String adminId, Notice notice);
+
 }

@@ -23,6 +23,7 @@ import admin.service.face.AdminLoginService;
 import common.JDBCTemplate;
 import common.Paging;
 import dto.AdminInfo;
+import dto.AdminRecode;
 import dto.BoardInfo;
 import dto.Notice;
 import dto.NoticeFile;
@@ -501,6 +502,9 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 			notice.setNotice_no( Integer.parseInt(param) );
 		}
 		
+		notice.setTitle(req.getParameter("notice_title"));
+		notice.setNotice_content(req.getParameter("notice_content"));
+		
 		System.out.println("AdminServiceImpl.getNoticeno End");
 		return notice;
 	}
@@ -789,7 +793,7 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 	}
 
 	@Override
-	public void update(HttpServletRequest req) {
+	public int update(HttpServletRequest req) {
 		System.out.println("AdminServiceImpl.update Start");
 		
 				//multipart/form-data 인코딩 확인
@@ -798,7 +802,7 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 				//multipar형식이 아닐 경우 처리 중단
 				if( !isMultipart ) {
 					System.out.println("[ERROR] 파일 업로드 형식 데이터가 아님");
-					return;
+					return 0;
 				}
 				
 				DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -932,8 +936,10 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 					}
 					
 				}
-		
+				
 		System.out.println("AdminServiceImpl.update End");
+				
+		return notice.getNotice_no();
 		
 	}
 
@@ -974,7 +980,7 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 		//Paging객체 생성
 		Paging paging = new Paging(totalCount, curPage);
 		
-		System.out.println("AdminServiceImpl.getPagingr4 End");
+		System.out.println("AdminServiceImpl.getPaging4 End");
 				
 		return paging;
 	}
@@ -999,6 +1005,206 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 		JDBCTemplate.commit(conn);
 		
 		System.out.println("AdminServiceImpl.deleteBoard End");
+	}
+
+	@Override
+	public void sendAdminLogin(String adminId) {
+		System.out.println("AdminServiceImpl.sendAdminLogin Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		adminDao.sendAdminLogin(conn, adminId);
+		
+		JDBCTemplate.commit(conn);
+		
+		System.out.println("AdminServiceImpl.sendAdminLogin End");
+	}
+
+	@Override
+	public void sendAdminLogout(String adminId) {
+		System.out.println("AdminServiceImpl.sendAdminLogout Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		adminDao.sendAdminLogout(conn, adminId);
+		
+		JDBCTemplate.commit(conn);
+		
+		System.out.println("AdminServiceImpl.sendAdminLogout End");
+	}
+
+	@Override
+	public AdminRecode getAdminInfo2(HttpServletRequest req) {
+		
+		System.out.println("AdminServiceImpl.getAdminInfo2 Start");
+		
+		AdminRecode adminRecode = new AdminRecode();
+		
+		if( req.getParameter("userid") != null) {
+			adminRecode.setAdminid( req.getParameter("userid") );
+		} else {
+			adminRecode.setAdminid("");
+		}
+		
+		System.out.println("AdminServiceImpl.getAdminInfo2 End");
+		
+		return adminRecode;
+	}
+
+	@Override
+	public Paging getPaging(HttpServletRequest req, AdminRecode adminRecode) {
+		
+		System.out.println("AdminServiceImpl.getPaging5 Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//총 관리자리스트 수 조회하기
+		int totalCount = adminDao.selectCntAll(conn, adminRecode);
+		
+		//전달파라미터 curPage 추출하기
+		String param = req.getParameter("curPage"); // url의 curPage파라미터값 조회
+		
+		int curPage = 0;
+		if( param != null && !"".equals(param) ) {
+			curPage = Integer.parseInt(param);
+		}
+		
+		//Paging객체 생성
+		Paging paging = new Paging(totalCount, curPage);
+		
+		System.out.println("AdminServiceImpl.getPaging5 End");
+		
+		return paging;
+	}
+
+	@Override
+	public List<AdminRecode> getList(Paging paging, AdminRecode adminRecode) {
+		System.out.println("AdminServiceImpl.getList5 Start");
+		
+		System.out.println("AdminServiceImpl.getList5 End");
+		
+		return adminDao.selectAll(JDBCTemplate.getConnection(), paging, adminRecode);
+	}
+
+	@Override
+	public void sendAdminCreate(String adminId, AdminInfo adminInfo) {
+		System.out.println("AdminServiceImpl.sendAdminCreate Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		adminDao.sendAdminCreate(conn, adminId, adminInfo);
+		
+		JDBCTemplate.commit(conn);
+		
+		System.out.println("AdminServiceImpl.sendAdminCreate End");
+	}
+
+	@Override
+	public void sendAdminDelete(String adminId, AdminInfo adminInfo) {
+		System.out.println("AdminServiceImpl.sendAdminDelete Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		adminDao.sendAdminDelete(conn, adminId, adminInfo);
+		
+		JDBCTemplate.commit(conn);
+		
+		System.out.println("AdminServiceImpl.sendAdminDelete End");
+	}
+
+	@Override
+	public void sendBoardDelete(String adminId, BoardInfo boardInfo) {
+	System.out.println("AdminServiceImpl.sendBoardDelete Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		adminDao.sendBoardDelete(conn, adminId, boardInfo);
+		
+		JDBCTemplate.commit(conn);
+		
+		System.out.println("AdminServiceImpl.sendBoardDelete End");
+	}
+
+	@Override
+	public BoardInfo selectBoard(HttpServletRequest req) {
+		System.out.println("AdminServiceImpl.selectBoard Start");
+		
+		BoardInfo boardInfo = new BoardInfo();
+		
+		int boardNo = Integer.parseInt( req.getParameter("boardno") );
+		
+		boardInfo.setBoardNo( boardNo );
+		boardInfo.setBoardTitle( req.getParameter("boardtitle") );
+		boardInfo.setBoardContent( req.getParameter("boardcontent") );
+		
+		System.out.println("AdminServiceImpl.selectBoard End");
+		
+		return boardInfo;
+	}
+
+	@Override
+	public void sendUserCreate(String adminId, UserInfo userInfo) {
+		System.out.println("AdminServiceImpl.sendUserCreate Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		adminDao.sendUserCreate(conn, adminId, userInfo);
+		
+		JDBCTemplate.commit(conn);
+		
+		System.out.println("AdminServiceImpl.sendUserCreate End");
+	}
+
+	@Override
+	public void sendUserDelete(String adminId, UserInfo userInfo) {
+		System.out.println("AdminServiceImpl.sendUserDelete Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		adminDao.sendUserDelete(conn, adminId, userInfo);
+		
+		JDBCTemplate.commit(conn);
+		
+		System.out.println("AdminServiceImpl.sendUserDelete End");
+	}
+
+	@Override
+	public void sendUserUpdate(String adminId, UserInfo userInfo) {
+		System.out.println("AdminServiceImpl.sendUserUpdate Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		adminDao.sendUserUpdate(conn, adminId, userInfo);
+		
+		JDBCTemplate.commit(conn);
+		
+		System.out.println("AdminServiceImpl.sendUserUpdate End");
+	}
+
+	@Override
+	public void sendNoticeUpdate(String adminId, int test) {
+		System.out.println("AdminServiceImpl.sendNoticeUpdate Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		adminDao.sendNoticeUpdate(conn, adminId, test);
+		
+		JDBCTemplate.commit(conn);
+		
+		System.out.println("AdminServiceImpl.sendNoticeUpdate End");
+	}
+
+	@Override
+	public void sendNoticeDelete(String adminId, Notice notice) {
+		System.out.println("AdminServiceImpl.sendNoticeDelete Start");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		adminDao.sendNoticeDelete(conn, adminId, notice);
+		
+		JDBCTemplate.commit(conn);
+		
+		System.out.println("AdminServiceImpl.sendNoticeDelete End");
 	}
 
 }

@@ -86,6 +86,8 @@ $(document).ready(function() {
 	<button id="btnUpdate" class="btn btn-info">수정</button>
 	<form action="<%=request.getContextPath() %>/admin/mainnotice/delete" method="get" style="display: inline;">
 		<input type="text" name="notice_no" value="<%=viewNotice.getNotice_no() %>" style="display: none;">
+		<input type="text" name="notice_title" value="<%=viewNotice.getTitle() %>" style="display: none;">
+		<input type="text" name="notice_content" value="<%=viewNotice.getNotice_content() %>" style="display: none;">
 		<button id="btnDelete" class="btn btn-danger">삭제</button>
 	</form>
 </div>

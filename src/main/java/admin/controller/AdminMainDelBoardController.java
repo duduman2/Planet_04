@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import admin.service.face.AdminLoginService;
 import admin.service.impl.AdminLoginServiceImpl;
@@ -23,9 +24,15 @@ public class AdminMainDelBoardController extends HttpServlet {
 		
 		BoardInfo boardInfo = new BoardInfo();
 		
-		boardInfo.setBoardNo( Integer.parseInt(req.getParameter("boardno")) );
+//		boardInfo.setBoardNo( Integer.parseInt(req.getParameter("boardno")) );
+		
+		boardInfo = adminService.selectBoard(req);
 		
 		adminService.deleteBoard(boardInfo);
+		
+		HttpSession session = req.getSession();
+		String adminId = (String) session.getAttribute("userid");
+		adminService.sendBoardDelete(adminId, boardInfo);
 		
 		doPost(req, resp);
 		
