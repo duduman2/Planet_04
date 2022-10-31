@@ -32,7 +32,7 @@ public class UserUpadateResultController extends HttpServlet {
 		String u_no = (String) session.getAttribute("u_no");
 		
 //		int userNo = Integer.parseInt(u_no);
-		int userNo = 31;
+		int userNo = 21;
 //		int userNo = 2; 
 		
 		//전달 파라미터 객체 얻어오기

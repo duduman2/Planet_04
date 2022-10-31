@@ -27,7 +27,7 @@
 table {  width: 100%; }
 table, tr, th, td { border: 1px solid #ccc; }
 th { text-align: center; }
-
+td { font-size: 1.3em; }
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -74,22 +74,16 @@ $(document).ready(function() {
 
 <%-- 			<td style="text-align: center;"><%= cList.get(i).getCarNo()	%> 번</td> --%>
 
-			<td style="text-align: center;"><input type="checkbox" name="" value=""></td>
+			<td style="text-align: center;"><input type="checkbox" name="checkedCart" value=""  style="zoom:2.0;"></td>
 			<td><%= pList.get(j).getProductNo()	%></td>
-			<td><%= pList.get(j).getProductName()	%>상품명+링크구현</td>
+			<td><%= pList.get(j).getProductName()	%></td>
 			<td><%= pList.get(j).getProductContent()	%></td>
-			<td><%= pList.get(j).getProductPrice()	%> 원</td>
-			<td style="text-align: center;">수량</td>
+			<td style="text-align: right;"><%= pList.get(j).getProductPrice()	%> 원</td>
+			<td style="text-align: right;"> 개</td>
+			
 <%-- 			<td style="text-align: center;"><%= cList.get(i).getDeliveryfee()	%>배송비유무?금액?</td> --%>
 
 
-<!-- 			<td style="text-align: center;"><input type="checkbox" name="" value=""></td> -->
-<%-- 			<td><%= pList.getp	%></td> --%>
-<%-- 			<td><%= pList.getProductName()	%>상품명+링크</td> --%>
-<%-- 			<td><%= pList.get(j).getProductContent()	%></td> --%>
-<%-- 			<td><%= pList.get(j).getProductPrice()	%>제품 가격</td> --%>
-<!-- 			<td style="text-align: center;">수량</td> -->
-<%-- 			<td style="text-align: center;"><%= cList.get(i).getDeliveryfee()	%>배송비유무?금액?</td> --%>
 
 
 
@@ -103,9 +97,10 @@ $(document).ready(function() {
 <table class="table table-hover">
 <thead>
 		<tr>	
+			<th>제품 전체 금액</th>
 			<th>제품 총 수량</th>
 			<th>예상 할인금액</th>
-			<th>총 금액</th>
+			<th>최종 금액</th>
 		</tr>
 </thead>
 <tbody>
@@ -114,6 +109,7 @@ $(document).ready(function() {
 <%-- 		<% for(int j=0; j<pList.size(); j++) { %> --%>
 <%-- 			<td style="text-align: right;"><%= cList.get(i).getWish_amount() %> 개</td>		 --%>
 <%-- 			<td style="text-align: right;"><%= cList.get(i).getTotalPrice() %> 원</td> --%>
+			<td style="text-align: right;"> 원</td>		
 			<td style="text-align: right;"> 개</td>		
 			<td style="text-align: right;"> 원</td>
 			<td style="text-align: right;"> 원</td>

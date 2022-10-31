@@ -15,16 +15,17 @@
 
 <style type="text/css">
 /* @import url("../sources/mypage/mypage.css"); */
-* { font-size: 1.1em;}
+* { font-size: 1.05em;}
 table, tr, th, td { 
 	border: 3px solid #ccc; 
 	border-collapse: collapse;
 	padding: 30px;
-	left: 500px;
+/* 	left: 300px; */
 	float: middle;
 }
-table { margin-left:auto; 
-    margin-right:auto;
+table { 
+/* 	margin-left:auto;  */
+/*     margin-right:auto; */
     margin-top: 50px;
     
 }
@@ -38,8 +39,23 @@ th { color: #5B9E28; }
 <script type="text/javascript">
 $(document).ready(function() {
 	
+	$("#btnUserInfo").click(function() {
+		$(location).attr("href", "/user/info")
+	})
+	$("#btnUserInfoModi").click(function() {
+		$(location).attr("href", "/user/update")
+	})
+	$("#btnUserInfoUpdate").click(function() {
+		$(location).attr("href", "/user/update")
+	})
+	$("#btnUserInfoDeleteMenu").click(function() {
+		$(location).attr("href", "/user/delete")
+	})	
 	$("#btnMyMain").click(function() {
 		$(location).attr("href", "/mypage/main")
+	})
+	$("#btnGradeInfo").click(function() {
+		$(location).attr("href", "/grade/info")
 	})
 	
 })
@@ -49,7 +65,7 @@ $(document).ready(function() {
 <!-- &nbsp;&nbsp;&nbsp;<p>씨앗 > 새싹 > 꽃잎 > 열매 > 나무</p> -->
 <hr>
 
-<div></div>
+<div class="main">
 
 <!-- <ul> -->
 <!-- 	<li>씨앗</li> -->
@@ -59,6 +75,19 @@ $(document).ready(function() {
 <!-- 	<li>나무</li> -->
 <!-- </ul> -->
 
+	<div id="uinfoMenu">
+		<ul style="list-style: none;">
+			<li><a id="btnGradeInfo">회원 등급 안내</a></li>
+			<li><a id="btnUserInfo">회원 정보 확인</a></li>
+			<li><a id="btnUserInfoModi">회원 정보 수정</a></li>
+			<li><a id="btnUserInfoDeleteMenu">회원 탈퇴</a></li>
+		</ul>
+	</div>
+	
+	<div class="line" id="line">  </div>
+	
+	
+<div id="uinfoRight">
 <table>
 	<thead> 
 	<tr style="border-bottom: double;">
@@ -102,6 +131,7 @@ $(document).ready(function() {
 		</td>
 	</tr>
 </table>
+</div>
 
 <div class="text-center">
 	<br>		
@@ -117,5 +147,8 @@ $(document).ready(function() {
 
 
 <div id="blank" style="height: 100px; margin-bottom: 100px;"> </div>
+
+</div><!--<div class=main> end -->
+
 
 <%@ include file="../layout/footer.jsp"%>

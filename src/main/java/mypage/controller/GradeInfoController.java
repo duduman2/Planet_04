@@ -18,7 +18,7 @@ public class GradeInfoController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/grade/info [GET]");
 		
-		req.getRequestDispatcher("/WEB-INF/views/mypage/gradeInfo.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/mypage/gradeInfo2.jsp").forward(req, resp);
 	}
 
 

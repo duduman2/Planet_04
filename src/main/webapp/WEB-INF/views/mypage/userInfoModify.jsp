@@ -166,10 +166,10 @@ $(document).ready(function() {
 				
 				&nbsp;&nbsp;&nbsp;
 				
-				<input type="submit" value="저장">
+<!-- 				<input type="submit" value="저장"> -->
 				
-<!-- 				<button type="submit" id="btnUserInfoUpdate"  class="btn btn-info" -->
-<!-- 				style="width: 100px; height: 50px;">저장</button>  -->
+				<button type="submit" id="btnUserInfoUpdate"  class="btn btn-info"
+				style="width: 100px; height: 50px;">저장</button> 
 					
 				&nbsp;&nbsp;&nbsp;
 				
@@ -182,7 +182,7 @@ $(document).ready(function() {
 
 
 
-<div id="blank" style="height: 200px;"> </div>
+<div id="blank" style="height: 100px;"> </div>
 
 
 </div><!--<div class=main> end -->

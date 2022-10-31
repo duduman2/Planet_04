@@ -41,6 +41,9 @@ $(document).ready(function() {
 	$("#btnMeetBoard").click(function() { //모임 게시판 페이지 이동
 		$(location).attr("href", "/board/list")
 	})
+	$("#btnOldTrade").click(function() { //중고 거래 페이지 이동
+		$(location).attr("href", "/trade")
+	})
 
 })
 
@@ -73,15 +76,14 @@ $(document).ready(function() {
 		display: block; margin: auto; margin-top: 20px; padding: 10px;" ></img>
 		
 		<%-- (font-style) (font-weight) (font-size)/줄간격(font-height) 글꼴(font-family)  --%>
-		<h3 style="font-style: italic; font-weight: bold; font-size= 2em;">
-		<a href="/grade/info" style="color: #5B9E28"><%=uList.getU_nick() %></a></h3>
+		<h3 style="font-style: italic; font-weight: bold; font-size= 2em; color: #5B9E28"><%=uList.getU_nick() %></h3>
 <!-- 		<h3>닉네임 불러오기</h3> -->
 		</td>
 	</tr>
 	
 	<tr>
 		<th style="text-align: center; height: 50px;">회원 등급</th>
- 		<td><%=uList.getGrade() %></td>
+ 		<td><a href="/grade/info" style="color: #5B9E28"><%=uList.getGrade() %></a></td>
 <!-- 		<td>회원 등급값 가져오기</td> -->
 	</tr>	
 
@@ -145,8 +147,12 @@ $(document).ready(function() {
 		</tr>
 		<tr>
 			<td>게시판</td>
-			<td><button class="btn btn-default" id="btnBoard">일반 게시판</button>
-			<button class="btn btn-default" id="btnMeetBoard">모임 게시판</button></td>
+			<td>
+			<button class="btn btn-default" id="btnBoard">일반 게시판</button>
+			<button class="btn btn-default" id="btnMeetBoard">모임 게시판</button>
+			<button class="btn btn-default" id="btnOldTrade">중고 거래</button>
+			
+			</td>
 		</tr>
 		<tr>
 			<td>댓글</td>
@@ -190,7 +196,7 @@ $(document).ready(function() {
 </table>
 
 
-<div id="blank" style="height: 100px; margin-bottom: 700px;"> </div>
+<div id="blank" style="height: 100px; margin-bottom: 600px;"> </div>
 
 <%@include file="../layout/footer.jsp" %>
 
