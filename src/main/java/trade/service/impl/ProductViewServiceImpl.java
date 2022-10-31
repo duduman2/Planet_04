@@ -29,4 +29,14 @@ public class ProductViewServiceImpl implements ProductViewService {
 		return view;
 	}
 
+	@Override
+	public void delete(int i) {
+		if( productDao.deleteboard(JDBCTemplate.getConnection(),i) > 0 ) {
+			JDBCTemplate.commit(JDBCTemplate.getConnection());
+		} else {
+			JDBCTemplate.rollback(JDBCTemplate.getConnection());
+		}
+		
+	}
+
 }
