@@ -124,5 +124,4 @@ function deleteboard( url1, url2, url3 ) {
 		
 	</div>
 </div>
-</body>
-</html>
+<%@ include file="./footer.jsp" %>
