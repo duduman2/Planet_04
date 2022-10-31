@@ -146,5 +146,4 @@ td {
 		<!-- 여기부터 달라진다 -->
 	</div>
 </div>
-</body>
-</html>
+<%@ include file="./footer.jsp" %>

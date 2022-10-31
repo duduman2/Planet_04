@@ -21,7 +21,7 @@ html, body {
 
 .down {
 	display: flex;
-	height: 100%;
+	height: 85%;
 }
 
 .lefttopbox {
@@ -80,6 +80,11 @@ html, body {
 .menubutton > a:hover {
 	color: black;
 	text-decoration: none;
+}
+
+
+footer {
+	padding-left: 10px;
 }
 
 </style>
