@@ -174,5 +174,29 @@ public class ProductDaoImpl implements ProductDao {
 		return count;
 	}
 
+	@Override
+	public int deleteboard(Connection conn, int i) {
+		int res= 0;
+		
+		String sql = "";
+		sql += "DELETE FROM product";
+		sql += " WHERE productno = ?"; 
+
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, i);
+			
+			res= ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+
 
 }

@@ -30,9 +30,13 @@ public class TradeViewController extends HttpServlet {
 		
 		productViewService.view(product);
 
+		HttpSession session = req.getSession();
+		String loginId = (String) session.getAttribute("loginid");
+		
 //		HttpSession session = req.getSession();
 //		session.setAttribute("login", true);
-
+		req.setAttribute("loginId", loginId);
+		System.out.println("Tradeview loginID : " +loginId);
 		req.setAttribute("view", product);
 		req.getRequestDispatcher("/WEB-INF/views/trade/view.jsp").forward(req, resp);
 	}

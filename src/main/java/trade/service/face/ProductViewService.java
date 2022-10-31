@@ -10,4 +10,6 @@ public interface ProductViewService {
 
 	Product view(Product product);
 
+	void delete(int i);
+
 }

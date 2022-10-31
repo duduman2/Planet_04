@@ -111,7 +111,14 @@ $(document).ready(function(){
 			$("#proinfo").attr("action","/buybuy").submit();
 		}
 	})
-	
+	$("#goDelete").click(function(){
+		if(confirm("정말 삭제 하시겠습니까?")){
+			$("#proinfo").attr("action","/tradedelete").submit();
+		}else {
+			return
+		}
+	})
+
 })
 
 
@@ -152,6 +159,10 @@ $(document).ready(function(){
 			
 			<button type="button" id="goWish" class="btn btn-success">장바구니</button>
 			<button type="button" id="goBuy" class="btn btn-success">구매하기</button>
+			<%if(request.getAttribute("loginId")==null) {%>
+			<%}else if(request.getAttribute("loginId").equals(productView.getProuserId())){ %>
+				<button type="button" id="goDelete" class="btn btn-success">삭제하기</button>
+			<%}%>
 			</form>
 		</td>
 </tr>

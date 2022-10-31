@@ -17,6 +17,8 @@ public interface ProductDao {
 
 	public int selectCntAll(Connection conn, String cl);
 
+	public int deleteboard(Connection conn, int i);
+
 
 
 
