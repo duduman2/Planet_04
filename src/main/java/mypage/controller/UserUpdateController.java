@@ -37,7 +37,7 @@ public class UserUpdateController extends HttpServlet {
 		//테스트용으로 1을 설정했고
 		//	-> 나중에 int userNo = Integer.parseInt(u_no); 로 바꾸기
 //		int userNo = Integer.parseInt(u_no);
-		int userNo = 31; 
+		int userNo = 21; 
 //		int userNo = 2; 
 		
 		//전달 파라미터 객체 얻어오기
@@ -66,7 +66,7 @@ public class UserUpdateController extends HttpServlet {
 		String u_no = (String) session.getAttribute("u_no");
 		
 //		int userNo = Integer.parseInt(u_no);
-		int userNo = 31; 
+		int userNo = 21; 
 //		int userNo = 2; 		
 		
 		//전달 파라미터 보내기

@@ -137,7 +137,8 @@ public class UserCartDaoImple implements UserCartDao {
 
 		
 		String sql = "";
-		sql += "SELECT * FROM tbl_wish";
+//		sql += "SELECT * FROM tbl_wish";
+		sql += "SELECT * FROM product";
 
 		
 		List<Cart> cartlist = new ArrayList<>();

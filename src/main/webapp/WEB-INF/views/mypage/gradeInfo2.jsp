@@ -2,14 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<title>회원 정보 확인하기</title>
+<title>회원 등급 안내</title>
 
 <%@include file="../layout/header2.jsp" %>
-
-<%-- 모델값 전달받기 --%>
-<% 	UserInfo uList = (UserInfo) request.getAttribute("data"); %>
-<%-- <% 	UserInfo uResultList = (UserInfo) request.getAttribute("result"); %> --%>
-
 
 <script type="text/javascript">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -19,10 +14,34 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>>
 </script>
 
-
 <style type="text/css">
 @import url("../sources/mypage/mypage.css");
-
+table, tr, th, td { 
+	border: 3px solid #ccc; 
+	border-collapse: collapse;
+	padding: 50px;
+/* 	left: 300px; */
+/* 	float: middle; */
+}
+table { 
+/* 	margin-left:auto;  */
+/*     margin-right:auto; */
+/*     margin-top: 50px; */
+    font-size: 1.4em;
+    
+}
+tr { width: 100%;  
+	padding-bottom: 50px;
+} 
+td { 
+	width: 400px;
+	text-align: left;
+	width: 65%;
+}
+th { color: #5B9E28; width: 35%; }
+/* th, td {  */
+/* 	padding: 20px;} */
+	
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -51,13 +70,13 @@ $(document).ready(function() {
 <!-- </head> -->
 <!-- <body> -->
 
-<h3>&nbsp;&nbsp;&nbsp;회원 정보 확인하기</h3>
+<h3>&nbsp;&nbsp;&nbsp;회원 등급 안내</h3>
 <hr>
 <div class="main">
 
 	<div id="uinfoMenu">
 		<ul style="list-style: none;">
-			<li><a id="btnGradeInfo">회원 등급 안내</a></li>
+			<li"><a id="btnGradeInfo">회원 등급 안내</a></li>
 			<li><a id="btnUserInfo">회원 정보 확인</a></li>
 			<li><a id="btnUserInfoModi">회원 정보 수정</a></li>
 			<li><a id="btnUserInfoDeleteMenu">회원 탈퇴</a></li>
@@ -73,88 +92,49 @@ $(document).ready(function() {
 	<div class="line" id="line">  </div>
 
 	<div id="uinfoRight">
-		<table class="table table-striped table-hover" id="userinfo">
+		<table class="table" id="userinfo">
+			<thead> 
+			<tr style="border-bottom: double;">
+				<th style="color: black; text-align: center;">등급 이름</th>
+				<th style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;회원 등급 업그레이드 조건</th>
+			</tr>
+			</thead>
 		
-		<%-- <% for(int i=0; i<uList.size(); i++) { %> --%>
-		<tr>
-			<th>회원 번호</th>
-			<td><%=uList.getU_no() %></td>
-		</tr>
-		<tr>
-			<th>회원 아이디</th>
-			<td><%=uList.getU_id() %></td>
-		</tr>
-		<tr>
-			<th>회원 패스워드</th>
-			<td><%=uList.getU_pw() %></td>
-		</tr>
-		<tr>
-			<th>회원 이름</th>
-			<td><%=uList.getU_name() %></td>
-		</tr>
-		<%-- 4개 --%>
-		
-		<tr>
-			<th>생년월일</th>
-			<td><%=uList.getU_birth() %></td>
-		</tr>
-		<tr>
-			<th>성별</th>
-			<td><%=uList.getU_gender() %></td>
-		</tr>
-		<tr>
-			<th>전화번호</th>
-			<td><%=uList.getU_phone() %></td>
-		</tr>
-		<tr>
-			<th>이메일</th>
-			<td><%=uList.getU_email() %></td>
-		</tr>
-		<%-- 8개--%>
-		
-		
-		<tr>
-			<th>주소</th>
-			<td><%=uList.getU_address() %></td>
-		</tr>
-		<tr>
-			<th>회원 닉네임</th>
-			<td><%=uList.getU_nick() %></td>
-		</tr>
-		<tr>
-			<th>가입날짜</th>
-			<td><%=uList.getU_join_date() %></td>
-		</tr>
-		<tr>
-			<th>사업자유저</th>
-			<td><%=uList.getB_business_number() %></td>
-		</tr>
-		<%-- 12개--%>
-		
-		
-		<tr>
-			<th>사업자번호</th>
-			<td><%=uList.getB_business_number() %></td>
-		</tr>
-		<tr>
-			<th>등급코드</th>
-			<td><%=uList.getGrade() %></td>
-		</tr>
-		<!-- <tr> -->
-		<!-- 	<th>신고코드</th> -->
-		<%-- 	<td><%=uList.getReportcode() %></td> --%>
-		<!-- </tr> -->
-		<!-- <tr> -->
-		<!-- 	<th>장바구니번호</th> -->
-		<%-- 	<td><%=uList.getWishno() %></td> --%>
-		<!-- </tr> -->
-		<tr>
-			<th>보유 포인트</th>
-			<td><%=uList.getU_point() %> P</td>
-		</tr>
-		
-		<%-- 17개--%>
-		<%-- <% } %> --%>
+			<tr>
+				<th style="text-align: center; vertical-align : middle;">&nbsp;&nbsp;&nbsp;&nbsp;씨앗</th>
+				<td>
+				 &nbsp;&nbsp;신규 가입자 누구나
+				</td>
+			</tr>
+			<tr>
+				<th style="text-align: center; vertical-align : middle;">&nbsp;&nbsp;&nbsp;&nbsp;새싹</th>
+				<td>
+				&nbsp;&nbsp;댓글 5회<br>
+				&nbsp;&nbsp;게시글 2회 
+				</td>
+			</tr>
+			<tr>
+				<th style="text-align: center; vertical-align : middle;">&nbsp;&nbsp;&nbsp;&nbsp;꽃잎</th>
+				<td>
+				&nbsp;&nbsp;댓글 10회<br>
+				&nbsp;&nbsp;게시글 5회 
+				</td>
+			</tr>
+			<tr>
+				<th style="text-align: center; vertical-align : middle;">&nbsp;&nbsp;&nbsp;&nbsp;열매</th>
+				<td>
+				&nbsp;&nbsp;댓글 20회<br>
+				&nbsp;&nbsp;게시글 10회 
+				</td>
+			</tr>
+			<tr>
+				<th style="text-align: center; vertical-align : middle;">&nbsp;&nbsp;&nbsp;&nbsp;나무</th>
+				<td>
+				&nbsp;&nbsp;댓글 30회<br>
+				&nbsp;&nbsp;게시글 20회 	
+				</td>
+			</tr>		
+
 		
 		
 		</table>
@@ -163,11 +143,6 @@ $(document).ready(function() {
 <div class="text-center" >
 	<button id="btnBack"  class="btn btn-default" style="width: 120px; 
 	height: 50px;" onclick="history.go(-1)">이전으로</button>
-
-	&nbsp;&nbsp;&nbsp;
-	
-	<button id="btnUserInfoUpdate"  class="btn btn-info"
-	style="width: 100px; height: 50px;">수정하기</button> 
 	
 	&nbsp;&nbsp;&nbsp;
 	
